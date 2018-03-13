@@ -1,6 +1,8 @@
 #include "Estado.h"
 
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
+
+	#pragma region InitOgre 
 	scnMgr = mng;
 	//set Camera
 	cam = scnMgr->createCamera("MainCam");
@@ -25,9 +27,32 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 80, 50);
+
+	#pragma endregion InitOgre
+
 }
 
 Estado::~Estado(){
 	scnMgr->clearScene();
 	scnMgr->~SceneManager();
+}
+
+bool Estado::update(float delta){
+
+	cont++;
+	if (cont == 50){
+		Mensaje* msg = new Mensaje(Tipo::Render, "yaw");
+		mensajes.push(msg);
+		cont = 0;
+	}
+	if (mensajes.size() > 0){
+		Mensaje* aux = mensajes.top();
+		mensajes.pop();
+		for (std::pair<std::string, Entidad*> ent : entidades){
+			ent.second->Update(delta, *aux);
+		}
+	}
+	swapMsgBufer();
+
+	return true;
 }

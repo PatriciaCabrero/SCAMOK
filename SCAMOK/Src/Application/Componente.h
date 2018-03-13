@@ -8,7 +8,7 @@ class Componente {
 public:
 	Componente(Entidad* pEnt){ pEntidad = pEnt; };
 	~Componente(){};
-	virtual void Update(float deltaTime, Mensaje& msj) { if (!activo) return; };
+	virtual void Update(float deltaTime, Mensaje const & msj) { if (!activo) return; };
 	virtual void Awake() { activo = true; };
 	virtual void Sleep() { activo = false; };
 

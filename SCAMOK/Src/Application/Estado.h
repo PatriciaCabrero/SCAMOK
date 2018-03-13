@@ -23,11 +23,23 @@ public:
 
 	void addViewPort();
 	Ogre::SceneManager* getScnManager(){ return scnMgr; };
+
+	bool update(float delta);
+
+	bool addMsg(Mensaje & msg){ 
+		bufer.push(&msg); 
+		return true; }
+	void swapMsgBufer(){
+		mensajes.swap(bufer);
+	}
 private:
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::Light* light;
+
+	std::priority_queue<Mensaje*> mensajes, bufer;
+	int cont = 0;
 
 };

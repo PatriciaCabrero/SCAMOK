@@ -1,4 +1,5 @@
 #include "Juego.h"
+#include "Estado.h"
 
 Juego::Juego()
 {
@@ -95,6 +96,9 @@ bool Juego::run(){
 
 	while (true)
 	{
+
+		pEstados.top()->update(12.0f);
+
 		// render ogre
 		Ogre::WindowEventUtilities::messagePump();
 		

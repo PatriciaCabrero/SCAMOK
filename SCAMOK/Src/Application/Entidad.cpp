@@ -7,7 +7,7 @@ Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 	componentes.insert(std::make_pair("Grafico", new GComponent(this)));
 
 }
-void Entidad::Update(float deltaTime, Mensaje& msg){
+void Entidad::Update(float deltaTime,  Mensaje const & msg){
 	if (activo){
 		for (auto i = componentes.begin(); i != componentes.end(); i++)
 		{

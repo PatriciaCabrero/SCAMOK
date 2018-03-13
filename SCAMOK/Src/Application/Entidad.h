@@ -9,7 +9,7 @@ class Entidad{
 
 public:
 	Entidad(Estado* pEstado);
-	void Update(float deltaTime, Mensaje& msg);
+	void Update(float deltaTime, Mensaje const & msg);
 	void Awake();
 	void Sleep();
 	Estado* getPEstado() { return pEstado; };

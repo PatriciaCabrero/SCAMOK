@@ -21,9 +21,10 @@ class Estado;
 class GComponent : public Componente {
 public:
 	GComponent(Entidad* pEnt);
-	virtual void Update(float deltaTime, Mensaje& msj);
+	virtual void Update(float deltaTime, Mensaje const & msj);
 
 private:
-	
+	Ogre::SceneNode * node;
+	Ogre::Entity * ent;
 
 };
