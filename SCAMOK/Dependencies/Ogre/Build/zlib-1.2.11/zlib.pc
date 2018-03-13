@@ -1,0 +1,13 @@
+prefix=C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies
+exec_prefix=C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies
+libdir=C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/lib
+sharedlibdir=C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/lib
+includedir=C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

@@ -1,0 +1,8 @@
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/zlib.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/zlibstatic.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/example.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/minigzip.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/INSTALL.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/RUN_TESTS.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/ALL_BUILD.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/zlib-1.2.11/CMakeFiles/ZERO_CHECK.dir

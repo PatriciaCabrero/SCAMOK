@@ -4,7 +4,7 @@
 
 # Ignore build directories
 cmake-build-*/
-/build/
+#/build/
 /installed/
 /android-build/
 /embuild/

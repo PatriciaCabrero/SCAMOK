@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeCSGSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeCacheSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeChunkHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeDualGridGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeGridSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeHalfFloatGridSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeIsoSurface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeIsoSurfaceMC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeMeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeOctreeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeOctreeNodeSplitPolicy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeSimplexNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\src\OgreVolumeTextureSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeCSGSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeCacheSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeChunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeChunkHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeDualGridGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeGridSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeHalfFloatGridSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeIsoSurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeIsoSurfaceMC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeIsoSurfaceTablesMC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeMeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeOctreeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeOctreeNodeSplitPolicy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeSimplexNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\Volume\include\OgreVolumeTextureSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include\OgreVolumePrerequisites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D8670B06-0A32-34F9-A7A5-60EF13F85A1A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A85E147F-269E-3C92-B8DF-CE2760474D48}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

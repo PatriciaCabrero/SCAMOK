@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E775DA30-2483-3989-97CE-664F5D097B0D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>OgreXMLConverter</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OgreXMLConverter.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">OgreXMLConverter_d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">OgreXMLConverter.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">OgreXMLConverter</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">OgreXMLConverter.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">OgreXMLConverter</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">OgreXMLConverter.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">OgreXMLConverter</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Debug\OgreMeshLodGenerator_d.lib;..\..\lib\Debug\OgreMain_d.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/Debug/OgreXMLConverter_d.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/Debug/OgreXMLConverter_d.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Release\OgreMeshLodGenerator.lib;..\..\lib\Release\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/Release/OgreXMLConverter.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/Release/OgreXMLConverter.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\MinSizeRel\OgreMeshLodGenerator.lib;..\..\lib\MinSizeRel\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/MinSizeRel/OgreXMLConverter.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/MinSizeRel/OgreXMLConverter.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_MT;_USRDLL;TIXML_USE_STL;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Components\MeshLodGenerator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\RelWithDebInfo\OgreMeshLodGenerator.lib;..\..\lib\RelWithDebInfo\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/RelWithDebInfo/OgreXMLConverter.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/RelWithDebInfo/OgreXMLConverter.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include\OgreXMLMeshSerializer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include\OgreXMLPrerequisites.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include\OgreXMLSkeletonSerializer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include\tinystr.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\include\tinyxml.h" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\main.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\OgreXMLMeshSerializer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\OgreXMLSkeletonSerializer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\tinystr.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\tinyxml.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\tinyxmlerror.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Tools\XMLConverter\src\tinyxmlparser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\OgreMain\OgreMain.vcxproj">
+      <Project>{E5DFB772-D24A-3C19-8DA5-1E52B5D88F1D}</Project>
+      <Name>OgreMain</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Components\MeshLodGenerator\OgreMeshLodGenerator.vcxproj">
+      <Project>{9C37DC1A-B346-30AB-BEC3-053C9C9E3ECC}</Project>
+      <Name>OgreMeshLodGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

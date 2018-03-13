@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{818444BE-AAB3-3597-924F-FAF73832ADB1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>RenderSystem_GL</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RenderSystem_GL.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RenderSystem_GL_d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RenderSystem_GL.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RenderSystem_GL</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">RenderSystem_GL.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">RenderSystem_GL</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">RenderSystem_GL.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">RenderSystem_GL</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR="Debug";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR=\"Debug\";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Debug\OgreGLSupport_d.lib;opengl32.lib;glu32.lib;..\..\lib\Debug\OgreMain_d.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/Debug/RenderSystem_GL_d.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/Debug/RenderSystem_GL_d.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR="Release";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR=\"Release\";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Release\OgreGLSupport.lib;opengl32.lib;glu32.lib;..\..\lib\Release\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/Release/RenderSystem_GL.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/Release/RenderSystem_GL.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR="MinSizeRel";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR=\"MinSizeRel\";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\MinSizeRel\OgreGLSupport.lib;opengl32.lib;glu32.lib;..\..\lib\MinSizeRel\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/MinSizeRel/RenderSystem_GL.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/MinSizeRel/RenderSystem_GL.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /Zm256</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4661;4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR="RelWithDebInfo";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;OGRE_GLPLUGIN_EXPORTS;_MT;_USRDLL;GLEW_STATIC;YY_NEVER_INTERACTIVE;CMAKE_INTDIR=\"RelWithDebInfo\";RenderSystem_GL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\Dependencies\include\freetype2;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\OgreMain\include\Threading;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GLSupport\include\GLSL;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\include;C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\RelWithDebInfo\OgreGLSupport.lib;opengl32.lib;glu32.lib;..\..\lib\RelWithDebInfo\OgreMain.lib;..\..\Dependencies\lib\zzip.lib;..\..\Dependencies\lib\zlib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/lib/RelWithDebInfo/RenderSystem_GL.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/bin/RelWithDebInfo/RenderSystem_GL.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLCopyingRenderTexture.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLDepthBuffer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLFBOMultiRenderTarget.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLFBORenderTexture.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLFrameBufferObject.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLGpuNvparseProgram.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLGpuProgram.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLGpuProgramManager.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLHardwareBufferManager.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLHardwareIndexBuffer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLHardwareOcclusionQuery.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLHardwarePixelBuffer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLHardwareVertexBuffer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLPBRenderTexture.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLPixelFormat.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLPlugin.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLPrerequisites.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLRenderSystem.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLRenderToVertexBuffer.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLStateCacheManager.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLSupport.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLTexture.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\include\OgreGLTextureManager.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLExtSupport.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLGpuProgram.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLLinkProgram.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLLinkProgramManager.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLProgram.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\include\OgreGLSLProgramFactory.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ps1.0_parser.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_rc1.0_parser.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ts1.0_parser.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_vs1.0_parser.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\macro.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\nvparse.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\nvparse_errors.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\nvparse_externs.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ps1.0_program.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_combiners.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_final.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_general.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_register.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ts1.0_inst.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ts1.0_inst_list.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vs1.0_inst.h" />
+    <ClInclude Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vs1.0_inst_list.h" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLExtSupport.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLGpuProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLLinkProgramManager.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\GLSL\src\OgreGLSLProgramFactory.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\src\ATI_FS_GLGpuProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\src\Compiler2Pass.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\atifs\src\ps_1_4.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ps1.0_lexer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ps1.0_parser.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_rc1.0_lexer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_rc1.0_parser.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ts1.0_lexer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_ts1.0_parser.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_vs1.0_lexer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\_vs1.0_parser.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\avp1.0_impl.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\nvparse.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\nvparse_errors.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ps1.0_program.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_combiners.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_final.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\rc1.0_general.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ts1.0_inst.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\ts1.0_inst_list.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vcp1.0_impl.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vp1.0_impl.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vs1.0_inst.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vs1.0_inst_list.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\nvparse\vsp1.0_impl.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLCopyingRenderTexture.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLDepthBuffer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLEngineDll.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLFBOMultiRenderTarget.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLFBORenderTexture.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLFrameBufferObject.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLGpuNvparseProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLGpuProgram.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLGpuProgramManager.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLHardwareBufferManager.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLHardwareIndexBuffer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLHardwareOcclusionQuery.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLHardwarePixelBuffer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLHardwareVertexBuffer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLPBRenderTexture.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLPixelFormat.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLPlugin.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLRenderSystem.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLRenderToVertexBuffer.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLStateCacheManager.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLSupport.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLTexture.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\OgreGLTextureManager.cpp" />
+    <ClCompile Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\RenderSystems\GL\src\glew.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\RenderSystems\GLSupport\OgreGLSupport.vcxproj">
+      <Project>{D577802B-2F77-358F-B7C4-D184A5958F89}</Project>
+      <Name>OgreGLSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\Nueva carpeta\P3\ProyectoBasico\Dependencies\Ogre\Build\OgreMain\OgreMain.vcxproj">
+      <Project>{E5DFB772-D24A-3C19-8DA5-1E52B5D88F1D}</Project>
+      <Name>OgreMain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

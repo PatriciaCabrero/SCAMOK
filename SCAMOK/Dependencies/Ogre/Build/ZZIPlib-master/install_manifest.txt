@@ -1,0 +1,8 @@
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/zzip.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/types.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/conf.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/_msvc.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/plugin.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/fetch.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zzip/_config.h
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/lib/zzip.lib

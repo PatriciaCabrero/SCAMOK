@@ -1,0 +1,6 @@
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/SDL2main.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/INSTALL.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/SDL2.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/uninstall.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/ALL_BUILD.dir
+C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/SDL2-build/CMakeFiles/ZERO_CHECK.dir
