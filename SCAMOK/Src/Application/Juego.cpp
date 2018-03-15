@@ -23,8 +23,12 @@ bool Juego::init(){
 
 	//Parsing the config file into the system.
 
-	cf.load(recursos);
-
+	try{
+		cf.load(recursos);
+	}
+	catch (Ogre::Exception e){
+		std::cout << "\n" << e.getFile();
+	}
 
 	//name: Path to resources in disk,
 	//loctype: defines what kind of location the element is (e.g. Filesystem, zip..)
