@@ -1,23 +1,24 @@
 
 #include "GComponent.h"
 
-GComponent::GComponent(Entidad* pEnt) : Componente (pEnt){
+GComponent::GComponent(Entidad* pEnt, std::string s) : Componente (pEnt){
 	
-	ent = pEnt->getPEstado()->getScnManager()->createEntity("ogrehead.mesh");
+	ent = pEnt->getPEstado()->getScnManager()->createEntity(s);
 	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode();
 	node->attachObject(ent);
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-	if (msg.getTipo() == Tipo::Render){
-		if (msg.getMsg() == "yaw"){
-			node->roll(Ogre::Radian(45));
-			Mensaje * m = new Mensaje(Tipo::Render, "pitch");
-			pEntidad->getPEstado()->addMsg(*m);
-		}
-		else if (msg.getMsg() == "pitch")
-			node->pitch(Ogre::Radian(12));
+	if (msg.getTipo() == Tipo::Render && (msg.getReceptor() == pEntidad || msg.getReceptor() == nullptr)){
+		if (msg.getMsg() == "der")
+		node->translate(1, 0, 0);
+		else if (msg.getMsg() == "izq")
+			node->translate(-1, 0, 0);
+		else if (msg.getMsg() == "arr")
+			node->translate(0, 0, -1);
+		else if (msg.getMsg() == "aba")
+			node->translate(0, 0, 1);
 
 	}
 }

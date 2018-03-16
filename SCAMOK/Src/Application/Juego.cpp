@@ -16,6 +16,26 @@ Juego::Juego()
 }
 
 bool Juego::init(){
+	if (initOgre()){
+		if (initOis())
+			return true;
+	}
+	else return false;
+}
+
+bool Juego::initOis(){
+	
+	//mInputMgr = new InputManager(*mInputMgr);
+	mInputMgr = InputManager::getSingletonPtr();
+	mInputMgr->initialise(mWindow);
+	mInputMgr->addKeyListener(this, "KeyListener");
+	//mInputMgr->addMouseListener(this, "MouseListener");
+	//mInputMgr->addJoystickListener(this, "JoystickListener");
+	
+	mInputMgr->getKeyboard()->setEventCallback(this); //mMouse->setEventCallback(this);
+	return true;
+}
+bool Juego::initOgre(){
 	root = new Ogre::Root(plugins);
 
 	//------------------------------------------------------------------------------------------------------
@@ -57,7 +77,7 @@ bool Juego::init(){
 			}
 			catch (Ogre::Exception e)
 			{
-				
+
 			}
 		}
 	}
@@ -98,9 +118,10 @@ bool Juego::run(){
 	Estado * pEstado = new Estado(scnMgr, mWindow);
 	pEstados.push(pEstado);
 
-	while (true)
+	while (!exit)
 	{
-
+		mInputMgr->capture();
+		//handleInput();
 		pEstados.top()->update(12.0f);
 
 		// render ogre
@@ -112,7 +133,68 @@ bool Juego::run(){
 		if (!root->renderOneFrame())return false;
 	}
 }
+bool Juego::keyPressed(const OIS::KeyEvent& ke)
+{
+	std::string key = "";
+	switch (ke.key)
+	{
+	case OIS::KC_ESCAPE: exit = true;
+		break;
+	case OIS::KC_RETURN: key = "return";
+		break;
+	case OIS::KC_RIGHT: key = "der";
+		break;
+	case OIS::KC_LEFT: key = "izq";
+		break;
+	case OIS::KC_UP: key = "arr";
+		break;
+	case OIS::KC_DOWN: key = "aba";
+		break;
+	default:
+		break;
+	}
+	
+	pEstados.top()->keyPressed(key);
+	return true;
+}
 
+//Este método habría que llamarlo para que el movimiento sea continuo y se capturen las teclas pulsadas.
+//Para esto hay que tener en cuenta el tiempo para que no se llene de mensajes.
+void Juego::handleInput() {
+	std::string key = "";
+	OIS::Keyboard *kb = mInputMgr->getKeyboard();
+
+	if (kb->isKeyDown(OIS::KC_RIGHT)) key = "der";
+	else if (kb->isKeyDown(OIS::KC_LEFT)) key = "izq";
+	else if (kb->isKeyDown(OIS::KC_UP)) key = "arr";
+	else if (kb->isKeyDown(OIS::KC_DOWN)) key = "aba";
+
+	if(key != "") pEstados.top()->keyPressed(key);
+}
+bool Juego::keyReleased(const OIS::KeyEvent& ke)
+{
+	std::string key = "";
+	switch (ke.key)
+	{
+	case OIS::KC_ESCAPE: exit = true;
+		break;
+	case OIS::KC_RETURN: key = "return";
+		break;
+	case OIS::KC_RIGHT: key = "der";
+		break;
+	case OIS::KC_LEFT: key = "izq";
+		break;
+	case OIS::KC_UP: key = "arr";
+		break;
+	case OIS::KC_DOWN: key = "aba";
+		break;
+	default:
+		break;
+	}
+
+	pEstados.top()->keyReleased(key);
+	return true;
+}
 Juego::~Juego()
 {
 }

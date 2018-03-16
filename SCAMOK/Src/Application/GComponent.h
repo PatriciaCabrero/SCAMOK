@@ -20,7 +20,7 @@ class Estado;
 
 class GComponent : public Componente {
 public:
-	GComponent(Entidad* pEnt);
+	GComponent(Entidad* pEnt, std::string s = "ogrehead.mesh");
 	virtual void Update(float deltaTime, Mensaje const & msj);
 
 private:

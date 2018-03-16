@@ -25,7 +25,10 @@ public:
 	Ogre::SceneManager* getScnManager(){ return scnMgr; };
 
 	bool update(float delta);
+	void keyPressed(std::string key);
+	void keyReleased(std::string key);
 
+	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg){ 
 		bufer.push(&msg); 
 		return true; }
@@ -40,6 +43,6 @@ private:
 	Ogre::Light* light;
 
 	std::priority_queue<Mensaje*> mensajes, bufer;
-	int cont = 0;
+	
 
 };

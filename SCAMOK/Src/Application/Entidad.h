@@ -9,12 +9,18 @@ class Entidad{
 
 public:
 	Entidad(Estado* pEstado);
+	Entidad(Estado* pEstado, std::string prefab);
 	void Update(float deltaTime, Mensaje const & msg);
 	void Awake();
 	void Sleep();
 	Estado* getPEstado() { return pEstado; };
+
+	bool añadeComponenteGrafico(std::string mesh);
+	bool añadeComponenteFisico();
+	bool añadeComponenteLogico(std::string component);
 private:
 	std::map<std::string, Componente*> componentes;
 	Estado* pEstado;
 	bool activo;
+
 };

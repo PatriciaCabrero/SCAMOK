@@ -1,7 +1,7 @@
 #include <string>
 #include "Estado.h"
 #pragma once
-enum Tipo{ Render, Fisica, Logica };
+enum Tipo{ Render, Fisica, Logica, Input };
 
 class Mensaje{
 public:
@@ -17,20 +17,29 @@ public:
 			case Fisica:
 				prio = 2;
 				break;
-			case Logica:
+			case Input:
 				prio = 3;
 				break;
 			}
 		}
 		prioridad = prio; 
+		emisor = nullptr;
+		receptor = nullptr;
 	}
-
+	void setMsgInfo(Entidad* em, Entidad* re = nullptr) {
+		emisor = em;
+		receptor = re;
+	}
 	int getPriority() { return prioridad; }
+	Entidad* getEmisor() { return emisor; }
+	Entidad* getReceptor() { return receptor; };
 	std::string getMsg() { return mensaje; }
 	int getTipo() { return tipo; }
 
 private:
 	std::string mensaje;
+	Entidad * emisor;
+	Entidad * receptor;
 	int prioridad;
 	Tipo tipo;
 };

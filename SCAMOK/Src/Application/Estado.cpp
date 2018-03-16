@@ -19,7 +19,9 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 		Ogre::Real(vp->getActualHeight()));
 
 	// Mesh de cabeza ogro
-	entidades.insert(std::make_pair("Ogro", new Entidad(this)));
+	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
+	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("sinbad.mesh");
+	entidades.insert(std::make_pair("OgroSinMovimiento", aux));
 
 
 	// Luz por defecto
@@ -39,12 +41,7 @@ Estado::~Estado(){
 
 bool Estado::update(float delta){
 
-	cont++;
-	if (cont == 50){
-		Mensaje* msg = new Mensaje(Tipo::Render, "yaw");
-		mensajes.push(msg);
-		cont = 0;
-	}
+	
 	if (mensajes.size() > 0){
 		Mensaje* aux = mensajes.top();
 		mensajes.pop();
@@ -55,4 +52,15 @@ bool Estado::update(float delta){
 	swapMsgBufer();
 
 	return true;
+}
+
+void Estado::keyPressed(std::string s) {
+	if (s == "der" || s == "izq" || s == "arr" || s == "aba") {
+		Mensaje* msg = new Mensaje(Tipo::Input, s);
+		mensajes.push(msg);
+	}
+	
+}
+void Estado::keyReleased(std::string s) {
+	
 }
