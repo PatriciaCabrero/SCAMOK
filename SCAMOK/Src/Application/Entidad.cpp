@@ -43,11 +43,15 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 	}
 	return true;
 }
-void Entidad::Update(float deltaTime,  Mensaje const & msg){
+void Entidad::Update(float deltaTime,  Mensaje const & msj){
+	Mensaje msg = msj;
 	if (activo){
-		for (auto i = componentes.begin(); i != componentes.end(); i++)
-		{
-			i->second->Update(deltaTime, msg);
+
+		if (msg.getReceptor() == this || msg.getReceptor() == nullptr) {
+			for (auto i = componentes.begin(); i != componentes.end(); i++)
+			{
+				i->second->Update(deltaTime, msg);
+			}
 		}
 	}
 }

@@ -10,7 +10,7 @@ GComponent::GComponent(Entidad* pEnt, std::string s) : Componente (pEnt){
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-	if (msg.getTipo() == Tipo::Render && (msg.getReceptor() == pEntidad || msg.getReceptor() == nullptr)){
+	if (msg.getTipo() == Tipo::Render ){
 		if (msg.getMsg() == "der")
 		node->translate(1, 0, 0);
 		else if (msg.getMsg() == "izq")
