@@ -2,6 +2,7 @@
 #include "Entidad.h"
 #include "GComponent.h"
 #include "Transform.h"
+#include "Animation.h"
 #include <iostream>
 #include <fstream>
 
@@ -26,6 +27,11 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 			std::string component; fe >> component;
 			añadeComponenteLogico(component);
 		}
+		else if (type == "Animation") {
+			std::string mesh; fe >> mesh;
+
+			añadeAnimacion(mesh);
+		}
 		fe >> type;
 	}
 
@@ -33,6 +39,11 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	
 }
 
+bool Entidad::añadeAnimacion(std::string mesh) {
+	componentes.insert(std::make_pair("Anim",  new Animation(this, mesh)));
+	return true;
+	
+}
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
 	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
 	return true;
@@ -41,6 +52,7 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
 	}
+
 	return true;
 }
 void Entidad::Update(float deltaTime,  Mensaje const & msj){

@@ -1,11 +1,12 @@
 
 #include "GComponent.h"
-
+using namespace Ogre;
 GComponent::GComponent(Entidad* pEnt, std::string s) : Componente (pEnt){
 	
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(s);
 	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode();
 	node->attachObject(ent);
+	node->rotate(Quaternion(Degree(180), Vector3::UNIT_Y));
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;

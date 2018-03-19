@@ -61,6 +61,8 @@ void Estado::joystickMoved(float x, float y) {
 
 	Mensaje* msg = new Mensaje(Tipo::Input, s);
 	mensajes.push(msg);
+	msg = new Mensaje(Tipo::AnimationM, "", 1);
+	mensajes.push(msg);
 }
 void Estado::keyPressed(std::string s) {
 	if (s == "der" || s == "izq" || s == "arr" || s == "aba") {

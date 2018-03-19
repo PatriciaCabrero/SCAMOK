@@ -1,7 +1,7 @@
 #include <string>
 #include "Estado.h"
 #pragma once
-enum Tipo{ Render, Fisica, Logica, Input, Animation };
+enum Tipo{ Render, Fisica, Logica, Input, AnimationM };
 
 class Mensaje{
 public:
@@ -14,7 +14,7 @@ public:
 			case Render:
 				prio = 1;
 				break;
-			case Animation:
+			case AnimationM:
 				prio = 1;
 				break;
 			case Fisica:

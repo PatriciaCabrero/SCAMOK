@@ -23,8 +23,7 @@ public:
 	GComponent(Entidad* pEnt, std::string s = "ogrehead.mesh");
 	virtual void Update(float deltaTime, Mensaje const & msj);
 
-private:
+protected:
 	Ogre::SceneNode * node;
 	Ogre::Entity * ent;
-
 };

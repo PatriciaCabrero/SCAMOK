@@ -17,6 +17,7 @@ public:
 
 	bool añadeComponenteGrafico(std::string mesh);
 	bool añadeComponenteFisico();
+	bool añadeAnimacion(std::string mesh);
 	bool añadeComponenteLogico(std::string component);
 private:
 	std::map<std::string, Componente*> componentes;
