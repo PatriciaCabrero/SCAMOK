@@ -3,6 +3,7 @@
 #include "GComponent.h"
 #include "Transform.h"
 #include "Animation.h"
+#include "Camara.h"
 #include <iostream>
 #include <fstream>
 
@@ -31,6 +32,9 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 			std::string mesh; fe >> mesh;
 			añadeAnimacion(mesh, fe);
 		}
+		else if (type == "Camara") {
+			componentes.insert(std::make_pair("Camara", new Camara(this)));
+		}
 		fe >> type;
 	}
 
@@ -43,8 +47,7 @@ bool Entidad::añadeAnimacion(std::string mesh, std::ifstream & fe) {
 		auto s = componentes.find("Grafico");
 		if (s != componentes.end())
 		{
-			componentes.at("Grafico")->destroy();
-			componentes.erase(s);
+			std::cout << "No puede tener componente grafico y animacion\n";
 		}
 		Animation *animation = new Animation(this, mesh);
 		int numAnims; fe >> numAnims;

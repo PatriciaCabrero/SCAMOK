@@ -206,6 +206,14 @@ void Juego::handleInput() {
 			if (abs(x) >= 0.1 || abs(y) >= 0.1)
 				pEstados.top()->joystickMoved(x, y);
 		}
+		if (js->getJoyStickState().mAxes[2].abs != 0 || js->getJoyStickState().mAxes[3].abs != 0) {
+
+			float x = js->getJoyStickState().mAxes[2].abs / 32768.0f;
+			float y = js->getJoyStickState().mAxes[3].abs / 32768.0f;
+
+			if (abs(x) >= 0.2 || abs(y) >= 0.2)
+				pEstados.top()->joystickMoved(x, y, 1);
+		}
 	}
 }
 bool Juego::keyReleased(const OIS::KeyEvent& ke)

@@ -3,24 +3,13 @@
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	#pragma region InitOgre 
+	mWin = mWindow;
 	scnMgr = mng;
-	//set Camera
-	cam = scnMgr->createCamera("MainCam");
-	cam->setPosition(0, 0, 80);
-	cam->lookAt(0, 0, -300);
-	cam->setNearClipDistance(5);
+	
 
-	//set viewport
-	vp = mWindow->addViewport(cam);
-	vp->setBackgroundColour(Ogre::ColourValue(150, 150, 150));
-
-	cam->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
-
-	// Mesh de cabeza ogro
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Greymon.mesh");
+	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
+	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Greymon");
 	entidades.insert(std::make_pair("Arbol", aux));
 
 
@@ -54,13 +43,20 @@ bool Estado::update(float delta){
 	return true;
 }
 
-void Estado::joystickMoved(float x, float y) {
+void Estado::joystickMoved(float x, float y, int js) {
 
 	std::string sx, sy; sx = std::to_string(x); sy = std::to_string(y);
 	std::string s = sx + "/"+ sy;
 
-	Mensaje* msg = new Mensaje(Tipo::Input, s);
-	mensajes.push(msg);
+	Mensaje* msg;
+		msg = new Mensaje(Tipo::Input, s);
+	if (js == 0) {
+		mensajes.push(msg);
+	}
+	else {
+		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
+		mensajes.push(msg);
+	}
 
 }
 void Estado::keyPressed(std::string s) {

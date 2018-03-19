@@ -1,12 +1,13 @@
 
 #include "GComponent.h"
 using namespace Ogre;
-GComponent::GComponent(Entidad* pEnt, std::string s) : Componente (pEnt){
+GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
 	
-	ent = pEnt->getPEstado()->getScnManager()->createEntity(s);
-	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode();
+	std::string mesh = name + ".mesh";
+	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
+	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode(name);
 	node->attachObject(ent);
-	node->rotate(Quaternion(Degree(180), Vector3::UNIT_Y));
+	
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;
@@ -17,8 +18,8 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 		std::string sz = msg.getMsg().substr(0, pos);
 		std::string sx = msg.getMsg().substr(pos + 1);
 
-		float x = std::stof(sx);
-		float z = std::stof(sz);
+		float x = -1* std::stof(sx);
+		float z = -1 *std::stof(sz);
 
 		node->translate(x,0,z);
 

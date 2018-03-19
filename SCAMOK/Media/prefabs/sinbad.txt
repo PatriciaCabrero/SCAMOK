@@ -1,7 +1,5 @@
-Grafico
-sinbad.mesh
 Animation
-sinbad.mesh
+sinbad
 2
 RunBase
 RunTop
