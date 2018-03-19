@@ -49,6 +49,7 @@ private:
 	virtual bool povMoved(const OIS::JoyStickEvent & arg, int index);// { return true; }
 	
 
+	int contJoystick;
 	bool exit = false;
 };
 
