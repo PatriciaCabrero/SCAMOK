@@ -11,14 +11,15 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
 	if (msg.getTipo() == Tipo::Render ){
-		if (msg.getMsg() == "der")
-		node->translate(1, 0, 0);
-		else if (msg.getMsg() == "izq")
-			node->translate(-1, 0, 0);
-		else if (msg.getMsg() == "arr")
-			node->translate(0, 0, -1);
-		else if (msg.getMsg() == "aba")
-			node->translate(0, 0, 1);
+		
+		int pos = msg.getMsg().find("/");
+		std::string sx = msg.getMsg().substr(0, pos);
+		std::string sy = msg.getMsg().substr(pos + 1);
+
+		float x = std::stof(sx);
+		float z = std::stof(sy);
+
+		node->translate(x,0,z);
 
 	}
 }

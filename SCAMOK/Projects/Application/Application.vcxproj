@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Application\Animation.cpp" />
     <ClCompile Include="..\..\Src\Application\Entidad.cpp" />
     <ClCompile Include="..\..\Src\Application\Estado.cpp" />
     <ClCompile Include="..\..\Src\Application\GComponent.cpp" />
@@ -20,6 +21,7 @@
     <ClCompile Include="..\..\Src\Application\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Application\Animation.h" />
     <ClInclude Include="..\..\Src\Application\Componente.h" />
     <ClInclude Include="..\..\Src\Application\Entidad.h" />
     <ClInclude Include="..\..\Src\Application\Estado.h" />

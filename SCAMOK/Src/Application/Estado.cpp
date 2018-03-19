@@ -20,8 +20,8 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	// Mesh de cabeza ogro
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("sinbad.mesh");
-	entidades.insert(std::make_pair("OgroSinMovimiento", aux));
+	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Greymon.mesh");
+	entidades.insert(std::make_pair("Arbol", aux));
 
 
 	// Luz por defecto
@@ -54,6 +54,14 @@ bool Estado::update(float delta){
 	return true;
 }
 
+void Estado::joystickMoved(float x, float y) {
+
+	std::string sx, sy; sx = std::to_string(x); sy = std::to_string(y);
+	std::string s = sx + "/"+ sy;
+
+	Mensaje* msg = new Mensaje(Tipo::Input, s);
+	mensajes.push(msg);
+}
 void Estado::keyPressed(std::string s) {
 	if (s == "der" || s == "izq" || s == "arr" || s == "aba") {
 		Mensaje* msg = new Mensaje(Tipo::Input, s);

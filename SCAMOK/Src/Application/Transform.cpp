@@ -1,5 +1,6 @@
 #pragma once 
 #include "Transform.h"
+#include <iostream>
 
 Transform::Transform(Entidad * pEnt, int x, int y, int z) : Componente(pEnt)
 {
@@ -12,11 +13,15 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
 	Mensaje msg = msj;
 	if (msg.getTipo() == Tipo::Input) {
-		if (msg.getMsg() == "der") x++;
-		else if (msg.getMsg() == "izq") x--;
-		else if (msg.getMsg() == "arr") z--;
-		else if (msg.getMsg() == "aba")	z++;
-		else return;
+		
+		int pos = msg.getMsg().find("/");
+		std::string sx = msg.getMsg().substr(0,pos);
+		std::string sy = msg.getMsg().substr(pos+1);
+
+		float x = std::stof(sx);
+		float y = std::stof(sy);
+
+		this->x += x; this->z += y;
 
 		Mensaje * m = new Mensaje(Tipo::Render, msg.getMsg());
 		//Si no se especifica receptor se considera broadcast

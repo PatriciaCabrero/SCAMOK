@@ -27,6 +27,7 @@ public:
 	bool update(float delta);
 	void keyPressed(std::string key);
 	void keyReleased(std::string key);
+	void joystickMoved(float x, float y);
 
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg){ 
