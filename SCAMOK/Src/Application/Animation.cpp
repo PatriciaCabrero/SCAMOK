@@ -2,18 +2,9 @@
 
 
 
-Animation::Animation(Entidad * pEnt, std::string mesh): GComponent (pEnt, mesh)
+Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GComponent (pEnt, mesh)
 {
-	baseAnim = ent->getAnimationState("RunBase");
-	topAnim = ent->getAnimationState("RunTop");
-	
-	baseAnim->setEnabled(true);
-	topAnim->setEnabled(true);
-	baseAnim->setLoop(true);
-	topAnim->setLoop(true);
-	
-	
-	
+	if (anim != "") addAnimationState(anim);
 }
 
 
@@ -24,18 +15,16 @@ Animation::~Animation()
 
 void Animation::Update(float deltaTime, Mensaje const & msj) {
 
-	topAnim->addTime(0.017f);
-	baseAnim->addTime(0.017f);
 	GComponent::Update(deltaTime, msj);
-	Mensaje msg = msj;
-	Componente::Update(deltaTime, msj);
-	if (msg.getTipo() == Tipo::AnimationM ) {
-		
-		
-	}
+	for (Ogre::AnimationState* pS : animStates)
+		pS->addTime(0.017f);	
 }
-/*void Animation::frameRendered(const Ogre::FrameEvent &  evt)
-{
-	topAnim->addTime(10.2f);//evt.timeSinceLastFrame);
-	baseAnim->addTime(10.0f);//evt.timeSinceLastFrame);
-}*/
+void Animation:: addAnimationState(std::string name, bool enabled, bool loop) {
+	
+	Ogre::AnimationState* newState;
+	newState = ent->getAnimationState(name);
+	newState->setEnabled(enabled);
+	newState->setLoop(loop);
+
+	animStates.push_back(newState);
+}

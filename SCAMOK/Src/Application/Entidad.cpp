@@ -29,8 +29,7 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 		}
 		else if (type == "Animation") {
 			std::string mesh; fe >> mesh;
-
-			añadeAnimacion(mesh);
+			añadeAnimacion(mesh, fe);
 		}
 		fe >> type;
 	}
@@ -39,11 +38,38 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	
 }
 
-bool Entidad::añadeAnimacion(std::string mesh) {
-	componentes.insert(std::make_pair("Anim",  new Animation(this, mesh)));
-	return true;
+bool Entidad::añadeAnimacion(std::string mesh, std::ifstream & fe) {
+	if (fe.is_open()) {
+		auto s = componentes.find("Grafico");
+		if (s != componentes.end())
+		{
+			componentes.at("Grafico")->destroy();
+			componentes.erase(s);
+		}
+		Animation *animation = new Animation(this, mesh);
+		int numAnims; fe >> numAnims;
+		for (int i = 0; i < numAnims; i++) {
+			std::string name; fe >> name;
+			animation->addAnimationState(name);
+		}
+		componentes.insert(std::make_pair("Anim", animation));
+		return true;
+	}
+	else return false;
 	
 }
+bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
+
+	auto s = componentes.find("Grafico");
+	if (s != componentes.end())
+	{
+		componentes.at("Grafico")->destroy();
+		componentes.erase(s);
+	}
+	dynamic_cast<Animation*>(componentes.at("Anim"))->addAnimationState(name,enabled, loop);
+	return true;
+}
+
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
 	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
 	return true;

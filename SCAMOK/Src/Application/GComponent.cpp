@@ -24,3 +24,12 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 
 	}
 }
+void GComponent::destroy() {
+	node->removeAndDestroyAllChildren();
+	pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
+	delete node;
+	delete ent;
+}
+GComponent::~GComponent() {
+	
+}
