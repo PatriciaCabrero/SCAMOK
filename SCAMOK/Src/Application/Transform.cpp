@@ -23,7 +23,7 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 
 		this->x += x; this->z += y;
 
-		Mensaje * m = new Mensaje(Tipo::Render, msg.getMsg());
+		Mensaje * m = new Mensaje(Tipo::Render, msg.getMsg(),SubTipo::Mover);
 		//Si no se especifica receptor se considera broadcast
 		m->setMsgInfo(pEntidad, pEntidad);
 		pEntidad->getPEstado()->addMsg(*m);

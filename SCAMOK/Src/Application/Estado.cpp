@@ -8,8 +8,15 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	
 
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
+
+	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
+	Mensaje* msg = new Mensaje(Tipo::Render, "0/1", SubTipo::Rotar);
+	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+	mensajes.push(msg);
+	
 	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Greymon");
+	 
+	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	entidades.insert(std::make_pair("Arbol", aux));
 
 

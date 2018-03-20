@@ -2,11 +2,13 @@
 #include "Estado.h"
 #pragma once
 enum Tipo{ Render, Fisica, Logica, Input, AnimationM };
+enum SubTipo {Rotar, Escalar, Mover, Nulo};
 
 class Mensaje{
 public:
-	Mensaje(Tipo tip, std::string msg, int prio = 0) { 
+	Mensaje(Tipo tip, std::string msg, SubTipo subtipo = SubTipo::Nulo, int prio = 0) { 
 		tipo = tip; mensaje = msg; 
+		subTipo = subtipo;
 
 		if (prio == 0){
 			switch (tipo)
@@ -38,6 +40,7 @@ public:
 	Entidad* getReceptor() { return receptor; };
 	std::string getMsg() { return mensaje; }
 	int getTipo() { return tipo; }
+	int getSubTipo() { return subTipo; }
 
 private:
 	std::string mensaje;
@@ -45,4 +48,5 @@ private:
 	Entidad * receptor;
 	int prioridad;
 	Tipo tipo;
+	SubTipo subTipo;
 };
