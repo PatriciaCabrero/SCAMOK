@@ -28,6 +28,7 @@ public:
 	bool update(float delta);
 	void keyPressed(std::string key);
 	void keyReleased(std::string key);
+	void joystickMoved(float x, float y, int js = 0);
 
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg){ 
@@ -42,12 +43,17 @@ public:
 	void reproduceFx(std::string fx, float x, float y, float z, float wet);
 	void reproduceAmbM(std::string amb, float wet, bool fade);
 	void paraAmb(int ch, bool fade);
+
+	//Ogre------------------------------------------
+	Ogre::RenderWindow* getWin() { return mWin; }
+
 private:
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::Light* light;
+	Ogre::RenderWindow* mWin;
 
 	std::priority_queue<Mensaje*> mensajes, bufer;
 	

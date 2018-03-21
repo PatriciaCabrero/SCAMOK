@@ -11,6 +11,7 @@ public:
 	virtual void Update(float deltaTime, Mensaje const & msj) { if (!activo) return; };
 	virtual void Awake() { activo = true; };
 	virtual void Sleep() { activo = false; };
+	virtual void destroy() {};
 
 protected:
 	bool activo;

@@ -1,6 +1,7 @@
 #include "Juego.h"
 #include "Estado.h"
 
+
 Juego::Juego()
 {
 
@@ -30,7 +31,7 @@ bool Juego::initOis(){
 	mInputMgr->initialise(mWindow);
 	mInputMgr->addKeyListener(this, "KeyListener");
 	//mInputMgr->addMouseListener(this, "MouseListener");
-	//mInputMgr->addJoystickListener(this, "JoystickListener");
+	mInputMgr->addJoystickListener(this, "JoystickListener");
 	
 	mInputMgr->getKeyboard()->setEventCallback(this); //mMouse->setEventCallback(this);
 	return true;
@@ -128,11 +129,17 @@ bool Juego::run(){
 
 	Estado * pEstado = new Estado(scnMgr, system, mWindow);
 	pEstados.push(pEstado);
-
+	int cont = 0;
+	std::cout << "\n\n\n";
+	contJoystick = 0;
 	while (!exit)
 	{
 		mInputMgr->capture();
-		//handleInput();
+		if (cont == 2) {
+			handleInput();
+			cont = 0;
+		}
+		else cont++;
 		pEstados.top()->update(12.0f);
 
 		// render ogre
@@ -144,8 +151,35 @@ bool Juego::run(){
 		if (!root->renderOneFrame())return false;
 	}
 }
+bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
+	std::cout << arg.state.mPOV->direction << "\n";
+	return true;
+}
+bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
+	contJoystick++;
+	/*
+	if (contJoystick == 3)
+	{
+		std::cout << arg.state.mAxes[0].abs << " , " << arg.state.mAxes[1].abs << "\n";
+		float x = arg.state.mAxes[0].abs / 32768.0f;
+		float y = arg.state.mAxes[1].abs / 32768.0f;
+
+
+		pEstados.top()->joystickMoved(x, y);
+		contJoystick = 0;
+	}*/
+	
+	return true;
+}
+bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
+	std::cout << buton << "\n";
+	
+	return true;
+}
 bool Juego::keyPressed(const OIS::KeyEvent& ke)
 {
+	
+	
 	std::string key = "";
 	switch (ke.key)
 	{
@@ -165,22 +199,33 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	}
 	
-	pEstados.top()->keyPressed(key);
+	//pEstados.top()->keyPressed(key);
 	return true;
 }
 
 //Este método habría que llamarlo para que el movimiento sea continuo y se capturen las teclas pulsadas.
 //Para esto hay que tener en cuenta el tiempo para que no se llene de mensajes.
 void Juego::handleInput() {
-	std::string key = "";
-	OIS::Keyboard *kb = mInputMgr->getKeyboard();
 
-	if (kb->isKeyDown(OIS::KC_RIGHT)) key = "der";
-	else if (kb->isKeyDown(OIS::KC_LEFT)) key = "izq";
-	else if (kb->isKeyDown(OIS::KC_UP)) key = "arr";
-	else if (kb->isKeyDown(OIS::KC_DOWN)) key = "aba";
+	OIS::JoyStick * js = mInputMgr->getJoystick(0);
+	if (js != NULL) {
+		if (js->getJoyStickState().mAxes[0].abs != 0 || js->getJoyStickState().mAxes[1].abs != 0) {
 
-	if(key != "") pEstados.top()->keyPressed(key);
+			float x = js->getJoyStickState().mAxes[0].abs / 32768.0f;
+			float y = js->getJoyStickState().mAxes[1].abs / 32768.0f;
+
+			if (abs(x) >= 0.1 || abs(y) >= 0.1)
+				pEstados.top()->joystickMoved(x, y);
+		}
+		if (js->getJoyStickState().mAxes[2].abs != 0 || js->getJoyStickState().mAxes[3].abs != 0) {
+
+			float x = js->getJoyStickState().mAxes[2].abs / 32768.0f;
+			float y = js->getJoyStickState().mAxes[3].abs / 32768.0f;
+
+			if (abs(x) >= 0.2 || abs(y) >= 0.2)
+				pEstados.top()->joystickMoved(x, y, 1);
+		}
+	}
 }
 bool Juego::keyReleased(const OIS::KeyEvent& ke)
 {

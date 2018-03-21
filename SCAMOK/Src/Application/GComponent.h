@@ -20,11 +20,16 @@ class Estado;
 
 class GComponent : public Componente {
 public:
-	GComponent(Entidad* pEnt, std::string s = "ogrehead.mesh");
+	GComponent(Entidad* pEnt, std::string name = "ogrehead");
+	~GComponent();
 	virtual void Update(float deltaTime, Mensaje const & msj);
+	virtual void destroy();
 
-private:
+	void rota(float angle, Ogre::Vector3 eje);
+	void translate(float x, float y, float z);
+	void scale(float x, float y, float z);
+	
+protected:
 	Ogre::SceneNode * node;
 	Ogre::Entity * ent;
-
 };
