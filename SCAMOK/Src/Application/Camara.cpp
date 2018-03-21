@@ -8,6 +8,8 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setPosition(0, 20, -50);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
+	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("NodoCamera");
+	node->attachObject(cam);
 
 	//set viewport
 	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
@@ -16,10 +18,8 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
-
-
-	pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->attachObject(cam);
-	//cam->rotate(Quaternion(Degree(180), Vector3::UNIT_Y));
+	
+	
 }
 
 Camara::~Camara()
@@ -32,16 +32,28 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 
 	if (msg.getTipo() == Input && msg.getReceptor() == pEntidad) {
+		
 		if (msg.getSubTipo() == SubTipo::Mover) {
-			int pos = msg.getMsg().find("/");
-			std::string sz = msg.getMsg().substr(0, pos);
-			std::string sx = msg.getMsg().substr(pos + 1);
+			
+			Ogre::Vector3 pos = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getPosition();
+			int x = 0; int z = 0;
 
-			float x = -1 * std::stof(sx);
-			float z = std::stof(sz);
+			if (!(node->getPosition().x == (int)pos.x && node->getPosition().z == (int)pos.z)) {
+				if (abs(node->getPosition().x) > (int)pos.x) x = -1;
+				else if (node->getPosition().x < (int) pos.x) x = 1;
 
-			cam->rotate(Ogre::Quaternion(Ogre::Degree(x), Ogre::Vector3::UNIT_Y));
-			cam->rotate(Ogre::Quaternion(Ogre::Degree(z), Ogre::Vector3::UNIT_X));
+				if (node->getPosition().z > (int) pos.z - 50) z = 1;
+				else if (node->getPosition().z < (int)pos.z - 50) {
+					z = -1;
+				}
+
+				node->translate(x, 0, z);
+				Mensaje* m = new Mensaje(Tipo::Input, "", SubTipo::Mover);
+				m->setMsgInfo(pEntidad, pEntidad);
+				pEntidad->getPEstado()->addMsg(*m);
+			}
+			
+			//node->lookAt(Ogre::Vector3(node->getPosition().x + std::stof(zS), node->getPosition().y, node->getPosition().z - std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
 		}
 	}
 

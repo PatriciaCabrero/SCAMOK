@@ -121,8 +121,10 @@ bool Juego::run(){
 	int cont = 0;
 	std::cout << "\n\n\n";
 	contJoystick = 0;
+	
 	while (!exit)
 	{
+		
 		mInputMgr->capture();
 		if (cont == 2) {
 			handleInput();
@@ -188,7 +190,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	}
 	
-	//pEstados.top()->keyPressed(key);
+	pEstados.top()->keyPressed(key);
 	return true;
 }
 
@@ -200,19 +202,19 @@ void Juego::handleInput() {
 	if (js != NULL) {
 		if (js->getJoyStickState().mAxes[0].abs != 0 || js->getJoyStickState().mAxes[1].abs != 0) {
 
-			float x = js->getJoyStickState().mAxes[0].abs / 32768.0f;
-			float y = js->getJoyStickState().mAxes[1].abs / 32768.0f;
+			float x = js->getJoyStickState().mAxes[1].abs / 32768.0f;
+			float y = js->getJoyStickState().mAxes[0].abs / 32768.0f;
 
-			if (abs(x) >= 0.1 || abs(y) >= 0.1)
-				pEstados.top()->joystickMoved(x, y);
+			if (abs(x) >= 0.2 || abs(y) >= 0.2)
+				pEstados.top()->joystickMoved(-x, -y);
 		}
 		if (js->getJoyStickState().mAxes[2].abs != 0 || js->getJoyStickState().mAxes[3].abs != 0) {
 
-			float x = js->getJoyStickState().mAxes[2].abs / 32768.0f;
-			float y = js->getJoyStickState().mAxes[3].abs / 32768.0f;
+			float x = js->getJoyStickState().mAxes[3].abs / 32768.0f;
+			float y = js->getJoyStickState().mAxes[2].abs / 32768.0f;
 
 			if (abs(x) >= 0.2 || abs(y) >= 0.2)
-				pEstados.top()->joystickMoved(x, y, 1);
+				pEstados.top()->joystickMoved(-x, -y, 1);
 		}
 	}
 }

@@ -6,18 +6,22 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	mWin = mWindow;
 	scnMgr = mng;
 	
+	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
 
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
-	Mensaje* msg = new Mensaje(Tipo::Render, "0/1", SubTipo::Rotar);
+
+	Mensaje * msg =  new Mensaje(Tipo::Render, "0/5/0", SubTipo::Mover);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
-	
-	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
+
+		
 	 
 	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
-	entidades.insert(std::make_pair("Arbol", aux));
+	entidades.insert(std::make_pair("Arena", aux));
+
+
 
 
 	// Luz por defecto
@@ -53,7 +57,7 @@ bool Estado::update(float delta){
 void Estado::joystickMoved(float x, float y, int js) {
 
 	std::string sx, sy; sx = std::to_string(x); sy = std::to_string(y);
-	std::string s = sx + "/"+ sy;
+	std::string s = sx + "/"+ "0/" + sy ;
 
 	Mensaje* msg;
 		msg = new Mensaje(Tipo::Input, s);
@@ -67,12 +71,19 @@ void Estado::joystickMoved(float x, float y, int js) {
 
 }
 void Estado::keyPressed(std::string s) {
-	if (s == "der" || s == "izq" || s == "arr" || s == "aba") {
-		Mensaje* msg = new Mensaje(Tipo::Input, s);
+	/*if (s == "der" || s == "izq" || s == "arr" || s == "aba") {
+		Mensaje* msg = new Mensaje(Tipo::Input, s, SubTipo::Mover);
+		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
 		mensajes.push(msg);
-	}
+	}*/
 	
 }
 void Estado::keyReleased(std::string s) {
 	
+}
+Entidad* Estado::getEntidad(std::string s) {
+	auto flag = entidades.find(s);
+	if (flag != entidades.end()) return entidades.at(s);
+	
+	return nullptr;
 }

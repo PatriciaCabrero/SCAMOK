@@ -12,6 +12,6 @@ public:
 
 private:
 	int x, y, z;
-
+	Entidad * camera;
 };
 

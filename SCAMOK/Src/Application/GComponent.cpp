@@ -7,7 +7,7 @@ GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
 	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode(name);
 	node->attachObject(ent);
-	
+
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;
@@ -16,13 +16,15 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 		
 		if (msg.getSubTipo() == SubTipo::Mover) {
 			int pos = msg.getMsg().find("/");
-			std::string sz = msg.getMsg().substr(0, pos);
-			std::string sx = msg.getMsg().substr(pos + 1);
+			std::string xS = msg.getMsg().substr(0, pos);
+			std::string subcad = msg.getMsg().substr(pos + 1);
+			pos = subcad.find("/");
+			std::string yS = subcad.substr(0, pos);
+			std::string zS = subcad.substr(pos + 1);
 
-			float x = -1 * std::stof(sx);
-			float z = -1 * std::stof(sz);
+			translate(std::stof(xS), std::stof(yS), std::stof(zS));
+			node->lookAt(Ogre::Vector3(node->getPosition().x+std::stof(zS), node->getPosition().y, node->getPosition().z-std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
 			
-			node->translate(x,0,z);
 		}
 		if (msg.getSubTipo() == SubTipo::Rotar) {
 			//angle/int-> 0 = x, 1 = y, 2 = z
@@ -45,6 +47,7 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 				break;
 			}
 		}
+		
 
 	}
 }
