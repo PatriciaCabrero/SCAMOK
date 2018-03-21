@@ -3,6 +3,7 @@
 #include <iterator>
 #include "Mensaje.h"
 
+
 class Estado;
 
 class Entidad{
@@ -20,6 +21,7 @@ public:
 	bool añadeAnimacion(std::string mesh, std::ifstream & fe);
 	bool añadeAnimacion(std::string name,bool enabled = true, bool loop = true);
 	bool añadeComponenteLogico(std::string component);
+	bool añadeComponenteSM(std::string component, void* sys);
 
 private:
 	std::map<std::string, Componente*> componentes;

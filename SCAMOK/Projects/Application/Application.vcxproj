@@ -19,6 +19,7 @@
     <ClCompile Include="..\..\Src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\Src\Application\Juego.cpp" />
     <ClCompile Include="..\..\Src\Application\ProyectoBasico.cpp" />
+    <ClCompile Include="..\..\Src\Application\SoundManager.cpp" />
     <ClCompile Include="..\..\Src\Application\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="..\..\Src\Application\InputManager.h" />
     <ClInclude Include="..\..\Src\Application\Juego.h" />
     <ClInclude Include="..\..\Src\Application\Mensaje.h" />
+    <ClInclude Include="..\..\Src\Application\SoundManager.h" />
     <ClInclude Include="..\..\Src\Application\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -43,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -127,7 +127,7 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	Estado * pEstado = new Estado(scnMgr, system, mWindow);
+	Estado * pEstado = new Estado(scnMgr, mWindow, system);
 	pEstados.push(pEstado);
 	int cont = 0;
 	std::cout << "\n\n\n";

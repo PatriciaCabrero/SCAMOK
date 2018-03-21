@@ -19,7 +19,7 @@
 class Estado
 {
 public:
-	Estado(Ogre::SceneManager * mng, FMOD::System* sys, Ogre::RenderWindow* mWindow);
+	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys);
 	~Estado();
 
 	void addViewPort();
@@ -40,9 +40,9 @@ public:
 
 	//Audio-----------------------------------------
 
-	void reproduceFx(std::string fx, float x, float y, float z, float wet);
+	/*void reproduceFx(std::string fx, float x, float y, float z, float wet);
 	void reproduceAmbM(std::string amb, float wet, bool fade);
-	void paraAmb(int ch, bool fade);
+	void paraAmb(int ch, bool fade);*/
 
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
@@ -58,15 +58,15 @@ private:
 	std::priority_queue<Mensaje*> mensajes, bufer;
 	
 	// Fmod settings
-	FMOD::ChannelGroup* reverbGroup;
+/*	FMOD::ChannelGroup* reverbGroup;
 	FMOD::ChannelGroup* mainGroup;
 	FMOD::DSP* reverbUnit;
 	FMOD::DSP* channelHead;
 	int cMusic;
-	int cAmb;
+	int cAmb;*/
 	FMOD::System* system;
 
-	std::vector<FMOD::DSPConnection*> reverbConnectionfx;
+	/*std::vector<FMOD::DSPConnection*> reverbConnectionfx;
 	std::vector<FMOD::Channel*> cFx;
 	std::vector<FMOD::Channel*> cMA;
 	std::vector<FMOD::DSPConnection*> reverbConnectionAmbM;
@@ -74,6 +74,6 @@ private:
 	std::map<std::string, FMOD::Sound*> vmusic;
 
 	void cargaAudio(std::string irPath);
-	void cargarAssetsAudio();
+	void cargarAssetsAudio();*/
 
 };
