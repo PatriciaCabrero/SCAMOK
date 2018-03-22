@@ -5,7 +5,8 @@ GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
 	
 	std::string mesh = name + ".mesh";
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
-	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode(name);
+	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name);
+	node = groupNode->createChildSceneNode(name);
 	node->attachObject(ent);
 
 }
@@ -23,7 +24,7 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			std::string zS = subcad.substr(pos + 1);
 
 			translate(std::stof(xS), std::stof(yS), std::stof(zS));
-			node->lookAt(Ogre::Vector3(node->getPosition().x+std::stof(zS), node->getPosition().y, node->getPosition().z-std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
+			node->lookAt(Ogre::Vector3(groupNode->getPosition().x+std::stof(zS), groupNode->getPosition().y, groupNode->getPosition().z-std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
 			
 		}
 		if (msg.getSubTipo() == SubTipo::Rotar) {
@@ -64,7 +65,7 @@ void GComponent::rota(float angle, Vector3 eje){
 	node->rotate(Quaternion(Degree(angle), eje));
 }
 void GComponent::translate(float x, float y, float z) {
-	node->translate(x, y, z);
+	groupNode->translate(x, y, z);
 }
 void GComponent::scale(float x, float y, float z) {
 	node->scale(x, y, z);

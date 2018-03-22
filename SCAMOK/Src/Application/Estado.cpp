@@ -6,9 +6,12 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	mWin = mWindow;
 	scnMgr = mng;
 	
-	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
+	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	scnMgr->setShadowFarDistance(200);
+
 
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
+	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
@@ -60,11 +63,12 @@ void Estado::joystickMoved(float x, float y, int js) {
 	std::string s = sx + "/"+ "0/" + sy ;
 
 	Mensaje* msg;
-		msg = new Mensaje(Tipo::Input, s);
 	if (js == 0) {
+		msg = new Mensaje(Tipo::Input, s);
 		mensajes.push(msg);
 	}
 	else {
+		msg = new Mensaje(Tipo::Input, s, SubTipo::Rotar);
 		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
 		mensajes.push(msg);
 	}

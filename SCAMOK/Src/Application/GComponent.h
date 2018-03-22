@@ -30,6 +30,6 @@ public:
 	void scale(float x, float y, float z);
 	
 protected:
-	Ogre::SceneNode * node;
+	Ogre::SceneNode * node, *groupNode;
 	Ogre::Entity * ent;
 };
