@@ -2,6 +2,9 @@
 
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
+	//Aqui montamos el mundo físico
+	fisicaManager = new Fisic();
+
 	#pragma region InitOgre 
 	mWin = mWindow;
 	scnMgr = mng;
@@ -20,8 +23,10 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	mensajes.push(msg);
 
 		
-	 
+	//Aquí va la parte gráfica del suelo
 	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
+	//Aquí le meto la base física al suelo
+
 	entidades.insert(std::make_pair("Arena", aux));
 
 

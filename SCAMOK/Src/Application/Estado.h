@@ -13,6 +13,7 @@
 #include <OgreTextureManager.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreException.h>
+#include "Fisic.h"
 
 
 class Estado
@@ -23,6 +24,7 @@ public:
 
 	void addViewPort();
 	Ogre::SceneManager* getScnManager(){ return scnMgr; };
+	Fisic* getFisicManager() { return fisicaManager; };
 
 	bool update(float delta);
 	void keyPressed(std::string key);
@@ -49,6 +51,6 @@ private:
 	Ogre::RenderWindow* mWin;
 
 	std::priority_queue<Mensaje*> mensajes, bufer;
-	
+	Fisic* fisicaManager;
 
 };
