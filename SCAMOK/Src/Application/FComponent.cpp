@@ -5,10 +5,10 @@ FComponent::FComponent(Entidad* pEnt, tipoFisica type, int masa, bool suelo):Com
 
 	//Aquí le asignamos el transform que debería tener la entidad
 	pTransform.setIdentity();
-	int x, y, z;
+	/*int x, y, z;
 	if(pEntidad->getEntityTransform(x, y, z))
 		pTransform.setOrigin(btVector3(x,y,z));
-	else 
+	else */
 		pTransform.setOrigin(btVector3(0, 0, 0));
 
 	//Aquí ajustamos la masa

@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Animation.h"
 #include "Camara.h"
+#include "FComponent.h"
 #include <iostream>
 #include <fstream>
 
@@ -77,6 +78,14 @@ bool Entidad::añadeComponenteGrafico(std::string mesh) {
 	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
 	return true;
 }
+
+bool Entidad::añadeComponenteFisico(tipoFisica type, int masa, bool suelo) {
+	if(!componentes.at("Transform"))
+		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
+	componentes.insert(std::make_pair("Fisico", new FComponent(this, type, masa, suelo)));
+	return true;
+}
+
 bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));

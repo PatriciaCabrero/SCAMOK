@@ -3,6 +3,8 @@
 class Entidad;
 class Mensaje;
 
+enum tipoFisica { Dinamico, Estatico, Kinematico };
+
 class Componente {
 
 public:
