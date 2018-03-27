@@ -14,6 +14,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
+	entidades.at("Ogro")->añadeComponenteFisico(1, 1, 1, false, tipoFisica::Kinematico, 10,true);
 	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
@@ -26,7 +27,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	//Aquí va la parte gráfica del suelo
 	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	//Aquí le meto la base física al suelo
-
+	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
 
 

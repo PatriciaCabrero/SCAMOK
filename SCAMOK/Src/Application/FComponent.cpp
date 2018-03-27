@@ -1,42 +1,91 @@
 #include "FComponent.h"  
  
-FComponent::FComponent(Entidad* pEnt, tipoFisica type, int masa, bool suelo):Componente(pEnt),masa(masa) {
+FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
-
-	//Aquí le asignamos el transform que debería tener la entidad
-	pTransform.setIdentity();
-	/*int x, y, z;
-	if(pEntidad->getEntityTransform(x, y, z))
-		pTransform.setOrigin(btVector3(x,y,z));
-	else */
-		pTransform.setOrigin(btVector3(0, 0, 0));
-
-	//Aquí ajustamos la masa
-	if (tipo == tipoFisica::Dinamico)
-		mass=masa;
-	else
-		mass=0;
-	//La inercia inicial doy por supuesto que siempre es 0
-	//pero se puede cambiar
-	btVector3 localInertia(0, 0, 0);
-
-	//Si hay que hacer un plano para el suelo
-	if (suelo)
-		//////////////OJO 50 y 50 DEBERIAN SER LAS MEDIDAS DEL MAPA////////////////
-		shape = new btBoxShape(btVector3(btScalar(50.), btScalar(0.), btScalar(50.)));
-	//Si no es el suelo, en lugar de un plano, hacemos una caja 
-	/*Aquí hay que meter la altura, anchura y profundidad*/else shape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
-	
-	
-	motionState = new btDefaultMotionState(pTransform);
-	shape->calculateLocalInertia(mass, localInertia);
-	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
-	body = new btRigidBody(RBInfo);
-	pEnt->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
-
+	if (suelo) {
+		///////////////////DIMENSIONES DEL SUELO//////////////////////
+		anchoCaja = 50;
+		altoCaja = 0;
+		profCaja = 50;
+	}
 } 
+
 FComponent::~FComponent() { 
 	delete body;
 	delete motionState;
 	delete shape;
 } 
+
+void FComponent::initBody() {
+	//Aquí ajustamos la masa
+	if (tipo == tipoFisica::Dinamico)
+		mass = masa;
+	else
+		mass = 0;
+	//La inercia inicial doy por supuesto que siempre es 0
+	btVector3 localInertia(0, 0, 0);
+
+	//Aquí hacemos la forma de la caja
+	shape = new btBoxShape(btVector3(btScalar(anchoCaja), btScalar(altoCaja), btScalar(profCaja)));
+
+	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
+	motionState = new btDefaultMotionState(pTransform);
+	shape->calculateLocalInertia(mass, localInertia);
+	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
+	body = new btRigidBody(RBInfo);
+	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
+}
+
+void FComponent::Update(float deltaTime, Mensaje const & msj) {
+	Mensaje msg = msj;
+	Componente::Update(deltaTime, msj);
+
+	//Esto es lo que hace en el primer update de todos, para colocar el cuerpo en su lugar
+	//y setear su alto, ancho y profundidad, masa, etc
+	if (msg.getTipo() == Tipo::Fisica) {
+		if (msg.getSubTipo() == SubTipo::InitFis) {
+			int pos = msg.getMsg().find("/");
+			std::string xS = msg.getMsg().substr(0, pos);
+			std::string subcad = msg.getMsg().substr(pos + 1);
+			pos = subcad.find("/");
+			std::string yS = subcad.substr(0, pos);
+			std::string zS = subcad.substr(pos + 1);
+			//Aquí le asignamos el transform que debería tener la entidad
+			pTransform.setIdentity();
+			pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
+			initBody();
+		}
+	}
+	std::string ms = "";
+	Mensaje * m;
+	switch (tipo)
+	{
+	case Dinamico:
+		 ms += std::to_string(body->getWorldTransform().getOrigin().getX()) + "/"
+			+ std::to_string(body->getWorldTransform().getOrigin().getY()) + "/"
+			+ std::to_string(body->getWorldTransform().getOrigin().getZ());
+		m = new Mensaje(Tipo::Logica, ms, SubTipo::Mover);
+		m->setMsgInfo(pEntidad, pEntidad);
+		pEntidad->getPEstado()->addMsg(*m);
+		break;
+	case Estatico:
+		break;
+	case Kinematico:
+		if (msg.getTipo() == Tipo::Fisica) {
+			if (msg.getSubTipo() == SubTipo::Mover) {
+				//Aquí lo movemos con la info procedente del transform
+				int pos = msg.getMsg().find("/");
+				std::string xS = msg.getMsg().substr(0, pos);
+				std::string subcad = msg.getMsg().substr(pos + 1);
+				pos = subcad.find("/");
+				std::string yS = subcad.substr(0, pos);
+				std::string zS = subcad.substr(pos + 1);
+				btTransform t;
+				t.setIdentity();
+				pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
+				body->setWorldTransform(t);
+			}
+		}
+		break;
+	}
+}

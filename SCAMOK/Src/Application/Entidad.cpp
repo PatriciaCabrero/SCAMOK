@@ -79,18 +79,17 @@ bool Entidad::añadeComponenteGrafico(std::string mesh) {
 	return true;
 }
 
-bool Entidad::añadeComponenteFisico(tipoFisica type, int masa, bool suelo) {
-	if(!componentes.at("Transform"))
-		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
-	componentes.insert(std::make_pair("Fisico", new FComponent(this, type, masa, suelo)));
+bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja ,bool suelo, tipoFisica type, int masa, bool mainChar) {
+	componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0, mainChar)));
+	componentes.insert(std::make_pair("Fisico", new FComponent(this, altoCaja, anchoCaja, profCaja, suelo, type, masa)));
 	return true;
 }
 
 bool Entidad::añadeComponenteLogico(std::string component) {
-	if (component == "Transform") {
+	/*if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
 	}
-
+	*/
 	return true;
 }
 void Entidad::Update(float deltaTime,  Mensaje const & msj){
