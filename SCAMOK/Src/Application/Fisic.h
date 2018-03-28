@@ -10,6 +10,7 @@ public:
 	Fisic(); 
 	~Fisic(); 
 	btDiscreteDynamicsWorld* getDynamicsWorld() { return dynamicsWorld; };
+	std::vector<btCollisionShape *> getCollisionShapes() { return collisionShapes; };
 
 private:
 	btDefaultCollisionConfiguration* collisionConfig;

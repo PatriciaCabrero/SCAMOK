@@ -54,6 +54,32 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 			this->x = x; this->z = z; this->y = y;
 		}
 	}
+	if (msg.getTipo() == Tipo::Logica) {
+		if (msg.getSubTipo() == SubTipo::Reposicionar) {
+			int pos = msg.getMsg().find("/");
+			std::string xS = msg.getMsg().substr(0, pos);
+			std::string subcad = msg.getMsg().substr(pos + 1);
+			pos = subcad.find("/");
+			std::string yS = subcad.substr(0, pos);
+			std::string zS = subcad.substr(pos + 1);
+
+			float x = std::stof(xS);
+			float y = std::stof(yS);
+			float z = std::stof(zS);
+
+			this->x = x; this->z = z; this->y = y;
+		
+			Mensaje* m = new Mensaje(Tipo::Fisica, msg.getMsg(), SubTipo::Reposicionar);
+			//Si no se especifica receptor se considera broadcast
+			m->setMsgInfo(pEntidad, pEntidad);
+			pEntidad->getPEstado()->addMsg(*m);
+
+			Mensaje * m2 = new Mensaje(Tipo::Render, msg.getMsg(), SubTipo::Mover);
+			//Si no se especifica receptor se considera broadcast
+			m2->setMsgInfo(pEntidad, pEntidad);
+			pEntidad->getPEstado()->addMsg(*m2);
+		}
+	}
 }
 
 void Transform::Awake() {

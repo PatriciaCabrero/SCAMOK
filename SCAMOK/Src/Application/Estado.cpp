@@ -30,7 +30,13 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
 
-
+	//Aquí meto un greymon dinámico para colisionar y hacer pruebas
+	Entidad* aux1 = new Entidad(this); aux->añadeComponenteGrafico("Greymon");
+	aux->añadeComponenteFisico(1, 1, 1, false, tipoFisica::Dinamico, 1);
+	entidades.insert(std::make_pair("Greymon", aux1));
+	Mensaje * ms = new Mensaje(Tipo::Logica, "10/10/10", SubTipo::Reposicionar);
+	ms->setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
+	mensajes.push(ms);
 
 
 	// Luz por defecto
@@ -50,7 +56,7 @@ Estado::~Estado(){
 
 bool Estado::update(float delta){
 
-	
+	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
 	if (mensajes.size() > 0){
 		Mensaje* aux = mensajes.top();
 		mensajes.pop();

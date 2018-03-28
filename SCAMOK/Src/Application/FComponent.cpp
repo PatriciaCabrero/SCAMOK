@@ -31,9 +31,15 @@ void FComponent::initBody() {
 	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	motionState = new btDefaultMotionState(pTransform);
 	shape->calculateLocalInertia(mass, localInertia);
+	//La siguiente linea no sé si es necesaria para el suelo
+	pEntidad->getPEstado()->getFisicManager()->getCollisionShapes().push_back(shape);
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
 	body = new btRigidBody(RBInfo);
+	//La siguiente linea no sé si es necesaria para el suelo
+	body->setRestitution(1);
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
+	//La siguiente linea no sé si es necesaria para el suelo
+	//physicsEngine->trackRigidBodyWithName(body, physicsCubeName);
 }
 
 void FComponent::Update(float deltaTime, Mensaje const & msj) {
@@ -54,6 +60,21 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			pTransform.setIdentity();
 			pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
 			initBody();
+		}
+	}
+	if (msg.getTipo() == Tipo::Fisica) {
+		if (msg.getSubTipo() == SubTipo::Reposicionar) {
+			int pos = msg.getMsg().find("/");
+			std::string xS = msg.getMsg().substr(0, pos);
+			std::string subcad = msg.getMsg().substr(pos + 1);
+			pos = subcad.find("/");
+			std::string yS = subcad.substr(0, pos);
+			std::string zS = subcad.substr(pos + 1);
+			//Aquí le asignamos el transform que debería tener la entidad
+			btTransform t;
+			t.setIdentity();
+			pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
+			body->setWorldTransform(t);
 		}
 	}
 	std::string ms = "";
