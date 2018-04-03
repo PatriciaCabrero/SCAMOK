@@ -16,7 +16,7 @@ public:
 	Estado* getPEstado() { return pEstado; };
 
 	bool añadeComponenteGrafico(std::string mesh);
-	bool añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja, bool suelo, tipoFisica type = tipoFisica::Estatico, int masa = 0, bool mainChar = false);
+	bool añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja, bool suelo, tipoFisica type = tipoFisica::Estatico, int masa = 0);
 	bool añadeAnimacion(std::string mesh, std::ifstream & fe);
 	bool añadeAnimacion(std::string name,bool enabled = true, bool loop = true);
 	bool añadeComponenteLogico(std::string component);

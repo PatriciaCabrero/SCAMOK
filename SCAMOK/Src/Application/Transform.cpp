@@ -2,7 +2,7 @@
 #include "Transform.h"
 #include <iostream>
 
-Transform::Transform(Entidad * pEnt, int x, int y, int z, bool mainCharacter) : Componente(pEnt),mainCharacter(mainCharacter)
+Transform::Transform(Entidad * pEnt, int x, int y, int z) : Componente(pEnt)
 {
 	this->x = x; this->y = y; this->z = z;
 	camera = pEntidad->getPEstado()->getEntidad("MainCamera");
@@ -14,7 +14,7 @@ Transform::~Transform()
 void Transform::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
 	Mensaje msg = msj;
-	if (mainCharacter && msg.getTipo() == Tipo::Input) {
+	if ( msg.getTipo() == Tipo::Input) {
 		int pos = msg.getMsg().find("/");
 		std::string xS = msg.getMsg().substr(0, pos);
 		std::string subcad = msg.getMsg().substr(pos + 1);

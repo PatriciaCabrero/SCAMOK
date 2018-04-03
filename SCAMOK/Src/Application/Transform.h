@@ -5,7 +5,7 @@
 class Transform : public Componente
 {
 public:
-	Transform(Entidad* pEnt, int x, int y, int z, bool mainCharacter = false);
+	Transform(Entidad* pEnt, int x, int y, int z);
 	~Transform();
 
 	virtual void Update(float deltaTime, Mensaje const & mensaje);
@@ -14,7 +14,6 @@ public:
 	void setTransform(int X, int Y, int Z) { x = X; y = Y; z = Z; };
 
 private:
-	bool mainCharacter;
 	int x, y, z;
 	Entidad * camera;
 };
