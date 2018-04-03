@@ -7,6 +7,7 @@
  
 SoundManager::SoundManager(Entidad* pEnt, FMOD::System* sys) : Componente(pEnt){
 	system = sys;
+	cargarAssetsAudio();
 } 
 SoundManager::~SoundManager() { 
 
@@ -34,7 +35,7 @@ SoundManager::~SoundManager() {
 
 void::SoundManager::cargarAssetsAudio() {
 	FMOD::Sound* sound;
-	std::string aux, clave;
+	std::string clave;
 	FMOD_RESULT result;
 	TCHAR szDir[MAX_PATH];
 	TCHAR dir;
@@ -52,8 +53,8 @@ void::SoundManager::cargarAssetsAudio() {
 			do {
 				_bstr_t b(FindFileData.cFileName);
 				aux = b;
-				aux = cabecera + aux + ".wav";
-				system->createSound(aux.c_str(), FMOD_3D, 0, &sound);
+				aux = (char*)szDir+b;
+				system->createSound(aux, FMOD_3D, 0, &sound);
 				sound->set3DMinMaxDistance(5.0f, 5000.0f);
 				vfx.insert(std::pair<std::string, FMOD::Sound*>(clave, sound));
 
@@ -75,8 +76,8 @@ void::SoundManager::cargarAssetsAudio() {
 			do {
 				_bstr_t b(FindFileData.cFileName);
 				aux = b;
-				aux = cabecera + aux + ".wav";
-				system->createSound(aux.c_str(), FMOD_3D, 0, &sound);
+				aux = (char*)szDir;
+				system->createSound(aux, FMOD_3D, 0, &sound);
 				sound->set3DMinMaxDistance(5.0f, 5000.0f);
 				vfx.insert(std::pair<std::string, FMOD::Sound*>(clave, sound));
 
