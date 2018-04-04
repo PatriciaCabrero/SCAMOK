@@ -14,6 +14,7 @@ Juego::Juego()
 #endif
 	
 	init();
+	initFmod();
 }
 
 bool Juego::init(){
