@@ -18,7 +18,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
-	Mensaje * msg =  new Mensaje(Tipo::Render, "0/5/0", SubTipo::Mover);
+	Mensaje * msg =  new Mensaje(Tipo::Render, "0/10/0", SubTipo::Mover);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
 
@@ -26,7 +26,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	//Aquí va la parte gráfica del suelo
 	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	//Aquí le meto la base física al suelo
-	//aux->añadeComponenteFisico(0, 0, 0, true);
+	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
 
 	/*//Aquí meto un greymon dinámico para colisionar y hacer pruebas
@@ -62,6 +62,10 @@ bool Estado::update(float delta){
 		for (std::pair<std::string, Entidad*> ent : entidades){
 			ent.second->Update(delta, *aux);
 		}
+	}
+	else {
+		for (std::pair<std::string, Entidad*> ent : entidades) 
+			ent.second->Update(delta, *(new Mensaje(Tipo::Fisica, " ")));
 	}
 	swapMsgBufer();
 

@@ -27,5 +27,6 @@ private:
 	Estado* pEstado;
 	bool activo;
 	Entidad* target; //Usar esta entidad para escuchar los mensajes dirigidos a ella
+	std::string nombreNodo;
 	
 };

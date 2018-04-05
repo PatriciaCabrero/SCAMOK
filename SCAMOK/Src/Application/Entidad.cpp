@@ -14,7 +14,7 @@ Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 
-
+	nombreNodo = prefab;
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
@@ -45,7 +45,6 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 		}
 		fe >> type;
 	}
-
 	fe.close();
 	
 }
@@ -82,13 +81,14 @@ bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 }
 
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
+	nombreNodo = mesh;
 	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
 	return true;
 }
 
 bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja ,bool suelo, tipoFisica type, int masa) {
 	
-	componentes.insert(std::make_pair("Fisico", new FComponent(this, altoCaja, anchoCaja, profCaja, suelo, type, masa)));
+	componentes.insert(std::make_pair("Fisico", new FComponent(this, altoCaja, anchoCaja, profCaja, nombreNodo, suelo, type, masa)));
 	return true;
 }
 

@@ -1,13 +1,24 @@
 #include "FComponent.h"  
  
-FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
+FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
 	if (suelo) {
 		///////////////////DIMENSIONES DEL SUELO//////////////////////
 		anchoCaja = 50;
 		altoCaja = 0;
 		profCaja = 50;
+		pTransform.setIdentity();
+		pTransform.setOrigin(btVector3(0, 0, 0));
+		initBody();
 	}
+	else {
+		pTransform.setIdentity();
+		pTransform.setOrigin(btVector3(0,10,0));
+		initBody();
+		posAnt = body->getWorldTransform().getOrigin();
+	}
+	if(nombreNodo != " ")
+		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo));
 } 
 
 FComponent::~FComponent() { 
@@ -79,15 +90,37 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	}
 	std::string ms = "";
 	Mensaje * m;
+	void *userPointer;
+	btTransform trans;
 	switch (tipo)
 	{
 	case Dinamico:
-		 ms += std::to_string(body->getWorldTransform().getOrigin().getX()) + "/"
-			+ std::to_string(body->getWorldTransform().getOrigin().getY()) + "/"
-			+ std::to_string(body->getWorldTransform().getOrigin().getZ());
-		m = new Mensaje(Tipo::Logica, ms, SubTipo::Mover);
-		m->setMsgInfo(pEntidad, pEntidad);
-		pEntidad->getPEstado()->addMsg(*m);
+		body->getMotionState()->getWorldTransform(trans);
+		userPointer = body->getUserPointer();
+		if (userPointer) {
+			btQuaternion orientation = trans.getRotation();
+			Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
+			sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+			sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
+		}
+
+		
+		/*if (body->getWorldTransform().getOrigin() != posAnt)
+		{
+			ms += std::to_string(body->getWorldTransform().getOrigin().getX()) + "/-"
+				+ std::to_string(body->getWorldTransform().getOrigin().getY()) + "/"
+				+ std::to_string(body->getWorldTransform().getOrigin().getZ());
+			m = new Mensaje(Tipo::Render, ms, SubTipo::Mover);
+			m->setMsgInfo(pEntidad, pEntidad);
+			pEntidad->getPEstado()->addMsg(*m);
+
+
+
+
+
+
+			posAnt = body->getWorldTransform().getOrigin();
+		}*/
 		break;
 	case Estatico:
 		break;
