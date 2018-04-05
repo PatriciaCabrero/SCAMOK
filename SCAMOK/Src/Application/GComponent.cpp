@@ -24,7 +24,7 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			std::string zS = subcad.substr(pos + 1);
 
 			translate(std::stof(xS), std::stof(yS), std::stof(zS));
-			node->lookAt(Ogre::Vector3(groupNode->getPosition().x+std::stof(zS), groupNode->getPosition().y, groupNode->getPosition().z-std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
+			node->lookAt(Ogre::Vector3(groupNode->getPosition().x + 100*std::stof(zS), groupNode->getPosition().y, groupNode->getPosition().z - 100*std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
 			
 		}
 		if (msg.getSubTipo() == SubTipo::Rotar) {
@@ -38,9 +38,9 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 
 			switch (eje)
 			{
-			case 0: rota(angulo, Vector3::UNIT_X);
+			case 0: rota(angulo, Vector3::UNIT_Y);
 				break;
-			case 1: rota(angulo, Vector3::UNIT_Y);
+			case 1: rota(angulo, Vector3::UNIT_X);
 				break;
 			case 2: rota(angulo, Vector3::UNIT_Z);
 				break;

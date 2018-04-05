@@ -8,8 +8,8 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setPosition(0, 20, -50);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
-	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("NodoCamera");
-	//node->attachObject(cam);
+	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->createChildSceneNode("NodoCamera");
+	node->attachObject(cam);
 
 	//set viewport
 	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
@@ -19,7 +19,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 	
-	pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->attachObject(cam);
+	//pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->attachObject(node);
 }
 
 Camara::~Camara()
@@ -31,7 +31,7 @@ void Camara::attach(Ogre::SceneNode* node) {
 void Camara::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 
-	if (msg.getTipo() == Input && msg.getReceptor() == pEntidad) {
+	//if (msg.getTipo() == Input && msg.getReceptor() == pEntidad) {
 		
 		if (msg.getSubTipo() == SubTipo::Rotar) {
 			int pos = msg.getMsg().find("/");
@@ -44,8 +44,8 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 			float x = std::stof(xS);
 			float z = -1* std::stof(zS);
 
-			cam->rotate(Ogre::Quaternion(Ogre::Degree(x), Ogre::Vector3::UNIT_Y));
-			cam->rotate(Ogre::Quaternion(Ogre::Degree(z), Ogre::Vector3::UNIT_X));
-		}
+			node->rotate(Ogre::Quaternion(Ogre::Degree(-x*2), Ogre::Vector3::UNIT_Y));
+			//node->rotate(Ogre::Quaternion(Ogre::Degree(z), Ogre::Vector3::UNIT_X));
+		//}
 	}
 }
