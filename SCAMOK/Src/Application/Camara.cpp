@@ -5,7 +5,7 @@ using namespace Ogre;
 Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 {
 	cam = pEnt->getPEstado()->getScnManager()->createCamera("MainCamera");
-	cam->setPosition(0, 20, -50);
+	cam->setPosition(0, 20, -75);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
 	node = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("NodoCamera");
@@ -13,7 +13,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 
 	//set viewport
 	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
-	vp->setBackgroundColour(Ogre::ColourValue(150, 150, 150));
+	vp->setBackgroundColour(Ogre::ColourValue(0, 150, 150));
 
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /

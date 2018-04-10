@@ -2,23 +2,24 @@
  
 FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
-	if (suelo) {
-		///////////////////DIMENSIONES DEL SUELO//////////////////////
-		anchoCaja = 50;
-		altoCaja = 0;
-		profCaja = 50;
-		pTransform.setIdentity();
-		pTransform.setOrigin(btVector3(0, 0, 0));
-		initBody();
-	}
-	else {
-		pTransform.setIdentity();
-		pTransform.setOrigin(btVector3(0,10,0));
-		initBody();
-		posAnt = body->getWorldTransform().getOrigin();
-	}
-	if(nombreNodo != " ")
-		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo));
+
+		Ogre::AxisAlignedBox bbox;
+		if (nombreNodo != " ") {
+			pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
+			pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, false);
+ 			bbox=  pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_getWorldAABB();
+			Ogre::Vector3  v = bbox.getSize();
+			altoCaja = v.y;
+			profCaja = v.z;
+			anchoCaja = v.x;
+			pTransform.setIdentity();
+			pTransform.setOrigin(btVector3(bbox.getCenter().x,bbox.getCenter().y, bbox.getCenter().z));
+			initBody();
+			posAnt = body->getWorldTransform().getOrigin();
+			body->getMotionState()->getWorldTransform(trans);
+			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo));
+		}
+	actualizaNodo();
 } 
 
 FComponent::~FComponent() { 
@@ -29,7 +30,7 @@ FComponent::~FComponent() {
 
 void FComponent::initBody() {
 	//Aquí ajustamos la masa
-	if (tipo == tipoFisica::Dinamico)
+	if (tipo != tipoFisica::Estatico)
 		mass = masa;
 	else
 		mass = 0;
@@ -47,7 +48,7 @@ void FComponent::initBody() {
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
 	body = new btRigidBody(RBInfo);
 	//La siguiente linea no sé si es necesaria para el suelo
-	body->setRestitution(1);
+	body->setRestitution(0);
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
 	//La siguiente linea no sé si es necesaria para el suelo
 	//physicsEngine->trackRigidBodyWithName(body, physicsCubeName);
@@ -90,21 +91,13 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	}
 	std::string ms = "";
 	Mensaje * m;
-	void *userPointer;
-	btTransform trans;
+	
 	switch (tipo)
 	{
 	case Dinamico:
+	
 		body->getMotionState()->getWorldTransform(trans);
-		userPointer = body->getUserPointer();
-		if (userPointer) {
-			btQuaternion orientation = trans.getRotation();
-			Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
-			sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
-			sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
-		}
-
-		
+		actualizaNodo();
 		/*if (body->getWorldTransform().getOrigin() != posAnt)
 		{
 			ms += std::to_string(body->getWorldTransform().getOrigin().getX()) + "/-"
@@ -122,9 +115,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			posAnt = body->getWorldTransform().getOrigin();
 		}*/
 		break;
-	case Estatico:
-		break;
 	case Kinematico:
+		
 		if (msg.getTipo() == Tipo::Fisica) {
 			if (msg.getSubTipo() == SubTipo::Mover) {
 				//Aquí lo movemos con la info procedente del transform
@@ -134,12 +126,37 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				pos = subcad.find("/");
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
-				btTransform t;
-				t.setIdentity();
-				pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
-				body->setWorldTransform(t);
+				float xF= std::stof(xS);
+				if (xF > 0) xF *= 50 ;
+				else if (xF < 0) xF *=50;
+				float zF = std::stof(zS);
+				if (zF > 0) zF *= 50;
+				else if (zF < 0) zF *= 50;
+				btVector3 vel = body->getLinearVelocity();
+				vel = vel + btVector3(xF,0,zF);
+				body->setLinearVelocity(vel);
+				//body->applyCentralImpulse(vel);
+				body->getMotionState()->getWorldTransform(trans);
+				actualizaNodo();
 			}
 		}
+		else {
+			btVector3 vel = body->getLinearVelocity();
+			vel = vel*btVector3(0, 1, 0);
+			body->setLinearVelocity(vel);
+			body->getMotionState()->getWorldTransform(trans);
+			actualizaNodo();
+		}
 		break;
+	}
+	
+}
+void FComponent:: actualizaNodo() {
+	userPointer = body->getUserPointer();
+	if (userPointer) {
+		btQuaternion orientation = trans.getRotation();
+		Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
+		sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+		sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
 	}
 }

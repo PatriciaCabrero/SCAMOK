@@ -28,15 +28,15 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 
 		this->x += x; this->z += z; this->y += y;
 
-		Mensaje * m = new Mensaje(Tipo::Render, msg.getMsg(), SubTipo::Mover);
+		/*Mensaje * m = new Mensaje(Tipo::Render, msg.getMsg(), SubTipo::Mover);
 		//Si no se especifica receptor se considera broadcast
 		m->setMsgInfo(pEntidad, pEntidad);
-		pEntidad->getPEstado()->addMsg(*m);
+		pEntidad->getPEstado()->addMsg(*m);*/
 
 		Mensaje * ms = new Mensaje(Tipo::Fisica, msg.getMsg(), SubTipo::Mover);
 		//Si no se especifica receptor se considera broadcast
 		ms->setMsgInfo(pEntidad, pEntidad);
-		pEntidad->getPEstado()->addMsg(*ms);
+		pEntidad->getPEstado()->addMsg(*ms);/*
 	}
 	if (msg.getTipo() == Tipo::Logica) {
 		if (msg.getSubTipo() == SubTipo::Mover) {
@@ -78,14 +78,14 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 			//Si no se especifica receptor se considera broadcast
 			m2->setMsgInfo(pEntidad, pEntidad);
 			pEntidad->getPEstado()->addMsg(*m2);
-		}
+		}*/
 	}
 }
 
 void Transform::Awake() {
-	std::string msg = std::to_string(x) + "/" + std::to_string(y) + "/" + std::to_string(z);
+	/*std::string msg = std::to_string(x) + "/" + std::to_string(y) + "/" + std::to_string(z);
 	Mensaje * m = new Mensaje(Tipo::Fisica, msg, SubTipo::InitFis);
 	//Si no se especifica receptor se considera broadcast
 	m->setMsgInfo(pEntidad, pEntidad);
-	pEntidad->getPEstado()->addMsg(*m);
+	pEntidad->getPEstado()->addMsg(*m);*/
 }

@@ -11,6 +11,7 @@ public:
 	virtual void Update(float deltaTime, Mensaje const & msj);//A rellenar con el cuenta steps
 	virtual void destroy() {};
 	void initBody();
+	void actualizaNodo();
 
 protected:
 	float altoCaja, anchoCaja, profCaja;
@@ -24,4 +25,6 @@ protected:
 	btVector3 posAnt;
 	//Ogre::SceneNode * node, *groupNode;
 	//Ogre::Entity * ent;
+	btTransform trans;
+	void *userPointer;
 }; 

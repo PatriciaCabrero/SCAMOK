@@ -18,7 +18,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
-	Mensaje * msg =  new Mensaje(Tipo::Render, "0/10/0", SubTipo::Mover);
+	Mensaje * msg =  new Mensaje(Tipo::Render, "0/50/0", SubTipo::Mover);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
 
