@@ -9,10 +9,18 @@ GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
 	node = groupNode->createChildSceneNode(name);
 	node->attachObject(ent);
 
+	
+
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
+	if (nodeCh == nullptr) {
+	nodeCh = node->createChildSceneNode("nodeCh");
+	Vector3 posAux = groupNode->getChild("NodoCamera")->getPosition();
+	posAux.y = posAux.y*-1;
+	nodeCh->setPosition(-posAux);
+	}
 	if (msg.getTipo() == Tipo::Render ){
 		
 		if (msg.getSubTipo() == SubTipo::Mover) {
@@ -24,7 +32,8 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			std::string zS = subcad.substr(pos + 1);
 
 			translate(std::stof(xS), std::stof(yS), std::stof(zS));
-			node->lookAt(Ogre::Vector3(groupNode->getPosition().x + 100*std::stof(zS), groupNode->getPosition().y, groupNode->getPosition().z - 100*std::stof(xS)), Node::Node::TS_WORLD, Vector3::UNIT_X);
+			node->lookAt(Ogre::Vector3(groupNode->getPosition().x + std::stof(xS)*100, groupNode->getPosition().y, groupNode->getPosition().z + std::stof(zS)*100), Node::TS_WORLD, Vector3::UNIT_Z);
+			
 			
 		}
 		if (msg.getSubTipo() == SubTipo::Rotar) {
@@ -35,7 +44,7 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 
 			int eje = std::stoi(ejeS);
 			float angulo = std::stof(anguloS);
-
+			
 			switch (eje)
 			{
 			case 0: rota(angulo, Vector3::UNIT_Y);
@@ -62,10 +71,13 @@ GComponent::~GComponent() {
 	
 }
 void GComponent::rota(float angle, Vector3 eje){
-	node->rotate(Quaternion(Degree(angle), eje));
+	//groupNode->rotate(Quaternion(Degree(-angle*2), eje));
+	node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
+	//groupNode->getChild("NodoCamera")->rotate(Quaternion(Degree(angle * 2), eje));
 }
 void GComponent::translate(float x, float y, float z) {
-	groupNode->translate(x, y, z);
+	
+	groupNode->translate(groupNode->getChild("NodoCamera")->getLocalAxes(), Vector3(x, y, z));
 }
 void GComponent::scale(float x, float y, float z) {
 	node->scale(x, y, z);

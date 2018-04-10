@@ -71,6 +71,10 @@ void Estado::joystickMoved(float x, float y, int js) {
 		msg = new Mensaje(Tipo::Input, s, SubTipo::Rotar);
 		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
 		mensajes.push(msg);
+		msg = new Mensaje(Tipo::Render, s, SubTipo::Rotar);
+		msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		mensajes.push(msg);
+
 	}
 
 }
