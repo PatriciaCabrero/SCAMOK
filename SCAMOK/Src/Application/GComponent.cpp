@@ -32,7 +32,15 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			std::string zS = subcad.substr(pos + 1);
 
 			translate(std::stof(xS), std::stof(yS), std::stof(zS));
-			node->lookAt(Ogre::Vector3(groupNode->getPosition().x + std::stof(xS)*100, groupNode->getPosition().y, groupNode->getPosition().z + std::stof(zS)*100), Node::TS_WORLD, Vector3::UNIT_Z);
+			Vector3 aux = Ogre::Vector3(groupNode->getPosition().x + std::stof(xS) * 100, groupNode->getPosition().y, groupNode->getPosition().z + std::stof(zS) * 100);
+			node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
+			//if (std::stof(xS) != 0 && std::stof(zS) != 0)
+				//node->rotate(Vector3(0, groupNode->getPosition().y, 0), Radian(sin(groupNode->getPosition().x / groupNode->getPosition().z)), Node::TS_LOCAL);
+			//node->lookAt(aux, Node::TS_WORLD, Vector3::UNIT_Z);
+			node->rotate(Quaternion(Radian(90),Vector3(0,0,0)), Node::TS_LOCAL);
+
+			
+			
 			
 			
 		}
@@ -47,9 +55,9 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			
 			switch (eje)
 			{
-			case 0: rota(angulo, Vector3::UNIT_Y);
+			case 0: rota(angulo, Vector3::UNIT_X);
 				break;
-			case 1: rota(angulo, Vector3::UNIT_X);
+			case 1: rota(angulo, Vector3::UNIT_Y);
 				break;
 			case 2: rota(angulo, Vector3::UNIT_Z);
 				break;
@@ -73,7 +81,7 @@ GComponent::~GComponent() {
 void GComponent::rota(float angle, Vector3 eje){
 	//groupNode->rotate(Quaternion(Degree(-angle*2), eje));
 	node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
-	//groupNode->getChild("NodoCamera")->rotate(Quaternion(Degree(angle * 2), eje));
+	
 }
 void GComponent::translate(float x, float y, float z) {
 	
