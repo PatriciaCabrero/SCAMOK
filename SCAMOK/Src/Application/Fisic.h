@@ -2,6 +2,8 @@
 #include "btBulletDynamicsCommon.h"
 #include <vector>
 #include <map>
+#include "LinearMath\btIDebugDraw.h"
+
 
 //Esta clase tendrá una instancia en el estado
 //Regulará todo lo relacionado con el mundo físico
@@ -18,7 +20,9 @@ private:
 	btBroadphaseInterface* overlappingPairCache;
 	btSequentialImpulseConstraintSolver* solver;
 	btDiscreteDynamicsWorld* dynamicsWorld;
+	
 
 	std::vector<btCollisionShape *> collisionShapes;
 	std::map<std::string, btRigidBody *> physicsAccessors;
+
 }; 

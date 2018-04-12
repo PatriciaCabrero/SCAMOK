@@ -1,11 +1,11 @@
 
 #include "GComponent.h"
 using namespace Ogre;
-GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
+GComponent::GComponent(Entidad* pEnt, std::string name, Ogre::Vector3 posIni) : Componente (pEnt){
 	
 	std::string mesh = name + ".mesh";
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
-	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name);
+	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name, posIni);
 	node = groupNode->createChildSceneNode(name);
 	node->attachObject(ent);
 

@@ -18,13 +18,15 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
-	Mensaje * msg =  new Mensaje(Tipo::Render, "0/50/0", SubTipo::Mover);
+	Mensaje * msg =  new Mensaje(Tipo::Render, "0/100/0", SubTipo::Mover);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-	mensajes.push(msg);
+	//mensajes.push(msg);
 
 		
 	//Aquí va la parte gráfica del suelo
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
+	std::vector<int> auxV = {0,0,0};
+	
+	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo", auxV );
 	//Aquí le meto la base física al suelo
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));

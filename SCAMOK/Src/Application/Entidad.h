@@ -2,6 +2,7 @@
 #include "Componente.h"
 #include <iterator>
 #include "Mensaje.h"
+#include <vector>
 
 class Estado;
 //enum tipoFisica { Dinamico, Estatico, Kinematico };
@@ -15,7 +16,7 @@ public:
 	void Sleep();
 	Estado* getPEstado() { return pEstado; };
 
-	bool añadeComponenteGrafico(std::string mesh);
+	bool añadeComponenteGrafico(std::string mesh, std::vector<int> posIni);
 	bool añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja, bool suelo, tipoFisica type = tipoFisica::Estatico, int masa = 0);
 	bool añadeAnimacion(std::string mesh, std::ifstream & fe);
 	bool añadeAnimacion(std::string name,bool enabled = true, bool loop = true);

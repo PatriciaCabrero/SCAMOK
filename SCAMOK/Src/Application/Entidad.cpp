@@ -23,7 +23,13 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	while (type != "---") {
 		if (type == "Grafico") {
 			std::string mesh; fe >> mesh;
-			añadeComponenteGrafico(mesh);
+			Ogre::Vector3 posIni;
+			fe >> posIni.x;
+			fe >> posIni.y; fe >> posIni.z;
+			std::vector< int> posI; posI.push_back(posIni.x);
+			posI.push_back(posIni.y);
+			posI.push_back(posIni.z);
+			añadeComponenteGrafico(mesh, posI);
 		}
 		else if (type == "Logico") {
 			std::string component; fe >> component;
@@ -80,9 +86,10 @@ bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 	return true;
 }
 
-bool Entidad::añadeComponenteGrafico(std::string mesh) {
+bool Entidad::añadeComponenteGrafico(std::string mesh, std::vector<int> posIni) {
 	nombreNodo = mesh;
-	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
+	Ogre::Vector3 v; v.x = posIni[0]; v.y = posIni[1]; v.z = posIni[2];
+	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh, v)));
 	return true;
 }
 

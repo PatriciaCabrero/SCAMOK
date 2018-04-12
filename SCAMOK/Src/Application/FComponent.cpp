@@ -3,22 +3,24 @@
 FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
 
-		Ogre::AxisAlignedBox bbox;
-		if (nombreNodo != " ") {
-			pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
-			pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, false);
- 			bbox=  pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_getWorldAABB();
-			Ogre::Vector3  v = bbox.getSize();
-			altoCaja = v.y;
-			profCaja = v.z;
-			anchoCaja = v.x;
-			pTransform.setIdentity();
-			pTransform.setOrigin(btVector3(bbox.getCenter().x,bbox.getCenter().y, bbox.getCenter().z));
-			initBody();
-			posAnt = body->getWorldTransform().getOrigin();
-			body->getMotionState()->getWorldTransform(trans);
-			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo));
-		}
+	Ogre::AxisAlignedBox bbox;
+	if (nombreNodo != " ") {
+		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
+		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, false);
+		Ogre::Vector3 posN = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo)->getPosition();
+		bbox = pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_getWorldAABB();
+		Ogre::Vector3  v = bbox.getSize();
+		altoCaja = v.y;
+		profCaja = v.z;
+		anchoCaja = v.x;
+		pTransform.setIdentity();
+		Ogre::Vector3 centro = bbox.getCenter();
+		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
+		initBody();
+		posAnt = body->getWorldTransform().getOrigin();
+		body->getMotionState()->getWorldTransform(trans);
+		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo));
+	}
 	actualizaNodo();
 } 
 

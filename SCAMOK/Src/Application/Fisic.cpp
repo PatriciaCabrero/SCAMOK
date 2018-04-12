@@ -1,4 +1,4 @@
-#include "Fisic.h"  
+#include "Fisic.h" 
  
 Fisic::Fisic() { 
 	collisionConfig = new btDefaultCollisionConfiguration();
