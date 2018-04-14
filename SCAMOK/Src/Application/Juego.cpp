@@ -8,14 +8,15 @@ Juego::Juego()
 	plugins = "OgreD/plugins_d.cfg";
 	recursos = "OgreD/resources_d.cfg";
 #else
-	plugins = "OgreD/plugins.cfg";
-	recursos = "OgreD/resources.cfg";
+	plugins = "Ogre/plugins.cfg";
+	recursos = "Ogre/resources.cfg";
 #endif
 	
 	init();
 }
 
 bool Juego::init(){
+	
 	root = new Ogre::Root(plugins);
 
 	//------------------------------------------------------------------------------------------------------
@@ -70,8 +71,39 @@ bool Juego::init(){
 
 	//------------------------------------------------------------------------------------------------------
 	//Render Window Creation
-	mWindow = root->initialise(true, "Behind the rainbow");
+	// pretend the user used some other mechanism to select the // OpenGL renderer String rName("OpenGL Rendering Subsystem"); RenderSystemList *rList = root->getAvailableRenderers(); RenderSystemList::iterator it = rList->begin(); RenderSystem *rSys = 0;
+	Ogre::RenderSystemList rList = root->getAvailableRenderers(); 
+	Ogre::RenderSystemList::iterator it = rList.begin();
+	Ogre::RenderSystem* rSys = 0;
+	while (it != rList.end()) {
+		// Ogre strings are typedefs of std::string RenderSystem *rSys = *(it++); if (rSys->getName().find("OpenGL")) {
+		// set the OpenGL render system for use root->setRenderSystem(rSys); break;
+		rSys = *(it++); 
+		if (rSys->getName() == "OpenGL Rendering Subsystem") {
+			// set the OpenGL render system for use 
+			root->setRenderSystem(rSys); 
+			break;
+		}
+	}
+		if (root->getRenderSystem() == NULL) {
+			delete root; 
+			return false;
+		}
+	
+	
+//	root->setRenderSystem()
+	 root->initialise(false);
+	 mWindow = root->createRenderWindow("Manual Ogre Window",  // window name 
+		 800,  
+															   // window width, in pixels 
+		 600,    
+															   // window height, in pixels 
+		 false,           
+															   // fullscreen or not 
+		 0);               
+															   // use defaults for all other values
 
+	
 	//------------------------------------------------------------------------------------------------------
 	//Resources Init
 
@@ -86,7 +118,7 @@ bool Juego::init(){
 	//SceneManager Set Up
 
 	//we generate the default sceneManager. (more SceneManagers in Ogre::ST_....)
-	scnMgr = root->createSceneManager(Ogre::ST_GENERIC);
+	scnMgr = root->createSceneManager(Ogre::ST_GENERIC, "MySceneManager");
 
 
 

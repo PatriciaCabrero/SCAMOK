@@ -3,6 +3,7 @@
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	#pragma region InitOgre 
+	//scnMgr = new Ogre::SceneManager();
 	scnMgr = mng;
 	//set Camera
 	cam = scnMgr->createCamera("MainCam");
