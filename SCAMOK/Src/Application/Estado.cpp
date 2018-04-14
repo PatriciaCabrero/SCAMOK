@@ -66,6 +66,9 @@ void Estado::joystickMoved(float x, float y, int js) {
 	if (js == 0) {
 		msg = new Mensaje(Tipo::Input, s);
 		mensajes.push(msg);
+		msg = new Mensaje(Tipo::Render, s, SubTipo::Mover);
+		msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		mensajes.push(msg);
 	}
 	else {
 		msg = new Mensaje(Tipo::Input, s, SubTipo::Rotar);

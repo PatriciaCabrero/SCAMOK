@@ -32,4 +32,5 @@ public:
 protected:
 	Ogre::SceneNode * node, *groupNode, *nodeCh;
 	Ogre::Entity * ent;
+	bool firstMsg;
 };

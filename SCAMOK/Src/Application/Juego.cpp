@@ -9,8 +9,8 @@ Juego::Juego()
 	plugins = "OgreD/plugins_d.cfg";
 	recursos = "OgreD/resources_d.cfg";
 #else
-	plugins = "OgreD/plugins.cfg";
-	recursos = "OgreD/resources.cfg";
+	plugins = "Ogre/plugins.cfg";
+	recursos = "OgreD/resources_d.cfg";
 #endif
 	
 	init();
@@ -121,25 +121,26 @@ bool Juego::run(){
 	int cont = 0;
 	std::cout << "\n\n\n";
 	contJoystick = 0;
+	bool rend = false;
 	
 	while (!exit)
 	{
 		
 		mInputMgr->capture();
-		if (cont == 2) {
+		if (cont == 4) {
 			handleInput();
 			cont = 0;
 		}
 		else cont++;
+		
 		pEstados.top()->update(12.0f);
-
 		// render ogre
 		Ogre::WindowEventUtilities::messagePump();
 		
 
 		//comprobar si la ventana está abierta
 		if (mWindow->isClosed())return false;
-		if (!root->renderOneFrame())return false;
+		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 	}
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
