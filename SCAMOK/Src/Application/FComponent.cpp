@@ -6,7 +6,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	Ogre::AxisAlignedBox bbox;
 	if (nombreNodo != " ") {
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
-		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, false);
+		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, true);
 		Ogre::Vector3 posN = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo)->getPosition();
 		bbox = pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_getWorldAABB();
 		Ogre::Vector3  v = bbox.getSize();
@@ -16,6 +16,8 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		pTransform.setIdentity();
 		Ogre::Vector3 centro = bbox.getCenter();
 		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
+		Ogre::Quaternion quat = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + nombreNodo)->getOrientation();
+		pTransform.setRotation(btQuaternion(quat.x, quat.y, quat.z, quat.w));//Tener en cuenta que en ogre el primer valor es w, mientras que en bullet va último.
 		initBody();
 		posAnt = body->getWorldTransform().getOrigin();
 		body->getMotionState()->getWorldTransform(trans);
@@ -87,8 +89,9 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			//Aquí le asignamos el transform que debería tener la entidad
 			btTransform t;
 			t.setIdentity();
-			pTransform.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
+			t.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
 			body->setWorldTransform(t);
+			//FALTA LA ORIENTACIÓN!!!
 		}
 	}
 	std::string ms = "";
@@ -98,7 +101,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	{
 	case Dinamico:
 	
-		body->getMotionState()->getWorldTransform(trans);
+		//body->getMotionState()->getWorldTransform(trans);
 		actualizaNodo();
 		/*if (body->getWorldTransform().getOrigin() != posAnt)
 		{
@@ -138,7 +141,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				vel = vel + btVector3(xF,0,zF);
 				body->setLinearVelocity(vel);
 				//body->applyCentralImpulse(vel);
-				body->getMotionState()->getWorldTransform(trans);
+				//body->getMotionState()->getWorldTransform(trans);
 				actualizaNodo();
 			}
 		}
@@ -146,7 +149,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			btVector3 vel = body->getLinearVelocity();
 			vel = vel*btVector3(0, 1, 0);
 			body->setLinearVelocity(vel);
-			body->getMotionState()->getWorldTransform(trans);
+			//body->getMotionState()->getWorldTransform(trans);
 			actualizaNodo();
 		}
 		break;
@@ -156,9 +159,12 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 void FComponent:: actualizaNodo() {
 	userPointer = body->getUserPointer();
 	if (userPointer) {
-		btQuaternion orientation = trans.getRotation();
+		btQuaternion orientation = /*trans.getRotation();*/
+		body->getOrientation();
+		btVector3 position = body->getWorldTransform().getOrigin();//Podriamos coger el world transform del motionstate del body
 		Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
-		sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+		//sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+		sceneNode->setPosition(Ogre::Vector3(position.getX(), position.getY(), position.getZ()));
 		sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
 	}
 }

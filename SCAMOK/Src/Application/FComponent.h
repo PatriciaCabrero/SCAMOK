@@ -12,6 +12,7 @@ public:
 	virtual void destroy() {};
 	void initBody();
 	void actualizaNodo();
+	btRigidBody* getRigidBody() { return body; };
 
 protected:
 	float altoCaja, anchoCaja, profCaja;
