@@ -10,7 +10,7 @@ Juego::Juego()
 	recursos = "OgreD/resources_d.cfg";
 #else
 	plugins = "Ogre/plugins.cfg";
-	recursos = "OgreD/resources_d.cfg";
+	recursos = "Ogre/resources.cfg";
 #endif
 	
 	init();
@@ -19,6 +19,11 @@ Juego::Juego()
 bool Juego::init(){
 	if (initOgre()){
 		if (initOis())
+#ifdef _DEBUG || !_WIN32
+			std::cout << "\n\n\n\n\nDebug\n\n\n\n";
+#else
+			std::cout << "\n\n\n\n\nRelease\n\n\n\n";
+#endif
 			return true;
 	}
 	else return false;
