@@ -1,5 +1,6 @@
 #include "Estado.h"
-
+#include <CEGUI\CEGUI.h>
+#include <CEGUI\RendererModules/OpenGL/GL3Renderer.h>
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	#pragma region InitOgre 
@@ -32,6 +33,9 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 80, 50);
+
+	//UI TEMPORAL
+	CEGUI::OpenGL3Renderer& myRenderer = CEGUI::OpenGL3Renderer::bootstrapSystem();
 
 	#pragma endregion InitOgre
 

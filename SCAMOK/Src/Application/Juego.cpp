@@ -1,7 +1,6 @@
 #include "Juego.h"
 #include "Estado.h"
 
-
 Juego::Juego()
 {
 

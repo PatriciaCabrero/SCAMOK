@@ -1,6 +1,7 @@
 #pragma once 
 #include "Camara.h"
 
+
 using namespace Ogre;
 Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 {
