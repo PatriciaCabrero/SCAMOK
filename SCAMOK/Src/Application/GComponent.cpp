@@ -81,8 +81,10 @@ void GComponent::destroy() {
 	delete ent;
 }
 GComponent::~GComponent() {
-	node->removeAndDestroyAllChildren();
-	groupNode->removeAndDestroyAllChildren();
+	//node->removeAndDestroyAllChildren();
+
+//	delete pEntidad;
+	//groupNode->removeAndDestroyAllChildren();
 }
 void GComponent::rota(float angle, Vector3 eje){
 	//groupNode->rotate(Quaternion(Degree(-angle*2), eje));

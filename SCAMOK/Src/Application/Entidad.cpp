@@ -45,7 +45,7 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 Entidad::~Entidad()
 {
 	for (std::pair<std::string, Componente*> p : componentes) {
-		//delete p.second;
+		delete p.second;
 	}
 	
 }

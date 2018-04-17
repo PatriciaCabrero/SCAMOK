@@ -120,9 +120,9 @@ bool Juego::initOgre(){
 }
 
 bool Juego::run(){
-
 	Estado * pEstado = new Estado(scnMgr, mWindow);
 	pEstados.push(pEstado);
+	
 	int cont = 0;
 	std::cout << "\n\n\n";
 	contJoystick = 0;
@@ -257,5 +257,5 @@ Juego::~Juego()
 	//delete scnMgr;
 	//delete mWindow;
 	delete mInputMgr;
-//	delete root;
+	delete root;
 }

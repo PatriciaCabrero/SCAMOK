@@ -43,9 +43,9 @@ Estado::~Estado(){
 	scnMgr->destroyAllEntities();
 	scnMgr->destroyAllLights();
 	scnMgr->destroyAllCameras();*/
-	delete scnMgr;
+	//delete scnMgr;
 	//delete cam;
-	delete mWin;
+	//delete mWin;
 	//delete vp;
 	for (std::pair<std::string,Entidad*> n : entidades) {
 		delete n.second;

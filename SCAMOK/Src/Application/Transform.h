@@ -6,7 +6,7 @@ class Transform : public Componente
 {
 public:
 	Transform(Entidad* pEnt, int x, int y, int z);
-	~Transform();
+	virtual ~Transform();
 
 	virtual void Update(float deltaTime, Mensaje const & mensaje);
 

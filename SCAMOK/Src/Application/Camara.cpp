@@ -24,6 +24,9 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 
 Camara::~Camara()
 {
+	/*delete cam;
+	delete vp;
+	delete node;*/
 }
 void Camara::attach(Ogre::SceneNode* node) {
 	node->attachObject(cam);

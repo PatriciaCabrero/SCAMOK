@@ -6,7 +6,7 @@ class Camara: public Componente
 {
 public:
 	Camara(Entidad* pEnt);
-	~Camara();
+	virtual ~Camara();
 	virtual void Update(float deltaTime, Mensaje const & msj);
 
 	void attach(Ogre::SceneNode* node);
