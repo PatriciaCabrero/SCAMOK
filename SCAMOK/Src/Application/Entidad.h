@@ -10,7 +10,8 @@ class Entidad{
 public:
 	Entidad(Estado* pEstado);
 	Entidad(Estado* pEstado, std::string prefab);
-	void Update(float deltaTime, Mensaje const & msg);
+	~Entidad();
+	void Update(float deltaTime, Mensaje  & msg);
 	void Awake();
 	void Sleep();
 	Estado* getPEstado() { return pEstado; };

@@ -147,6 +147,8 @@ bool Juego::run(){
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 	}
+	delete pEstado;
+	return true;
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
 	std::cout << arg.state.mPOV->direction << "\n";
@@ -250,4 +252,10 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 }
 Juego::~Juego()
 {
+	//root->destroySceneManager(scnMgr);
+	
+	//delete scnMgr;
+	//delete mWindow;
+	delete mInputMgr;
+//	delete root;
 }

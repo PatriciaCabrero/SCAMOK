@@ -6,6 +6,10 @@ enum SubTipo {Rotar, Escalar, Mover, Nulo};
 
 class Mensaje{
 public:
+	bool operator<(const Mensaje &o) const
+	{
+		return prioridad < o.prioridad;
+	}
 	Mensaje(Tipo tip, std::string msg, SubTipo subtipo = SubTipo::Nulo, int prio = 0) { 
 		tipo = tip; mensaje = msg; 
 		subTipo = subtipo;

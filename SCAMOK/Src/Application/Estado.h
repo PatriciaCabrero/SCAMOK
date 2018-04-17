@@ -33,8 +33,8 @@ public:
 
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg, bool needNow = false){ 
-		if(!needNow)bufer.push(&msg); 
-		else mensajes.push(&msg);
+		if(!needNow)bufer.push(msg); 
+		else mensajes.push(msg);
 		return true; }
 	void swapMsgBufer(){
 		mensajes.swap(bufer);
@@ -48,7 +48,8 @@ private:
 	Ogre::Light* light;
 	Ogre::RenderWindow* mWin;
 
-	std::priority_queue<Mensaje*> mensajes, bufer;
+	
+	std::priority_queue < Mensaje > mensajes, bufer;
 	
 
 };
