@@ -42,7 +42,7 @@ void FComponent::initBody() {
 	btVector3 localInertia(0, 0, 0);
 
 	//Aquí hacemos la forma de la caja
-	shape = new btBoxShape(btVector3(btScalar(anchoCaja), btScalar(altoCaja), btScalar(profCaja)));
+	shape = new btBoxShape(btVector3(btScalar(anchoCaja/2), btScalar(altoCaja/2), btScalar(profCaja/2)));
 
 	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	motionState = new btDefaultMotionState(pTransform);
@@ -102,7 +102,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	case Dinamico:
 	
 		//body->getMotionState()->getWorldTransform(trans);
-		actualizaNodo();
+		//actualizaNodo();
 		/*if (body->getWorldTransform().getOrigin() != posAnt)
 		{
 			ms += std::to_string(body->getWorldTransform().getOrigin().getX()) + "/-"
@@ -132,28 +132,29 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
 				float xF= std::stof(xS);
-				if (xF > 0) xF *= 50 ;
-				else if (xF < 0) xF *=50;
+				if (xF > 0) xF *= 10;
+				else if (xF < 0) xF *=10;
 				float zF = std::stof(zS);
-				if (zF > 0) zF *= 50;
-				else if (zF < 0) zF *= 50;
+				if (zF > 0) zF *= 10;
+				else if (zF < 0) zF *= 10;
 				btVector3 vel = body->getLinearVelocity();
 				vel = vel + btVector3(xF,0,zF);
 				body->setLinearVelocity(vel);
 				//body->applyCentralImpulse(vel);
 				//body->getMotionState()->getWorldTransform(trans);
-				actualizaNodo();
+				//actualizaNodo();
 			}
 		}
 		else {
 			btVector3 vel = body->getLinearVelocity();
-			vel = vel*btVector3(0, 1, 0);
+			vel = vel*btVector3(0, 0, 0);
 			body->setLinearVelocity(vel);
 			//body->getMotionState()->getWorldTransform(trans);
-			actualizaNodo();
+			//actualizaNodo();
 		}
 		break;
 	}
+	actualizaNodo();
 	
 }
 void FComponent:: actualizaNodo() {

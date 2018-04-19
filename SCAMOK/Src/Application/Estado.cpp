@@ -21,10 +21,10 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	Mensaje * msg = new Mensaje(Tipo::Fisica, "0/100/0", SubTipo::Reposicionar);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
-	//Mensaje * msg =  new Mensaje(Tipo::Render, "0/100/0", SubTipo::Mover);
-	//msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-	//mensajes.push(msg);
-
+	/*Mensaje * msg =  new Mensaje(Tipo::Render, "0/100/0", SubTipo::Mover);
+	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+	mensajes.push(msg);
+	*/
 		
 	//Aquí va la parte gráfica del suelo
 	std::vector<int> auxV = {0,0,0};
