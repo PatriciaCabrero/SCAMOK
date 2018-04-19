@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-cegui-dependencies-0ecdf3a9e49b\build\CMakeFiles\d6c26fe4e5eefe503ea36c084a62df5e\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A65C8A2F-E8A8-3347-A1C9-86BB97B83669}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

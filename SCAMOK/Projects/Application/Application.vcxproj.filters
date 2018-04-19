@@ -42,6 +42,9 @@
     <ClCompile Include="..\..\Src\Application\Camara.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Application\Juego.h">
@@ -72,6 +75,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\Camara.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

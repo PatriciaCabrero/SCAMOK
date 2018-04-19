@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\SamplesFrameworkBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\SamplesFramework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiBaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiRendererSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\Samples_xmlHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\SampleData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\MetaDataWindowManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\SamplesBrowserManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\Win32AppHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\Win32CEGuiRendererSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiGLFWSharedBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiGLFW2SharedBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiOpenGLBaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiOpenGL3BaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiD3D9BaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiD3D10BaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D10.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\CEGuiD3D11BaseApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples\common\include\Sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\SamplesFrameworkBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\SamplesFramework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\CEGuiBaseApplication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\CEGuiRendererSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\Samples_xmlHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\SampleData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\MetaDataWindowManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\include\SamplesBrowserManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\hlocal\Proyecto3\Proyecto_3\SCAMOK\Dependencies\CEGUI\cegui-0.8.7\samples_framework\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{04BEFC9D-0F79-3FDE-AFF5-756D3352DC4F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E5BB82B4-1A28-3C9E-8F3A-E9607EC46E29}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

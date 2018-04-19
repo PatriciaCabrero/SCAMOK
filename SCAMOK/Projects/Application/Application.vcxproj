@@ -20,6 +20,7 @@
     <ClCompile Include="..\..\Src\Application\Juego.cpp" />
     <ClCompile Include="..\..\Src\Application\ProyectoBasico.cpp" />
     <ClCompile Include="..\..\Src\Application\Transform.cpp" />
+    <ClCompile Include="GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Application\Animation.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\..\Src\Application\Juego.h" />
     <ClInclude Include="..\..\Src\Application\Mensaje.h" />
     <ClInclude Include="..\..\Src\Application\Transform.h" />
+    <ClInclude Include="GUI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3883AEBC-E2D3-40CA-9D3D-5A335C546C9C}</ProjectGuid>

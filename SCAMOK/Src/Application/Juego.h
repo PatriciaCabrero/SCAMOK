@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Estado.h"
 #include "InputManager.h"
+#include "GUI.h"
 
 
 class Juego: public OIS::KeyListener, OIS::MouseListener, OIS::JoyStickListener
