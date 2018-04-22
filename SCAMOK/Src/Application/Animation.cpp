@@ -10,7 +10,8 @@ Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GCompo
 
 Animation::~Animation()
 {
-	
+	/*delete baseAnim;
+	delete topAnim;*/
 }
 
 void Animation::Update(float deltaTime, Mensaje const & msj) {

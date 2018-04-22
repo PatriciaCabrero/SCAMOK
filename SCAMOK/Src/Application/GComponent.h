@@ -21,7 +21,7 @@ class Estado;
 class GComponent : public Componente {
 public:
 	GComponent(Entidad* pEnt, std::string name = "ogrehead");
-	~GComponent();
+	virtual ~GComponent();
 	virtual void Update(float deltaTime, Mensaje const & msj);
 	virtual void destroy();
 

@@ -8,12 +8,12 @@
 #include <fstream>
 
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
-
+	
 
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 
-
+	
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
@@ -40,6 +40,14 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	}
 
 	fe.close();
+	
+}
+
+Entidad::~Entidad()
+{
+	for (std::pair<std::string, Componente*> p : componentes) {
+		delete p.second;
+	}
 	
 }
 
@@ -85,14 +93,14 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 
 	return true;
 }
-void Entidad::Update(float deltaTime,  Mensaje const & msj){
-	Mensaje msg = msj;
+void Entidad::Update(float deltaTime,  Mensaje & msg){
+	
 	if (activo){
-
+		
 		if (msg.getReceptor() == this || msg.getReceptor() == nullptr) {
-			for (auto i = componentes.begin(); i != componentes.end(); i++)
+			for (std::pair<std::string, Componente*> c : componentes)
 			{
-				i->second->Update(deltaTime, msg);
+				c.second->Update(deltaTime, msg);
 			}
 		}
 	}

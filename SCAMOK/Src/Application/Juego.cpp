@@ -10,7 +10,7 @@ Juego::Juego()
 	recursos = "OgreD/resources_d.cfg";
 #else
 	plugins = "Ogre/plugins.cfg";
-	recursos = "OgreD/resources_d.cfg";
+	recursos = "Ogre/resources.cfg";
 #endif
 	
 	init();
@@ -19,6 +19,11 @@ Juego::Juego()
 bool Juego::init(){
 	if (initOgre()){
 		if (initOis())
+#ifdef _DEBUG || !_WIN32
+			std::cout << "\n\n\n\n\nDebug\n\n\n\n";
+#else
+			std::cout << "\n\n\n\n\nRelease\n\n\n\n";
+#endif
 			return true;
 	}
 	else return false;
@@ -115,9 +120,9 @@ bool Juego::initOgre(){
 }
 
 bool Juego::run(){
-
 	Estado * pEstado = new Estado(scnMgr, mWindow);
 	pEstados.push(pEstado);
+	
 	int cont = 0;
 	std::cout << "\n\n\n";
 	contJoystick = 0;
@@ -142,6 +147,8 @@ bool Juego::run(){
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 	}
+	delete pEstado;
+	return true;
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
 	std::cout << arg.state.mPOV->direction << "\n";
@@ -245,4 +252,10 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 }
 Juego::~Juego()
 {
+	//root->destroySceneManager(scnMgr);
+	
+	//delete scnMgr;
+	//delete mWindow;
+	delete mInputMgr;
+	delete root;
 }

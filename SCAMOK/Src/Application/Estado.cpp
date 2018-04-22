@@ -15,15 +15,15 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 
 	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
-	Mensaje * msg =  new Mensaje(Tipo::Render, "0/5/0", SubTipo::Mover);
-	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+	Mensaje msg (Tipo::Render, "0/5/0", SubTipo::Mover);
+	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
 
 		
 	 
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
+	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	entidades.insert(std::make_pair("Arena", aux));
-
+	//delete aux;
 
 
 
@@ -38,18 +38,28 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 }
 
 Estado::~Estado(){
-	scnMgr->clearScene();
+	/*scnMgr->clearScene();
 	scnMgr->~SceneManager();
+	scnMgr->destroyAllEntities();
+	scnMgr->destroyAllLights();
+	scnMgr->destroyAllCameras();*/
+	//delete scnMgr;
+	//delete cam;
+	//delete mWin;
+	//delete vp;
+	for (std::pair<std::string,Entidad*> n : entidades) {
+		delete n.second;
+	}
 }
 
 bool Estado::update(float delta){
 
 	
 	if (mensajes.size() > 0){
-		Mensaje* aux = mensajes.top();
+		Mensaje aux = mensajes.top();
 		mensajes.pop();
 		for (std::pair<std::string, Entidad*> ent : entidades){
-			ent.second->Update(delta, *aux);
+			ent.second->Update(delta, aux);
 		}
 	}
 	swapMsgBufer();
@@ -62,21 +72,21 @@ void Estado::joystickMoved(float x, float y, int js) {
 	std::string sx, sy; sx = std::to_string(x); sy = std::to_string(y);
 	std::string s = sx + "/"+ "0/" + sy ;
 
-	Mensaje* msg;
+	
 	if (js == 0) {
-		msg = new Mensaje(Tipo::Input, s);
-		mensajes.push(msg);
-		msg = new Mensaje(Tipo::Render, s, SubTipo::Mover);
-		msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-		mensajes.push(msg);
+		Mensaje msgI (Tipo::Input, s);
+		mensajes.push(msgI);
+		Mensaje msgR(Tipo::Render, s, SubTipo::Mover);
+		msgR.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		mensajes.push(msgR);
 	}
 	else {
-		msg = new Mensaje(Tipo::Input, s, SubTipo::Rotar);
-		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
-		mensajes.push(msg);
-		msg = new Mensaje(Tipo::Render, s, SubTipo::Rotar);
-		msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-		mensajes.push(msg);
+		Mensaje msgI(Tipo::Input, s, SubTipo::Rotar);
+		msgI.setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
+		mensajes.push(msgI);
+		Mensaje msgR(Tipo::Render, s, SubTipo::Rotar);
+		msgR.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		mensajes.push(msgR);
 
 	}
 

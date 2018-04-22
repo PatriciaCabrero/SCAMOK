@@ -9,19 +9,14 @@ GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
 	node = groupNode->createChildSceneNode(name);
 	node->attachObject(ent);
 	firstMsg = false;
-	
+	nodeCh = nullptr;
 
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	if (!firstMsg) {
 		Mensaje msg = msj;
 		Componente::Update(deltaTime, msj);
-		if (nodeCh == nullptr) {
-			nodeCh = node->createChildSceneNode("nodeCh");
-			Vector3 posAux = groupNode->getChild("NodoCamera")->getPosition();
-			posAux.y = posAux.y*-1;
-			nodeCh->setPosition(-posAux);
-		}
+	
 		if (msg.getTipo() == Tipo::Render) {
 
 			if (msg.getSubTipo() == SubTipo::Mover) {
@@ -80,7 +75,10 @@ void GComponent::destroy() {
 	delete ent;
 }
 GComponent::~GComponent() {
-	
+	//node->removeAndDestroyAllChildren();
+
+//	delete pEntidad;
+	//groupNode->removeAndDestroyAllChildren();
 }
 void GComponent::rota(float angle, Vector3 eje){
 	//groupNode->rotate(Quaternion(Degree(-angle*2), eje));
