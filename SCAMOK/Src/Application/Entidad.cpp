@@ -19,6 +19,7 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	std::ifstream fe(path);
 	std::string type;
 	fe >> type;
+	activo = true;
 	while (type != "---") {
 		if (type == "Grafico") {
 			std::string mesh; fe >> mesh;
