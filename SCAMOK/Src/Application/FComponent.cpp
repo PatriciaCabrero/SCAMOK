@@ -103,7 +103,10 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	//Este sería el caso kinematico concrero de la niña
 	//Para los enemigos habría que haacer otro
 	case Kinematico:
-		
+		btVector3 vel = body->getLinearVelocity();
+		vel = vel * btVector3(0, 1, 0);
+		body->setLinearVelocity(vel);
+
 		if (msg.getTipo() == Tipo::Fisica) {
 			if (msg.getSubTipo() == SubTipo::Mover) {
 
@@ -125,14 +128,10 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				body->setLinearVelocity(vel);
 			}
 		}
-		else {
-			btVector3 vel = body->getLinearVelocity();
-			vel = vel*btVector3(0, 0, 0);
-			body->setLinearVelocity(vel);
-		}
 		break;
 	}
 	actualizaNodo();
+
 	
 }
 
