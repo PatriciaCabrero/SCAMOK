@@ -23,7 +23,7 @@ protected:
 	btCollisionShape* shape;
 	btDefaultMotionState *motionState;
 	btRigidBody* body;
-	btVector3 posAnt;
+	//btVector3 posAnt;
 	//Ogre::SceneNode * node, *groupNode;
 	//Ogre::Entity * ent;
 	btTransform trans;

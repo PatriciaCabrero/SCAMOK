@@ -21,10 +21,6 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	Mensaje * msg = new Mensaje(Tipo::Fisica, "0/100/0", SubTipo::Reposicionar);
 	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
-	/*Mensaje * msg =  new Mensaje(Tipo::Render, "0/100/0", SubTipo::Mover);
-	msg->setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-	mensajes.push(msg);
-	*/
 		
 	//Aquí va la parte gráfica del suelo
 	std::vector<int> auxV = {0,0,0};
@@ -34,14 +30,14 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
 
-	/*//Aquí meto un greymon dinámico para colisionar y hacer pruebas
-	Entidad* aux1 = new Entidad(this); aux->añadeComponenteGrafico("Greymon");
-	//aux->añadeComponenteFisico(1, 1, 1, false, tipoFisica::Dinamico, 1);
+	//Aquí meto un greymon dinámico para colisionar y hacer pruebas
+	Entidad* aux1 = new Entidad(this);
+	aux1->añadeComponenteGrafico("Greymon", auxV);
+	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 	entidades.insert(std::make_pair("Greymon", aux1));
-	Mensaje * ms = new Mensaje(Tipo::Logica, "10/10/10", SubTipo::Reposicionar);
+	Mensaje * ms = new Mensaje(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
 	ms->setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
 	mensajes.push(ms);
-	*/
 
 	// Luz por defecto
 	scnMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));

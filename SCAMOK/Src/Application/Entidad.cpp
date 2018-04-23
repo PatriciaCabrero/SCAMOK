@@ -9,8 +9,7 @@
 #include <fstream>
 
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
-
-
+	nombreNodo = " ";
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 
