@@ -133,6 +133,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
+				body->activate(true);
 				body->applyCentralImpulse(btVector3(0,2000,0));
 				
 				/*vel = vel * btVector3(0, -50, 0);
