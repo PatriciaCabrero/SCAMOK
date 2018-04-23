@@ -4,16 +4,17 @@
 #include "Transform.h"
 #include "Animation.h"
 #include "Camara.h"
+#include "FComponent.h"
 #include <iostream>
 #include <fstream>
 
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
-	
 
+	nombreNodo = " ";
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 
-	
+	nombreNodo = prefab;
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
@@ -36,9 +37,15 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 		else if (type == "Camara") {
 			componentes.insert(std::make_pair("Camara", new Camara(this)));
 		}
+		else if (type == "CFisico") {
+			float altoCaja; float anchoCaja; float profCaja; bool suelo; tipoFisica type; int masa;
+			fe >> altoCaja >> anchoCaja >> profCaja >> suelo;
+			int auxType; fe >> auxType; type = (tipoFisica)auxType;
+			fe >> masa;
+			añadeComponenteFisico(altoCaja, anchoCaja, profCaja, suelo, type, masa);
+		}
 		fe >> type;
 	}
-
 	fe.close();
 	
 }
@@ -83,14 +90,22 @@ bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 }
 
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
+	nombreNodo = mesh;
 	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
 	return true;
 }
+
+bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja ,bool suelo, tipoFisica type, int masa) {
+	
+	componentes.insert(std::make_pair("Fisico", new FComponent(this, altoCaja, anchoCaja, profCaja, nombreNodo, suelo, type, masa)));
+	return true;
+}
+
 bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
 	}
-
+	
 	return true;
 }
 void Entidad::Update(float deltaTime,  Mensaje & msg){

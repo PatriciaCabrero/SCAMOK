@@ -2,7 +2,7 @@
 #include "Estado.h"
 #pragma once
 enum Tipo{ Render, Fisica, Logica, Input, AnimationM };
-enum SubTipo {Rotar, Escalar, Mover, Nulo};
+enum SubTipo {Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara,Nulo};
 
 class Mensaje{
 public:

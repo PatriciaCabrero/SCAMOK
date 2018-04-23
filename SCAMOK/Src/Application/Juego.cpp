@@ -172,7 +172,7 @@ bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 }
 bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
 	std::cout << buton << "\n";
-	
+	pEstados.top()->keyPressed(std::to_string(buton));
 	return true;
 }
 bool Juego::keyPressed(const OIS::KeyEvent& ke)

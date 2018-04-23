@@ -2,9 +2,10 @@
 #include "Componente.h"
 #include <iterator>
 #include "Mensaje.h"
+#include <vector>
 
 class Estado;
-
+//enum tipoFisica { Dinamico, Estatico, Kinematico };
 class Entidad{
 
 public:
@@ -17,7 +18,7 @@ public:
 	Estado* getPEstado() { return pEstado; };
 
 	bool añadeComponenteGrafico(std::string mesh);
-	bool añadeComponenteFisico();
+	bool añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja, bool suelo, tipoFisica type = tipoFisica::Estatico, int masa = 0);
 	bool añadeAnimacion(std::string mesh, std::ifstream & fe);
 	bool añadeAnimacion(std::string name,bool enabled = true, bool loop = true);
 	bool añadeComponenteLogico(std::string component);
@@ -28,5 +29,6 @@ private:
 	Estado* pEstado;
 	bool activo;
 	Entidad* target; //Usar esta entidad para escuchar los mensajes dirigidos a ella
+	std::string nombreNodo;
 	
 };

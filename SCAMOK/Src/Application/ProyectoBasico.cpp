@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "Juego.h"
+//#include <vld.h>
 
 #ifdef _DEBUG || !_WIN32
 int main(){
@@ -12,7 +13,7 @@ int CALLBACK WinMain(
 	_In_ int       nCmdShow
 	){
 #endif
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Check Memory Leaks
 	Juego* game = new Juego();
 	game->run();
 	delete game;
