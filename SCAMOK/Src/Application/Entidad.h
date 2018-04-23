@@ -5,7 +5,6 @@
 #include <vector>
 
 class Estado;
-//enum tipoFisica { Dinamico, Estatico, Kinematico };
 class Entidad{
 
 public:

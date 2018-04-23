@@ -41,12 +41,12 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) { return true; };
 	
 	
-	virtual bool axisMoved(const OIS::JoyStickEvent & arg, int axis);// { return true; }
-	virtual bool buttonPressed(const OIS::JoyStickEvent & arg, int button);// { return true; }
+	virtual bool axisMoved(const OIS::JoyStickEvent & arg, int axis);
+	virtual bool buttonPressed(const OIS::JoyStickEvent & arg, int button);
 	virtual bool buttonReleased(const OIS::JoyStickEvent & arg, int buton) { return true; }
 	virtual bool sliderMoved(const OIS::JoyStickEvent & arg, int index) { return true; }
 	virtual bool vector3Moved(const OIS::JoyStickEvent & arg, int index) { return true; }
-	virtual bool povMoved(const OIS::JoyStickEvent & arg, int index);// { return true; }
+	virtual bool povMoved(const OIS::JoyStickEvent & arg, int index);
 	
 
 	int contJoystick;

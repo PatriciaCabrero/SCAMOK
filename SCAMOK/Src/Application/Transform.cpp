@@ -41,9 +41,5 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 }
 
 void Transform::Awake() {
-	/*std::string msg = std::to_string(x) + "/" + std::to_string(y) + "/" + std::to_string(z);
-	Mensaje * m = new Mensaje(Tipo::Fisica, msg, SubTipo::InitFis);
-	//Si no se especifica receptor se considera broadcast
-	m->setMsgInfo(pEntidad, pEntidad);
-	pEntidad->getPEstado()->addMsg(*m);*/
+	
 }

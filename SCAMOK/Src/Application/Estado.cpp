@@ -25,7 +25,6 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
-	//delete aux;
 
 	Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("Greymon");
@@ -35,22 +34,6 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	ms.setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
 	mensajes.push(ms); 
 
-/*	//Aquí va la parte gráfica del suelo
-	std::vector<int> auxV = {0,0,0};
-	
-	Entidad * aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo", auxV );
-	//Aquí le meto la base física al suelo
-	aux->añadeComponenteFisico(0, 0, 0, true);
-	entidades.insert(std::make_pair("Arena", aux));
-
-	//Aquí meto un greymon dinámico para colisionar y hacer pruebas
-	Entidad* aux1 = new Entidad(this);
-	aux1->añadeComponenteGrafico("Greymon", auxV);
-	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-	entidades.insert(std::make_pair("Greymon", aux1));
-	Mensaje * ms = new Mensaje(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
-	ms->setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
-	mensajes.push(ms);*/
 
 	// Luz por defecto
 	scnMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
@@ -63,15 +46,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 }
 
 Estado::~Estado(){
-	/*scnMgr->clearScene();
-	scnMgr->~SceneManager();
-	scnMgr->destroyAllEntities();
-	scnMgr->destroyAllLights();
-	scnMgr->destroyAllCameras();*/
-	//delete scnMgr;
-	//delete cam;
-	//delete mWin;
-	//delete vp;
+	delete fisicaManager;
 	for (std::pair<std::string,Entidad*> n : entidades) {
 		delete n.second;
 	}
@@ -123,11 +98,7 @@ void Estado::keyPressed(std::string s) {
 		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 		mensajes.push(msg);
 	}
-	/*if (s == "der" || s == "izq" || s == "arr" || s == "aba") {
-		Mensaje* msg = new Mensaje(Tipo::Input, s, SubTipo::Mover);
-		msg->setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
-		mensajes.push(msg);
-	}*/
+
 	
 }
 void Estado::keyReleased(std::string s) {

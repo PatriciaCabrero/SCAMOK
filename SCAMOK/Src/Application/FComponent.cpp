@@ -19,7 +19,6 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		profCaja = v.z;
 		anchoCaja = v.x;
 		pTransform.setIdentity();
-		//Ogre::Vector3 centro = bbox.getCenter();
 		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
 		Ogre::Quaternion quat = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + nombreNodo)->getOrientation();
 		pTransform.setRotation(btQuaternion(quat.x, quat.y, quat.z, quat.w));//Tener en cuenta que en ogre el primer valor es w, mientras que en bullet va último.
@@ -71,7 +70,6 @@ void FComponent::initBody() {
 	body->setRestitution(0);
 
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
-	//body->setGravity({ 0,0,0 });
 
 }
 
@@ -92,7 +90,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			t.setIdentity();
 			t.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
 			body->setWorldTransform(t);
-			//FALTA LA ORIENTACIÓN!!!
 		}
 	}
 	std::string ms = "";
@@ -122,10 +119,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
 				 valores = matriz * valores;
-			/*	if (xF > 0) xF *= 50;
-				else if (xF < 0) xF *=50;
-				if (zF > 0) zF *= 50;
-				else if (zF < 0) zF *= 50;*/
+		
 				vel = body->getLinearVelocity();
 				std::cout<< valores.x * 30 << "\n";
 				vel = vel + btVector3(valores.x*30,0,valores.z*30);
@@ -136,8 +130,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				body->activate(true);
 				body->applyCentralImpulse(btVector3(0,2000,0));
 				
-				/*vel = vel * btVector3(0, -50, 0);
-				body->setLinearVelocity(vel);*/
 			}
 			else if (msg.getSubTipo() == SubTipo::Nulo) {
 				vel = body->getLinearVelocity();
@@ -163,9 +155,6 @@ void FComponent:: actualizaNodo() {
 		btVector3 position = body->getWorldTransform().getOrigin();
 		Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
 		sceneNode->setPosition(Ogre::Vector3(position.getX() , position.getY(), position.getZ()));
-		//btQuaternion quat = btQuaternion(); quat.setX(sceneNode->getOrientation().x); quat.setY(sceneNode->getOrientation().y); quat.setZ(sceneNode->getOrientation().z);
-		//quat.setW( sceneNode->getOrientation().w);
-		//body->getWorldTransform().setRotation(quat);
-		//sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
+		
 	}
 }

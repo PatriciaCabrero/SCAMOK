@@ -2,7 +2,6 @@
 
 #include "Componente.h"
 #include "Estado.h"
-//enum tipoFisica { Dinamico, Estatico, Kinematico};
 
 class FComponent  : public Componente { 
 public: 
@@ -23,9 +22,7 @@ protected:
 	btCollisionShape* shape;
 	btDefaultMotionState *motionState;
 	btRigidBody* body;
-	//btVector3 posAnt;
-	//Ogre::SceneNode * node, *groupNode;
-	//Ogre::Entity * ent;
+
 	btTransform trans;
 	void *userPointer;
 }; 

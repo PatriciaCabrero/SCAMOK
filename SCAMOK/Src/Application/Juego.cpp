@@ -1,7 +1,6 @@
 #include "Juego.h"
 #include "Estado.h"
 
-
 Juego::Juego()
 {
 
@@ -156,17 +155,7 @@ bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
 }
 bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 	contJoystick++;
-	/*
-	if (contJoystick == 3)
-	{
-		std::cout << arg.state.mAxes[0].abs << " , " << arg.state.mAxes[1].abs << "\n";
-		float x = arg.state.mAxes[0].abs / 32768.0f;
-		float y = arg.state.mAxes[1].abs / 32768.0f;
 
-
-		pEstados.top()->joystickMoved(x, y);
-		contJoystick = 0;
-	}*/
 	
 	return true;
 }
@@ -252,10 +241,6 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 }
 Juego::~Juego()
 {
-	//root->destroySceneManager(scnMgr);
-	
-	//delete scnMgr;
-	//delete mWindow;
 	delete mInputMgr;
 	delete root;
 }

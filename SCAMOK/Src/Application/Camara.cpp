@@ -19,14 +19,12 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 	
-	//pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->attachObject(node);
+	
 }
 
 Camara::~Camara()
 {
-	/*delete cam;
-	delete vp;
-	delete node;*/
+	
 }
 void Camara::attach(Ogre::SceneNode* node) {
 	node->attachObject(cam);
@@ -48,7 +46,6 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 			float z = -1* std::stof(zS);
 
 			node->rotate(Ogre::Quaternion(Ogre::Degree(-x*2), Ogre::Vector3::UNIT_Y));
-			//node->rotate(Ogre::Quaternion(Ogre::Degree(z), Ogre::Vector3::UNIT_X));
 		}
 	}
 }
