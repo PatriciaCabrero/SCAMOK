@@ -77,6 +77,12 @@ bool Entidad::añadeAnimacion(std::string mesh, std::ifstream & fe) {
 	else return false;
 	
 }
+void Entidad::setAnim(std::string const &s, bool loop, bool enabled, bool idle) {
+	auto flag = componentes.find("Anim");
+	if (flag != componentes.end()) {
+		static_cast<Animation*>(componentes.at("Anim"))->addAnimationState(s, loop, enabled, idle);
+	}
+}
 bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 
 	auto s = componentes.find("Grafico");

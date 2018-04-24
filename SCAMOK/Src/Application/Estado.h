@@ -63,4 +63,5 @@ private:
 	std::priority_queue < Mensaje > mensajes, bufer;
 	Fisic* fisicaManager;
 	FMOD::System* system;
+	bool noInput; int  contInput;
 };

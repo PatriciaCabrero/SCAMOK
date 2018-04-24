@@ -23,6 +23,7 @@ public:
 	bool añadeAnimacion(std::string name,bool enabled = true, bool loop = true);
 	bool añadeComponenteLogico(std::string component);
 	bool añadeComponenteSM(std::string component, void* sys);
+	void setAnim(std::string const &s, bool loop = false, bool enabled = true, bool idle = false);
 
 private:
 	std::map<std::string, Componente*> componentes;

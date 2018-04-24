@@ -5,7 +5,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 
 	//Aqui montamos el mundo físico
 	fisicaManager = new Fisic();
-
+	noInput = true; contInput = 0;
 	system = sys;
 	#pragma region InitOgre 
 	mWin = mWindow;
@@ -72,7 +72,15 @@ bool Estado::update(float delta){
 	else {
 		for (std::pair<std::string, Entidad*> ent : entidades) 
 			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
+		if (contInput == 30) {
+			entidades.at("Ogro")->setAnim("IdleTop", true, true, true);
+			entidades.at("Ogro")->setAnim("IdleBase", true, true, true);
+			contInput = 0;
+		}
+
 	}
+	contInput++;
+	
 	swapMsgBufer();
 
 	return true;
@@ -90,6 +98,9 @@ void Estado::joystickMoved(float x, float y, int js) {
 		Mensaje msgR(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
 		msgR.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 		mensajes.push(msgR);
+		entidades.at("Ogro")->setAnim("RunTop", true);
+		entidades.at("Ogro")->setAnim("RunBase", true);
+		contInput = 0;
 		
 	}
 	else {
@@ -105,7 +116,9 @@ void Estado::keyPressed(std::string s) {
 		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 		mensajes.push(msg);
 	}
-
+	else if (s == "2") {
+		entidades.at("Ogro")->setAnim("Dance");
+	}
 	
 }
 void Estado::keyReleased(std::string s) {

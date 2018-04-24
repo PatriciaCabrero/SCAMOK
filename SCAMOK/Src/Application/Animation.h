@@ -17,10 +17,10 @@ public:
 	Ogre::AnimationState* baseAnim;
 	Ogre::AnimationState* topAnim;
 
-	void addAnimationState(std::string name, bool enabled = true, bool loop = true);
+	void addAnimationState(std::string name, bool loop = false, bool enabled = true, bool idle = false);
 
 private:
-	std::vector<Ogre::AnimationState*> animStates;
+	std::map<std::string, Ogre::AnimationState*> animStates;
 };
 
 
