@@ -192,6 +192,7 @@ void SoundManager::reproduceFx(std::string fx, float x, float y, float z, float 
 				cFx[i]->getDSP(FMOD_CHANNELCONTROL_DSP_HEAD, &channelHead);
 				reverbUnit->addInput(channelHead, &reverbConnectionfx[i], FMOD_DSPCONNECTION_TYPE_SEND);
 				reverbConnectionfx[i]->setMix(wet);
+				
 			}
 			else if (i == cFx.size() - 1) {
 				system->playSound(s, mainGroup, false, &cFx[i]);
@@ -229,6 +230,7 @@ void SoundManager::reproduceAmbM(std::string amb, float wet, bool fade) {
 			cMA[i]->getDSPClock(NULL, &parentclock);
 			cMA[i]->addFadePoint(parentclock, 0.0f);
 			cMA[i]->addFadePoint(parentclock + 4096, 1.0f);
+			cMA[i]->setVolume(0.24);
 		}
 		cMA[i]->getDSP(FMOD_CHANNELCONTROL_DSP_HEAD, &channelHead);
 		reverbUnit->addInput(channelHead, &reverbConnectionAmbM[i], FMOD_DSPCONNECTION_TYPE_SEND);
@@ -246,6 +248,26 @@ void SoundManager::Update(float deltaTime, Mensaje const & msj) {
 			std::string cancion = msg.getMsg().substr(pos + 1);
 			if (accion == "Play") {
 				reproduceAmbM(cancion, 0.0, true);
+			}
+		}
+		if (msg.getSubTipo() == SubTipo::Effect) {
+			int pos = msg.getMsg().find("/");
+			std::string accion = msg.getMsg().substr(0, pos);
+			std::string subcad = msg.getMsg().substr(pos + 1);
+			pos = subcad.find("/");
+			std::string fx = subcad.substr(0, pos);
+			subcad = subcad.substr(pos + 1);
+			pos = subcad.find("/");
+			std::string xS = subcad.substr(0, pos);
+			subcad = subcad.substr(pos + 1);
+			pos = subcad.find("/");
+			std::string yS = subcad.substr(0, pos);
+			subcad = subcad.substr(pos + 1);
+			pos = subcad.find("/");
+			std::string zS = subcad.substr(0, pos);
+
+			if (accion == "Play") {
+				reproduceFx(fx, std::stof(xS), std::stof(yS),std::stof(zS),0);
 			}
 		}
 	}

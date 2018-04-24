@@ -126,6 +126,9 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
+				std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX())+"/0/"+ std::to_string(body->getWorldTransform().getOrigin().getZ());
+				Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/"+pos, SubTipo::Effect);
+				pEntidad->getPEstado()->addMsg(msEfect);
 				body->activate(true);
 				body->applyCentralImpulse(btVector3(0,2000,0));
 				
