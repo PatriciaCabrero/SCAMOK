@@ -117,7 +117,7 @@ public:
         rendering window.  If you have not done this, then you'll be wanting to
         use the overload that takes an Ogre::RenderTarget as input.
     */
-	static OgreRenderer& bootstrapSystem(const int abi = CEGUI_VERSION_ABI) /*{}*/;
+    static OgreRenderer& bootstrapSystem(const int abi = CEGUI_VERSION_ABI);
 #endif
     /*!
     \brief

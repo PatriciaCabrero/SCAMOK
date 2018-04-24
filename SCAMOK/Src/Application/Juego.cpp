@@ -17,7 +17,7 @@ Juego::Juego()
 
 bool Juego::init(){
 	if (initOgre()){
-		if (initOis())
+		if (initOis() && initCEGUI())
 #ifdef _DEBUG || !_WIN32
 			std::cout << "\n\n\n\n\nDebug\n\n\n\n";
 #else
@@ -27,7 +27,14 @@ bool Juego::init(){
 	}
 	else return false;
 }
-
+bool Juego::initCEGUI() {
+	m_gui.init("../Media/GUI");
+	m_gui.loadScheme("TaharezLook.scheme");
+	m_gui.setFont("DejaVuSans-10");
+	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", Ogre::Vector4(0.5f, 0.5f, 0.1f, 0.05f), Ogre::Vector4(0.0f), "TestButton"));
+	testButton->setText("Hello World!");
+	return true;
+}
 bool Juego::initOis(){
 	
 	//mInputMgr = new InputManager(*mInputMgr);
@@ -145,6 +152,7 @@ bool Juego::run(){
 		//comprobar si la ventana está abierta
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
+		m_gui.draw();
 	}
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {

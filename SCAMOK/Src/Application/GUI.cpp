@@ -1,18 +1,18 @@
 #include "GUI.h"
 
-CEGUI::OpenGL3Renderer* GUI::renderer_ = nullptr;
+CEGUI::OgreRenderer* GUI::renderer_ = nullptr;
 
 void GUI::init(const std::string& resourcesDirectory)
 {
 	if (renderer_ == nullptr) {
-		renderer_ = &CEGUI::OpenGL3Renderer::bootstrapSystem();  //Crea objetos especificos e inicializa para Ogre;
+		renderer_ = &CEGUI::OgreRenderer::bootstrapSystem();  //Crea objetos especificos e inicializa para Ogre;
 
 		CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 		rp->setResourceGroupDirectory("imagesets", resourcesDirectory + "/imagesets/"); //dentro de imagesets podemos crear nuestros propios sets
 		rp->setResourceGroupDirectory("schemes", resourcesDirectory + "/schemes/"); //Schemes: tipos de botones, etc.
 		rp->setResourceGroupDirectory("fonts", resourcesDirectory + "/fonts/"); //Fuentes de texto;
 		rp->setResourceGroupDirectory("layouts", resourcesDirectory + "/layouts/");
-		rp->setResourceGroupDirectory("looknfeels", resourcesDirectory + "/looknfeels/");
+		rp->setResourceGroupDirectory("looknfeels", resourcesDirectory + "/looknfeel/");
 		rp->setResourceGroupDirectory("lua_scripts", resourcesDirectory + "/lua_scripts/");
 
 
@@ -39,7 +39,7 @@ void GUI::draw()
 	renderer_->beginRendering();
 	context_->draw(); //Dibuja todo lo del contexto
 	renderer_->endRendering();
-	glDisable(GL_SCISSOR_TEST);
+//	glDisable(GL_SCISSOR_TEST);
 }
 
 void GUI::loadScheme(const std::string & schemeFile)

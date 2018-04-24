@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A6C6DE8E-A781-38E3-9D64-9719D14EA607}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>CEGUISampleFramework-0.8</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CEGUISampleFramework-0.8.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CEGUISampleFramework-0.8_d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CEGUISampleFramework-0.8.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CEGUISampleFramework-0.8</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">CEGUISampleFramework-0.8.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">CEGUISampleFramework-0.8</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">CEGUISampleFramework-0.8.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">CEGUISampleFramework-0.8</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glfw_d.lib;..\lib\CEGUIOpenGLRenderer-0_d.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\lib\OIS_static_d.lib;..\lib\CEGUIOgreRenderer-0_d.lib;dxerr.lib;..\lib\CEGUIDirect3D9Renderer-0_d.lib;d3d9.lib;..\lib\CEGUIDirect3D10Renderer-0_d.lib;d3d10.lib;..\lib\CEGUIDirect3D11Renderer-0_d.lib;d3d11.lib;..\lib\CEGUIBase-0_d.lib;opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glew_d.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\lib\Debug\OgreMain_d.lib;d3dx9d.lib;..\..\dependencies\lib\dynamic\freetype_d.lib;..\..\dependencies\lib\dynamic\pcre_d.lib;winmm.lib;DbgHelp.lib;d3dcompiler.lib;d3dx10.lib;d3dx11d.lib;d3dx10d.lib;..\..\dependencies\lib\dynamic\D3DX11Effects_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/software/programacion/MSDirectXjun2010/Lib/x86;C:/software/programacion/MSDirectXjun2010/Lib/x86/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUISampleFramework-0.8_d.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUISampleFramework-0.8_d.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glfw.lib;..\lib\CEGUIOpenGLRenderer-0.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\lib\OIS_static.lib;..\lib\CEGUIOgreRenderer-0.lib;dxerr.lib;..\lib\CEGUIDirect3D9Renderer-0.lib;d3d9.lib;..\lib\CEGUIDirect3D10Renderer-0.lib;d3d10.lib;..\lib\CEGUIDirect3D11Renderer-0.lib;d3d11.lib;..\lib\CEGUIBase-0.lib;opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glew.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\lib\Release\OgreMain.lib;d3dx9.lib;..\..\dependencies\lib\dynamic\freetype.lib;..\..\dependencies\lib\dynamic\pcre.lib;winmm.lib;d3dcompiler.lib;d3dx11.lib;d3dx10.lib;d3dx10d.lib;..\..\dependencies\lib\dynamic\D3DX11Effects.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/software/programacion/MSDirectXjun2010/Lib/x86;C:/software/programacion/MSDirectXjun2010/Lib/x86/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUISampleFramework-0.8.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUISampleFramework-0.8.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glfw.lib;..\lib\CEGUIOpenGLRenderer-0.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\lib\OIS_static.lib;..\lib\CEGUIOgreRenderer-0.lib;dxerr.lib;..\lib\CEGUIDirect3D9Renderer-0.lib;d3d9.lib;..\lib\CEGUIDirect3D10Renderer-0.lib;d3d10.lib;..\lib\CEGUIDirect3D11Renderer-0.lib;d3d11.lib;..\lib\CEGUIBase-0.lib;opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glew.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\lib\Release\OgreMain.lib;d3dx9.lib;..\..\dependencies\lib\dynamic\freetype.lib;..\..\dependencies\lib\dynamic\pcre.lib;winmm.lib;d3dcompiler.lib;d3dx11.lib;d3dx10.lib;d3dx10d.lib;..\..\dependencies\lib\dynamic\D3DX11Effects.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/software/programacion/MSDirectXjun2010/Lib/x86;C:/software/programacion/MSDirectXjun2010/Lib/x86/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUISampleFramework-0.8.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUISampleFramework-0.8.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLFW_DLL;_CRT_SECURE_NO_WARNINGS;NOMINMAX;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cegui\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\common\include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include;C:\software\programacion\MSDirectXjun2010\Include;C:\hlocal\cegui-0.8.7\cegui-0.8.7\dependencies\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\OgreMain\include;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glfw.lib;..\lib\CEGUIOpenGLRenderer-0.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\OIS\lib\OIS_static.lib;..\lib\CEGUIOgreRenderer-0.lib;dxerr.lib;..\lib\CEGUIDirect3D9Renderer-0.lib;d3d9.lib;..\lib\CEGUIDirect3D10Renderer-0.lib;d3d10.lib;..\lib\CEGUIDirect3D11Renderer-0.lib;d3d11.lib;..\lib\CEGUIBase-0.lib;opengl32.lib;glu32.lib;..\..\dependencies\lib\dynamic\glew.lib;C:\hlocal\Proyecto_3\SCAMOK\Dependencies\Ogre\Build\lib\Release\OgreMain.lib;d3dx9.lib;..\..\dependencies\lib\dynamic\freetype.lib;..\..\dependencies\lib\dynamic\pcre.lib;winmm.lib;d3dcompiler.lib;d3dx11.lib;d3dx10.lib;d3dx10d.lib;..\..\dependencies\lib\dynamic\D3DX11Effects.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/software/programacion/MSDirectXjun2010/Lib/x86;C:/software/programacion/MSDirectXjun2010/Lib/x86/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/lib/CEGUISampleFramework-0.8.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/bin/CEGUISampleFramework-0.8.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+C:\hlocal\cmake-3.11.1-win64-x64\cmake-3.11.1-win64-x64\bin\cmake.exe -HC:/hlocal/cegui-0.8.7/cegui-0.8.7 -BC:/hlocal/cegui-0.8.7/cegui-0.8.7/build --check-stamp-file C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/samples_framework/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cmake\templates\VisualStudioUserFile.vcxproj.user.in;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples_framework\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+C:\hlocal\cmake-3.11.1-win64-x64\cmake-3.11.1-win64-x64\bin\cmake.exe -HC:/hlocal/cegui-0.8.7/cegui-0.8.7 -BC:/hlocal/cegui-0.8.7/cegui-0.8.7/build --check-stamp-file C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/samples_framework/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cmake\templates\VisualStudioUserFile.vcxproj.user.in;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples_framework\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+C:\hlocal\cmake-3.11.1-win64-x64\cmake-3.11.1-win64-x64\bin\cmake.exe -HC:/hlocal/cegui-0.8.7/cegui-0.8.7 -BC:/hlocal/cegui-0.8.7/cegui-0.8.7/build --check-stamp-file C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/samples_framework/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cmake\templates\VisualStudioUserFile.vcxproj.user.in;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples_framework\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+C:\hlocal\cmake-3.11.1-win64-x64\cmake-3.11.1-win64-x64\bin\cmake.exe -HC:/hlocal/cegui-0.8.7/cegui-0.8.7 -BC:/hlocal/cegui-0.8.7/cegui-0.8.7/build --check-stamp-file C:/hlocal/cegui-0.8.7/cegui-0.8.7/build/samples_framework/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/hlocal/cegui-0.8.7/cegui-0.8.7/samples_framework/CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;C:\hlocal\cegui-0.8.7\cegui-0.8.7\cmake\templates\VisualStudioUserFile.vcxproj.user.in;C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples_framework\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\SamplesFrameworkBase.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\SamplesFramework.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiBaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiRendererSelector.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\Samples_xmlHandler.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\SampleData.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\MetaDataWindowManager.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\SamplesBrowserManager.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\Win32AppHelper.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\Win32CEGuiRendererSelector.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiGLFWSharedBase.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiGLFW2SharedBase.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiOpenGLBaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiOpenGL3BaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiOgreBaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiD3D9BaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D9.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiD3D10BaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D10.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\CEGuiD3D11BaseApplication.cpp" />
+    <ClCompile Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\src\DeviceReset_Direct3D11.cpp" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples\common\include\Sample.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\SamplesFrameworkBase.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\SamplesFramework.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\CEGuiBaseApplication.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\CEGuiRendererSelector.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\Samples_xmlHandler.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\SampleData.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\MetaDataWindowManager.h" />
+    <ClInclude Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\samples_framework\include\SamplesBrowserManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\ZERO_CHECK.vcxproj">
+      <Project>{60F6391A-3E8C-3DF5-99FA-695C8E114F0D}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\CEGUIBase-0.vcxproj">
+      <Project>{CDB6BB93-FC3E-3578-865D-C4FA50DCC28A}</Project>
+      <Name>CEGUIBase-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\CommonDialogs\CEGUICommonDialogs-0.vcxproj">
+      <Project>{1EA7A6C4-6B03-330E-8660-2D5111FD9B95}</Project>
+      <Name>CEGUICommonDialogs-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\CommonDialogsDemo\CEGUICommonDialogsDemo.vcxproj">
+      <Project>{479FFDC6-3901-3DD0-92AF-AEAED4584D4A}</Project>
+      <Name>CEGUICommonDialogsDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\WindowRendererSets\Core\CEGUICoreWindowRendererSet.vcxproj">
+      <Project>{DC106030-863A-3585-99B3-ACD5376AB6EE}</Project>
+      <Name>CEGUICoreWindowRendererSet</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\Demo6\CEGUIDemo6.vcxproj">
+      <Project>{46AD0BEC-9F4C-37A8-9774-0DA2200C72B3}</Project>
+      <Name>CEGUIDemo6</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\RendererModules\Direct3D10\CEGUIDirect3D10Renderer-0.vcxproj">
+      <Project>{7EB0C354-6255-3408-950F-22324730DACD}</Project>
+      <Name>CEGUIDirect3D10Renderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\RendererModules\Direct3D11\CEGUIDirect3D11Renderer-0.vcxproj">
+      <Project>{D4AA445E-C01D-37F5-B294-1E0BA53281DB}</Project>
+      <Name>CEGUIDirect3D11Renderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\RendererModules\Direct3D9\CEGUIDirect3D9Renderer-0.vcxproj">
+      <Project>{2790C9B2-F38A-3BD8-8BCB-CFA26E4A182C}</Project>
+      <Name>CEGUIDirect3D9Renderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\DragDropDemo\CEGUIDragDropDemo.vcxproj">
+      <Project>{75877003-DF45-39F4-B56A-B4746F86EF12}</Project>
+      <Name>CEGUIDragDropDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\EditboxValidationDemo\CEGUIEditboxValidationDemo.vcxproj">
+      <Project>{C4252083-8B53-3976-BE40-409985972841}</Project>
+      <Name>CEGUIEditboxValidationDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\EffectsDemo\CEGUIEffectsDemo.vcxproj">
+      <Project>{114B62C4-CEF1-3355-B440-E35EC32C9D8A}</Project>
+      <Name>CEGUIEffectsDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\XMLParserModules\Expat\CEGUIExpatParser.vcxproj">
+      <Project>{1F9B88C2-8997-3E75-AFF8-6DC91A3794CE}</Project>
+      <Name>CEGUIExpatParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\FontDemo\CEGUIFontDemo.vcxproj">
+      <Project>{FE5D17E8-16BF-318C-9BEA-6209265EB003}</Project>
+      <Name>CEGUIFontDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\GameMenu\CEGUIGameMenuDemo.vcxproj">
+      <Project>{717EBBF5-8BB1-3CAF-B6D9-DA6C4F4B6B74}</Project>
+      <Name>CEGUIGameMenuDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\HUDDemo\CEGUIHUDDemo.vcxproj">
+      <Project>{1B957928-1D48-30BA-9B61-A6131D0BEBF6}</Project>
+      <Name>CEGUIHUDDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\HelloWorld\CEGUIHelloWorldDemo.vcxproj">
+      <Project>{58ECE106-6784-305E-82DD-7554D6EAB71D}</Project>
+      <Name>CEGUIHelloWorldDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\InventoryDemo\CEGUIInventoryDemo.vcxproj">
+      <Project>{2C4A5707-BE74-36A3-9D3B-546AD068ADDA}</Project>
+      <Name>CEGUIInventoryDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\LookNFeelOverview\CEGUILookNFeelOverviewDemo.vcxproj">
+      <Project>{A473CE6E-8BEB-3484-B5BE-140098F7679B}</Project>
+      <Name>CEGUILookNFeelOverviewDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\Minesweeper\CEGUIMinesweeper.vcxproj">
+      <Project>{664CDBCF-7EA6-3B42-849C-6F975CC73F42}</Project>
+      <Name>CEGUIMinesweeper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\RendererModules\Ogre\CEGUIOgreRenderer-0.vcxproj">
+      <Project>{5C949EBE-58D2-3CC4-AA3D-0ADF7C86DE0E}</Project>
+      <Name>CEGUIOgreRenderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\RendererModules\OpenGL\CEGUIOpenGLRenderer-0.vcxproj">
+      <Project>{96ACA2F2-5FA1-35F6-9A21-3860BF0BAC5F}</Project>
+      <Name>CEGUIOpenGLRenderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\cegui\src\ImageCodecModules\SILLY\CEGUISILLYImageCodec.vcxproj">
+      <Project>{79FA9BE1-9B88-31D5-B3F5-455B42EF77A4}</Project>
+      <Name>CEGUISILLYImageCodec</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\ScrollablePaneDemo\CEGUIScrollablePaneDemo.vcxproj">
+      <Project>{A6C4F6A8-1F0A-3AB0-9EDF-BBB83CE09BFB}</Project>
+      <Name>CEGUIScrollablePaneDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\TabControlDemo\CEGUITabControlDemo.vcxproj">
+      <Project>{9CE46299-8EE2-3341-BCDF-4099EF091F0E}</Project>
+      <Name>CEGUITabControlDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\TextDemo\CEGUITextDemo.vcxproj">
+      <Project>{AEBE0744-9399-31BF-9618-AE45AC5F8FC4}</Project>
+      <Name>CEGUITextDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\TreeDemo\CEGUITreeDemo.vcxproj">
+      <Project>{92D61F6B-1C7A-354C-ACCB-B83E6E52B02E}</Project>
+      <Name>CEGUITreeDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\hlocal\cegui-0.8.7\cegui-0.8.7\build\samples\WidgetDemo\CEGUIWidgetDemo.vcxproj">
+      <Project>{58E9E283-B1CD-3BA7-80AD-53135911C9BF}</Project>
+      <Name>CEGUIWidgetDemo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

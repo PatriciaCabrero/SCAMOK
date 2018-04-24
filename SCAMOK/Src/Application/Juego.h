@@ -23,6 +23,7 @@ private:
 	bool init();
 	bool initOgre();
 	bool initOis();
+	bool initCEGUI();
 
 	std::string recursos, plugins;
 	Ogre::Root *root;
@@ -32,6 +33,8 @@ private:
 
 	//Ois-------------------
 	InputManager * mInputMgr;
+	//CEGUI-----------------
+	GUI  m_gui;
 	
 	void handleInput();
 	virtual bool keyPressed(const OIS::KeyEvent& ke);

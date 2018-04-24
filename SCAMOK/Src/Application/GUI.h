@@ -1,6 +1,6 @@
 #pragma once
 #include <CEGUI\CEGUI.h>
-#include <CEGUI\RendererModules\OpenGL\GL3Renderer.h>
+#include <CEGUI\RendererModules\Ogre\Renderer.h>
 #include <OgreVector4.h>
 
 class GUI
@@ -21,7 +21,7 @@ public:
 	CEGUI::Window* createWidget(const std::string& scheme, const Ogre::Vector4& destRectPerc, const Ogre::Vector4& destRectPix, const std::string& name = "");
 	static void setWidgetDestRect(CEGUI::Window* widget, const Ogre::Vector4& destRectPerc, const Ogre::Vector4& destRectPix);
 
-	static CEGUI::OpenGL3Renderer* getRenderer() {
+	static CEGUI::OgreRenderer* getRenderer() {
 		return renderer_;
 	}
 
@@ -29,7 +29,7 @@ public:
 		return context_;
 	}
 private:
-	 static CEGUI::OpenGL3Renderer* renderer_;
+	 static CEGUI::OgreRenderer* renderer_;
 	 CEGUI::GUIContext* context_ = nullptr;
 	 CEGUI::Window* root_ = nullptr;
 };
