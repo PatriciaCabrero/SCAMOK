@@ -4,15 +4,16 @@
 using namespace Ogre;
 Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 {
-	cam = pEnt->getPEstado()->getScnManager()->createCamera("MainCamera");
+	altura = 0;
+	cam = pEntidad->getPEstado()->getScnManager()->createCamera("MainCamera");
 	cam->setPosition(0, 20, -75);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
-	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->createChildSceneNode("NodoCamera");
+	node = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->createChildSceneNode("NodoCamera");
 	node->attachObject(cam);
 
 	//set viewport
-	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
+	vp = pEntidad->getPEstado()->getWin()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 150, 150));
 
 	cam->setAspectRatio(
@@ -42,10 +43,27 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 			std::string yS = subcad.substr(0, pos);
 			std::string zS = subcad.substr(pos + 1);
 
+			//ROTACION LATERAL
 			float x = std::stof(xS);
-			float z = -1* std::stof(zS);
+			node->yaw(Ogre::Degree(x*2), Node::TS_WORLD);
 
-			node->rotate(Ogre::Quaternion(Ogre::Degree(-x*2), Ogre::Vector3::UNIT_Y));
+			//ROTACION VERTICAL
+			float z = -1* std::stof(zS);
+			/*//if(altura >= 0 && altura <= 10)
+			//	altura += z;
+
+			node->translate(Vector3(0, z, 0));*/
+			
+			//node->pitch(Ogre::Degree(altura));
+			//Ogre::Real a = node->getOrientation().
+			if (node->getOrientation().getPitch().valueDegrees() < 0 && z > 0) {
+				node->pitch(Ogre::Degree(z * 2),Node::TS_LOCAL);
+			}else if (node->getOrientation().getPitch().valueDegrees() > 10 && z < 0) {
+				node->pitch(Ogre::Degree(z * 2), Node::TS_LOCAL);
+			}else if(node->getOrientation().getPitch().valueDegrees() >= 0 && node->getOrientation().getPitch().valueDegrees() < 10)
+				node->pitch(Ogre::Degree(z * 2),Node::TS_LOCAL);
+
+
 		}
 	}
 }
