@@ -14,12 +14,13 @@
 #include <OgreWindowEventUtilities.h>
 #include <OgreException.h>
 #include "Fisic.h"
+#include <fmod.hpp>
 
 
 class Estado
 {
 public:
-	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow);
+	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys);
 	~Estado();
 
 	void addViewPort();
@@ -41,7 +42,16 @@ public:
 	void swapMsgBufer(){
 		mensajes.swap(bufer);
 	}
+
+	//Audio-----------------------------------------
+
+	/*void reproduceFx(std::string fx, float x, float y, float z, float wet);
+	void reproduceAmbM(std::string amb, float wet, bool fade);
+	void paraAmb(int ch, bool fade);*/
+
+	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
+
 private:
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
@@ -52,5 +62,5 @@ private:
 	
 	std::priority_queue < Mensaje > mensajes, bufer;
 	Fisic* fisicaManager;
-
+	FMOD::System* system;
 };

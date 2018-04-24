@@ -13,6 +13,7 @@ Juego::Juego()
 #endif
 	
 	init();
+	initFmod();
 }
 
 bool Juego::init(){
@@ -117,9 +118,21 @@ bool Juego::initOgre(){
 
 	return true;
 }
+bool Juego::initFmod() {
+	unsigned int      version;
+	result = FMOD::System_Create(&system);
+	result = system->getVersion(&version);
 
+	if (version < FMOD_VERSION)
+	{
+		std::cout << ("FMOD lib version %08x doesn't match header version %08x", version, FMOD_VERSION);
+	}
+	system->init(100, FMOD_INIT_NORMAL, NULL);
+	return true;
+}
 bool Juego::run(){
-	Estado * pEstado = new Estado(scnMgr, mWindow);
+
+	Estado * pEstado = new Estado(scnMgr, mWindow, system);
 	pEstados.push(pEstado);
 	
 	int cont = 0;

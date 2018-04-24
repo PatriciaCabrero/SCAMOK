@@ -1,8 +1,8 @@
 #include <string>
 #include "Estado.h"
 #pragma once
-enum Tipo{ Render, Fisica, Logica, Input, AnimationM };
-enum SubTipo {Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara,Nulo};
+enum Tipo{ Render, Fisica, Logica, Input, AnimationM, Audio };
+enum SubTipo { Musica, Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara, Nulo};
 
 class Mensaje{
 public:
@@ -28,6 +28,9 @@ public:
 				break;
 			case Input:
 				prio = 3;
+				break;
+			default:
+				prio = 4;
 				break;
 			}
 		}

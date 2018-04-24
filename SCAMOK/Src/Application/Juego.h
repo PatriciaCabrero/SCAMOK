@@ -22,12 +22,18 @@ private:
 	bool init();
 	bool initOgre();
 	bool initOis();
+	bool initFmod();
 
 	std::string recursos, plugins;
 	Ogre::Root *root;
 	Ogre::ConfigFile cf;
 	Ogre::RenderWindow* mWindow;
 	Ogre::SceneManager * scnMgr;
+
+	//Fmod------------------
+
+	FMOD::System     *system;
+	FMOD_RESULT       result;
 
 	//Ois-------------------
 	InputManager * mInputMgr;

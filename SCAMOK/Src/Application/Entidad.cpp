@@ -7,7 +7,7 @@
 #include "FComponent.h"
 #include <iostream>
 #include <fstream>
-
+#include "SoundManager.h"
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 
 	nombreNodo = " ";
@@ -105,11 +105,18 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
 	}
-	
 	return true;
 }
-void Entidad::Update(float deltaTime,  Mensaje & msg){
-	
+
+
+bool Entidad::añadeComponenteSM(std::string component, void* sys) {
+	if (component == "SoundManager")
+		componentes.insert(std::make_pair("SoundManager", new SoundManager(this, (FMOD::System*)sys)));
+	return true;
+}
+
+void Entidad::Update(float deltaTime,  Mensaje & msj){
+	Mensaje msg = msj;
 	if (activo){
 		
 		if (msg.getReceptor() == this || msg.getReceptor() == nullptr) {

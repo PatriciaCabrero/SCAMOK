@@ -1,10 +1,12 @@
 #include "Estado.h"
+#include "Juego.h"
 
-Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
+Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys){
 
 	//Aqui montamos el mundo físico
 	fisicaManager = new Fisic();
 
+	system = sys;
 	#pragma region InitOgre 
 	mWin = mWindow;
 	scnMgr = mng;
@@ -16,7 +18,6 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
 	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
 
-	//Este mensaje debería ser de transform y configurarlo para que cambie sus referencias locales
 
 	Mensaje msg (Tipo::Fisica, "0/30/0", SubTipo::Reposicionar);
 	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
@@ -34,6 +35,11 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	ms.setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
 	mensajes.push(ms); 
 
+	aux = new Entidad(this); aux->añadeComponenteSM("SoundManager", system);
+	entidades.insert(std::make_pair("SoundManager", aux));
+	Mensaje playM(Tipo::Audio, "Play/wii.mp3", SubTipo::Musica);
+	mensajes.push(playM);
+
 
 	// Luz por defecto
 	scnMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
@@ -44,6 +50,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow){
 	#pragma endregion InitOgre
 
 }
+
 
 Estado::~Estado(){
 	delete fisicaManager;

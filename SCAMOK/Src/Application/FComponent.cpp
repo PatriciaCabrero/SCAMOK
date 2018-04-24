@@ -121,7 +121,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				 valores = matriz * valores;
 		
 				vel = body->getLinearVelocity();
-				std::cout<< valores.x * 30 << "\n";
 				vel = vel + btVector3(valores.x*30,0,valores.z*30);
 
 				body->setLinearVelocity(vel);
