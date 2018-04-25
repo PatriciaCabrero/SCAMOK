@@ -40,11 +40,11 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	mensajes.push(ms1);
 	
 	Entidad* aux1 = new Entidad(this);
-	aux1->añadeComponenteGrafico("Greymon");
+	aux1->añadeComponenteGrafico("stone");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-	entidades.insert(std::make_pair("Greymon", aux1));
+	entidades.insert(std::make_pair("Stone", aux1));
 	Mensaje ms (Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
-	ms.setMsgInfo(entidades.at("Greymon"), entidades.at("Greymon"));
+	ms.setMsgInfo(entidades.at("Stone"), entidades.at("Stone"));
 	mensajes.push(ms); 
 
 	aux = new Entidad(this); aux->añadeComponenteSM("SoundManager", system);
