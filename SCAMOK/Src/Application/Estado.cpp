@@ -115,9 +115,18 @@ void Estado::keyPressed(std::string s) {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
 		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 		mensajes.push(msg);
+		entidades.at("Ogro")->setAnim("JumpLoop");
+	}
+	else if (s == "1") {
+		entidades.at("Ogro")->setAnim("SliceHorizontal");
+
 	}
 	else if (s == "2") {
 		entidades.at("Ogro")->setAnim("Dance");
+	}
+	else if (s == "3") {
+		entidades.at("Ogro")->setAnim("SliceVertical");
+
 	}
 	
 }

@@ -3,7 +3,7 @@
  
 FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
-
+	
 	Ogre::AxisAlignedBox bbox;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
@@ -126,11 +126,13 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
-				std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX())+"/0/"+ std::to_string(body->getWorldTransform().getOrigin().getZ());
-				Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/"+pos, SubTipo::Effect);
-				pEntidad->getPEstado()->addMsg(msEfect);
-				body->activate(true);
-				body->applyCentralImpulse(btVector3(0,2000,0));
+				if ((int)body->getLinearVelocity().getY() == 0) {
+					std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX()) + "/0/" + std::to_string(body->getWorldTransform().getOrigin().getZ());
+					Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
+					pEntidad->getPEstado()->addMsg(msEfect);
+					body->activate(true);
+					body->applyCentralImpulse(btVector3(0, 1500, 0));
+				}
 				
 			}
 			else if (msg.getSubTipo() == SubTipo::Nulo) {

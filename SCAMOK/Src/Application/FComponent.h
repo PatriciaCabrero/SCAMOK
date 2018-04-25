@@ -22,7 +22,6 @@ protected:
 	btCollisionShape* shape;
 	btDefaultMotionState *motionState;
 	btRigidBody* body;
-
 	btTransform trans;
 	void *userPointer;
 }; 

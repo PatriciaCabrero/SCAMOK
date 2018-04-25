@@ -1,7 +1,10 @@
 Animation
 sinbad
-1
+4
 Dance
+SliceHorizontal
+SliceVertical
+JumpLoop
 Logico
 Transform
 CFisico
