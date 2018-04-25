@@ -24,4 +24,5 @@ protected:
 	btRigidBody* body;
 	btTransform trans;
 	void *userPointer;
+	bool _suelo;
 }; 

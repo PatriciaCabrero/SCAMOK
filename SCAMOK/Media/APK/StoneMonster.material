@@ -1,18 +1,13 @@
-// ArenaFloor genrated by blender2ogre 0.6.0
+// StoneMonster genrated by blender2ogre 0.6.0
 
-material ArenaFloor 
+material StoneMonster 
 {
     receive_shadows on 
 
     technique
     {
-        pass ArenaFloor
+        pass StoneMonster
         {
-            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
-            diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
-            specular 0.5 0.5 0.5 1.0 12.5
-            emissive 0.0 0.0 0.0 1.0
-
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
@@ -31,6 +26,5 @@ material ArenaFloor
             transparent_sorting on
 
         }
-        
     }
 }

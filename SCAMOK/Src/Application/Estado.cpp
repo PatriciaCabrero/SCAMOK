@@ -12,6 +12,9 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	scnMgr = mng;
 	
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
+
+
 	scnMgr->setShadowFarDistance(200);
 
 
@@ -26,7 +29,16 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
-
+	
+	
+	Entidad *aux2 = new Entidad(this);
+	aux2->añadeComponenteGrafico("compcube");
+	aux2->añadeComponenteFisico(0, 0, 0, false);
+	entidades.insert(std::make_pair("MetalBox", aux2));
+	Mensaje ms1(Tipo::Fisica, "0/25/10", SubTipo::Reposicionar);
+	ms1.setMsgInfo(entidades.at("MetalBox"), entidades.at("MetalBox"));
+	mensajes.push(ms1);
+	
 	Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("Greymon");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
@@ -45,7 +57,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	scnMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	light = scnMgr->createLight("MainLight");
-	light->setPosition(20, 80, 50);
+	light->setPosition(20, 50, 50);
 
 	#pragma endregion InitOgre
 

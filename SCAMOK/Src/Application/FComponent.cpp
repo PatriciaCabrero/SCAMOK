@@ -3,12 +3,13 @@
  
 FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, int masa):Componente(pEnt),masa(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
+	_suelo = suelo;
 	
 	Ogre::AxisAlignedBox bbox;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
 		//Muestra la caja en Ogre
-		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
+		//pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, true);
 
 		//Le pone al cuerpo coordenadas, orientación y volumen (sacado del componente gráfico)
@@ -19,7 +20,9 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		profCaja = v.z;
 		anchoCaja = v.x;
 		pTransform.setIdentity();
-		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
+			pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
+		
+		
 		Ogre::Quaternion quat = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + nombreNodo)->getOrientation();
 		pTransform.setRotation(btQuaternion(quat.x, quat.y, quat.z, quat.w));//Tener en cuenta que en ogre el primer valor es w, mientras que en bullet va último.
 		initBody();
@@ -57,10 +60,15 @@ void FComponent::initBody() {
 	btVector3 localInertia(0, 0, 0);
 
 	//Aquí hacemos la forma de la caja
-	shape = new btBoxShape(btVector3(btScalar(anchoCaja/2), btScalar(altoCaja/2), btScalar(profCaja/2)));
-
-	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	motionState = new btDefaultMotionState(pTransform);
+
+	if (!_suelo) {
+		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
+	}
+	else {
+		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 7.5), btScalar(profCaja / 2)));
+
+	}//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	shape->calculateLocalInertia(mass, localInertia);
 	pEntidad->getPEstado()->getFisicManager()->getCollisionShapes().push_back(shape);
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
@@ -68,7 +76,10 @@ void FComponent::initBody() {
 
 	//Elasticidad del material
 	body->setRestitution(0);
+	if (tipo == tipoFisica::Kinematico) {
+		body->setAngularFactor(btVector3(0, 1, 0));
 
+	}
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
 
 }
@@ -122,7 +133,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 		
 				vel = body->getLinearVelocity();
 				vel = vel + btVector3(valores.x*30,0,valores.z*30);
-
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
@@ -131,7 +141,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 					Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
 					pEntidad->getPEstado()->addMsg(msEfect);
 					body->activate(true);
-					body->applyCentralImpulse(btVector3(0, 1500, 0));
+					body->applyCentralImpulse(btVector3(0, 2000, 0));
 				}
 				
 			}
