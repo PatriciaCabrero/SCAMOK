@@ -12,7 +12,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	scnMgr = mng;
 	
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-//	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
+	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
 
 
 	scnMgr->setShadowFarDistance(200);
