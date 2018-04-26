@@ -12,7 +12,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	scnMgr = mng;
 	
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
+//	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
 
 
 	scnMgr->setShadowFarDistance(200);
@@ -47,8 +47,9 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	ms.setMsgInfo(entidades.at("Stone"), entidades.at("Stone"));
 	mensajes.push(ms); 
 
-	aux = new Entidad(this); aux->añadeComponenteSM("SoundManager", system);
-	entidades.insert(std::make_pair("SoundManager", aux));
+	
+	Entidad* aux3 = new Entidad(this); aux3->añadeComponenteSM("SoundManager", system);
+	entidades.insert(std::make_pair("SoundManager", aux3));
 	Mensaje playM(Tipo::Audio, "Play/wii.mp3", SubTipo::Musica);
 	mensajes.push(playM);
 

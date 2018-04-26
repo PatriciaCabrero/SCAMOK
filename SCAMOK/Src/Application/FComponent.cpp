@@ -5,9 +5,9 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	tipo = type;
 	_suelo = suelo;
 	
-	Ogre::AxisAlignedBox bbox;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
+	Ogre::AxisAlignedBox bbox;
 		//Muestra la caja en Ogre
 		//pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, true);

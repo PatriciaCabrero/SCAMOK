@@ -26,7 +26,7 @@ SoundManager::~SoundManager() {
 	for (auto it : cMA) {
 		it->stop();
 	}
-
+	
 	mainGroup->release();
 	result = reverbGroup->release();
 	result = reverbUnit->release();

@@ -21,8 +21,7 @@ private:
 	FMOD::ChannelGroup* mainGroup;
 	FMOD::DSP* reverbUnit;
 	FMOD::DSP* channelHead;
-	int cMusic;
-	int cAmb;
+	
 	FMOD::System* system;
 
 	std::vector<FMOD::DSPConnection*> reverbConnectionfx;
