@@ -26,7 +26,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
 	 
-	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("Arena_draft.lwo");
+	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena");
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("Arena", aux));
 	
@@ -35,7 +35,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	aux2->añadeComponenteGrafico("compcube");
 	aux2->añadeComponenteFisico(0, 0, 0, false);
 	entidades.insert(std::make_pair("MetalBox", aux2));
-	Mensaje ms1(Tipo::Fisica, "0/25/10", SubTipo::Reposicionar);
+	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar);
 	ms1.setMsgInfo(entidades.at("MetalBox"), entidades.at("MetalBox"));
 	mensajes.push(ms1);
 	

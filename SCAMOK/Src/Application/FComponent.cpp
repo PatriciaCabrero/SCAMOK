@@ -66,7 +66,7 @@ void FComponent::initBody() {
 		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
 	}
 	else {
-		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 7.5), btScalar(profCaja / 2)));
+		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
 
 	}//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	shape->calculateLocalInertia(mass, localInertia);
