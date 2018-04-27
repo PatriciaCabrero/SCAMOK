@@ -44,7 +44,7 @@ void::SoundManager::cargarAssetsAudio() {
 	WIN32_FIND_DATA FindFileData;
 	HANDLE hFind;
 	DWORD dwError = 0;
-	char* aux;
+	char* aux = " ";
 
 	hFind = FindFirstFile(szDir, &FindFileData);
 	if (hFind != INVALID_HANDLE_VALUE) {

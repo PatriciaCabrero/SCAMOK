@@ -5,7 +5,7 @@
 
 class FComponent  : public Componente { 
 public: 
-	FComponent(Entidad* pEnt, float altoCaja, float anchoCaja, float profCaja, std::string nombreNodo, bool suelo, tipoFisica type = tipoFisica::Estatico, int masa = 0/*inamovible*/);
+	FComponent(Entidad* pEnt, float altoCaja = 0, float anchoCaja=0, float profCaja=0, std::string nombreNodo=" ", bool suelo= false, tipoFisica type = tipoFisica::Estatico, btScalar masa = 0/*inamovible*/);
 	~FComponent(); 
 	virtual void Update(float deltaTime, Mensaje const & msj);//A rellenar con el cuenta steps
 	virtual void destroy() {};
@@ -17,7 +17,6 @@ protected:
 	float altoCaja, anchoCaja, profCaja;
 	btTransform pTransform;
 	tipoFisica tipo;
-	int masa;
 	btScalar mass;
 	btCollisionShape* shape;
 	btDefaultMotionState *motionState;

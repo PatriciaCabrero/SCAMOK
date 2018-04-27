@@ -9,7 +9,7 @@
 #include <fstream>
 #include "SoundManager.h"
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
-
+	activo = true;
 	nombreNodo = " ";
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
@@ -21,6 +21,7 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	std::string type;
 	fe >> type;
 	activo = true;
+
 	while (type != "---") {
 		if (type == "Grafico") {
 			std::string mesh; fe >> mesh;

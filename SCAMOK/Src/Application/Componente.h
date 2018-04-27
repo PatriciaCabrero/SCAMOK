@@ -8,7 +8,7 @@ enum tipoFisica { Dinamico, Estatico, Kinematico };
 class Componente {
 
 public:
-	Componente(Entidad* pEnt){ pEntidad = pEnt; };
+	Componente(Entidad* pEnt) { pEntidad = pEnt; activo = true; };
 	virtual ~Componente() {}
 	virtual void Update(float deltaTime, Mensaje const & msj) { if (!activo) return; };
 	virtual void Awake() { activo = true; };

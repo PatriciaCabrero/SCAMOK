@@ -124,7 +124,7 @@ void Estado::joystickMoved(float x, float y, int js) {
 
 }
 void Estado::keyPressed(std::string s) {
-	if (s == "0") {
+	if (s == "0" || s=="salto") {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
 		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 		mensajes.push(msg);
@@ -139,11 +139,11 @@ void Estado::keyPressed(std::string s) {
 	}
 	else if (s == "3") {
 		entidades.at("Ogro")->setAnim("SliceVertical");
-
 	}
 	
 }
 void Estado::keyReleased(std::string s) {
+
 	
 }
 Entidad* Estado::getEntidad(std::string s) {

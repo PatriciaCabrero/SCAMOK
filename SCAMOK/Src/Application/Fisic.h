@@ -25,6 +25,6 @@ private:
 	btDiscreteDynamicsWorld* dynamicsWorld;
 	
 
-	std::vector<btCollisionShape *> collisionShapes;
+	std::vector<btCollisionShape*> collisionShapes;
 	std::map<std::string, btRigidBody *> physicsAccessors;
 }; 

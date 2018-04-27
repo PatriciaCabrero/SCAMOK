@@ -114,8 +114,6 @@ bool Juego::initOgre(){
 	//we generate the default sceneManager. (more SceneManagers in Ogre::ST_....)
 	scnMgr = root->createSceneManager(Ogre::ST_GENERIC);
 
-
-
 	return true;
 }
 bool Juego::initFmod() {
@@ -196,6 +194,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	case OIS::KC_DOWN: key = "aba";
 		break;
+	case OIS::KC_SPACE: key = "salto";
 	default:
 		break;
 	}
@@ -207,6 +206,33 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 //Este método habría que llamarlo para que el movimiento sea continuo y se capturen las teclas pulsadas.
 //Para esto hay que tener en cuenta el tiempo para que no se llene de mensajes.
 void Juego::handleInput() {
+	OIS::Keyboard * keyboard = mInputMgr->getKeyboard();
+
+	if (keyboard != NULL) {
+		//DIAGONALES
+		if (keyboard->isKeyDown(OIS::KeyCode::KC_LEFT)&& keyboard->isKeyDown(OIS::KeyCode::KC_UP)) {
+			pEstados.top()->joystickMoved(1, 1);
+		}else if (keyboard->isKeyDown(OIS::KeyCode::KC_LEFT)&& keyboard->isKeyDown(OIS::KeyCode::KC_DOWN)) {
+			pEstados.top()->joystickMoved(1, -1);
+		}else if (keyboard->isKeyDown(OIS::KeyCode::KC_RIGHT)&&keyboard->isKeyDown(OIS::KeyCode::KC_UP)) {
+			pEstados.top()->joystickMoved(-1, 1);
+		}else if (keyboard->isKeyDown(OIS::KeyCode::KC_RIGHT)&& keyboard->isKeyDown(OIS::KeyCode::KC_DOWN)) {
+			pEstados.top()->joystickMoved(-1, -1);
+		}
+		//Direcciones normales
+		else if (keyboard->isKeyDown(OIS::KeyCode::KC_LEFT)) {
+			pEstados.top()->joystickMoved(1, 0);
+		}
+		else if (keyboard->isKeyDown(OIS::KeyCode::KC_RIGHT)) {
+			pEstados.top()->joystickMoved(-1, 0);
+		}
+		else if (keyboard->isKeyDown(OIS::KeyCode::KC_UP)) {
+			pEstados.top()->joystickMoved(0, 1);
+		}
+		else if (keyboard->isKeyDown(OIS::KeyCode::KC_DOWN)) {
+			pEstados.top()->joystickMoved(0, -1);
+		}
+	}
 
 	OIS::JoyStick * js = mInputMgr->getJoystick(0);
 	if (js != NULL) {
