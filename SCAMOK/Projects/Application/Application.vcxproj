@@ -15,6 +15,8 @@
     <ClCompile Include="..\..\Src\Application\Camara.cpp" />
     <ClCompile Include="..\..\Src\Application\Entidad.cpp" />
     <ClCompile Include="..\..\Src\Application\Estado.cpp" />
+    <ClCompile Include="..\..\Src\Application\Factory.cpp" />
+    <ClCompile Include="..\..\Src\Application\FactoryBalas.cpp" />
     <ClCompile Include="..\..\Src\Application\FComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Fisic.cpp" />
     <ClCompile Include="..\..\Src\Application\GComponent.cpp" />
@@ -30,6 +32,8 @@
     <ClInclude Include="..\..\Src\Application\Componente.h" />
     <ClInclude Include="..\..\Src\Application\Entidad.h" />
     <ClInclude Include="..\..\Src\Application\Estado.h" />
+    <ClInclude Include="..\..\Src\Application\Factory.h" />
+    <ClInclude Include="..\..\Src\Application\FactoryBalas.h" />
     <ClInclude Include="..\..\Src\Application\FComponent.h" />
     <ClInclude Include="..\..\Src\Application\Fisic.h" />
     <ClInclude Include="..\..\Src\Application\GComponent.h" />
@@ -55,7 +59,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

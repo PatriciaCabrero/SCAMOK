@@ -16,6 +16,8 @@
 #include "Fisic.h"
 #include <fmod.hpp>
 
+#include "Factory.h"
+
 
 class Estado
 {
@@ -64,4 +66,6 @@ private:
 	Fisic* fisicaManager;
 	FMOD::System* system;
 	bool noInput; int  contInput;
+
+	Factory* factoria;
 };

@@ -1,5 +1,6 @@
 #include "Estado.h"
 #include "Juego.h"
+#include "FactoryBalas.h"
 
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys){
 
@@ -10,6 +11,8 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	#pragma region InitOgre 
 	mWin = mWindow;
 	scnMgr = mng;
+
+	factoria = new FactoryBalas();
 	
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
@@ -59,6 +62,9 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
+
+	string name = factoria->create("arenarwert");
+	std::cout << name << endl;
 
 	#pragma endregion InitOgre
 
