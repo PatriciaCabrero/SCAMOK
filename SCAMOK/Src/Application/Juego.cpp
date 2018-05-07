@@ -14,6 +14,7 @@ Juego::Juego()
 	
 	init();
 	initFmod();
+	initCEGUI();
 }
 
 bool Juego::init(){
@@ -29,6 +30,15 @@ bool Juego::init(){
 	else return false;
 }
 
+bool Juego::initCEGUI() {
+	m_gui.init("../Media/GUI");
+	m_gui.loadScheme("Generic.scheme");
+	//CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("Generic/MouseArrow");	
+	m_gui.setFont("DejaVuSans-10");
+	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
+	testButton->setText("Hello World!");
+	return true;
+}
 bool Juego::initOis(){
 	
 	//mInputMgr = new InputManager(*mInputMgr);
@@ -156,6 +166,7 @@ bool Juego::run(){
 		//comprobar si la ventana está abierta
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
+		m_gui.draw();
 	}
 	delete pEstado;
 	return true;

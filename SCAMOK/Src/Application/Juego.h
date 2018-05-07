@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Estado.h"
 #include "InputManager.h"
+#include "GUI.h"
 
 
 class Juego: public OIS::KeyListener, OIS::MouseListener, OIS::JoyStickListener
@@ -23,6 +24,7 @@ private:
 	bool initOgre();
 	bool initOis();
 	bool initFmod();
+	bool initCEGUI();
 
 	std::string recursos, plugins;
 	Ogre::Root *root;
@@ -38,6 +40,9 @@ private:
 	//Ois-------------------
 	InputManager * mInputMgr;
 	
+
+	//CEGUI----------------
+	GUI m_gui;
 	void handleInput();
 	virtual bool keyPressed(const OIS::KeyEvent& ke);
 	virtual bool keyReleased(const OIS::KeyEvent& ke);
