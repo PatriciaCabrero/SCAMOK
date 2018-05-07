@@ -5,7 +5,7 @@ class Estado;
 
 class GComponent : public Componente {
 public:
-	GComponent(Entidad* pEnt, std::string name = "ogrehead");
+	GComponent(Entidad* pEnt, int cont, std::string name = "ogrehead");
 	virtual ~GComponent();
 
 	virtual void Update(float deltaTime, Mensaje const & msj);
@@ -19,4 +19,6 @@ protected:
 	Ogre::SceneNode * node, *groupNode, *nodeCh;
 	Ogre::Entity * ent;
 	bool firstMsg;
+
+private:
 };

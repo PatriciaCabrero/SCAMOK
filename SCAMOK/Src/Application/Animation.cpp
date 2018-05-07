@@ -2,7 +2,7 @@
 
 
 
-Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GComponent (pEnt, mesh)
+Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GComponent (pEnt, pEnt->cont,mesh)
 {
 	if (anim != "") addAnimationState(anim);
 }

@@ -9,12 +9,13 @@
 #include <fstream>
 #include "SoundManager.h"
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
+	cont++;
 	activo = true;
 	nombreNodo = " ";
 }
 Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
-
-	nombreNodo = prefab;
+	cont++;
+	nombreNodo = prefab + to_string(cont);
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
@@ -97,8 +98,8 @@ bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 }
 
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
-	nombreNodo = mesh;
-	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
+	nombreNodo = mesh + to_string(cont);
+	componentes.insert(std::make_pair("Grafico", new GComponent(this, cont,mesh)));
 	return true;
 }
 

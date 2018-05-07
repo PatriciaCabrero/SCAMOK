@@ -1,16 +1,14 @@
 
 #include "GComponent.h"
 using namespace Ogre;
-GComponent::GComponent(Entidad* pEnt, std::string name) : Componente (pEnt){
-	
+GComponent::GComponent(Entidad* pEnt, int cont, std::string name) : Componente (pEnt){	
 	std::string mesh = name + ".mesh";
-	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
-	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name);
-	node = groupNode->createChildSceneNode(name);
+	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh + to_string(cont));
+	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name+to_string(cont));
+	node = groupNode->createChildSceneNode(name + to_string(cont));
 	node->attachObject(ent);
 	firstMsg = false;
 	nodeCh = nullptr;
-
 }
 void GComponent::Update(float deltaTime,  Mensaje const & msj) { 
 	if (!firstMsg) {

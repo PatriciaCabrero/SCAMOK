@@ -28,7 +28,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		initBody();
 
 		//Vincula el nodo gráfico al físico
-		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo));
+		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ nombreNodo));
 
 		//Para poder acceder desde Fisic a los rigidbodies
 		pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
@@ -111,6 +111,29 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	switch (tipo)
 	{
 	case Dinamico:
+		if (msg.getTipo() == Tipo::Fisica) {
+			if (msg.getSubTipo() == SubTipo::Dispara) {
+				//Recibimos la fuerza en el mensaje
+				int escala = std::stof(msg.getMsg());
+
+				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
+				btVector3 start = alaia->getWorldTransform().getOrigin();
+
+				//No estoyseguro de sise transforma así de un cuaternión a un vt3
+				btVector3 final = { alaia->getOrientation().getX(), alaia->getOrientation().getY(), alaia->getOrientation().getZ() };
+
+				btVector3 end = start + (final * 10000);
+				btCollisionWorld::ClosestRayResultCallback RayCallback(start, end);
+				pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, end, RayCallback);
+				btVector3 fuerza = final * escala;
+
+				//if (RayCallback.hasHit()) {
+					btVector3 hitPoint = RayCallback.m_hitPointWorld;
+					body->applyImpulse(fuerza , hitPoint - body->getCenterOfMassPosition());
+				//}
+				//La inercia la tenemos que calcular con la posición de la cámara
+			}
+		}
 		break;
 
 	//Este sería el caso kinematico concreto de la niña

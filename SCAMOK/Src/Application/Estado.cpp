@@ -63,9 +63,6 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
 
-	string name = factoria->create("arenarwert");
-	std::cout << name << endl;
-
 	#pragma endregion InitOgre
 
 }
@@ -145,6 +142,19 @@ void Estado::keyPressed(std::string s) {
 	}
 	else if (s == "3") {
 		entidades.at("Ogro")->setAnim("SliceVertical");
+	}
+	else if (s == "4") {
+		Entidad* aux1 = new Entidad(this);
+		string auxBala = factoria->create("Greymon");
+		aux1->añadeComponenteGrafico("Greymon");
+		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+		entidades.insert(std::make_pair(auxBala, aux1));
+		Mensaje ms(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
+		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
+		ms.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
+		ms1.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
+		mensajes.push(ms);
+		mensajes.push(ms1);
 	}
 	
 }
