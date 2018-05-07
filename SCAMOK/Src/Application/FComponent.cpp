@@ -116,16 +116,23 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				//Recibimos la fuerza en el mensaje
 				int escala = std::stof(msg.getMsg());
 
-				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
+				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad1");
 				btVector3 start = alaia->getWorldTransform().getOrigin();
 
 				//No estoyseguro de sise transforma así de un cuaternión a un vt3
-				btVector3 final = { alaia->getOrientation().getX(), alaia->getOrientation().getY(), alaia->getOrientation().getZ() };
-
-				btVector3 end = start + (final * 10000);
+				//btVector3 final = { 0, 0, 100 };
+				Ogre::Vector3 valores = { alaia->getWorldTransform().getOrigin().getX(),  
+					alaia->getWorldTransform().getOrigin().getY(), 
+					alaia->getWorldTransform().getOrigin().getZ() };
+				Ogre::Matrix3 final = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
+				valores = final * valores;
+				btVector3 aux = {
+					valores.x, valores.y, valores.z
+				};
+				btVector3 end = start + (aux * 10000);
 				btCollisionWorld::ClosestRayResultCallback RayCallback(start, end);
 				pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, end, RayCallback);
-				btVector3 fuerza = final * escala;
+				btVector3 fuerza = aux * escala;
 
 				//if (RayCallback.hasHit()) {
 					btVector3 hitPoint = RayCallback.m_hitPointWorld;

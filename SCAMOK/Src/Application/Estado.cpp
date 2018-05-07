@@ -146,10 +146,13 @@ void Estado::keyPressed(std::string s) {
 	else if (s == "4") {
 		Entidad* aux1 = new Entidad(this);
 		string auxBala = factoria->create("Greymon");
-		aux1->añadeComponenteGrafico("Greymon");
+		aux1->añadeComponenteGrafico("Greymon",auxBala);
 		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 		entidades.insert(std::make_pair(auxBala, aux1));
-		Mensaje ms(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
+		string posOgro = to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX()) + "/" +
+			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY() + 10) + "/" + 
+			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ() + 10);
+		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
 		ms1.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));

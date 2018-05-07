@@ -8,7 +8,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setPosition(0, 35, -100);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
-	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->createChildSceneNode("NodoCamera");
+	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad1")->createChildSceneNode("NodoCamera");
 	node->attachObject(cam);
 
 	//set viewport

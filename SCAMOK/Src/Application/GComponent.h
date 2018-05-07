@@ -6,6 +6,7 @@ class Estado;
 class GComponent : public Componente {
 public:
 	GComponent(Entidad* pEnt, int cont, std::string name = "ogrehead");
+	GComponent(Entidad* pEnt, std::string name, std::string ogreNodeName);
 	virtual ~GComponent();
 
 	virtual void Update(float deltaTime, Mensaje const & msj);

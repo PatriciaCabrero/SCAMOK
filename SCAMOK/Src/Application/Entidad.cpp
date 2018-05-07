@@ -103,6 +103,12 @@ bool Entidad::añadeComponenteGrafico(std::string mesh) {
 	return true;
 }
 
+bool Entidad::añadeComponenteGrafico(std::string mesh, std::string ogreNodeName) {
+	nombreNodo = ogreNodeName;
+	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh,nombreNodo)));
+	return true;
+}
+
 bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profCaja ,bool suelo, tipoFisica type, int masa) {
 	
 	componentes.insert(std::make_pair("Fisico", new FComponent(this, altoCaja, anchoCaja, profCaja, nombreNodo, suelo, type, masa)));
