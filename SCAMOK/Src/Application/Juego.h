@@ -40,6 +40,7 @@ private:
 	//Ois-------------------
 	InputManager * mInputMgr;
 	
+	
 
 	//CEGUI----------------
 	GUI m_gui;
@@ -47,9 +48,9 @@ private:
 	virtual bool keyPressed(const OIS::KeyEvent& ke);
 	virtual bool keyReleased(const OIS::KeyEvent& ke);
 
-	virtual bool mouseMoved(const OIS::MouseEvent& me) { return true; };
-	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) { return true; };
-	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) { return true; };
+	virtual bool mouseMoved(const OIS::MouseEvent& me);
+	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	
 	
 	virtual bool axisMoved(const OIS::JoyStickEvent & arg, int axis);

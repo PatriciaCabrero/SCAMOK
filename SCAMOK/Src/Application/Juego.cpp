@@ -32,11 +32,12 @@ bool Juego::init(){
 
 bool Juego::initCEGUI() {
 	m_gui.init("../Media/GUI");
-	m_gui.loadScheme("Generic.scheme");
-	//CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("Generic/MouseArrow");	
+	m_gui.loadScheme("TaharezLook.scheme");
 	m_gui.setFont("DejaVuSans-10");
 	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	testButton->setText("Hello World!");
+	testButton->setText("Hello GUI!");
+	m_gui.setMouseCursor("TaharezLook/MouseArrow");
+	m_gui.showMouseCursor();
 	return true;
 }
 bool Juego::initOis(){
@@ -45,10 +46,14 @@ bool Juego::initOis(){
 	mInputMgr = InputManager::getSingletonPtr();
 	mInputMgr->initialise(mWindow);
 	mInputMgr->addKeyListener(this, "KeyListener");
-	//mInputMgr->addMouseListener(this, "MouseListener");
+	mInputMgr->addMouseListener(this, "MouseListener");
 	mInputMgr->addJoystickListener(this, "JoystickListener");
-	
-	mInputMgr->getKeyboard()->setEventCallback(this); //mMouse->setEventCallback(this);
+	//mMouse = static_cast<OIS::Mouse*>(mInputMgr->createInputObject(OIS::OISMouse, true));
+
+	mInputMgr->getKeyboard()->setEventCallback(this);
+	mInputMgr->getMouse()->setEventCallback(this);
+
+
 	return true;
 }
 bool Juego::initOgre(){
@@ -151,7 +156,8 @@ bool Juego::run(){
 	while (!exit)
 	{
 		
-		mInputMgr->capture();
+		mInputMgr->capture();		
+
 		if (cont == 4) {
 			handleInput();
 			cont = 0;
@@ -287,6 +293,21 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 	}
 
 	pEstados.top()->keyReleased(key);
+	return true;
+}
+
+//MOUSE
+bool Juego::mouseMoved(const OIS::MouseEvent& me) {
+	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
+	m_gui.moveMouse(me.state.X.abs, me.state.Y.abs);
+	return true;
+}
+bool Juego::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
+
+	return true;
+}
+bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
+
 	return true;
 }
 Juego::~Juego()

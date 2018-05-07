@@ -5,21 +5,23 @@ CEGUI::OgreRenderer*  GUI::m_renderer = nullptr;
 void  GUI::init(const std::string& resourceDirectory) {
 	// Check if the renderer and system were not already initialized
 	if (m_renderer == nullptr) {
-		m_renderer = &CEGUI::OgreRenderer::bootstrapSystem();
+		m_renderer = &CEGUI::OgreRenderer::create();
+		CEGUI::System::create(*m_renderer);
+		//m_renderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
-	/*	CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
+		CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 		rp->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets");
 		rp->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes");
 		rp->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts");
 		rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
 		rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
-		rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
-*/
-		CEGUI::ImageManager::setImagesetDefaultResourceGroup("Imagesets");
-		CEGUI::Font::setDefaultResourceGroup("Fonts");
-		CEGUI::Scheme::setDefaultResourceGroup("Schemes");
-		CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
-		CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+		//rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+
+		CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+		CEGUI::Font::setDefaultResourceGroup("fonts");
+		CEGUI::Scheme::setDefaultResourceGroup("schemes");
+		CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+		CEGUI::WindowManager::setDefaultResourceGroup("layouts");
 		
 	}
 
@@ -29,15 +31,30 @@ void  GUI::init(const std::string& resourceDirectory) {
 }
 
 void  GUI::destroy() {
-	CEGUI::System::getSingleton().destroyGUIContext(*m_context);
+	CEGUI::System::destroy();
+	CEGUI::OgreRenderer::destroy(static_cast<CEGUI::OgreRenderer&>(*m_renderer));
+//	CEGUI::System::getSingleton().destroyGUIContext(*m_context);
 }
 
 void  GUI::draw() {
+	//CEGUI::System::getSingleton().renderAllGUIContexts();
 	m_renderer->beginRendering();
 	m_context->draw();
 	m_renderer->endRendering();
 }
 
+void GUI::moveMouse(int x, int y) {
+	m_context->injectMousePosition(x, y);
+}
+void GUI::setMouseCursor(const std::string&imageFile) {
+	m_context->getMouseCursor().setDefaultImage(imageFile);
+}
+void GUI::showMouseCursor() {
+	m_context->getMouseCursor().show();
+}
+void GUI::hideMouseCursor() {
+	m_context->getMouseCursor().hide();
+}
 void  GUI::loadScheme(const std::string& schemeFile) {
 	CEGUI::SchemeManager::getSingleton().createFromFile(schemeFile);
 }

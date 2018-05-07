@@ -11,6 +11,11 @@
 
 		void draw();
 
+		void setMouseCursor(const std::string&imageFile);
+		void moveMouse(int x, int y);
+		void showMouseCursor();
+		void hideMouseCursor();
+
 		void loadScheme(const std::string& schemeFile);
 		void setFont(const std::string& fontFile);
 		CEGUI::Window* createWidget(const std::string& type, const glm::vec4& destRectPerc, const glm::vec4& destRectPix, const std::string& name = "");
