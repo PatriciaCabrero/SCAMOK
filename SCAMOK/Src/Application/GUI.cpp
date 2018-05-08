@@ -15,7 +15,7 @@ void  GUI::init(const std::string& resourceDirectory) {
 		rp->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts");
 		rp->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
 		rp->setResourceGroupDirectory("looknfeels", resourceDirectory + "/looknfeel/");
-		//rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+		rp->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
 
 		CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
 		CEGUI::Font::setDefaultResourceGroup("fonts");
@@ -25,9 +25,11 @@ void  GUI::init(const std::string& resourceDirectory) {
 		
 	}
 
+	
 	m_context = &CEGUI::System::getSingleton().createGUIContext(m_renderer->getDefaultRenderTarget());
 	m_root = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "root");
 	m_context->setRootWindow(m_root);
+
 }
 
 void  GUI::destroy() {
@@ -46,9 +48,10 @@ void  GUI::draw() {
 void GUI::moveMouse(int x, int y) {
 	m_context->injectMousePosition(x, y);
 }
-void GUI::clickMouse() {
-	m_context->injectMouseButtonClick(CEGUI::MouseButton::LeftButton);
+void GUI::clickMouse(OIS::MouseButtonID id) {
+	m_context->injectMouseButtonDown(convertButton(id));
 }
+
 void GUI::setMouseCursor(const std::string&imageFile) {
 	m_context->getMouseCursor().setDefaultImage(imageFile);
 }
@@ -77,4 +80,21 @@ void  GUI::setWidgetDestRect(CEGUI::Window* widget, const glm::vec4& destRectPer
 void  GUI::setFont(const std::string& fontFile) {
 	CEGUI::FontManager::getSingleton().createFromFile(fontFile + ".font");
 	m_context->setDefaultFont(fontFile);
+}
+
+CEGUI::MouseButton GUI::convertButton(OIS::MouseButtonID buttonID) {
+	switch (buttonID)
+	{
+	case OIS::MB_Left:
+		return CEGUI::LeftButton;
+
+	case OIS::MB_Right:
+		return CEGUI::RightButton;
+
+	case OIS::MB_Middle:
+		return CEGUI::MiddleButton;
+
+	default:
+		return CEGUI::LeftButton;
+	}
 }

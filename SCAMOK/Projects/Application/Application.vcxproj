@@ -45,7 +45,7 @@
     <ProjectGuid>{3883AEBC-E2D3-40CA-9D3D-5A335C546C9C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Application</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -111,7 +111,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\CEGUI\include;$(SolutionDir)Dependencies\Fmod\inc;$(SolutionDir)Dependencies\Ogre\OgreMain\include;$(SolutionDir)Dependencies\Ogre\Build\include;$(SolutionDir)Dependencies\OIS\include;$(SolutionDir)Dependencies\Bullet3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>C:\hlocal\Proyecto_3\SCAMOK\Dependencies\VLD\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>$(SolutionDir)Dependencies\VLD\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,7 +119,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>OgreMain.lib;OIS.lib;OIS_static.lib;fmod_vc.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;Bullet3OpenCL_clew.lib;BulletCollision.lib;BulletDynamics.lib;BulletInverseDynamics.lib;BulletSoftBody.lib;LinearMath.lib;Bullet2FileLoader.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUIOgreRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Fmod\lib;$(SolutionDir)Dependencies\Ogre\Build\lib\Release;$(SolutionDir)Dependencies\OIS\lib;$(SolutionDir)Dependencies\Bullet3\lib\Release;C:\hlocal\proyecto_3\SCAMOK\Dependencies\CEGUI\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Fmod\lib;$(SolutionDir)Dependencies\Ogre\Build\lib\Release;$(SolutionDir)Dependencies\OIS\lib;$(SolutionDir)Dependencies\Bullet3\lib\Release;$(SolutionDir)Dependencies\CEGUI\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
