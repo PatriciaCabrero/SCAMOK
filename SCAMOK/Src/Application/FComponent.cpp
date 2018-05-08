@@ -5,6 +5,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	tipo = type;
 	_suelo = suelo;
 	
+	trigger = nullptr;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
 
@@ -28,10 +29,15 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		initBody();
 
 		//Vincula el nodo gráfico al físico
-		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo));
+		if (trigger)
+			trigger->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + nombreNodo));
+		else
+			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo));
 
 		//Para poder acceder desde Fisic a los rigidbodies
-		pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
+		if (tipo != tipoFisica::Trigger)
+			pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
+		
 	}
 
 	//Si no está vinculado a un componente gráfico se crea por defecto en el 0,0,0 se puede reposicionar con un mensaje
@@ -48,11 +54,12 @@ FComponent::~FComponent() {
 	delete body;
 	delete motionState;
 	delete shape;
+	delete trigger;
 } 
 
 void FComponent::initBody() {
 	//Aquí ajustamos la masa
-	if (tipo == tipoFisica::Estatico)
+	if (tipo == tipoFisica::Estatico || tipo == tipoFisica::Trigger)
 		mass = 0;
 
 	//La inercia inicial siempre es 0
@@ -62,7 +69,15 @@ void FComponent::initBody() {
 	motionState = new btDefaultMotionState(pTransform);
 
 	if (!_suelo) {
-		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
+		if (tipo != tipoFisica::Trigger)
+			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
+		else {
+
+			trigger = new btGhostObject();
+			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
+			trigger->setCollisionShape(shape);
+
+		}
 	}
 	else {
 		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
@@ -79,11 +94,13 @@ void FComponent::initBody() {
 	body->setRestitution(0);
 	
 	//Para que sinbad no rote
-	if (tipo == tipoFisica::Kinematico) {
+	if (tipo == tipoFisica::Kinematico || tipo == tipoFisica::Trigger) {
 		body->setAngularFactor(btVector3(0, 1, 0));
 	}
 
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
+	if (trigger)
+		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addCollisionObject(trigger);
 
 }
 

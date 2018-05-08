@@ -20,6 +20,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 
 	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
 	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
+	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "alaia")));
 
 
 	Mensaje msg (Tipo::Fisica, "0/30/0", SubTipo::Reposicionar);

@@ -22,6 +22,7 @@ protected:
 	btDefaultMotionState *motionState;
 	btRigidBody* body;
 	btTransform trans;
+	btGhostObject* trigger;
 	void *userPointer;
 	bool _suelo;
 }; 

@@ -1,5 +1,7 @@
 #pragma once 
 #include "btBulletDynamicsCommon.h"
+#include "btBulletCollisionCommon.h"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
 #include <vector>
 #include <map>
 #include "LinearMath\btIDebugDraw.h"
