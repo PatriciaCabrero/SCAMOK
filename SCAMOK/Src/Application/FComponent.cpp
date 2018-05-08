@@ -114,31 +114,19 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 		if (msg.getTipo() == Tipo::Fisica) {
 			if (msg.getSubTipo() == SubTipo::Dispara) {
 				//Recibimos la fuerza en el mensaje
-				int escala = std::stof(msg.getMsg());
+				Ogre::Real escala = std::stof(msg.getMsg());
 
 				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad1");
 				btVector3 start = alaia->getWorldTransform().getOrigin();
 
-				//No estoyseguro de sise transforma así de un cuaternión a un vt3
-				//btVector3 final = { 0, 0, 100 };
-				Ogre::Vector3 valores = { alaia->getWorldTransform().getOrigin().getX(),  
-					alaia->getWorldTransform().getOrigin().getY(), 
-					alaia->getWorldTransform().getOrigin().getZ() };
-				Ogre::Matrix3 final = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
-				valores = final * valores;
-				btVector3 aux = {
-					valores.x, valores.y, valores.z
-				};
-				btVector3 end = start + (aux * 10000);
-				btCollisionWorld::ClosestRayResultCallback RayCallback(start, end);
-				pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, end, RayCallback);
-				btVector3 fuerza = aux * escala;
+				Ogre::Vector3 valores = { escala,0,escala };
+				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
 
-				//if (RayCallback.hasHit()) {
-					btVector3 hitPoint = RayCallback.m_hitPointWorld;
-					body->applyImpulse(fuerza , hitPoint - body->getCenterOfMassPosition());
-				//}
-				//La inercia la tenemos que calcular con la posición de la cámara
+				valores = matriz * valores;
+
+				btVector3 vel = { 0,0,valores.z };
+
+				body->applyImpulse(vel*10,start);
 			}
 		}
 		break;

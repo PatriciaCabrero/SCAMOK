@@ -151,7 +151,7 @@ void Estado::keyPressed(std::string s) {
 		entidades.insert(std::make_pair(auxBala, aux1));
 		string posOgro = to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX()) + "/" +
 			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY() + 10) + "/" + 
-			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ() + 10);
+			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());
 		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
