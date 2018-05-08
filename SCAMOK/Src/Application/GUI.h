@@ -11,8 +11,9 @@
 
 		void draw();
 
-		void setMouseCursor(const std::string&imageFile);
 		void moveMouse(int x, int y);
+		void clickMouse();
+		void setMouseCursor(const std::string&imageFile);
 		void showMouseCursor();
 		void hideMouseCursor();
 

@@ -39,11 +39,16 @@ private:
 
 	//Ois-------------------
 	InputManager * mInputMgr;
+
 	
 	
 
 	//CEGUI----------------
 	GUI m_gui;
+	 
+
+
+
 	void handleInput();
 	virtual bool keyPressed(const OIS::KeyEvent& ke);
 	virtual bool keyReleased(const OIS::KeyEvent& ke);
@@ -60,6 +65,8 @@ private:
 	virtual bool vector3Moved(const OIS::JoyStickEvent & arg, int index) { return true; }
 	virtual bool povMoved(const OIS::JoyStickEvent & arg, int index);
 	
+	bool exitGame(const CEGUI::EventArgs &e);
+
 
 	int contJoystick;
 	bool exit = false;

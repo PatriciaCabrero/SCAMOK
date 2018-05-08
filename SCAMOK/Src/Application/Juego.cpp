@@ -36,8 +36,13 @@ bool Juego::initCEGUI() {
 	m_gui.setFont("DejaVuSans-10");
 	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
 	testButton->setText("Hello GUI!");
+	testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Juego::exitGame, this));
 	m_gui.setMouseCursor("TaharezLook/MouseArrow");
 	m_gui.showMouseCursor();
+
+
+	//m_gui getRootWindow()->addChild(BloodScreen);
+
 	return true;
 }
 bool Juego::initOis(){
@@ -157,6 +162,7 @@ bool Juego::run(){
 	{
 		
 		mInputMgr->capture();		
+		CEGUI::System::getSingleton().injectTimePulse(0.016f);
 
 		if (cont == 4) {
 			handleInput();
@@ -179,6 +185,12 @@ bool Juego::run(){
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
 	std::cout << arg.state.mPOV->direction << "\n";
+	return true;
+}
+bool Juego::exitGame(const CEGUI::EventArgs &e)
+{
+	std::cout << "kek\n";
+	exit = true;
 	return true;
 }
 bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
@@ -303,7 +315,7 @@ bool Juego::mouseMoved(const OIS::MouseEvent& me) {
 	return true;
 }
 bool Juego::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
-
+	m_gui.clickMouse();
 	return true;
 }
 bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {

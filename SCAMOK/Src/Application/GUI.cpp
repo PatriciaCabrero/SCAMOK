@@ -46,6 +46,9 @@ void  GUI::draw() {
 void GUI::moveMouse(int x, int y) {
 	m_context->injectMousePosition(x, y);
 }
+void GUI::clickMouse() {
+	m_context->injectMouseButtonClick(CEGUI::MouseButton::LeftButton);
+}
 void GUI::setMouseCursor(const std::string&imageFile) {
 	m_context->getMouseCursor().setDefaultImage(imageFile);
 }
