@@ -172,6 +172,14 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 		}
 		break;
 	}
+
+	if (tipo == tipoFisica::Trigger) {
+		if (trigger->getNumOverlappingObjects() >= 0) {
+			
+			pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
+			std::cout << "Trigger collision\n";
+		}
+	}
 	actualizaNodo();
 
 	

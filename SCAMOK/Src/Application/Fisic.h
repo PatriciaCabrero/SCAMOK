@@ -17,6 +17,14 @@ public:
 	std::vector<btCollisionShape *> getCollisionShapes() { return collisionShapes; };
 	//Devuelve el cuerpo con el nombre del nodo que se le pasa
 	btRigidBody* getRigidBody(std::string nombre) { return physicsAccessors.at(nombre); };
+	std::string getRigidBody(btRigidBody * rg) { 
+		auto it = physicsAccessors.begin();
+		std::string salida = "";
+		while (it != physicsAccessors.end()) {
+			if (it->second == rg) salida = it->first;
+		}
+		return salida;
+	};
 	void addBodyToMap(std::string n, btRigidBody* b) { physicsAccessors.insert(std::pair<std::string, btRigidBody*>(n, b)); };
 
 private:
