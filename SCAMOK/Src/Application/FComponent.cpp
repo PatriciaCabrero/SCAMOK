@@ -124,9 +124,10 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 
 				valores = matriz * valores;
 
-				btVector3 vel = { 0,0,valores.z };
+				btVector3 vel = { valores.x ,0, valores.z };
+				btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 
-				body->applyImpulse(vel*10,start);
+				body->applyImpulse(velAux*10, start);
 			}
 		}
 		break;

@@ -149,9 +149,19 @@ void Estado::keyPressed(std::string s) {
 		aux1->añadeComponenteGrafico("Greymon",auxBala);
 		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 		entidades.insert(std::make_pair(auxBala, aux1));
-		string posOgro = to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX()) + "/" +
-			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY() + 10) + "/" + 
-			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());
+
+		Ogre::Vector3 valores = { 1,0,1 };
+		Ogre::Matrix3 matriz = getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
+		valores = matriz * valores;
+		btVector3 pos1 = { valores.x ,0, valores.z };
+		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
+		/*btVector3 pos (posAux.x * 2 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX(),
+			this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY(),
+			posAux.z * 2 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());*/
+
+		string posOgro = to_string(posAux.getX() * 6 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX()) + "/" +
+			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY()) + "/" +
+			to_string(posAux.getZ() * 6 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());
 		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
