@@ -153,25 +153,31 @@ bool Juego::run(){
 	contJoystick = 0;
 	bool rend = false;
 	
+
+	int msUpdate = 16;
+	int lastUpdate = 0;
+	
+
 	while (!exit)
 	{
-		
-		mInputMgr->capture();		
+		if (GetTickCount() - lastUpdate >= msUpdate) {
+			mInputMgr->capture();
 
-		if (cont == 4) {
-			handleInput();
-			cont = 0;
+			if (cont == 4) {
+				handleInput();
+				cont = 0;
+			}
+			else cont++;
+
+			pEstados.top()->update(GetTickCount() - lastUpdate);
+			// render ogre
+			Ogre::WindowEventUtilities::messagePump();
+			lastUpdate = GetTickCount();
+
+			//comprobar si la ventana está abierta
+			if (mWindow->isClosed())return false;
+			if (cont % 2 != 0 && !root->renderOneFrame())return false;
 		}
-		else cont++;
-		
-		pEstados.top()->update(12.0f);
-		// render ogre
-		Ogre::WindowEventUtilities::messagePump();
-		
-
-		//comprobar si la ventana está abierta
-		if (mWindow->isClosed())return false;
-		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 		m_gui.draw();
 	}
 	delete pEstado;

@@ -75,7 +75,7 @@ Estado::~Estado(){
 
 bool Estado::update(float delta){
 
-	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
+	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
 	if (mensajes.size() > 0){
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
