@@ -48,8 +48,11 @@ void  GUI::draw() {
 void GUI::moveMouse(int x, int y) {
 	m_context->injectMousePosition(x, y);
 }
-void GUI::clickMouse(OIS::MouseButtonID id) {
+void GUI::downMouse(OIS::MouseButtonID id) {
 	m_context->injectMouseButtonDown(convertButton(id));
+}
+void GUI::upMouse(OIS::MouseButtonID id) {
+	m_context->injectMouseButtonUp(convertButton(id));
 }
 
 void GUI::setMouseCursor(const std::string&imageFile) {

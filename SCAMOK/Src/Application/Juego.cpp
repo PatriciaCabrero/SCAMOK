@@ -32,16 +32,22 @@ bool Juego::init(){
 
 bool Juego::initCEGUI() {
 	m_gui.init("../Media/GUI");
-	m_gui.loadScheme("TaharezLook.scheme"); 
+	m_gui.loadScheme("TaharezLook.scheme");
+	//m_gui.loadScheme("HUDDemo.scheme");
+
 	m_gui.loadScheme("Generic.scheme");
 	m_gui.setFont("DejaVuSans-10");
 	
 	CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("TaharezLookOverview.layout");
-	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(guiRoot);
-	
-	//	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	//testButton->setText("Hello GUI!");
-	//testButton->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
+	m_gui.getRoot()->addChild(guiRoot);
+	CEGUI::PushButton* aux = static_cast<CEGUI::PushButton*>(guiRoot->getChild("StaticImage")->getChild("button"));
+	aux->setText("Suavisado");
+	aux->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
+	//TaharezLook/Button/disableButton
+	//aux->activate();
+		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
+	testButton->setText("Hello GUI!");
+	testButton->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
 
 	m_gui.setMouseCursor("TaharezLook/MouseArrow");
 	m_gui.showMouseCursor();
@@ -321,11 +327,11 @@ bool Juego::mouseMoved(const OIS::MouseEvent& me) {
 	return true;
 }
 bool Juego::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
-	m_gui.clickMouse(id);
+	m_gui.downMouse(id);
 	return true;
 }
 bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
-
+	m_gui.upMouse(id);
 	return true;
 }
 Juego::~Juego()

@@ -13,7 +13,8 @@
 		void draw();
 
 		void moveMouse(int x, int y);
-		void clickMouse(OIS::MouseButtonID id);
+		void downMouse(OIS::MouseButtonID id);
+		void upMouse(OIS::MouseButtonID id);
 		void setMouseCursor(const std::string&imageFile);
 		void showMouseCursor();
 		void hideMouseCursor();
@@ -26,6 +27,7 @@
 		// Getters
 		static CEGUI::OgreRenderer* getRenderer() { return m_renderer; }
 		const CEGUI::GUIContext* getContext() { return m_context; }
+		 CEGUI::Window* getRoot() { return m_root; }
 		static CEGUI::MouseButton convertButton(OIS::MouseButtonID buttonID);
 	private:
 		static CEGUI::OgreRenderer* m_renderer;
