@@ -20,8 +20,9 @@ public:
 	std::string getRigidBody(btRigidBody * rg) { 
 		auto it = physicsAccessors.begin();
 		std::string salida = "";
-		while (it != physicsAccessors.end()) {
+		while (it != physicsAccessors.end() && salida == "") {
 			if (it->second == rg) salida = it->first;
+			it++;
 		}
 		return salida;
 	};

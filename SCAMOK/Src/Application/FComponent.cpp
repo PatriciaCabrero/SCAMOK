@@ -76,7 +76,6 @@ void FComponent::initBody() {
 			trigger = new btGhostObject();
 			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
 			trigger->setCollisionShape(shape);
-
 		}
 	}
 	else {
@@ -88,6 +87,7 @@ void FComponent::initBody() {
 	shape->calculateLocalInertia(mass, localInertia);
 	pEntidad->getPEstado()->getFisicManager()->getCollisionShapes().push_back(shape);
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
+	
 	body = new btRigidBody(RBInfo);
 
 	//Elasticidad del material
@@ -174,10 +174,15 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	}
 
 	if (tipo == tipoFisica::Trigger) {
-		if (trigger->getNumOverlappingObjects() >= 0) {
+		if (trigger->getNumOverlappingObjects() > 0) {
 			
-			pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
-			std::cout << "Trigger collision\n";
+			std::string msgStr = "";
+			Mensaje m (Tipo::Fisica, msgStr,SubTipo::Trigge);
+			std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
+			m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
+			
+			pEntidad->getPEstado()->addMsg(m);
+			//std::cout << "Trigger collision\n";
 		}
 	}
 	actualizaNodo();
