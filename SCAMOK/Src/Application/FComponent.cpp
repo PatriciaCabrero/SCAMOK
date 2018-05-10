@@ -45,6 +45,8 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 } 
 
 FComponent::~FComponent() { 
+	/*if(body != nullptr)
+		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeRigidBody(body);*/
 	delete body;
 	delete motionState;
 	delete shape;
@@ -111,25 +113,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	switch (tipo)
 	{
 	case Dinamico:
-		if (msg.getTipo() == Tipo::Fisica) {
-			if (msg.getSubTipo() == SubTipo::Dispara) {
-				//Recibimos la fuerza en el mensaje
-				Ogre::Real escala = std::stof(msg.getMsg());
-
-				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad1");
-				btVector3 start = alaia->getWorldTransform().getOrigin();
-
-				Ogre::Vector3 valores = { escala,0,escala };
-				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
-
-				valores = matriz * valores;
-
-				btVector3 vel = { valores.x ,0, valores.z };
-				btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
-
-				body->applyImpulse(velAux*10, start);
-			}
-		}
 		break;
 
 	//Este sería el caso kinematico concreto de la niña

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include "SoundManager.h"
+#include "BalaComponent.h"
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 	cont++;
 	activo = true;
@@ -118,6 +119,9 @@ bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profC
 bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
+	}
+	if (component == "BalaComponent") {
+		componentes.insert(std::make_pair("BalaComponent", new BalaComponent(this)));
 	}
 	return true;
 }

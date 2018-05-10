@@ -81,8 +81,18 @@ bool Estado::update(float delta){
 	if (mensajes.size() > 0){
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
-		for (std::pair<std::string, Entidad*> ent : entidades){
-			ent.second->Update(delta, aux);
+		if (aux.getTipo() == Tipo::Destroy) {
+			std::string nombre = aux.getMsg();
+			getFisicManager()->getDynamicsWorld()->removeRigidBody(getFisicManager()->getRigidBody(nombre));
+			Entidad* aDestruir = entidades.at(nombre);
+			entidades.erase(nombre);
+			aDestruir->destroy();
+		}
+		else
+		{
+			for (std::pair<std::string, Entidad*> ent : entidades) {
+				ent.second->Update(delta, aux);
+			}
 		}
 	}
 	else {
@@ -148,26 +158,8 @@ void Estado::keyPressed(std::string s) {
 		string auxBala = factoria->create("Greymon");
 		aux1->añadeComponenteGrafico("Greymon",auxBala);
 		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+		aux1->añadeComponenteLogico("BalaComponent");
 		entidades.insert(std::make_pair(auxBala, aux1));
-
-		Ogre::Vector3 valores = { 1,0,1 };
-		Ogre::Matrix3 matriz = getScnManager()->getSceneNode("sinbad1")->getLocalAxes();
-		valores = matriz * valores;
-		btVector3 pos1 = { valores.x ,0, valores.z };
-		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
-		/*btVector3 pos (posAux.x * 2 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX(),
-			this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY(),
-			posAux.z * 2 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());*/
-
-		string posOgro = to_string(posAux.getX() * 6 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getX()) + "/" +
-			to_string(this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getY()) + "/" +
-			to_string(posAux.getZ() * 6 + this->getFisicManager()->getRigidBody("sinbad1")->getWorldTransform().getOrigin().getZ());
-		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
-		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
-		ms.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
-		ms1.setMsgInfo(entidades.at(auxBala), entidades.at(auxBala));
-		mensajes.push(ms);
-		mensajes.push(ms1);
 	}
 	
 }

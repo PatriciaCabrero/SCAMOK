@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Application\Animation.cpp" />
+    <ClCompile Include="..\..\Src\Application\BalaComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Camara.cpp" />
     <ClCompile Include="..\..\Src\Application\Entidad.cpp" />
     <ClCompile Include="..\..\Src\Application\Estado.cpp" />
@@ -28,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Application\Animation.h" />
+    <ClInclude Include="..\..\Src\Application\BalaComponent.h" />
     <ClInclude Include="..\..\Src\Application\Camara.h" />
     <ClInclude Include="..\..\Src\Application\Componente.h" />
     <ClInclude Include="..\..\Src\Application\Entidad.h" />
