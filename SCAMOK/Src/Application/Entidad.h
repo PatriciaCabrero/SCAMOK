@@ -10,7 +10,7 @@ class Entidad{
 
 public:
 	Entidad(Estado* pEstado);
-	Entidad(Estado* pEstado, std::string prefab);
+	Entidad(Estado* pEstado, std::string prefab, std::string nombre = "");
 	~Entidad();
 	void Update(float deltaTime, Mensaje  & msg);
 	void Awake();

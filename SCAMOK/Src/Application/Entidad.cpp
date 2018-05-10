@@ -12,9 +12,11 @@ Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 	activo = true;
 	nombreNodo = " ";
 }
-Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
-
-	nombreNodo = prefab;
+Entidad::Entidad(Estado* pEstado, std::string prefab, std::string nombre) : pEstado(pEstado) {
+	if (nombre == "")
+		nombreNodo = prefab;
+	else
+		nombreNodo = nombre;
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
