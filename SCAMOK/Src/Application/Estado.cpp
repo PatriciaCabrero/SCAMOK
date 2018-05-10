@@ -4,67 +4,36 @@
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys){
 
 	//Aqui montamos el mundo físico
-	fisicaManager = new Fisic();
-	noInput = true; contInput = 0;
-	system = sys;
-	#pragma region InitOgre 
-	mWin = mWindow;
 	scnMgr = mng;
-	
-	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	scnMgr->setSkyDome(true, "Examples/CloudySky" ,5, 8);
-
-
-	scnMgr->setShadowFarDistance(200);
-
-
-	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
-	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
-
-
-	Mensaje msg (Tipo::Fisica, "0/30/0", SubTipo::Reposicionar);
-	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-	mensajes.push(msg);
-	 
-	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena");
-	aux->añadeComponenteFisico(0, 0, 0, true);
-	entidades.insert(std::make_pair("Arena", aux));
-	
-	
-	Entidad *aux2 = new Entidad(this);
-	aux2->añadeComponenteGrafico("compcube");
-	aux2->añadeComponenteFisico(0, 0, 0, false);
-	entidades.insert(std::make_pair("MetalBox", aux2));
-	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar);
-	ms1.setMsgInfo(entidades.at("MetalBox"), entidades.at("MetalBox"));
-	mensajes.push(ms1);
-	
-	Entidad* aux1 = new Entidad(this);
-	aux1->añadeComponenteGrafico("stone");
-	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-	entidades.insert(std::make_pair("Stone", aux1));
-	Mensaje ms (Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
-	ms.setMsgInfo(entidades.at("Stone"), entidades.at("Stone"));
-	mensajes.push(ms); 
-
-	
-	Entidad* aux3 = new Entidad(this); aux3->añadeComponenteSM("SoundManager", system);
-	entidades.insert(std::make_pair("SoundManager", aux3));
-	Mensaje playM(Tipo::Audio, "Play/wii.mp3", SubTipo::Musica);
-	mensajes.push(playM);
-
-
-	// Luz por defecto
-	scnMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
-
-	light = scnMgr->createLight("MainLight");
-	light->setPosition(20, 50, 50);
-
-	#pragma endregion InitOgre
-
+	mWin = mWindow;
+	system = sys;
 }
 
+bool Estado::initCEGUI() {
+	m_gui.init("../Media/GUI");
+	m_gui.loadScheme("TaharezLook.scheme");
+	m_gui.loadScheme("GameMenu.scheme");
+	m_gui.loadScheme("HUDDemo.scheme");
+	m_gui.loadScheme("VanillaSkin.scheme");
 
+	m_gui.loadScheme("AlfiskoSkin.scheme");
+	m_gui.loadScheme("Generic.scheme");
+	m_gui.loadScheme("OgreTray.scheme");
+	m_gui.loadScheme("SampleBrowser.scheme");
+	m_gui.loadScheme("VanillaCommonDialogs.scheme");
+	m_gui.loadScheme("WindowsLook.scheme");
+
+
+
+
+	m_gui.loadScheme("Generic.scheme");
+	m_gui.setFont("DejaVuSans-10");
+
+
+	//m_gui getRootWindow()->addChild(BloodScreen);
+
+	return true;
+}
 Estado::~Estado(){
 	delete fisicaManager;
 	for (std::pair<std::string,Entidad*> n : entidades) {
@@ -74,28 +43,7 @@ Estado::~Estado(){
 
 bool Estado::update(float delta){
 
-	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
-	if (mensajes.size() > 0){
-		Mensaje aux = mensajes.top();
-		mensajes.pop();
-		for (std::pair<std::string, Entidad*> ent : entidades){
-			ent.second->Update(delta, aux);
-		}
-	}
-	else {
-		for (std::pair<std::string, Entidad*> ent : entidades) 
-			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
-		if (contInput == 30) {
-			entidades.at("Ogro")->setAnim("IdleTop", true, true, true);
-			entidades.at("Ogro")->setAnim("IdleBase", true, true, true);
-			contInput = 0;
-		}
-
-	}
-	contInput++;
 	
-	swapMsgBufer();
-
 	return true;
 }
 
@@ -106,40 +54,15 @@ void Estado::joystickMoved(float x, float y, int js) {
 
 	
 	if (js == 0) {
-		Mensaje msgI (Tipo::Input, s, SubTipo::Mover);
-		mensajes.push(msgI);
-		Mensaje msgR(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
-		msgR.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-		mensajes.push(msgR);
-		entidades.at("Ogro")->setAnim("RunTop", true);
-		entidades.at("Ogro")->setAnim("RunBase", true);
-		contInput = 0;
+		
 		
 	}
 	else {
-		Mensaje msgI(Tipo::Input, s, SubTipo::OrientaCamara);
-		msgI.setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
-		mensajes.push(msgI);
+		
 	}
 
 }
 void Estado::keyPressed(std::string s) {
-	if (s == "0" || s=="salto") {
-		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
-		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
-		mensajes.push(msg);
-		entidades.at("Ogro")->setAnim("JumpLoop");
-	}
-	else if (s == "1") {
-		entidades.at("Ogro")->setAnim("SliceHorizontal");
-
-	}
-	else if (s == "2") {
-		entidades.at("Ogro")->setAnim("Dance");
-	}
-	else if (s == "3") {
-		entidades.at("Ogro")->setAnim("SliceVertical");
-	}
 	
 }
 void Estado::keyReleased(std::string s) {
@@ -151,4 +74,17 @@ Entidad* Estado::getEntidad(std::string s) {
 	if (flag != entidades.end()) return entidades.at(s);
 	
 	return nullptr;
+}
+bool Estado::mouseMoved(const OIS::MouseEvent& me) {
+	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
+	m_gui.moveMouse(me.state.X.abs, me.state.Y.abs);
+	return true;
+}
+bool Estado::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
+	m_gui.downMouse(id);
+	return true;
+}
+bool Estado::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
+	m_gui.upMouse(id);
+	return true;
 }

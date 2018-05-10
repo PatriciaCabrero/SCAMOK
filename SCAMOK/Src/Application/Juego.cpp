@@ -1,6 +1,5 @@
 #include "Juego.h"
-#include "Estado.h"
-
+#include "EstadoJuego.h"
 Juego::Juego()
 {
 
@@ -14,7 +13,7 @@ Juego::Juego()
 	
 	init();
 	initFmod();
-	initCEGUI();
+	//initCEGUI();
 }
 
 bool Juego::init(){
@@ -30,33 +29,7 @@ bool Juego::init(){
 	else return false;
 }
 
-bool Juego::initCEGUI() {
-	m_gui.init("../Media/GUI");
-	m_gui.loadScheme("TaharezLook.scheme");
-	//m_gui.loadScheme("HUDDemo.scheme");
 
-	m_gui.loadScheme("Generic.scheme");
-	m_gui.setFont("DejaVuSans-10");
-	
-	CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("TaharezLookOverview.layout");
-	m_gui.getRoot()->addChild(guiRoot);
-	CEGUI::PushButton* aux = static_cast<CEGUI::PushButton*>(guiRoot->getChild("StaticImage")->getChild("button"));
-	aux->setText("Suavisado");
-	aux->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
-	//TaharezLook/Button/disableButton
-	//aux->activate();
-		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	testButton->setText("Hello GUI!");
-	testButton->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
-
-	m_gui.setMouseCursor("TaharezLook/MouseArrow");
-	m_gui.showMouseCursor();
-
-
-	//m_gui getRootWindow()->addChild(BloodScreen);
-
-	return true;
-}
 bool Juego::initOis(){
 	
 	//mInputMgr = new InputManager(*mInputMgr);
@@ -162,7 +135,7 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	Estado * pEstado = new Estado(scnMgr, mWindow, system);
+	EstadoJuego * pEstado = new EstadoJuego(scnMgr, mWindow, system);
 	pEstados.push(pEstado);
 	
 	int cont = 0;
@@ -174,7 +147,7 @@ bool Juego::run(){
 	{
 		
 		mInputMgr->capture();		
-		CEGUI::System::getSingleton().injectTimePulse(0.016f);
+		
 
 		if (cont == 4) {
 			handleInput();
@@ -190,7 +163,7 @@ bool Juego::run(){
 		//comprobar si la ventana está abierta
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
-		m_gui.draw();
+		
 	}
 	delete pEstado;
 	return true;
@@ -323,15 +296,15 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 //MOUSE
 bool Juego::mouseMoved(const OIS::MouseEvent& me) {
 	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
-	m_gui.moveMouse(me.state.X.abs, me.state.Y.abs);
+	pEstados.top()->mouseMoved(me);
 	return true;
 }
 bool Juego::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
-	m_gui.downMouse(id);
+	pEstados.top()->mousePressed(me,id);
 	return true;
 }
 bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
-	m_gui.upMouse(id);
+	pEstados.top()->mouseReleased(me, id);
 	return true;
 }
 Juego::~Juego()

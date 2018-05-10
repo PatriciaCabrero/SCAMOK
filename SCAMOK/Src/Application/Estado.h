@@ -15,7 +15,7 @@
 #include <OgreException.h>
 #include "Fisic.h"
 #include <fmod.hpp>
-
+#include "GUI.h"
 
 class Estado
 {
@@ -27,13 +27,16 @@ public:
 	Ogre::SceneManager* getScnManager(){ return scnMgr; };
 	Fisic* getFisicManager() { return fisicaManager; };
 
-	bool update(float delta);
-	void keyPressed(std::string key);
-	void keyReleased(std::string key);
-	void joystickMoved(float x, float y, int js = 0);
+	virtual bool update(float delta);
+	virtual void keyPressed(std::string key);
+	virtual void keyReleased(std::string key);
+	virtual void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
+	virtual bool initCEGUI();
 
-
+	virtual bool mouseMoved(const OIS::MouseEvent& me);
+	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg, bool needNow = false){ 
 		if(!needNow)bufer.push(msg); 
@@ -52,13 +55,14 @@ public:
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
 
-private:
+protected:
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::Light* light;
 	Ogre::RenderWindow* mWin;
+	GUI m_gui;
 	
 	std::priority_queue < Mensaje > mensajes, bufer;
 	Fisic* fisicaManager;
