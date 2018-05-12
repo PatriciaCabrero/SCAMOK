@@ -22,9 +22,9 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
 	mensajes.push(msg);
 
-	/*Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena");
+	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena");
 	aux->añadeComponenteFisico(0, 0, 0, true);
-	entidades.insert(std::make_pair("Arena", aux));*/
+	entidades.insert(std::make_pair("Arena", aux));
 
 
 	Entidad *aux2 = new Entidad(this);
@@ -64,19 +64,9 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 bool EstadoJuego::initCEGUI() {
 	Estado::initCEGUI();
 
-	/*guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("VanillaWindows.layout");
+	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
-	//CEGUI::PushButton* aux = static_cast<CEGUI::PushButton*>(guiRoot->getChild("StaticImage")->getChild("button"));
-	//aux->setText("Suavisado");
-	//aux->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
-	//TaharezLook/Button/disableButton
-	//aux->activate();
-	CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	testButton->setText("Hello GUI!");
-	//testButton->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
-
-	m_gui.setMouseCursor("TaharezLook/MouseArrow");
-	m_gui.showMouseCursor();*/
+	
 	return true;
 }
 bool EstadoJuego::update(float delta) {

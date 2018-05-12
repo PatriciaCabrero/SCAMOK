@@ -290,7 +290,7 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 	case OIS::KC_UP: key = "arr";
 		break;
 	case OIS::KC_DOWN: key = "aba";
-		break;
+		break;	
 	default:
 		break;
 	}
