@@ -64,7 +64,7 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 bool EstadoJuego::initCEGUI() {
 	Estado::initCEGUI();
 
-	CEGUI::Window *guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("VanillaWindows.layout");
+	/*guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("VanillaWindows.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 	//CEGUI::PushButton* aux = static_cast<CEGUI::PushButton*>(guiRoot->getChild("StaticImage")->getChild("button"));
 	//aux->setText("Suavisado");
@@ -76,11 +76,11 @@ bool EstadoJuego::initCEGUI() {
 	//testButton->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
 
 	m_gui.setMouseCursor("TaharezLook/MouseArrow");
-	m_gui.showMouseCursor();
+	m_gui.showMouseCursor();*/
 	return true;
 }
 bool EstadoJuego::update(float delta) {
-
+	CEGUI::System::getSingleton().injectTimePulse(0.016f);
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
 	if (mensajes.size() > 0) {
 		Mensaje aux = mensajes.top();

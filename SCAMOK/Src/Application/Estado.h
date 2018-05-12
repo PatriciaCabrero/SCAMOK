@@ -33,6 +33,10 @@ public:
 	virtual void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
 	virtual bool initCEGUI();
+	virtual void destroy() { 
+		m_gui.hideMouseCursor();
+		m_gui.getRoot()->destroyChild(guiRoot); 
+	};
 
 	virtual bool mouseMoved(const OIS::MouseEvent& me);
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
@@ -63,7 +67,8 @@ protected:
 	Ogre::Light* light;
 	Ogre::RenderWindow* mWin;
 	GUI m_gui;
-	
+	CEGUI::Window *guiRoot;
+
 	std::priority_queue < Mensaje > mensajes, bufer;
 	Fisic* fisicaManager;
 	FMOD::System* system;

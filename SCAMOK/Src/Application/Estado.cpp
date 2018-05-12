@@ -42,7 +42,7 @@ Estado::~Estado(){
 }
 
 bool Estado::update(float delta){
-
+	m_gui.draw();
 	
 	return true;
 }

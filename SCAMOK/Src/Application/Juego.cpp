@@ -1,5 +1,7 @@
 #include "Juego.h"
 #include "EstadoJuego.h"
+#include "EstadoMenu.h"
+
 Juego::Juego()
 {
 
@@ -191,14 +193,17 @@ bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
 }
 bool Juego::keyPressed(const OIS::KeyEvent& ke)
 {
-	
+	EstadoMenu * pEstado;
 	
 	std::string key = "";
 	switch (ke.key)
 	{
-	case OIS::KC_ESCAPE: exit = true;
+	case OIS::KC_ESCAPE: //exit = true;
 		break;
-	case OIS::KC_RETURN: key = "return";
+	case OIS::KC_P:if (pEstados.size() == 1) {
+		pEstado = new EstadoMenu(scnMgr, mWindow, system);
+		pEstados.push(pEstado);
+	}
 		break;
 	case OIS::KC_RIGHT: key = "der";
 		break;
@@ -273,8 +278,9 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 	std::string key = "";
 	switch (ke.key)
 	{
-	case OIS::KC_ESCAPE: exit = true;
-		break;
+	case OIS::KC_ESCAPE: if (pEstados.size() == 1) exit = true;
+						 else { pEstados.top()->destroy(); pEstados.pop(); }
+	break;
 	case OIS::KC_RETURN: key = "return";
 		break;
 	case OIS::KC_RIGHT: key = "der";
