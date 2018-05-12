@@ -1,12 +1,13 @@
 #include "Estado.h"
-#include "Juego.h"
 
-Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys){
+
+Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* game){
 
 	//Aqui montamos el mundo físico
 	scnMgr = mng;
 	mWin = mWindow;
 	system = sys;
+	game_ = game;
 }
 
 bool Estado::initCEGUI() {

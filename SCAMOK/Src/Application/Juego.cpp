@@ -201,7 +201,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 	case OIS::KC_ESCAPE: //exit = true;
 		break;
 	case OIS::KC_P:if (pEstados.size() == 1) {
-		pEstado = new EstadoMenu(scnMgr, mWindow, system);
+		pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
 		pEstados.push(pEstado);
 	}
 		break;

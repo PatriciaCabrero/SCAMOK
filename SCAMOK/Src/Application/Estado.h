@@ -17,10 +17,12 @@
 #include <fmod.hpp>
 #include "GUI.h"
 
+class Juego;
+
 class Estado
 {
 public:
-	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys);
+	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego * game = nullptr);
 	~Estado();
 
 	void addViewPort();
@@ -60,6 +62,7 @@ public:
 	Ogre::RenderWindow* getWin() { return mWin; }
 
 protected:
+
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;
@@ -73,4 +76,6 @@ protected:
 	Fisic* fisicaManager;
 	FMOD::System* system;
 	bool noInput; int  contInput;
+
+	Juego * game_;
 };

@@ -17,6 +17,11 @@ public:
 	
 	bool run();
 	std::stack<Estado*>pEstados;
+	void exitGame() { exit = true; }
+	void quitaEstado() {
+		pEstados.top()->destroy();
+		pEstados.pop();
+	}
 
 private:
 
