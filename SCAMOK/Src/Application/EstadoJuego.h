@@ -12,6 +12,8 @@ public:
 	virtual void keyReleased(std::string key);
 	virtual void joystickMoved(float x, float y, int js = 0);
 	virtual bool initCEGUI();
+	virtual void init();
+	void cargaGui();
 private:
 
 };

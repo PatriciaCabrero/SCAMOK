@@ -5,8 +5,12 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 {
 	fisicaManager = new Fisic();
 	noInput = true; contInput = 0;
+	cargaGui();
+	
+}
+void EstadoJuego::init() {
 #pragma region InitOgre 
-
+	
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	scnMgr->setSkyDome(true, "Examples/CloudySky", 5, 8);
 
@@ -57,12 +61,18 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 	light->setPosition(20, 50, 50);
 
 #pragma endregion InitOgre
-
+	destroy();
 	initCEGUI();
 }
-
-bool EstadoJuego::initCEGUI() {
+void EstadoJuego::cargaGui()
+{
 	Estado::initCEGUI();
+	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("loadScreen.layout");
+	m_gui.getRoot()->addChild(guiRoot);
+
+}
+bool EstadoJuego::initCEGUI() {
+	//Estado::initCEGUI();
 
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
@@ -71,6 +81,7 @@ bool EstadoJuego::initCEGUI() {
 }
 bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(0.016f);
+	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
 	if (mensajes.size() > 0) {
 		Mensaje aux = mensajes.top();

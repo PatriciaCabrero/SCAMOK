@@ -39,6 +39,7 @@ public:
 		m_gui.hideMouseCursor();
 		m_gui.getRoot()->destroyChild(guiRoot); 
 	};
+	virtual void init() {};
 
 	virtual bool mouseMoved(const OIS::MouseEvent& me);
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);

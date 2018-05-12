@@ -138,6 +138,7 @@ bool Juego::initFmod() {
 bool Juego::run(){
 
 	EstadoJuego * pEstado = new EstadoJuego(scnMgr, mWindow, system);
+	bool firstTime = true;
 	pEstados.push(pEstado);
 	
 	int cont = 0;
@@ -165,6 +166,10 @@ bool Juego::run(){
 		//comprobar si la ventana está abierta
 		if (mWindow->isClosed())return false;
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
+		if (firstTime) {
+			firstTime = false;
+			pEstado->init();
+		}
 		
 	}
 	delete pEstado;
