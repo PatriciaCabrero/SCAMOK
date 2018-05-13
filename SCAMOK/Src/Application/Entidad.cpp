@@ -145,5 +145,12 @@ void Entidad::Update(float deltaTime,  Mensaje & msj){
 		}
 	}
 }
+
+void Entidad::destruyeComponenteGrafico() {
+	GComponent* g = dynamic_cast<GComponent*>  (componentes.at("Grafico"));
+	if (g != nullptr)
+		g->destroy();
+}
+
 void Entidad::Awake(){ activo = true; }
 void Entidad::Sleep(){ activo = false; }

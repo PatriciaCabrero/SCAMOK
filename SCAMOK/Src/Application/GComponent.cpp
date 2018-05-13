@@ -50,11 +50,15 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 		firstMsg = true; 
 	}
 }
+
+//No sé si esto funka bien del todo, además lo llamo desde la entidad y le hago un casting guarro
+//Debería mandarlo como mensaje.
+//El juego peta al salir
 void GComponent::destroy() {
 	node->removeAndDestroyAllChildren();
 	pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
 	delete node;
-	delete ent;
+	//delete ent;
 }
 GComponent::~GComponent() {
 	//node->removeAndDestroyAllChildren();

@@ -26,6 +26,7 @@ public:
 	bool añadeComponenteSM(std::string component, void* sys);
 	void setAnim(std::string const &s, bool loop = false, bool enabled = true, bool idle = false);
 	void destroy() { delete this; };
+	void destruyeComponenteGrafico();
 	std::string getNombreNodo() { return nombreNodo; };
 	int cont = 0;
 

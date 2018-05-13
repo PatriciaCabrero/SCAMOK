@@ -85,6 +85,7 @@ bool Estado::update(float delta){
 			std::string nombre = aux.getMsg();
 			getFisicManager()->getDynamicsWorld()->removeRigidBody(getFisicManager()->getRigidBody(nombre));
 			Entidad* aDestruir = entidades.at(nombre);
+			aDestruir->destruyeComponenteGrafico();
 			entidades.erase(nombre);
 			aDestruir->destroy();
 		}
@@ -153,7 +154,7 @@ void Estado::keyPressed(std::string s) {
 	else if (s == "3") {
 		entidades.at("Ogro")->setAnim("SliceVertical");
 	}
-	else if (s == "4") {
+	else if (s == "5") {
 		Entidad* aux1 = new Entidad(this);
 		string auxBala = factoria->create("Greymon");
 		aux1->añadeComponenteGrafico("Greymon",auxBala);
