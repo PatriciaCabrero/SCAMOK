@@ -8,7 +8,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setPosition(0, 35, -100);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
-	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad1")->createChildSceneNode("NodoCamera");
+	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->createChildSceneNode("NodoCamera");
 	node->attachObject(cam);
 
 	//set viewport
@@ -42,8 +42,8 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 			std::string yS = subcad.substr(0, pos);
 			std::string zS = subcad.substr(pos + 1);
 
-			float x = std::stof(xS);
-			float z = -1* std::stof(zS);
+			float x = std::stof(xS)* deltaTime*0.1;
+			float z = deltaTime * std::stof(zS)*0.1;
 
 			node->rotate(Ogre::Quaternion(Ogre::Degree(-x*2), Ogre::Vector3::UNIT_Y));
 		}

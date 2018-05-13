@@ -34,7 +34,7 @@ public:
 	void keyReleased(std::string key);
 	void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
-
+	void destroy(std::string b) { borrar.push_back(b); }
 
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg, bool needNow = false){ 
@@ -55,6 +55,7 @@ public:
 	Ogre::RenderWindow* getWin() { return mWin; }
 
 private:
+	std::vector<std::string> borrar;
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;

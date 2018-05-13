@@ -4,8 +4,8 @@ using namespace Ogre;
 GComponent::GComponent(Entidad* pEnt, int cont, std::string name) : Componente (pEnt){	
 	std::string mesh = name + ".mesh";
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
-	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name+to_string(cont));
-	node = groupNode->createChildSceneNode(name + to_string(cont));
+	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name);
+	node = groupNode->createChildSceneNode(name );
 	node->attachObject(ent);
 	firstMsg = false;
 	nodeCh = nullptr;
@@ -56,9 +56,9 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 //El juego peta al salir
 void GComponent::destroy() {
 	pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());
-	pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
-	delete node;
-	delete ent;
+	//pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
+	//delete node;
+	//delete ent;
 }
 GComponent::~GComponent() {
 	//node->removeAndDestroyAllChildren();

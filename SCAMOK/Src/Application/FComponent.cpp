@@ -5,16 +5,17 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	tipo = type;
 	_suelo = suelo;
 	
+	trigger = nullptr;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
 
 		//Muestra la caja en Ogre
 		//pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
-		pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_update(true, true);
+		pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->_update(true, true);
 
 		//Le pone al cuerpo coordenadas, orientación y volumen (sacado del componente gráfico)
-		Ogre::Vector3 posN = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+nombreNodo)->getPosition();
-		Ogre::AxisAlignedBox bbox = pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->_getWorldAABB();
+		Ogre::Vector3 posN = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo())->getPosition();
+		Ogre::AxisAlignedBox bbox = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->_getWorldAABB();
 		Ogre::Vector3  v = bbox.getSize();
 		altoCaja = v.y; 
 		profCaja = v.z;
@@ -23,15 +24,20 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
 		
 		
-		Ogre::Quaternion quat = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + nombreNodo)->getOrientation();
+		Ogre::Quaternion quat = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + pEntidad->getNombreNodo())->getOrientation();
 		pTransform.setRotation(btQuaternion(quat.x, quat.y, quat.z, quat.w));//Tener en cuenta que en ogre el primer valor es w, mientras que en bullet va último.
 		initBody();
 
 		//Vincula el nodo gráfico al físico
-		body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ nombreNodo));
+		if (trigger)
+			trigger->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + pEntidad->getNombreNodo()));
+		else
+			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo()));
 
 		//Para poder acceder desde Fisic a los rigidbodies
-		pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
+		if (tipo != tipoFisica::Trigger)
+			pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
+		
 	}
 
 	//Si no está vinculado a un componente gráfico se crea por defecto en el 0,0,0 se puede reposicionar con un mensaje
@@ -50,11 +56,12 @@ FComponent::~FComponent() {
 	delete body;
 	delete motionState;
 	delete shape;
+	delete trigger;
 } 
 
 void FComponent::initBody() {
 	//Aquí ajustamos la masa
-	if (tipo == tipoFisica::Estatico)
+	if (tipo == tipoFisica::Estatico || tipo == tipoFisica::Trigger)
 		mass = 0;
 
 	//La inercia inicial siempre es 0
@@ -64,7 +71,14 @@ void FComponent::initBody() {
 	motionState = new btDefaultMotionState(pTransform);
 
 	if (!_suelo) {
-		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
+		if (tipo != tipoFisica::Trigger)
+			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
+		else {
+
+			trigger = new btGhostObject();
+			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
+			trigger->setCollisionShape(shape);
+		}
 	}
 	else {
 		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
@@ -75,17 +89,20 @@ void FComponent::initBody() {
 	shape->calculateLocalInertia(mass, localInertia);
 	pEntidad->getPEstado()->getFisicManager()->getCollisionShapes().push_back(shape);
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
+	
 	body = new btRigidBody(RBInfo);
 
 	//Elasticidad del material
 	body->setRestitution(0);
 	
 	//Para que sinbad no rote
-	if (tipo == tipoFisica::Kinematico) {
+	if (tipo == tipoFisica::Kinematico || tipo == tipoFisica::Trigger) {
 		body->setAngularFactor(btVector3(0, 1, 0));
 	}
 
 	pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addRigidBody(body);
+	if (trigger)
+		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->addCollisionObject(trigger);
 
 }
 
@@ -128,8 +145,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				pos = subcad.find("/");
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
-				float xF= std::stof(xS);
-				float zF = std::stof(zS);
+				float xF= std::stof(xS) * deltaTime*0.1;
+				float zF = std::stof(zS) * deltaTime*0.1;
 				Ogre::Vector3 valores = { xF,0,zF };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
@@ -156,6 +173,20 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			}
 		}
 		break;
+	}
+
+	if (tipo == tipoFisica::Trigger) {
+		if (trigger->getNumOverlappingObjects() > 0) {
+			
+			std::string msgStr = "";
+			Mensaje m (Tipo::Fisica, msgStr,SubTipo::Trigge);
+			std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
+			m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
+			
+			pEntidad->getPEstado()->addMsg(m);
+			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
+		}
 	}
 	actualizaNodo();
 

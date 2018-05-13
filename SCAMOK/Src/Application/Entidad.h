@@ -10,7 +10,7 @@ class Entidad{
 
 public:
 	Entidad(Estado* pEstado);
-	Entidad(Estado* pEstado, std::string prefab);
+	Entidad(Estado* pEstado, std::string prefab, std::string nombre = "");
 	~Entidad();
 	void Update(float deltaTime, Mensaje  & msg);
 	void Awake();
@@ -25,10 +25,11 @@ public:
 	bool añadeComponenteLogico(std::string component);
 	bool añadeComponenteSM(std::string component, void* sys);
 	void setAnim(std::string const &s, bool loop = false, bool enabled = true, bool idle = false);
-	void destroy() { delete this; };
 	void destruyeComponenteGrafico();
 	std::string getNombreNodo() { return nombreNodo; };
+	void setNombreNodo(std::string s) { nombreNodo = s; };
 	int cont = 0;
+
 
 private:
 	std::map<std::string, Componente*> componentes;
