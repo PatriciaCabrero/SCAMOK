@@ -76,6 +76,13 @@ Estado::~Estado(){
 bool Estado::update(float delta){
 
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
+
+	for (size_t i = 0; i < borrar.size(); i++)
+	{
+		entidades.erase(borrar[i]);
+	}
+	borrar.clear();
+
 	if (mensajes.size() > 0){
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
@@ -117,7 +124,7 @@ void Estado::joystickMoved(float x, float y, int js) {
 		contInput = 0;
 		
 	}
-	else {
+	if (js != 0) {
 		Mensaje msgI(Tipo::Input, s, SubTipo::OrientaCamara);
 		msgI.setMsgInfo(entidades.at("camera"), entidades.at("camera"));
 		mensajes.push(msgI);

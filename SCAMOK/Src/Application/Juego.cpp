@@ -154,7 +154,7 @@ bool Juego::run(){
 	bool rend = false;
 	
 
-	int msUpdate = 16;
+	int msUpdate = 8;
 	int lastUpdate = 0;
 	
 
@@ -168,7 +168,6 @@ bool Juego::run(){
 				cont = 0;
 			}
 			else cont++;
-
 			pEstados.top()->update(GetTickCount() - lastUpdate);
 			// render ogre
 			Ogre::WindowEventUtilities::messagePump();
@@ -176,8 +175,8 @@ bool Juego::run(){
 
 			//comprobar si la ventana está abierta
 			if (mWindow->isClosed())return false;
-			if (cont % 2 != 0 && !root->renderOneFrame())return false;
 		}
+		if (cont % 2 != 0 && !root->renderOneFrame())return false;
 		m_gui.draw();
 	}
 	delete pEstado;

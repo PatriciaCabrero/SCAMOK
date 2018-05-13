@@ -18,7 +18,7 @@ void Animation::Update(float deltaTime, Mensaje const & msj) {
 	GComponent::Update(deltaTime, msj);
 	std::vector<std::string> borrar;
 	for (std::pair<std::string, Ogre::AnimationState*> pS : animStates) {
-		pS.second->addTime(0.005f);
+		pS.second->addTime(deltaTime*0.001f);
 		if (pS.second->hasEnded() && !pS.second->getLoop()) {
 			borrar.push_back(pS.first);
 			pS.second->setEnabled(false);

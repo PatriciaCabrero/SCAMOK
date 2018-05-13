@@ -24,6 +24,7 @@ public:
 	bool añadeComponenteLogico(std::string component);
 	bool añadeComponenteSM(std::string component, void* sys);
 	void setAnim(std::string const &s, bool loop = false, bool enabled = true, bool idle = false);
+	std::string getNombre() { return nombreNodo; }
 
 private:
 	std::map<std::string, Componente*> componentes;

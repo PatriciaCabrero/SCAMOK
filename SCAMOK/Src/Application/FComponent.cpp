@@ -143,8 +143,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				pos = subcad.find("/");
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
-				float xF= std::stof(xS);
-				float zF = std::stof(zS);
+				float xF= std::stof(xS) * deltaTime*0.1;
+				float zF = std::stof(zS) * deltaTime*0.1;
 				Ogre::Vector3 valores = { xF,0,zF };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
@@ -182,7 +182,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
 			
 			pEntidad->getPEstado()->addMsg(m);
-			//std::cout << "Trigger collision\n";
+			pEntidad->getPEstado()->destroy(pEntidad->getNombre());
+			pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombre());//->getSceneNode("GNode" + nombreNodo)
 		}
 	}
 	actualizaNodo();
