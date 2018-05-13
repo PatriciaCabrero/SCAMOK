@@ -55,10 +55,10 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 //Debería mandarlo como mensaje.
 //El juego peta al salir
 void GComponent::destroy() {
-	node->removeAndDestroyAllChildren();
+	pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());
 	pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
 	delete node;
-	//delete ent;
+	delete ent;
 }
 GComponent::~GComponent() {
 	//node->removeAndDestroyAllChildren();
