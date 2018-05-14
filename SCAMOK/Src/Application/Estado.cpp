@@ -8,6 +8,7 @@ Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::Syst
 	mWin = mWindow;
 	system = sys;
 	game_ = game;
+	fisicaManager = new Fisic();
 }
 
 bool Estado::initCEGUI() {

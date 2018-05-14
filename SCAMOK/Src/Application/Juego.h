@@ -22,7 +22,7 @@ public:
 		pEstados.top()->destroy();
 		pEstados.pop();
 	}
-
+	void cambiaEstado(Estado* state, bool sobrescribe = false);
 private:
 
 	bool init();
@@ -44,8 +44,6 @@ private:
 
 	//Ois-------------------
 	InputManager * mInputMgr;
-
-	
 	
 
 	//CEGUI----------------
@@ -75,5 +73,6 @@ private:
 
 	int contJoystick;
 	bool exit = false;
+	bool firstTime;
 };
 

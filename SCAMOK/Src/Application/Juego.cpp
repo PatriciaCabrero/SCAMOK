@@ -18,6 +18,19 @@ Juego::Juego()
 	//initCEGUI();
 }
 
+void Juego::cambiaEstado(Estado * state, bool sobrescribe)
+{
+	if (sobrescribe) {
+		
+		root->renderOneFrame();
+		firstTime = true;
+		quitaEstado();
+	}
+	
+	pEstados.push(state);
+	
+}
+
 bool Juego::init(){
 	if (initOgre()){
 		if (initOis())
@@ -137,8 +150,8 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	EstadoJuego * pEstado = new EstadoJuego(scnMgr, mWindow, system);
-	bool firstTime = true;
+	EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+	firstTime = true;
 	pEstados.push(pEstado);
 	
 	int cont = 0;
@@ -168,7 +181,7 @@ bool Juego::run(){
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 		if (firstTime) {
 			firstTime = false;
-			pEstado->init();
+				pEstados.top()->init();
 		}
 		
 	}
@@ -206,7 +219,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 	case OIS::KC_ESCAPE: //exit = true;
 		break;
 	case OIS::KC_P:if (pEstados.size() == 1) {
-		pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+		pEstado = new EstadoMenu(scnMgr, mWindow, system, this,"pause");
 		pEstados.push(pEstado);
 	}
 		break;

@@ -3,6 +3,7 @@
 	<Imageset filename="TaharezLook.imageset" />
 	<Imageset filename="HUD.imageset" />
 	<Imageset filename="HUD2.imageset" />
+	<Imageset filename="menuPrincipal.imageset" />
 	<Imageset filename="Loading.imageset" />
 	<Font filename="DejaVuSans-12.font" />
 	<LookNFeel filename="TaharezLook.looknfeel" />

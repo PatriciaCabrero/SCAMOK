@@ -3,7 +3,7 @@
 
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
-	fisicaManager = new Fisic();
+	
 	noInput = true; contInput = 0;
 	cargaGui();
 	
