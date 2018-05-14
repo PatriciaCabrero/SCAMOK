@@ -249,6 +249,9 @@ void SoundManager::Update(float deltaTime, Mensaje const & msj) {
 			if (accion == "Play") {
 				reproduceAmbM(cancion, 0.0, true);
 			}
+			else if (accion == "Stop") {
+				paraAmb(0, true);
+			}
 		}
 		if (msg.getSubTipo() == SubTipo::Effect) {
 			int pos = msg.getMsg().find("/");

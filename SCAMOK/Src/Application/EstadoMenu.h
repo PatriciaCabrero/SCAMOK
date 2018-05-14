@@ -14,6 +14,7 @@ public:
 	void level1();
 	void salir();
 	void creditos();
+	virtual bool update(float delta);
 
 private:
 		std::string type_;

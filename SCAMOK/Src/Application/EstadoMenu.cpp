@@ -49,6 +49,10 @@ void EstadoMenu::level1()
 {
 	//destroy();
 	//game_->quitaEstado();
+	Mensaje playM(Tipo::Audio, "Stop/wii.mp3", SubTipo::Musica);
+	mensajes.push(playM);
+	update(0.17);
+
 	EstadoJuego* estado = new EstadoJuego(scnMgr, mWin, system);
 	game_->cambiaEstado(estado, true);
 }
@@ -63,6 +67,18 @@ void EstadoMenu::creditos()
 {
 	EstadoMenu* estado = new EstadoMenu(scnMgr, mWin, system, game_, "creditos");
 	game_->cambiaEstado(estado);
+}
+
+bool EstadoMenu::update(float delta)
+{
+	if (mensajes.size() > 0) {
+		Mensaje aux = mensajes.top();
+		mensajes.pop();
+		for (std::pair<std::string, Entidad*> ent : entidades) {
+			ent.second->Update(delta, aux);
+		}
+	}
+	return true;
 }
 
 void EstadoMenu::initMenuPause()
@@ -96,6 +112,11 @@ void EstadoMenu::initOpciones()
 
 void EstadoMenu::initPpal()
 {
+	Entidad* aux3 = new Entidad(this); aux3->añadeComponenteSM("SoundManager", system);
+	entidades.insert(std::make_pair("SoundManager", aux3));
+	Mensaje playM(Tipo::Audio, "Play/ppal.mp3", SubTipo::Musica);
+	mensajes.push(playM);
+
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("menuPrincipal.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
