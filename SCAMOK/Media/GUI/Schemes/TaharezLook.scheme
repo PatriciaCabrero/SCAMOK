@@ -5,6 +5,7 @@
 	<Imageset filename="HUD2.imageset" />
 	<Imageset filename="menuPrincipal.imageset" />
 	<Imageset filename="Loading.imageset" />
+	<Imageset filename="creditos.imageset" />
 	<Font filename="DejaVuSans-12.font" />
 	<LookNFeel filename="TaharezLook.looknfeel" />
 	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />

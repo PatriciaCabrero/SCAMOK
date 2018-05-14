@@ -40,7 +40,7 @@ void EstadoMenu::opciones()
 	
 }
 
-void EstadoMenu::jugar()
+void EstadoMenu::estadoAnt()
 {
 	game_->quitaEstado();
 }
@@ -74,7 +74,7 @@ void EstadoMenu::initMenuPause()
 	opciones->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::opciones, this));
 
 	CEGUI::PushButton* jugar = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
-	jugar->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::jugar, this));
+	jugar->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
 
 	CEGUI::PushButton* salir = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
 	salir->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));
@@ -82,6 +82,12 @@ void EstadoMenu::initMenuPause()
 
 void EstadoMenu::initCreditos()
 {
+	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("creditos.layout");
+	m_gui.getRoot()->addChild(guiRoot);
+
+	CEGUI::PushButton* volver = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Volver"));
+	volver->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
+
 }
 
 void EstadoMenu::initOpciones()

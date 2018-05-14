@@ -10,10 +10,11 @@ public:
 	virtual bool initCEGUI();
 	
 	void opciones();
-	void jugar();
+	void estadoAnt();
 	void level1();
 	void salir();
 	void creditos();
+
 private:
 		std::string type_;
 		void initMenuPause();

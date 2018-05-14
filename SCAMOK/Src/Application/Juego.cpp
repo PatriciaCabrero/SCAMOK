@@ -296,8 +296,8 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 	std::string key = "";
 	switch (ke.key)
 	{
-	case OIS::KC_ESCAPE: if (pEstados.size() == 1) exit = true;
-						 else { pEstados.top()->destroy(); pEstados.pop(); }
+	case OIS::KC_ESCAPE:// if (pEstados.size() == 1) exit = true;
+						// else { pEstados.top()->destroy(); pEstados.pop(); }
 	break;
 	case OIS::KC_RETURN: key = "return";
 		break;

@@ -6,7 +6,7 @@
         <Property name="Image" value="mPpal/bg" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/ImageButton" name="Creditos" >
-            <Property name="Area" value="{{0,806},{0,538},{0,1014},{0,710}}" />
+            <Property name="Area" value="{{0,811},{0,524},{0,1019},{0,715}}" />
             <Property name="HoverImage" value="mPpal/logoB2" />
             <Property name="NormalImage" value="mPpal/logoB1" />
             <Property name="PushedImage" value="mPpal/logoB1" />
@@ -19,7 +19,7 @@
             <Property name="NormalImage" value="mPpal/button1" />
             <Property name="PushedImage" value="mPpal/button1" />
             <Window type="TaharezLook/StaticText" name="StaticText" >
-                <Property name="Area" value="{{0,46},{0,35},{0,120},{0,59}}" />
+                <Property name="Area" value="{{0,43},{0,35},{0,125},{0,59}}" />
                 <Property name="Font" value="Jura-18" />
                 <Property name="Text" value="JUGAR" />
                 <Property name="MaxSize" value="{{10,0},{10,0}}" />
@@ -28,7 +28,7 @@
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="ClippedByParent" value="False" />
                 <Property name="BackgroundEnabled" value="False" />
-                <Property name="HorzScrollPageSize" value="74" />
+                <Property name="HorzScrollPageSize" value="82" />
                 <Property name="RiseOnClickEnabled" value="False" />
                 <Property name="VertScrollPageSize" value="24" />
                 <Property name="HorzScrollDocumentSize" value="72" />
