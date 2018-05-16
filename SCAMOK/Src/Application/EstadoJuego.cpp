@@ -1,6 +1,7 @@
 #pragma once
 #include "EstadoJuego.h"
 #include "FactoryBalas.h"
+#include <iostream>
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
 	
@@ -74,18 +75,28 @@ void EstadoJuego::cargaGui()
 	m_gui.getRoot()->addChild(guiRoot);
 
 }
+void EstadoJuego::restaPower()
+{
+	CEGUI::UDim dim = power->getWidth();
+	dim -= {0, 25};
+	power->setWidth(dim);
+}
 bool EstadoJuego::initCEGUI() {
 	//Estado::initCEGUI();
 
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
+
+	life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
+	power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
+	maxPower = power->getWidth().d_offset;
 	
 	return true;
 }
 bool EstadoJuego::update(float delta) {
-	CEGUI::System::getSingleton().injectTimePulse(1.0f/delta);
+	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
-	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f /delta);
+	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
 	for (size_t i = 0; i < borrar.size(); i++)
 	{
 		entidades.at(borrar[i])->destruyeComponenteGrafico();
@@ -114,6 +125,13 @@ bool EstadoJuego::update(float delta) {
 	m_gui.draw();
 	swapMsgBufer();
 
+	if (power != nullptr) {
+		CEGUI::UDim dim = power->getWidth();
+		if (dim.d_offset < maxPower) {
+			dim += {0, 0.01f};
+			power->setWidth(dim);
+		}
+	}
 	return true;
 }
 
@@ -160,13 +178,17 @@ void EstadoJuego::keyPressed(std::string s) {
 		entidades.at("sinbad")->setAnim("SliceVertical");
 	}
 	else if (s == "5") {
-		Entidad* aux1 = new Entidad(this);
-		string auxBala = factoria->create("Greymon");
-		aux1->setNombreNodo(auxBala);
-		aux1->añadeComponenteGrafico("Greymon", auxBala);
-		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-		aux1->añadeComponenteLogico("BalaComponent");
-		entidades.insert(std::make_pair(auxBala, aux1));
+		if (power->getWidth().d_offset >= 24) {
+			Entidad* aux1 = new Entidad(this);
+
+			string auxBala = factoria->create("Greymon");
+			aux1->setNombreNodo(auxBala);
+			aux1->añadeComponenteGrafico("Greymon", auxBala);
+			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+			aux1->añadeComponenteLogico("BalaComponent");
+			entidades.insert(std::make_pair(auxBala, aux1));
+			restaPower();
+		}
 	}
 
 }

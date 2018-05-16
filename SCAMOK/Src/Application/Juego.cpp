@@ -151,6 +151,7 @@ bool Juego::initFmod() {
 bool Juego::run(){
 
 	EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+	//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system);
 	firstTime = true;
 	pEstados.push(pEstado);
 	
