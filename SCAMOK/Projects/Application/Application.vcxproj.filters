@@ -51,6 +51,16 @@
     <ClCompile Include="..\..\Src\Application\SoundManager.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+
+    <ClCompile Include="..\..\Src\Application\Factory.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Application\FactoryBalas.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Application\BalaComponent.cpp">
+ <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\Application\GUI.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -100,6 +110,16 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\SoundManager.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+
+    <ClInclude Include="..\..\Src\Application\Factory.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Application\FactoryBalas.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Application\BalaComponent.h">
+<Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\GUI.h">
       <Filter>Archivos de encabezado</Filter>

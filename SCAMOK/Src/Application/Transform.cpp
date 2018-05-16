@@ -5,7 +5,7 @@
 Transform::Transform(Entidad * pEnt, int x, int y, int z) : Componente(pEnt)
 {
 	this->x = x; this->y = y; this->z = z;
-	camera = pEntidad->getPEstado()->getEntidad("MainCamera");
+	camera = pEntidad->getPEstado()->getEntidad("camera");
 	Awake();
 }
 Transform::~Transform()

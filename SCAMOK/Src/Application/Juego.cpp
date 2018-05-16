@@ -159,31 +159,42 @@ bool Juego::run(){
 	contJoystick = 0;
 	bool rend = false;
 	
+
+	int msUpdate = 8;
+	int lastUpdate = 0;
+	
+
 	while (!exit)
 	{
-		
-		mInputMgr->capture();		
-		
 
-		if (cont == 4) {
-			handleInput();
-			cont = 0;
-		}
-		else cont++;
-		
-		pEstados.top()->update(12.0f);
-		// render ogre
-		Ogre::WindowEventUtilities::messagePump();
-		
+	//	if (GetTickCount() - lastUpdate >= msUpdate) {
+			mInputMgr->capture();
 
-		//comprobar si la ventana está abierta
-		if (mWindow->isClosed())return false;
+
+			if (cont == 4) {
+				handleInput();
+				cont = 0;
+			}
+			else cont++;
+			//std::cout << GetTickCount() - lastUpdate << std::endl;
+			//pEstados.top()->update(GetTickCount() - lastUpdate);
+			// render ogre
+			pEstados.top()->update(12.0f);
+			Ogre::WindowEventUtilities::messagePump();
+			lastUpdate = GetTickCount();
+
+			//comprobar si la ventana está abierta
+			if (mWindow->isClosed())return false;
+		//}
+	
+		
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 		if (firstTime) {
 			firstTime = false;
 				pEstados.top()->init();
 		}
 		
+
 	}
 	delete pEstado;
 	return true;
@@ -194,7 +205,6 @@ bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
 }
 bool Juego::exitGame(const CEGUI::EventArgs &e)
 {
-	std::cout << "kek\n";
 	exit = true;
 	return true;
 }

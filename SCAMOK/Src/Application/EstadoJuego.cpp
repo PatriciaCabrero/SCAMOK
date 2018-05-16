@@ -1,6 +1,6 @@
 #pragma once
 #include "EstadoJuego.h"
-
+#include "FactoryBalas.h"
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
 	
@@ -10,7 +10,7 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 }
 void EstadoJuego::init() {
 #pragma region InitOgre 
-	
+	factoria = new FactoryBalas();
 	scnMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	scnMgr->setSkyDome(true, "Examples/CloudySky", 5, 8);
 
@@ -18,21 +18,21 @@ void EstadoJuego::init() {
 	scnMgr->setShadowFarDistance(200);
 
 
-	entidades.insert(std::make_pair("Ogro", new Entidad(this, "sinbad")));
-	entidades.insert(std::make_pair("MainCamera", new Entidad(this, "camera")));
+	entidades.insert(std::make_pair("sinbad", new Entidad(this, "sinbad")));
+	entidades.insert(std::make_pair("camera", new Entidad(this, "camera")));
 
 
 	Mensaje msg(Tipo::Fisica, "0/30/0", SubTipo::Reposicionar);
-	msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+	msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
 	mensajes.push(msg);
 
-	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena");
+	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena","arena");
 	aux->añadeComponenteFisico(0, 0, 0, true);
-	entidades.insert(std::make_pair("Arena", aux));
+	entidades.insert(std::make_pair("arena", aux));
 
 
 	Entidad *aux2 = new Entidad(this);
-	aux2->añadeComponenteGrafico("compcube");
+	aux2->añadeComponenteGrafico("compcube","compcube");
 	aux2->añadeComponenteFisico(0, 0, 0, false);
 	entidades.insert(std::make_pair("MetalBox", aux2));
 	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar);
@@ -40,11 +40,11 @@ void EstadoJuego::init() {
 	mensajes.push(ms1);
 
 	Entidad* aux1 = new Entidad(this);
-	aux1->añadeComponenteGrafico("stone");
+	aux1->añadeComponenteGrafico("stone","stone");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-	entidades.insert(std::make_pair("Stone", aux1));
+	entidades.insert(std::make_pair("stone", aux1));
 	Mensaje ms(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
-	ms.setMsgInfo(entidades.at("Stone"), entidades.at("Stone"));
+	ms.setMsgInfo(entidades.at("stone"), entidades.at("stone"));
 	mensajes.push(ms);
 
 
@@ -59,6 +59,9 @@ void EstadoJuego::init() {
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
+
+
+
 
 #pragma endregion InitOgre
 	destroy();
@@ -80,9 +83,16 @@ bool EstadoJuego::initCEGUI() {
 	return true;
 }
 bool EstadoJuego::update(float delta) {
-	CEGUI::System::getSingleton().injectTimePulse(0.016f);
+	CEGUI::System::getSingleton().injectTimePulse(1.0f/delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
-	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / 60.0f);
+	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f /delta);
+	for (size_t i = 0; i < borrar.size(); i++)
+	{
+		entidades.at(borrar[i])->destruyeComponenteGrafico();
+		entidades.erase(borrar[i]);
+	}
+	borrar.clear();
+
 	if (mensajes.size() > 0) {
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
@@ -94,8 +104,8 @@ bool EstadoJuego::update(float delta) {
 		for (std::pair<std::string, Entidad*> ent : entidades)
 			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
 		if (contInput == 30) {
-			entidades.at("Ogro")->setAnim("IdleTop", true, true, true);
-			entidades.at("Ogro")->setAnim("IdleBase", true, true, true);
+			entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
+			entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
 			contInput = 0;
 		}
 
@@ -117,16 +127,16 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 		Mensaje msgI(Tipo::Input, s, SubTipo::Mover);
 		mensajes.push(msgI);
 		Mensaje msgR(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
-		msgR.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		msgR.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
 		mensajes.push(msgR);
-		entidades.at("Ogro")->setAnim("RunTop", true);
-		entidades.at("Ogro")->setAnim("RunBase", true);
+		entidades.at("sinbad")->setAnim("RunTop", true);
+		entidades.at("sinbad")->setAnim("RunBase", true);
 		contInput = 0;
 
 	}
 	else {
 		Mensaje msgI(Tipo::Input, s, SubTipo::OrientaCamara);
-		msgI.setMsgInfo(entidades.at("MainCamera"), entidades.at("MainCamera"));
+		msgI.setMsgInfo(entidades.at("camera"), entidades.at("camera"));
 		mensajes.push(msgI);
 	}
 
@@ -135,19 +145,28 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 void EstadoJuego::keyPressed(std::string s) {
 	if (s == "0" || s == "salto") {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
-		msg.setMsgInfo(entidades.at("Ogro"), entidades.at("Ogro"));
+		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
 		mensajes.push(msg);
-		entidades.at("Ogro")->setAnim("JumpLoop");
+		entidades.at("sinbad")->setAnim("JumpLoop");
 	}
 	else if (s == "1") {
-		entidades.at("Ogro")->setAnim("SliceHorizontal");
+		entidades.at("sinbad")->setAnim("SliceHorizontal");
 
 	}
 	else if (s == "2") {
-		entidades.at("Ogro")->setAnim("Dance");
+		entidades.at("sinbad")->setAnim("Dance");
 	}
 	else if (s == "3") {
-		entidades.at("Ogro")->setAnim("SliceVertical");
+		entidades.at("sinbad")->setAnim("SliceVertical");
+	}
+	else if (s == "5") {
+		Entidad* aux1 = new Entidad(this);
+		string auxBala = factoria->create("Greymon");
+		aux1->setNombreNodo(auxBala);
+		aux1->añadeComponenteGrafico("Greymon", auxBala);
+		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+		aux1->añadeComponenteLogico("BalaComponent");
+		entidades.insert(std::make_pair(auxBala, aux1));
 	}
 
 }

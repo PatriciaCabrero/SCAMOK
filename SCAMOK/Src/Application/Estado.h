@@ -17,7 +17,12 @@
 #include <fmod.hpp>
 #include "GUI.h"
 
+
 class Juego;
+
+#include "Factory.h"
+
+
 
 class Estado
 {
@@ -34,6 +39,7 @@ public:
 	virtual void keyReleased(std::string key);
 	virtual void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
+
 	virtual bool initCEGUI();
 	virtual void destroy() { 
 		m_gui.hideMouseCursor();
@@ -44,6 +50,10 @@ public:
 	virtual bool mouseMoved(const OIS::MouseEvent& me);
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+
+	void destroy(std::string b) { borrar.push_back(b); }
+
+
 	//mensajes-------------------------------------
 	bool addMsg(Mensaje & msg, bool needNow = false){ 
 		if(!needNow)bufer.push(msg); 
@@ -62,8 +72,10 @@ public:
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
 
+
 protected:
 
+	std::vector<std::string> borrar;
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
 	Ogre::Camera* cam;
@@ -78,5 +90,8 @@ protected:
 	FMOD::System* system;
 	bool noInput; int  contInput;
 
+
 	Juego * game_;
+
+
 };

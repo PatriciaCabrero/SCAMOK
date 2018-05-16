@@ -1,4 +1,6 @@
 #include "Estado.h"
+#include "Juego.h"
+#include "FactoryBalas.h"
 
 
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* game){
@@ -17,17 +19,12 @@ bool Estado::initCEGUI() {
 	m_gui.loadScheme("GameMenu.scheme");
 	m_gui.loadScheme("HUDDemo.scheme");
 	m_gui.loadScheme("VanillaSkin.scheme");
-
 	m_gui.loadScheme("AlfiskoSkin.scheme");
 	m_gui.loadScheme("Generic.scheme");
 	m_gui.loadScheme("OgreTray.scheme");
 	m_gui.loadScheme("SampleBrowser.scheme");
 	m_gui.loadScheme("VanillaCommonDialogs.scheme");
 	m_gui.loadScheme("WindowsLook.scheme");
-
-
-
-
 	m_gui.loadScheme("Generic.scheme");
 	m_gui.setFont("DejaVuSans-10");
 
@@ -44,24 +41,14 @@ Estado::~Estado(){
 }
 
 bool Estado::update(float delta){
+
 	m_gui.draw();
-	
+
 	return true;
 }
 
 void Estado::joystickMoved(float x, float y, int js) {
 
-	std::string sx, sy; sx = std::to_string(x); sy = std::to_string(y);
-	std::string s = sx + "/"+ "0/" + sy ;
-
-	
-	if (js == 0) {
-		
-		
-	}
-	else {
-		
-	}
 
 }
 void Estado::keyPressed(std::string s) {
@@ -69,7 +56,6 @@ void Estado::keyPressed(std::string s) {
 }
 void Estado::keyReleased(std::string s) {
 
-	
 }
 Entidad* Estado::getEntidad(std::string s) {
 	auto flag = entidades.find(s);

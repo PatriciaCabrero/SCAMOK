@@ -1,6 +1,6 @@
 #pragma once
 #include "Estado.h"
-
+#include "Factory.h"
 class EstadoJuego: public Estado
 {
 public:
@@ -15,6 +15,8 @@ public:
 	virtual void init();
 	void cargaGui();
 private:
+	Factory * factoria;
+
 
 };
 

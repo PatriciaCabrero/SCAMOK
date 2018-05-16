@@ -12,11 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Application\Animation.cpp" />
+    <ClCompile Include="..\..\Src\Application\BalaComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Camara.cpp" />
     <ClCompile Include="..\..\Src\Application\Entidad.cpp" />
     <ClCompile Include="..\..\Src\Application\Estado.cpp" />
     <ClCompile Include="..\..\Src\Application\EstadoJuego.cpp" />
     <ClCompile Include="..\..\Src\Application\EstadoMenu.cpp" />
+    <ClCompile Include="..\..\Src\Application\Factory.cpp" />
+    <ClCompile Include="..\..\Src\Application\FactoryBalas.cpp" />
     <ClCompile Include="..\..\Src\Application\FComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Fisic.cpp" />
     <ClCompile Include="..\..\Src\Application\GComponent.cpp" />
@@ -29,12 +32,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Application\Animation.h" />
+    <ClInclude Include="..\..\Src\Application\BalaComponent.h" />
     <ClInclude Include="..\..\Src\Application\Camara.h" />
     <ClInclude Include="..\..\Src\Application\Componente.h" />
     <ClInclude Include="..\..\Src\Application\Entidad.h" />
     <ClInclude Include="..\..\Src\Application\Estado.h" />
     <ClInclude Include="..\..\Src\Application\EstadoJuego.h" />
     <ClInclude Include="..\..\Src\Application\EstadoMenu.h" />
+    <ClInclude Include="..\..\Src\Application\Factory.h" />
+    <ClInclude Include="..\..\Src\Application\FactoryBalas.h" />
     <ClInclude Include="..\..\Src\Application\FComponent.h" />
     <ClInclude Include="..\..\Src\Application\Fisic.h" />
     <ClInclude Include="..\..\Src\Application\GComponent.h" />

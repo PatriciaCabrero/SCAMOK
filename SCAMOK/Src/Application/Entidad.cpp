@@ -8,13 +8,23 @@
 #include <iostream>
 #include <fstream>
 #include "SoundManager.h"
+#include "BalaComponent.h"
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
+	cont++;
 	activo = true;
 	nombreNodo = " ";
 }
-Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 
-	nombreNodo = prefab;
+Entidad::Entidad(Estado* pEstado, std::string prefab, std::string nombre) : pEstado(pEstado) {
+	cont++;
+	
+	if (nombre == "" )
+		if (pEstado->getEntidad(prefab) != nullptr)
+			nombreNodo = prefab + to_string(cont);
+		else nombreNodo = prefab;
+	else
+		nombreNodo = nombre;
+
 	std::string path = "../Media/prefabs/";
 	path += prefab + ".txt";
 	std::ifstream fe(path);
@@ -25,7 +35,7 @@ Entidad::Entidad(Estado* pEstado, std::string prefab) : pEstado(pEstado) {
 	while (type != "---") {
 		if (type == "Grafico") {
 			std::string mesh; fe >> mesh;
-			añadeComponenteGrafico(mesh);
+			añadeComponenteGrafico(mesh, nombreNodo);
 		}
 		else if (type == "Logico") {
 			std::string component; fe >> component;
@@ -97,8 +107,14 @@ bool Entidad::añadeAnimacion(std::string name, bool enabled, bool loop) {
 }
 
 bool Entidad::añadeComponenteGrafico(std::string mesh) {
-	nombreNodo = mesh;
-	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh)));
+	nombreNodo = mesh + to_string(cont);
+	componentes.insert(std::make_pair("Grafico", new GComponent(this, cont,mesh)));
+	return true;
+}
+
+bool Entidad::añadeComponenteGrafico(std::string mesh, std::string ogreNodeName) {
+	nombreNodo = ogreNodeName;
+	componentes.insert(std::make_pair("Grafico", new GComponent(this, mesh,nombreNodo)));
 	return true;
 }
 
@@ -111,6 +127,9 @@ bool Entidad::añadeComponenteFisico(float altoCaja, float anchoCaja, float profC
 bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
+	}
+	if (component == "BalaComponent") {
+		componentes.insert(std::make_pair("BalaComponent", new BalaComponent(this)));
 	}
 	return true;
 }
@@ -134,5 +153,12 @@ void Entidad::Update(float deltaTime,  Mensaje & msj){
 		}
 	}
 }
+
+void Entidad::destruyeComponenteGrafico() {
+		GComponent* g = dynamic_cast<GComponent*>  (componentes.at("Grafico"));
+		if (g != nullptr)
+			g->destroy();
+}
+
 void Entidad::Awake(){ activo = true; }
 void Entidad::Sleep(){ activo = false; }

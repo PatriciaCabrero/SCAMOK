@@ -2,7 +2,7 @@
 
 
 
-Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GComponent (pEnt, mesh)
+Animation::Animation(Entidad * pEnt, std::string mesh, std::string anim): GComponent (pEnt, pEnt->cont,mesh)
 {
 	if (anim != "") addAnimationState(anim);
 }
@@ -18,7 +18,7 @@ void Animation::Update(float deltaTime, Mensaje const & msj) {
 	GComponent::Update(deltaTime, msj);
 	std::vector<std::string> borrar;
 	for (std::pair<std::string, Ogre::AnimationState*> pS : animStates) {
-		pS.second->addTime(0.005f);
+		pS.second->addTime(deltaTime*0.001f);
 		if (pS.second->hasEnded() && !pS.second->getLoop()) {
 			borrar.push_back(pS.first);
 			pS.second->setEnabled(false);
