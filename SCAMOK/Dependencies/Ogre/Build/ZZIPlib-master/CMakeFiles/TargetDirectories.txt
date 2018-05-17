@@ -1,5 +1,0 @@
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/ZZIPlib-master/CMakeFiles/zzip.dir
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/ZZIPlib-master/CMakeFiles/zzipfseeko.dir
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/ZZIPlib-master/CMakeFiles/INSTALL.dir
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/ZZIPlib-master/CMakeFiles/ALL_BUILD.dir
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/ZZIPlib-master/CMakeFiles/ZERO_CHECK.dir

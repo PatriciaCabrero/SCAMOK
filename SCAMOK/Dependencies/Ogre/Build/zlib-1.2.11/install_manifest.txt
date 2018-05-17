@@ -1,7 +1,0 @@
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/lib/zlib.lib
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/bin/zlib.dll
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/lib/zlibstatic.lib
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zconf.h
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/include/zlib.h
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/share/man/man3/zlib.3
-C:/hlocal/Nueva carpeta/P3/ProyectoBasico/Dependencies/Ogre/Build/Dependencies/share/pkgconfig/zlib.pc

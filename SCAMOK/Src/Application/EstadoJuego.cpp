@@ -2,6 +2,7 @@
 #include "EstadoJuego.h"
 #include "FactoryBalas.h"
 #include <iostream>
+#include "OgreParticleSystem.h"
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
 	
@@ -61,6 +62,7 @@ void EstadoJuego::init() {
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
 
+	
 
 
 
@@ -181,13 +183,18 @@ void EstadoJuego::keyPressed(std::string s) {
 		if (power->getWidth().d_offset >= 24) {
 			Entidad* aux1 = new Entidad(this);
 
-			string auxBala = factoria->create("Greymon");
+			string auxBala = factoria->create("triangulo");
 			aux1->setNombreNodo(auxBala);
-			aux1->añadeComponenteGrafico("Greymon", auxBala);
+			
+			aux1->añadeComponenteGrafico("triangulo", auxBala);
 			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 			aux1->añadeComponenteLogico("BalaComponent");
 			entidades.insert(std::make_pair(auxBala, aux1));
 			restaPower();
+			// create a particle system named explosions using the explosionTemplate
+			Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala+"PFX","Smoke");
+			scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);
+			particleSystem->setEmitting(true);
 		}
 	}
 
