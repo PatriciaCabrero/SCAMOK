@@ -24,7 +24,7 @@ void EstadoJuego::init() {
 	entidades.insert(std::make_pair("camera", new Entidad(this, "camera")));
 
 
-	Mensaje msg(Tipo::Fisica, "0/30/0", SubTipo::Reposicionar);
+	Mensaje msg(Tipo::Fisica, "80/30/0", SubTipo::Reposicionar);
 	msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
 	mensajes.push(msg);
 
@@ -43,7 +43,8 @@ void EstadoJuego::init() {
 
 	Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("stone","stone");
-	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+	aux1->añadeComponenteLogico("IABola");
+	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
 	entidades.insert(std::make_pair("stone", aux1));
 	Mensaje ms(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
 	ms.setMsgInfo(entidades.at("stone"), entidades.at("stone"));
@@ -114,8 +115,10 @@ bool EstadoJuego::update(float delta) {
 		}
 	}
 	else {
-		for (std::pair<std::string, Entidad*> ent : entidades)
+		for (std::pair<std::string, Entidad*> ent : entidades) {
 			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
+			ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+		}
 		if (contInput == 30) {
 			entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
 			entidades.at("sinbad")->setAnim("IdleBase", true, true, true);

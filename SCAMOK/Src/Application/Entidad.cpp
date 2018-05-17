@@ -9,6 +9,8 @@
 #include <fstream>
 #include "SoundManager.h"
 #include "BalaComponent.h"
+#include "IABola.h"
+
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 	cont++;
 	activo = true;
@@ -128,8 +130,11 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 	if (component == "Transform") {
 		componentes.insert(std::make_pair("Transform", new Transform(this, 0, 0, 0)));
 	}
-	if (component == "BalaComponent") {
+	else if (component == "BalaComponent") {
 		componentes.insert(std::make_pair("BalaComponent", new BalaComponent(this)));
+	}
+	else if (component == "IABola") {
+		componentes.insert(std::make_pair("IABola", new IABola(this,"sinbad", 0, 0, 0)));
 	}
 	return true;
 }
