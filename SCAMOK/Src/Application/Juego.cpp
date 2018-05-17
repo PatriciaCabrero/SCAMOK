@@ -161,35 +161,36 @@ bool Juego::run(){
 	bool rend = false;
 	
 
-	int msUpdate = 8;
+	int msUpdate = 12;
 	int lastUpdate = 0;
-	
+	int up = 0;
 
 	while (!exit)
 	{
+		
+		up = GetTickCount() - lastUpdate;
 
-	//	if (GetTickCount() - lastUpdate >= msUpdate) {
-			mInputMgr->capture();
-
-
+		if (up >= msUpdate) {
+			
+			
 			if (cont == 4) {
 				handleInput();
 				cont = 0;
 			}
-			else cont++;
-			//std::cout << GetTickCount() - lastUpdate << std::endl;
-			//pEstados.top()->update(GetTickCount() - lastUpdate);
+			else { cont++;
+				if (cont == 2)
+				mInputMgr->capture();
+			}
+			pEstados.top()->update(up);
+			lastUpdate += up;
 			// render ogre
-			pEstados.top()->update(12.0f);
-			Ogre::WindowEventUtilities::messagePump();
-			lastUpdate = GetTickCount();
-
-			//comprobar si la ventana está abierta
+			//pEstados.top()->update(12.0f);
+			 Ogre::WindowEventUtilities::messagePump();
 			if (mWindow->isClosed())return false;
-		//}
-	
+		}
+		if (!root->renderOneFrame())return false;
+		//comprobar si la ventana está abierta
 		
-		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 		if (firstTime) {
 			firstTime = false;
 				pEstados.top()->init();
