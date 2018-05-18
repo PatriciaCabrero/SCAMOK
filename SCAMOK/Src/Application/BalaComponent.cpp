@@ -10,7 +10,7 @@ BalaComponent::BalaComponent(Entidad* pEntidad) : Componente(pEntidad) {
 	btVector3 pos1 = { valores.x ,0, valores.z };
 	btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 	string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getX()) + "/" +
-		to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY()) + "/" +
+		to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY() + 4) + "/" +
 		to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getZ());
 	Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 	Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
@@ -19,8 +19,10 @@ BalaComponent::BalaComponent(Entidad* pEntidad) : Componente(pEntidad) {
 	pEntidad->getPEstado()->addMsg(ms);
 	pEntidad->getPEstado()->addMsg(ms1);
 
+
 	tiempoInicio = std::clock()* 1000;
 	std::cout << "CREADOOO\n";
+	
 
 } 
 BalaComponent::~BalaComponent() { 
@@ -46,8 +48,43 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			btVector3 vel = { valores.x ,0, valores.z };
 			btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 
+			btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 1000);
 
+			btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
+			pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
+
+			if (RayCallback.hasHit()) {
+				auxx = RayCallback.m_hitPointWorld;
+				std::cout << "EYY";
+			}
+
+			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
 			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
+
+
+			
+
+			/*
+			int numManifolds = world->getDispatcher()->getNumManifolds();
+    for (int i = 0; i < numManifolds; i++)
+    {
+        btPersistentManifold* contactManifold =  world->getDispatcher()->getManifoldByIndexInternal(i);
+        const btCollisionObject* obA = contactManifold->getBody0();
+        const btCollisionObject* obB = contactManifold->getBody1();
+
+        int numContacts = contactManifold->getNumContacts();
+        for (int j = 0; j < numContacts; j++)
+        {
+            btManifoldPoint& pt = contactManifold->getContactPoint(j);
+            if (pt.getDistance() < 0.f)
+            {
+                const btVector3& ptA = pt.getPositionWorldOnA();
+                const btVector3& ptB = pt.getPositionWorldOnB();
+                const btVector3& normalOnB = pt.m_normalWorldOnB;
+            }
+        }
+    }
+			*/
 		}
 	}
 

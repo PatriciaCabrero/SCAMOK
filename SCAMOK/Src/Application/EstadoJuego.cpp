@@ -179,7 +179,7 @@ void EstadoJuego::keyPressed(std::string s) {
 	else if (s == "3") {
 		entidades.at("sinbad")->setAnim("SliceVertical");
 	}
-	else if (s == "5") {
+	else if (s == "5" || s == "disparo") {
 		if (power->getWidth().d_offset >= 24) {
 			Entidad* aux1 = new Entidad(this);
 
@@ -190,7 +190,7 @@ void EstadoJuego::keyPressed(std::string s) {
 			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 			aux1->añadeComponenteLogico("BalaComponent");
 			entidades.insert(std::make_pair(auxBala, aux1));
-			restaPower();
+			//restaPower();
 			// create a particle system named explosions using the explosionTemplate
 			Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala+"PFX","Smoke");
 			scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);

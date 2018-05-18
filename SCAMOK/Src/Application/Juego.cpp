@@ -227,7 +227,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 	std::string key = "";
 	switch (ke.key)
 	{
-	case OIS::KC_ESCAPE: //exit = true;
+	case OIS::KC_ESCAPE: exit = true;
 		break;
 	case OIS::KC_P:if (pEstados.size() == 1) {
 		pEstado = new EstadoMenu(scnMgr, mWindow, system, this,"pause");
@@ -243,6 +243,8 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 	case OIS::KC_DOWN: key = "aba";
 		break;
 	case OIS::KC_SPACE: key = "salto";
+		break;
+	case OIS::KC_Q: key = "disparo";
 	default:
 		break;
 	}
