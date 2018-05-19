@@ -16,6 +16,7 @@ public:
 
 private:
 	std::map<std::string, Ogre::AnimationState*> animStates;
+	float time;
 };
 
 

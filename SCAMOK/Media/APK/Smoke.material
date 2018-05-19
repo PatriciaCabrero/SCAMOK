@@ -1,4 +1,4 @@
-material "Smoke"
+material Smoke
 {
 	technique
 	{

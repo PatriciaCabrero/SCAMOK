@@ -16,7 +16,7 @@ public:
 	void cargaGui();
 	void restaPower();
 private:
-	Factory * factoria;
+	
 	CEGUI::ProgressBar * life;
 	CEGUI::ProgressBar * power = nullptr;
 	int maxPower;

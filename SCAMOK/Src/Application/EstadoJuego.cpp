@@ -46,7 +46,7 @@ void EstadoJuego::init() {
 	aux1->añadeComponenteLogico("IABola");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
 	entidades.insert(std::make_pair("stone", aux1));
-	Mensaje ms(Tipo::Fisica, "0/150/0", SubTipo::Reposicionar);
+	Mensaje ms(Tipo::Fisica, "20/150/0", SubTipo::Reposicionar);
 	ms.setMsgInfo(entidades.at("stone"), entidades.at("stone"));
 	mensajes.push(ms);
 
@@ -100,6 +100,7 @@ bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
+	
 	for (size_t i = 0; i < borrar.size(); i++)
 	{
 		entidades.at(borrar[i])->destruyeComponenteGrafico();
@@ -110,22 +111,25 @@ bool EstadoJuego::update(float delta) {
 	if (mensajes.size() > 0) {
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
+		
 		for (std::pair<std::string, Entidad*> ent : entidades) {
 			ent.second->Update(delta, aux);
 		}
 	}
 	else {
 		for (std::pair<std::string, Entidad*> ent : entidades) {
-			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
+			ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
 			ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
 		}
-		if (contInput == 30) {
+		if (contInput >= 30) {
 			entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
 			entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
 			contInput = 0;
 		}
 
 	}
+	
 	contInput++;
 	m_gui.draw();
 	swapMsgBufer();
@@ -181,6 +185,9 @@ void EstadoJuego::keyPressed(std::string s) {
 	}
 	else if (s == "3") {
 		entidades.at("sinbad")->setAnim("SliceVertical");
+		
+			for (std::pair<std::string, Entidad*> ent : entidades)
+				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
 	else if (s == "5") {
 		if (power->getWidth().d_offset >= 24) {

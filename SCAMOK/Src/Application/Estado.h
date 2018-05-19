@@ -39,6 +39,9 @@ public:
 	virtual void keyReleased(std::string key);
 	virtual void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
+	void addEntidad(std::string &name,Entidad * ent) {
+		entidades.insert(std::make_pair(name, ent));
+	}
 
 	virtual bool initCEGUI();
 	virtual void destroy() { 
@@ -71,10 +74,10 @@ public:
 
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
-
+	Factory* getFactory() { return factoria; }
 
 protected:
-
+	Factory * factoria;
 	std::vector<std::string> borrar;
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;

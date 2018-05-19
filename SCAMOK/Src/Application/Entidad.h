@@ -29,7 +29,9 @@ public:
 	std::string getNombreNodo() { return nombreNodo; };
 	void setNombreNodo(std::string s) { nombreNodo = s; };
 	int cont = 0;
-
+	Componente* getComponente(std::string const & name) {
+		return componentes.at(name);
+	}
 
 private:
 	std::map<std::string, Componente*> componentes;

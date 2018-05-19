@@ -1,6 +1,7 @@
 #include "IABola.h"  
 #include <iostream>
- 
+#include "FComponent.h"
+#include "OgreParticleSystem.h"
 
 IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Componente(pEnt)
 {
@@ -9,6 +10,11 @@ IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Compon
 	state = Wander;
 	wState = Right;
 	cont = 0;
+	contDivide = 0;
+	numDiv = 0;
+	pS = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Division");
+	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	node->attachObject(pS);
 } 
 IABola::~IABola() { 
 } 
@@ -20,10 +26,29 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 
 		if (msg.getSubTipo() == SubTipo::Nulo) {
 			
-			if (state == States::Wander) wander();
-;
+			if (state == States::Wander) {
+				// wander();
+				contDivide++;
+				if (contDivide == 800) {
+					contDivide = 0;
+					state = States::Stay;
+				}
+			}
+			else if (state == States::Stay) {
+				contDivide++;
+				pS->setEmitting(true);
+				if (contDivide == 200) {
+					contDivide = 0;
+					divide();
+					state = States::Wander;
+				}
+			}
 		}
-
+		else {
+			//if(state==Hunt)	divide();
+			//else state = Hunt;
+			divide();
+		}
 	}
 }
 
@@ -76,4 +101,31 @@ void IABola::stay()
 
 void IABola::hunt()
 {
+}
+
+void IABola::divide()
+{
+		Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	if (node->getScale().x > 0.218) {
+		node->scale(0.6, 0.6, 0.6);
+
+		Entidad* aux1 = new Entidad(pEntidad->getPEstado());
+		string auxBola = pEntidad->getPEstado()->getFactory()->create("stone");
+		aux1->setNombreNodo(auxBola);
+
+		aux1->añadeComponenteGrafico("stone", auxBola);
+		aux1->añadeComponenteLogico("IABola");
+		aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
+		pEntidad->getPEstado()->addEntidad(auxBola, aux1);
+		
+
+		btRigidBody *b = static_cast<FComponent*>(pEntidad->getComponente("Fisico"))->getRigidBody();
+		std::string pos = std::to_string(b->getWorldTransform().getOrigin().x()) + "/0/" + std::to_string(b->getWorldTransform().getOrigin().z());
+		Mensaje ms(Tipo::Fisica, pos, SubTipo::Reposicionar);
+		ms.setMsgInfo(aux1, aux1);
+		pEntidad->getPEstado()->addMsg(ms, true);
+
+		pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBola)->scale(node->getScale().x, node->getScale().x, node->getScale().x);
+		numDiv++;
+	}
 }

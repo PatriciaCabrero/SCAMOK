@@ -110,7 +110,7 @@ void FComponent::initBody() {
 void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-
+	if (msg.getTipo() == Tipo:: IA) return;
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
 			int pos = msg.getMsg().find("/");

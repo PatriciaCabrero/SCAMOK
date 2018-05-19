@@ -13,10 +13,14 @@ public:
 	void wander();
 	void stay();
 	void hunt();
+	void divide();
 private:
+	Ogre::ParticleSystem* pS;
 	int x, y, z;
 	Ogre::SceneNode *target;
 	States state;
 	WanderState wState;
 	int cont;
+	int contDivide;
+	int numDiv;
 }; 
