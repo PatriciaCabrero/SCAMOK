@@ -48,18 +48,21 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			btVector3 vel = { valores.x ,0, valores.z };
 			btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 
-			btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 1000);
+			btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 9000);
 
 			btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
 			pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
 
-			if (RayCallback.hasHit()) {
-				auxx = RayCallback.m_hitPointWorld;
-				std::cout << "EYY";
-			}
-
 			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
 			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
+
+			if (RayCallback.hasHit()) {
+				auxx = RayCallback.m_hitPointWorld;
+				Mensaje ms1(Tipo::Fisica, " ", SubTipo::Destruye);
+				ms1.setMsgInfo(pEntidad, pEntidad);
+				pEntidad->getPEstado()->addMsg(ms1);
+			}
+
 
 
 			
@@ -76,21 +79,25 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
         for (int j = 0; j < numContacts; j++)
         {
             btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (pt.getDistance() < 0.f)
-            {
-                const btVector3& ptA = pt.getPositionWorldOnA();
-                const btVector3& ptB = pt.getPositionWorldOnB();
-                const btVector3& normalOnB = pt.m_normalWorldOnB;
-            }
+            if (RayCallback.hasHit()) {
+				auxx = RayCallback.m_hitPointWorld;
+				Mensaje ms1(Tipo::Fisica, " ", SubTipo::Destruye);
+				ms1.setMsgInfo(pEntidad, pEntidad);
+				pEntidad->getPEstado()->addMsg(ms1);
+				
+			}else{
+				/if (tiempoInicio + /*5000000*//*1000000  < std::clock() * 1000) {*/
+				//pEntidad->Sleep();
+				/*pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+				std::cout << "MUERE\n";
+			}*/
+			}
         }
-    }
-			*/
-		}
-	}
-
 	if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
 		//pEntidad->Sleep();
 		pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 		std::cout << "MUERE\n";
 	}
+
 }
+

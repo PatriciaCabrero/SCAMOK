@@ -131,6 +131,11 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	switch (tipo)
 	{
 	case Dinamico:
+		if (msg.getTipo() == Tipo::Fisica) {
+			if (msg.getSubTipo() == SubTipo::Destruye) {
+				pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			}
+		}
 		break;
 
 	//Este sería el caso kinematico concreto de la niña
@@ -171,6 +176,9 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				btVector3 vel = body->getLinearVelocity();
 				vel = vel * btVector3(0, 1, 0);
 				body->setLinearVelocity(vel);
+			}
+			if (msg.getSubTipo() == SubTipo::Destruye) {
+				pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 			}
 		}
 		break;
