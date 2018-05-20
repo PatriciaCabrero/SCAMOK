@@ -94,9 +94,9 @@ bool EstadoJuego::initCEGUI() {
 	return true;
 }
 bool EstadoJuego::update(float delta) {
-	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
+	CEGUI::System::getSingleton().injectTimePulse(delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
-	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
+	this->getFisicManager()->getDynamicsWorld()->stepSimulation(delta);
 	for (size_t i = 0; i < borrar.size(); i++)
 	{
 		entidades.at(borrar[i])->destruyeComponenteGrafico();

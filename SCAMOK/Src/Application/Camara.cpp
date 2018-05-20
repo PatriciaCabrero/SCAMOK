@@ -18,6 +18,8 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
+	velX = 0;
+	cont = 0;
 	
 	
 }
@@ -31,7 +33,7 @@ void Camara::attach(Ogre::SceneNode* node) {
 }
 void Camara::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
-
+	cont++;
 	if (msg.getTipo() == Input && msg.getReceptor() == pEntidad) {
 		
 		if (msg.getSubTipo() == SubTipo::OrientaCamara) {
@@ -42,10 +44,19 @@ void Camara::Update(float deltaTime, Mensaje const & msj) {
 			std::string yS = subcad.substr(0, pos);
 			std::string zS = subcad.substr(pos + 1);
 
-			float x = std::stof(xS)* deltaTime*0.5;
-			float z = deltaTime * std::stof(zS)*0.5;
+			velX = std::stof(xS)*deltaTime/4;
+			float z = std::stof(zS);
 
-			node->rotate(Ogre::Quaternion(Ogre::Degree(-x*2), Ogre::Vector3::UNIT_Y));
+			
 		}
+
 	}
+	else if (cont >= 4) {
+		cont = 0;
+		velX *= 0.9*0.9*0.9*0.9;
+		if (abs(velX) < 0.01)
+			velX = 0;
+	}
+
+	node->rotate(Ogre::Quaternion(Ogre::Degree(velX), Ogre::Vector3::UNIT_Y));
 }

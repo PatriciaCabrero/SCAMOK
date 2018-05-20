@@ -15,4 +15,6 @@ private:
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::SceneNode* node;
+	float velX;
+	int cont;
 };

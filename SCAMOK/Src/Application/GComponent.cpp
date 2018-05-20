@@ -36,7 +36,7 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
 
-				Vector3 aux = Ogre::Vector3(groupNode->getPosition().x + std::stof(xS) * 100000, groupNode->getPosition().y, groupNode->getPosition().z + std::stof(zS) * 100000);
+				Vector3 aux = Ogre::Vector3(groupNode->getPosition().x + std::stof(xS) * 100000*deltaTime, groupNode->getPosition().y, groupNode->getPosition().z + std::stof(zS) * 100000*deltaTime);
 				node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
 			
 				node->lookAt(aux, Node::TS_LOCAL, Vector3::UNIT_Z);

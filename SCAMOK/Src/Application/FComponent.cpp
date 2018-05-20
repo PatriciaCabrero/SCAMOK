@@ -146,15 +146,15 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				pos = subcad.find("/");
 				std::string yS = subcad.substr(0, pos);
 				std::string zS = subcad.substr(pos + 1);
-				float xF= std::stof(xS) * deltaTime*0.1;
-				float zF = std::stof(zS) * deltaTime*0.1;
-				Ogre::Vector3 valores = { xF,0,zF };
+				float xF = std::stof(xS) * deltaTime/2;
+				float zF = std::stof(zS) * deltaTime/2;
+				Ogre::Vector3 valores = { xF*2,0,zF*2 };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
 				valores = matriz * valores;
 		
 				btVector3 vel = body->getLinearVelocity();
-				vel = vel + btVector3(valores.x*30,0,valores.z*30);
+				vel = vel + btVector3(valores.x,0,valores.z);
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
@@ -163,13 +163,17 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 					Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
 					pEntidad->getPEstado()->addMsg(msEfect);
 					body->activate(true);
-					body->applyCentralImpulse(btVector3(0, 2000, 0));
+					body->applyCentralImpulse(btVector3(0, 120*deltaTime, 0));
 				}
 				
 			}
 			else if (msg.getSubTipo() == SubTipo::Nulo) {
 				btVector3 vel = body->getLinearVelocity();
-				vel = vel * btVector3(0, 1, 0);
+				vel = vel * btVector3(0.6, 1, 0.6);
+				float auxX, auxY;
+				auxX = vel.getX(); auxY = vel.getY();
+				if (abs(auxX) < 0.01 && abs(auxY)< 0.01)
+					vel = vel * btVector3(0, 1, 0);
 				body->setLinearVelocity(vel);
 			}
 		}

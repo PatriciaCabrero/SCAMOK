@@ -25,9 +25,9 @@ void Transform::Update(float deltaTime, Mensaje const & msj) {
 			std::string yS = subcad.substr(0, pos);
 			std::string zS = subcad.substr(pos + 1);
 
-			float x = std::stof(xS);
-			float y = std::stof(yS);
-			float z = std::stof(zS);
+			float x = std::stof(xS)*deltaTime / 4;
+			float y = std::stof(yS)*deltaTime / 4;
+			float z = std::stof(zS)*deltaTime / 4;
 
 			this->x += x; this->z += z; this->y += y;
 

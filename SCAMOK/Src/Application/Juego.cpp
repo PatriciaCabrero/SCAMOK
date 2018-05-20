@@ -187,8 +187,8 @@ bool Juego::run(){
 			//pEstados.top()->update(12.0f);
 			 Ogre::WindowEventUtilities::messagePump();
 			if (mWindow->isClosed())return false;
+			if (!root->renderOneFrame())return false;
 		}
-		if (!root->renderOneFrame())return false;
 		//comprobar si la ventana está abierta
 		
 		if (firstTime) {
