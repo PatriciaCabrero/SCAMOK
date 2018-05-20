@@ -1,7 +1,7 @@
 #pragma once 
 #include "Componente.h"
 #include "Estado.h"
-enum States { Hunt, Wander, Stay };
+enum States { Hunt, Wander, Stay, Die };
 enum WanderState { Right, Left, Up, Down, RU,RD, LU,LD };
 class IABola: public Componente
 {
@@ -14,6 +14,7 @@ public:
 	void stay();
 	void hunt();
 	void divide();
+	void die();
 private:
 	Ogre::ParticleSystem* pS;
 	int x, y, z;
