@@ -90,9 +90,13 @@ bool EstadoJuego::initCEGUI() {
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
-	life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
+	//life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
 	power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
 	maxPower = power->getWidth().d_offset;
+
+	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
+	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	mensajes.push(ms);
 	
 	return true;
 }

@@ -75,7 +75,9 @@ public:
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
 	Factory* getFactory() { return factoria; }
-
+	CEGUI::Window* getGUIRoot() {
+		return guiRoot;
+	}
 protected:
 	Factory * factoria;
 	std::vector<std::string> borrar;

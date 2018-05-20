@@ -145,7 +145,7 @@ void IABola::hunt()
 	pEntidad->getPEstado()->addMsg(m);*/
 	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	Ogre::Vector3 aux = Ogre::Vector3(vecSinbad.x(), 0, vecSinbad.z());
-	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getOrientation());
+	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->getOrientation());
 	node->lookAt(aux,Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
 	Mensaje msgI(Tipo::Fisica, s, SubTipo::Mover);
 	msgI.setMsgInfo(pEntidad, pEntidad);
@@ -186,7 +186,11 @@ void IABola::die()
 		em->setEnabled(false);
 		em->setEnabled(true);
 	
-	 if(cont > 200)
-		pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+		if (cont > 200) {
+			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			Mensaje ms(Tipo::Gui, "-", SubTipo::CambiaVida);
+			ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("sinbad"), pEntidad->getPEstado()->getEntidad("sinbad"));
+			pEntidad->getPEstado()->addMsg(ms);
+		}
 	cont++;
 }

@@ -7,6 +7,8 @@ SliceVertical
 JumpLoop
 Logico
 Transform
+Logico
+LifeComponent
 CFisico
 1 1 1 0 2 100
 ---
