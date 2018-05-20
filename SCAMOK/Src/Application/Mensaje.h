@@ -29,7 +29,7 @@ public:
 				prio = 2;
 				break;
 			case Input:
-				prio = 3;
+				prio = 1;
 				break;
 			default:
 				prio = 4;

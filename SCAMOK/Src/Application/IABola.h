@@ -24,4 +24,5 @@ private:
 	int cont;
 	int contDivide;
 	int numDiv;
+	int contDescartes;
 }; 

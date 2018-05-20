@@ -90,7 +90,7 @@ protected:
 	GUI m_gui;
 	CEGUI::Window *guiRoot;
 
-	std::priority_queue < Mensaje > mensajes, bufer;
+	std::priority_queue <Mensaje> mensajes, bufer;
 	Fisic* fisicaManager;
 	FMOD::System* system;
 	bool noInput; int  contInput;

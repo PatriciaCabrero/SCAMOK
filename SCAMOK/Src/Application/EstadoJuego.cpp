@@ -6,7 +6,7 @@
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
 	
-	noInput = true; contInput = 0;
+	noInput = true; contInput = contDescartes=0;
 	cargaGui();
 	
 }
@@ -122,8 +122,7 @@ bool EstadoJuego::update(float delta) {
 	}
 	else {
 		for (std::pair<std::string, Entidad*> ent : entidades) {
-			ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
-			ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+	
 			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
 		}
 		if (contInput >= 30) {
@@ -133,6 +132,14 @@ bool EstadoJuego::update(float delta) {
 		}
 
 	}
+	//if (contDescartes == 16) {
+		for (std::pair<std::string, Entidad*> ent : entidades) {
+			ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
+			ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+		}
+		contDescartes = 0;
+	//}
+	//contDescartes++;
 	
 	contInput++;
 	m_gui.draw();
