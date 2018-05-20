@@ -185,12 +185,12 @@ void IABola::die()
 		Ogre::ParticleEmitter * em = pS->getEmitter(0);
 		em->setEnabled(false);
 		em->setEnabled(true);
+			Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaVida);
+			ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("sinbad"), pEntidad->getPEstado()->getEntidad("sinbad"));
+			pEntidad->getPEstado()->addMsg(ms);
 	
 		if (cont > 200) {
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-			Mensaje ms(Tipo::Gui, "-", SubTipo::CambiaVida);
-			ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("sinbad"), pEntidad->getPEstado()->getEntidad("sinbad"));
-			pEntidad->getPEstado()->addMsg(ms);
 		}
 	cont++;
 }
