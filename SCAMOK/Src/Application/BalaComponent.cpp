@@ -2,22 +2,32 @@
 #include <ctime>
 #include <iostream>
  
-BalaComponent::BalaComponent(Entidad* pEntidad) : Componente(pEntidad) {
+BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntidad) {
+	tipo = type;
+	if (type == "Simple") {
 
-	Ogre::Vector3 valores = { 1,0,1 };
-	Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
-	valores = matriz * valores;
-	btVector3 pos1 = { valores.x ,0, valores.z };
-	btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
-	string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getX()) + "/" +
-		to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY() + 4) + "/" +
-		to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getZ());
-	Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
-	Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
-	ms.setMsgInfo(pEntidad, pEntidad);
-	ms1.setMsgInfo(pEntidad, pEntidad);
-	pEntidad->getPEstado()->addMsg(ms);
-	pEntidad->getPEstado()->addMsg(ms1);
+		Ogre::Vector3 valores = { 1,0,1 };
+		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+		valores = matriz * valores;
+		btVector3 pos1 = { valores.x ,0, valores.z };
+		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
+		string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getX()) + "/" +
+			to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY() + 4) + "/" +
+			to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getZ());
+		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
+		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
+		ms.setMsgInfo(pEntidad, pEntidad);
+		ms1.setMsgInfo(pEntidad, pEntidad);
+		pEntidad->getPEstado()->addMsg(ms);
+		pEntidad->getPEstado()->addMsg(ms1);
+	}
+	else {
+		Ogre::Vector3 valores = { 0,1,0 };
+		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+		valores = matriz * valores;
+		btVector3 pos1 = { 0 ,valores.y, 0 };
+		
+	}
 
 
 	tiempoInicio = std::clock()* 1000;
@@ -35,31 +45,47 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Dispara) {
-			Ogre::Real escala = std::stof(msg.getMsg());
+			if (tipo == "Simple") {
+				Ogre::Real escala = std::stof(msg.getMsg());
 
-			btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
-			btVector3 start = alaia->getWorldTransform().getOrigin();
+				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
+				btVector3 start = alaia->getWorldTransform().getOrigin();
 
-			Ogre::Vector3 valores = { escala,0,escala };
-			Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+				Ogre::Vector3 valores = { escala,0,escala };
+				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
 
-			valores = matriz * valores;
+				valores = matriz * valores;
 
-			btVector3 vel = { valores.x ,0, valores.z };
-			btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
+				btVector3 vel = { valores.x ,0, valores.z };
+				btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 
-			btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 1000);
+				btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 1000);
 
-			btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
-			pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
+				btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
+				pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
 
-			if (RayCallback.hasHit()) {
-				auxx = RayCallback.m_hitPointWorld;
-				std::cout << "EYY";
+				if (RayCallback.hasHit()) {
+					auxx = RayCallback.m_hitPointWorld;
+					std::cout << "EYY";
+				}
+
+				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
+				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
 			}
+			else {
+				Ogre::Real escala = std::stof(msg.getMsg());
 
-			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
-			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
+				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
+				btVector3 start = alaia->getWorldTransform().getOrigin();
+
+				Ogre::Vector3 valores = { 0,escala,0 };
+				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+
+				valores = matriz * valores;
+
+				btVector3 vel = { 0 ,-valores.y, 0 };
+				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(vel * 10, start);
+			}
 
 
 			

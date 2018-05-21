@@ -21,5 +21,11 @@ private:
 	CEGUI::ProgressBar * power = nullptr;
 	int maxPower;
 
+	float RandomNumber(float Min, float Max)
+	{
+		float result = (((float)rand() / float(RAND_MAX)) * (Max - Min)) + Min;
+		return result;
+	}
+
 };
 

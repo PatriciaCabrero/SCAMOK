@@ -185,16 +185,49 @@ void EstadoJuego::keyPressed(std::string s) {
 
 			string auxBala = factoria->create("triangulo");
 			aux1->setNombreNodo(auxBala);
-			
+
 			aux1->añadeComponenteGrafico("triangulo", auxBala);
 			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-			aux1->añadeComponenteLogico("BalaComponent");
+			aux1->añadeComponenteLogico("BalaComponentSimple");
 			entidades.insert(std::make_pair(auxBala, aux1));
 			//restaPower();
 			// create a particle system named explosions using the explosionTemplate
-			Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala+"PFX","Smoke");
+			Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala + "PFX", "Smoke");
 			scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);
 			particleSystem->setEmitting(true);
+		}
+	}
+	else if (s == "6") {
+		if (power->getWidth().d_offset >= 24) {
+			double rotation = 2 * 3.1416 / 6;
+			for (int i = 0; i < 6; i++) {
+				Entidad* aux1 = new Entidad(this);
+
+				string auxBala = factoria->create("triangulo");
+				aux1->setNombreNodo(auxBala);
+
+				aux1->añadeComponenteGrafico("triangulo", auxBala);
+				aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+				aux1->añadeComponenteLogico("BalaComponent");
+				entidades.insert(std::make_pair(auxBala, aux1));
+				double rot = i * rotation;
+				double x = aux1->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getX() + cos(rot) * 10;
+				double z = aux1->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getZ() + sin(rot) * 10;
+				string posOgro = to_string(x) + "/" +
+					to_string(aux1->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY() + 60) + "/" +
+					to_string(z);
+				Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
+				Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
+				ms.setMsgInfo(aux1, aux1);
+				ms1.setMsgInfo(aux1, aux1);
+				aux1->getPEstado()->addMsg(ms);
+				aux1->getPEstado()->addMsg(ms1);
+				//restaPower();
+				// create a particle system named explosions using the explosionTemplate
+				Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala + "PFX", "Smoke");
+				scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);
+				particleSystem->setEmitting(true);
+			}
 		}
 	}
 
