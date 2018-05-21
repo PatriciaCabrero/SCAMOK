@@ -17,15 +17,17 @@ IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Compon
 	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	pS->setEmitting(false);
 	node->attachObject(pS);
-	contDescartes = 0;
+	valueDiv = (rand() %  300) + 700;
+	valueWait = (rand() % 50) + 150;
+	velDir = (rand() % 10) + 45;
 } 
 IABola::~IABola() { 
 } 
 void IABola::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
-	//if (contDescartes > 4) {
+
 		Mensaje msg = msj;
-		//Play/jddjdj/x/y/z
+		
 		if (msg.getTipo() == Tipo::IA) {
 
 			if (msg.getSubTipo() == SubTipo::Nulo) {
@@ -33,7 +35,7 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 				if (state == States::Wander) {
 					wander();
 					contDivide++;
-					if (contDivide == 800) {
+					if (contDivide == valueDiv) {
 						contDivide = 0;
 						state = States::Stay;
 					}
@@ -41,7 +43,7 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 				else if (state == States::Stay) {
 					contDivide++;
 					pS->setEmitting(true);
-					if (contDivide == 200) {
+					if (contDivide == valueWait) {
 						contDivide = 0;
 						divide();
 						state = States::Wander;
@@ -50,7 +52,7 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 				else if (state == States::Hunt) {
 					hunt();
 					contDivide++;
-					if (contDivide == 800) {
+					if (contDivide == valueDiv) {
 						contDivide = 0;
 						state = States::Stay;
 					}
@@ -59,24 +61,13 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 					die();
 				}
 			}
-			else {
-				state = Hunt;
-				//pS->clear();
-				//pS = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Division");
-				//if(state==Hunt)	divide();
-				//else state = Hunt;
-				////divide();
-			}
+			
 		}
-		contDescartes = 0;
-	//}
-	//contDescartes++;
-
 }
 
 void IABola::wander()
 {
-	if (cont > 50) {
+	if (cont > velDir) {
 		cont = 0;
 		int r = std::rand() % 8;
 		if (r > 6) {
@@ -92,21 +83,28 @@ void IABola::wander()
 	switch (wState)
 	{
 	case Right:	s = "-0.5/0/0";
-		
+		x = -0.5;
 		break;
 	case Left:s = "0.5/0/0";
+		x = 0.5;
 		break;
 	case Up:s = "0/0/0.5";
+		z = 0.5;
 		break;
 	case Down:s = "0/0/-0.5";
+		z = -0.5;
 		break;
 	case RD: s = "-0.5/0/-0.5";
+		x = -0.5; z = -0.5;
 		break;
 	case RU: s = "-0.5/0/0.5";
+		x = -0.5; z = 0.5;
 		break;
 	case LD: s = "0.5/0/-0.5";
+		x = 0.5; z = -0.5;
 		break;
 	case LU: s = "0.5/0/0.5";
+		x = 0.5; z = 0.5;
 		break;
 	default:
 		break;
@@ -115,7 +113,10 @@ void IABola::wander()
 	msgI.setMsgInfo(pEntidad, pEntidad);
 	pEntidad->getPEstado()->addMsg(msgI);
 	
-	
+	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	Ogre::Vector3 aux = Ogre::Vector3(x, 0, z);
+	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
+	node->lookAt(aux, Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
 }
 
 void IABola::stay()
@@ -129,11 +130,11 @@ void IABola::hunt()
 	btVector3 vecBola = static_cast<FComponent*>(pEntidad->getComponente("Fisico"))->getRigidBody()->getWorldTransform().getOrigin();
 
 	float X, Y, Z;
-	if (vecSinbad.x() - vecBola.x() < 0) X = 0.5f;
-	else if(vecSinbad.x() - vecBola.x() > 0) X = -0.5f;
+	if (vecSinbad.x() - vecBola.x() > 0) X = 0.5f;
+	else if(vecSinbad.x() - vecBola.x() < 0) X = -0.5f;
 	else X = 0;
-	if (vecSinbad.z() - vecBola.z() < 0) Z = 0.5f;
-	else if (vecSinbad.z() - vecBola.z() > 0) Z = -0.5f;
+	if (vecSinbad.z() - vecBola.z() > 0) Z = 0.5f;
+	else if (vecSinbad.z() - vecBola.z() < 0) Z = -0.5f;
 	else Z = 0;
 
 	std::cout << "\nบบบบบบ\nHUNT" << vecSinbad.z() - vecBola.z();
@@ -143,13 +144,12 @@ void IABola::hunt()
 		cont++;
 		die();
 	}
-	/*Mensaje m(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
-	m.setMsgInfo(pEntidad, pEntidad);
-	pEntidad->getPEstado()->addMsg(m);*/
+	
 	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
-	Ogre::Vector3 aux = Ogre::Vector3(vecSinbad.x() - vecBola.x(), 0, vecSinbad.z() - vecBola.z());
-	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getOrientation());
+	Ogre::Vector3 aux = Ogre::Vector3(vecSinbad.x(), 0, vecSinbad.z());
+	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
 	node->lookAt(aux,Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
+	
 	Mensaje msgI(Tipo::Fisica, s, SubTipo::Mover);
 	msgI.setMsgInfo(pEntidad, pEntidad);
 	pEntidad->getPEstado()->addMsg(msgI);
@@ -160,6 +160,8 @@ void IABola::divide()
 {
 		Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	if (node->getScale().x > 0.218) {
+		restaurapS();
+		pS->setEmitting(false);
 		node->scale(0.6, 0.6, 0.6);
 
 		Entidad* aux1 = new Entidad(pEntidad->getPEstado());
@@ -185,9 +187,7 @@ void IABola::divide()
 
 void IABola::die()
 {
-		Ogre::ParticleEmitter * em = pS->getEmitter(0);
-		em->setEnabled(false);
-		em->setEnabled(true);
+		restaurapS();
 
 		Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaVida);
 		ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("sinbad"), pEntidad->getPEstado()->getEntidad("sinbad"));
@@ -197,4 +197,12 @@ void IABola::die()
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 		}
 	cont++;
+}
+
+void IABola::restaurapS()
+{
+	Ogre::ParticleEmitter * em = pS->getEmitter(0);
+	em->setEnabled(false);
+	em->setEnabled(true);
+	
 }

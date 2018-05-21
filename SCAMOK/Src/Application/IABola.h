@@ -16,6 +16,8 @@ public:
 	void divide();
 	void die();
 private:
+	void restaurapS();
+
 	Ogre::ParticleSystem* pS;
 	int x, y, z;
 	Ogre::SceneNode *target;
@@ -24,5 +26,5 @@ private:
 	int cont;
 	int contDivide;
 	int numDiv;
-	int contDescartes;
+	int valueDiv, valueWait, velDir;
 }; 

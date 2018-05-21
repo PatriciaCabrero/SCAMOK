@@ -151,7 +151,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				Ogre::Vector3 valores = { xF,0,zF };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
-				valores = matriz * valores;
+				if (pEntidad->getNombreNodo() == "sinbad") 
+					valores = matriz * valores;
 		
 				btVector3 vel = body->getLinearVelocity();
 				//float yAux = vel.y();
