@@ -29,10 +29,10 @@ public:
 				prio = 2;
 				break;
 			case Input:
-				prio = 1;
+				prio = 3;
 				break;
 			default:
-				prio = 4;
+				prio = 0;
 				break;
 			}
 		}

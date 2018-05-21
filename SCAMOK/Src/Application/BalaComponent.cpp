@@ -50,7 +50,7 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
 		}
 		if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
-			//pEntidad->Sleep();
+			pEntidad->Sleep();
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 			std::cout << "MUERE\n";
 		}

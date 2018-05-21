@@ -24,7 +24,7 @@ void EstadoJuego::init() {
 	entidades.insert(std::make_pair("camera", new Entidad(this, "camera")));
 
 
-	Mensaje msg(Tipo::Fisica, "80/30/0", SubTipo::Reposicionar);
+	Mensaje msg(Tipo::Fisica, "80/30/0", SubTipo::Reposicionar,8);
 	msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
 	mensajes.push(msg);
 
@@ -37,16 +37,16 @@ void EstadoJuego::init() {
 	aux2->añadeComponenteGrafico("compcube","compcube");
 	aux2->añadeComponenteFisico(0, 0, 0, false);
 	entidades.insert(std::make_pair("MetalBox", aux2));
-	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar);
+	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar,8);
 	ms1.setMsgInfo(entidades.at("MetalBox"), entidades.at("MetalBox"));
 	mensajes.push(ms1);
 
 	Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("stone","stone");
-	aux1->añadeComponenteLogico("IABola");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
+	aux1->añadeComponenteLogico("IABola");
 	entidades.insert(std::make_pair("stone", aux1));
-	Mensaje ms(Tipo::Fisica, "20/150/0", SubTipo::Reposicionar);
+	Mensaje ms(Tipo::Fisica, "20/150/0", SubTipo::Reposicionar,8);
 	ms.setMsgInfo(entidades.at("stone"), entidades.at("stone"));
 	mensajes.push(ms);
 
@@ -112,7 +112,7 @@ bool EstadoJuego::update(float delta) {
 	}
 	borrar.clear();
 
-	if (mensajes.size() > 0) {
+	while (mensajes.size() > 0) {
 		Mensaje aux = mensajes.top();
 		mensajes.pop();
 		
@@ -120,26 +120,17 @@ bool EstadoJuego::update(float delta) {
 			ent.second->Update(delta, aux);
 		}
 	}
-	else {
-		for (std::pair<std::string, Entidad*> ent : entidades) {
-	
-			ent.second->Update(delta, Mensaje(Tipo::Fisica, " ", SubTipo::Nulo));
-		}
-		if (contInput >= 30) {
-			entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
-			entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
-			contInput = 0;
-		}
-
+	if (contInput >= 30) {
+		entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
+		entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
+		contInput = 0;
 	}
-	//if (contDescartes == 16) {
-		for (std::pair<std::string, Entidad*> ent : entidades) {
-			ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
-			ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
-		}
-		contDescartes = 0;
-	//}
-	//contDescartes++;
+
+	for (std::pair<std::string, Entidad*> ent : entidades) {
+		ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
+		ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+	}
+		
 	
 	contInput++;
 	m_gui.draw();
@@ -172,10 +163,14 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 		contInput = 0;
 
 	}
-	else {
+	else if (js == 1) {
 		Mensaje msgI(Tipo::Input, s, SubTipo::OrientaCamara);
 		msgI.setMsgInfo(entidades.at("camera"), entidades.at("camera"));
 		mensajes.push(msgI);
+	}
+	else {
+		Mensaje msgF(Tipo::Fisica, s, SubTipo::Nulo);
+		mensajes.push(msgF);
 	}
 
 }

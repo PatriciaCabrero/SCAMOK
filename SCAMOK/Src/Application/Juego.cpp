@@ -291,6 +291,10 @@ void Juego::handleInput() {
 
 			if (abs(x) >= 0.2 || abs(y) >= 0.2)
 				pEstados.top()->joystickMoved(-x, -y);
+			else {
+				pEstados.top()->joystickMoved(0, 0, 2);
+			}
+
 		}
 		if (js->getJoyStickState().mAxes[2].abs != 0 || js->getJoyStickState().mAxes[3].abs != 0) {
 
@@ -299,6 +303,8 @@ void Juego::handleInput() {
 
 			if (abs(x) >= 0.2 || abs(y) >= 0.2)
 				pEstados.top()->joystickMoved(-x, -y, 1);
+			else
+				pEstados.top()->joystickMoved(0, 0, 2);
 		}
 	}
 }

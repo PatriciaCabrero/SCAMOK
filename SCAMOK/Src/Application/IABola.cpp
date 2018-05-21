@@ -23,7 +23,7 @@ IABola::~IABola() {
 } 
 void IABola::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
-	if (contDescartes > 4) {
+	//if (contDescartes > 4) {
 		Mensaje msg = msj;
 		//Play/jddjdj/x/y/z
 		if (msg.getTipo() == Tipo::IA) {
@@ -69,8 +69,8 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 			}
 		}
 		contDescartes = 0;
-	}
-	contDescartes++;
+	//}
+	//contDescartes++;
 
 }
 

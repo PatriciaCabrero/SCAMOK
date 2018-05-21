@@ -110,7 +110,7 @@ void FComponent::initBody() {
 void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-	if (msg.getTipo() == Tipo:: IA) return;
+	//if (msg.getTipo() == Tipo:: IA) return;
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
 			int pos = msg.getMsg().find("/");
@@ -154,7 +154,8 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				valores = matriz * valores;
 		
 				btVector3 vel = body->getLinearVelocity();
-				vel = vel + btVector3(valores.x*30,0,valores.z*30);
+				//float yAux = vel.y();
+				vel.setValue(valores.x*30,vel.y(),valores.z*30);
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {

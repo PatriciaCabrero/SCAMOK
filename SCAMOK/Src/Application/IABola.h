@@ -1,7 +1,7 @@
 #pragma once 
 #include "Componente.h"
 #include "Estado.h"
-enum States { Hunt, Wander, Stay, Die };
+enum States { Hunt, Wander, Stay, Die, p };
 enum WanderState { Right, Left, Up, Down, RU,RD, LU,LD };
 class IABola: public Componente
 {
