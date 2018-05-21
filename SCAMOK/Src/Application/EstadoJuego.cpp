@@ -20,12 +20,12 @@ void EstadoJuego::init() {
 	scnMgr->setShadowFarDistance(200);
 
 
-	entidades.insert(std::make_pair("sinbad", new Entidad(this, "sinbad")));
+	entidades.insert(std::make_pair("Alaia", new Entidad(this, "Alaia")));
 	entidades.insert(std::make_pair("camera", new Entidad(this, "camera")));
 
 
 	Mensaje msg(Tipo::Fisica, "80/30/0", SubTipo::Reposicionar,8);
-	msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(msg);
 
 	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena","arena");
@@ -95,7 +95,7 @@ bool EstadoJuego::initCEGUI() {
 	maxPower = power->getWidth().d_offset;
 
 	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
-	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(ms);
 	
 	return true;
@@ -121,8 +121,8 @@ bool EstadoJuego::update(float delta) {
 		}
 	}
 	if (contInput >= 30) {
-		entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
-		entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
+		entidades.at("Alaia")->setAnim("Idle", true, true, true);
+		//entidades.at("Alaia")->setAnim("IdleBase", true, true, true);
 		contInput = 0;
 	}
 
@@ -156,10 +156,10 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 		Mensaje msgI(Tipo::Input, s, SubTipo::Mover);
 		mensajes.push(msgI);
 		Mensaje msgR(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
-		msgR.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msgR.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msgR);
-		entidades.at("sinbad")->setAnim("RunTop", true);
-		entidades.at("sinbad")->setAnim("RunBase", true);
+		entidades.at("Alaia")->setAnim("Run", true);
+		//entidades.at("Alaia")->setAnim("RunBase", true);
 		contInput = 0;
 
 	}
@@ -178,19 +178,19 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 void EstadoJuego::keyPressed(std::string s) {
 	if (s == "0" || s == "salto") {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
-		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
-		entidades.at("sinbad")->setAnim("JumpLoop");
+		entidades.at("Alaia")->setAnim("JumpLoop");
 	}
 	else if (s == "1") {
-		entidades.at("sinbad")->setAnim("SliceHorizontal");
+		entidades.at("Alaia")->setAnim("SliceHorizontal");
 
 	}
 	else if (s == "2") {
-		entidades.at("sinbad")->setAnim("Dance");
+		entidades.at("Alaia")->setAnim("Dance");
 	}
 	else if (s == "3") {
-		entidades.at("sinbad")->setAnim("SliceVertical");
+		entidades.at("Alaia")->setAnim("SliceVertical");
 		
 			for (std::pair<std::string, Entidad*> ent : entidades)
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));

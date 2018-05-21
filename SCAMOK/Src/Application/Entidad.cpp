@@ -135,7 +135,7 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 		componentes.insert(std::make_pair("BalaComponent", new BalaComponent(this)));
 	}
 	else if (component == "IABola") {
-		componentes.insert(std::make_pair("IABola", new IABola(this,"sinbad", 0, 0, 0)));
+		componentes.insert(std::make_pair("IABola", new IABola(this,"Alaia", 0, 0, 0)));
 	}
 	else if (component == "LifeComponent") {
 		componentes.insert(std::make_pair("LifeComponent", new LifeComponent(this)));

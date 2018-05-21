@@ -1,5 +1,11 @@
-Grafico
-alaia
+Animation
+Alaia
+1
+Run
+Logico
+Transform
+Logico
+LifeComponent
 CFisico
-1 1 1 0 3 100
+1 1 1 0 2 100
 ---

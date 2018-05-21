@@ -96,7 +96,7 @@ void FComponent::initBody() {
 	//Elasticidad del material
 	body->setRestitution(0);
 	
-	//Para que sinbad no rote
+	//Para que Alaia no rote
 	if (tipo == tipoFisica::Kinematico || tipo == tipoFisica::Trigger) {
 		body->setAngularFactor(btVector3(0, 1, 0));
 	}
@@ -151,7 +151,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				Ogre::Vector3 valores = { xF,0,zF };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
-				if (pEntidad->getNombreNodo() == "sinbad") 
+				if (pEntidad->getNombreNodo() == "Alaia") 
 					valores = matriz * valores;
 		
 				btVector3 vel = body->getLinearVelocity();

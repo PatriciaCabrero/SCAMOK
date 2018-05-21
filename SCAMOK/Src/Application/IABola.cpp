@@ -115,7 +115,7 @@ void IABola::wander()
 	
 	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	Ogre::Vector3 aux = Ogre::Vector3(x, 0, z);
-	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
+	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodeAlaia")->getOrientation());
 	node->lookAt(aux, Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
 }
 
@@ -126,28 +126,28 @@ void IABola::stay()
 void IABola::hunt()
 {
 	
-	btVector3 vecSinbad = static_cast<FComponent*>(pEntidad->getPEstado()->getEntidad("sinbad")->getComponente("Fisico"))->getRigidBody()->getWorldTransform().getOrigin();
+	btVector3 vecAlaia = static_cast<FComponent*>(pEntidad->getPEstado()->getEntidad("Alaia")->getComponente("Fisico"))->getRigidBody()->getWorldTransform().getOrigin();
 	btVector3 vecBola = static_cast<FComponent*>(pEntidad->getComponente("Fisico"))->getRigidBody()->getWorldTransform().getOrigin();
 
 	float X, Y, Z;
-	if (vecSinbad.x() - vecBola.x() > 0) X = 0.5f;
-	else if(vecSinbad.x() - vecBola.x() < 0) X = -0.5f;
+	if (vecAlaia.x() - vecBola.x() > 0) X = 0.5f;
+	else if(vecAlaia.x() - vecBola.x() < 0) X = -0.5f;
 	else X = 0;
-	if (vecSinbad.z() - vecBola.z() > 0) Z = 0.5f;
-	else if (vecSinbad.z() - vecBola.z() < 0) Z = -0.5f;
+	if (vecAlaia.z() - vecBola.z() > 0) Z = 0.5f;
+	else if (vecAlaia.z() - vecBola.z() < 0) Z = -0.5f;
 	else Z = 0;
 
-	std::cout << "\nบบบบบบ\nHUNT" << vecSinbad.z() - vecBola.z();
+	std::cout << "\nบบบบบบ\nHUNT" << vecAlaia.z() - vecBola.z();
 
 	std::string s = std::to_string(X) + "/0/" + std::to_string(Z);
-	if (abs(vecSinbad.x() - vecBola.x()) < 6.0f && abs(vecSinbad.z() - vecBola.z()) < 6.0f) {
+	if (abs(vecAlaia.x() - vecBola.x()) < 6.0f && abs(vecAlaia.z() - vecBola.z()) < 6.0f) {
 		cont++;
 		die();
 	}
 	
 	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
-	Ogre::Vector3 aux = Ogre::Vector3(vecSinbad.x(), 0, vecSinbad.z());
-	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
+	Ogre::Vector3 aux = Ogre::Vector3(vecAlaia.x(), 0, vecAlaia.z());
+	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodeAlaia")->getOrientation());
 	node->lookAt(aux,Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
 	
 	Mensaje msgI(Tipo::Fisica, s, SubTipo::Mover);
@@ -190,7 +190,7 @@ void IABola::die()
 		restaurapS();
 
 		Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaVida);
-		ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("sinbad"), pEntidad->getPEstado()->getEntidad("sinbad"));
+		ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("Alaia"), pEntidad->getPEstado()->getEntidad("Alaia"));
 		pEntidad->getPEstado()->addMsg(ms);
 	
 		if (cont > 200) {
