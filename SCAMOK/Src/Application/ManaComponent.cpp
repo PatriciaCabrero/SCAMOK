@@ -1,8 +1,13 @@
 #include "ManaComponent.h"  
 #include "OgreParticleSystem.h"
+#include "OgreParticleEmitter.h"
 
 ManaComponent::ManaComponent(Entidad* pEnt) : Componente(pEnt) 
 {
+
+	particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem("cargaManaPFX", "Fairy");
+	pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
+	particleSystem->setEmitting(false);
 } 
 ManaComponent::~ManaComponent() { 
 } 
@@ -33,8 +38,8 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 			}
 		}
 	}
-	if (msg.getTipo() == Tipo::Mana) {
-		if (msg.getSubTipo() == SubTipo::DoPower && mana != nullptr) {
+	if (msg.getTipo() == Tipo::Mana && mana != nullptr) {
+		if (msg.getSubTipo() == SubTipo::DoPower ) {
 
 			if (mana->getWidth().d_offset >= 24) {
 				Entidad* aux1 = new Entidad(pEntidad->getPEstado());
@@ -53,7 +58,22 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 				particleSystem->setEmitting(true);
 			}
 		}
+		else if (msg.getSubTipo() == SubTipo::GetPower) {
+			if (msg.getMsg() == "item") {
+				
+			}
+			else if (msg.getMsg() == "carga") {
+				charge();
+			}
+			else
+			{
+				finCharge();
+			}
+		}
 	}
+	/*Mensaje ms(Tipo::Gui, "+0.01", SubTipo::CambiaMana);
+	ms.setMsgInfo(pEntidad, pEntidad);
+	pEntidad->getPEstado()->addMsg(ms);*/
 }
 
 void ManaComponent::restaPower()
@@ -61,4 +81,26 @@ void ManaComponent::restaPower()
 	Mensaje ms(Tipo::Gui, "-25", SubTipo::CambiaMana);
 	ms.setMsgInfo(pEntidad, pEntidad);
 	pEntidad->getPEstado()->addMsg(ms, true);
+}
+
+void ManaComponent::charge()
+{
+	Mensaje ms(Tipo::Gui, "+0.5", SubTipo::CambiaMana);
+	ms.setMsgInfo(pEntidad, pEntidad);
+	pEntidad->getPEstado()->addMsg(ms, true);
+
+	particleSystem->setEmitting(true);
+	
+}
+
+void ManaComponent::finCharge()
+{
+	particleSystem->setEmitting(false);
+}
+void ManaComponent::restaurapS()
+{
+	Ogre::ParticleEmitter * em = particleSystem->getEmitter(0);
+	em->setEnabled(false);
+	em->setEnabled(true);
+
 }

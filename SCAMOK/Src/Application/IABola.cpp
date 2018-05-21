@@ -14,7 +14,7 @@ IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Compon
 	contDivide = 0;
 	numDiv = 0;
 	pS = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Division");
-	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	pS->setEmitting(false);
 	node->attachObject(pS);
 	valueDiv = (rand() %  300) + 700;
@@ -113,7 +113,7 @@ void IABola::wander()
 	msgI.setMsgInfo(pEntidad, pEntidad);
 	pEntidad->getPEstado()->addMsg(msgI);
 	
-	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	Ogre::Vector3 aux = Ogre::Vector3(x, 0, z);
 	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
 	node->lookAt(aux, Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
@@ -145,7 +145,7 @@ void IABola::hunt()
 		die();
 	}
 	
-	Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	Ogre::Vector3 aux = Ogre::Vector3(vecSinbad.x(), 0, vecSinbad.z());
 	node->setOrientation(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNodesinbad")->getOrientation());
 	node->lookAt(aux,Ogre::Node::TS_LOCAL, Ogre::Vector3::UNIT_Z);
@@ -158,7 +158,7 @@ void IABola::hunt()
 
 void IABola::divide()
 {
-		Ogre::SceneNode* node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
+	node = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo());
 	if (node->getScale().x > 0.218) {
 		restaurapS();
 		pS->setEmitting(false);

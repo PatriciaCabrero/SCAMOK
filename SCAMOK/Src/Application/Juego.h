@@ -63,7 +63,7 @@ private:
 	
 	virtual bool axisMoved(const OIS::JoyStickEvent & arg, int axis);
 	virtual bool buttonPressed(const OIS::JoyStickEvent & arg, int button);
-	virtual bool buttonReleased(const OIS::JoyStickEvent & arg, int buton) { return true; }
+	virtual bool buttonReleased(const OIS::JoyStickEvent & arg, int buton);
 	virtual bool sliderMoved(const OIS::JoyStickEvent & arg, int index) { return true; }
 	virtual bool vector3Moved(const OIS::JoyStickEvent & arg, int index) { return true; }
 	virtual bool povMoved(const OIS::JoyStickEvent & arg, int index);

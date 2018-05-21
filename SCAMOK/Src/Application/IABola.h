@@ -17,7 +17,7 @@ public:
 	void die();
 private:
 	void restaurapS();
-
+	Ogre::SceneNode* node;
 	Ogre::ParticleSystem* pS;
 	int x, y, z;
 	Ogre::SceneNode *target;

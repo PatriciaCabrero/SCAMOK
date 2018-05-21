@@ -137,11 +137,6 @@ bool EstadoJuego::update(float delta) {
 	m_gui.draw();
 	swapMsgBufer();
 
-
-	Mensaje ms(Tipo::Gui, "+0.01", SubTipo::CambiaMana);
-	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
-	mensajes.push(ms);
-
 	return true;
 }
 
@@ -187,6 +182,9 @@ void EstadoJuego::keyPressed(std::string s) {
 	}
 	else if (s == "2") {
 		entidades.at("sinbad")->setAnim("Dance");
+		Mensaje msg(Tipo::Mana, "carga", SubTipo::GetPower);
+		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		mensajes.push(msg);
 	}
 	else if (s == "3") {
 		entidades.at("sinbad")->setAnim("SliceVertical");
@@ -202,6 +200,11 @@ void EstadoJuego::keyPressed(std::string s) {
 
 }
 void EstadoJuego::keyReleased(std::string s) {
-
+	if (s == "2") {
+		
+		Mensaje msg(Tipo::Mana, " ", SubTipo::GetPower);
+		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		mensajes.push(msg);
+	}
 
 }

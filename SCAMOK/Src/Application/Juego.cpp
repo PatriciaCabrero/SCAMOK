@@ -171,11 +171,7 @@ bool Juego::run(){
 	//	if (GetTickCount() - lastUpdate >= msUpdate) {
 			mInputMgr->capture();
 
-
-		if (firstTime) {
-			firstTime = false;
-				pEstados.top()->init();
-		}
+			
 			if (cont == 4) {
 				handleInput();
 				cont = 0;
@@ -195,6 +191,10 @@ bool Juego::run(){
 		
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
 		
+		if (firstTime) {
+			firstTime = false;
+			pEstados.top()->init();
+		}
 
 	}
 	delete pEstado;
@@ -218,6 +218,11 @@ bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
 	std::cout << buton << "\n";
 	pEstados.top()->keyPressed(std::to_string(buton));
+	return true;
+}
+bool Juego::buttonReleased(const OIS::JoyStickEvent & arg, int buton)
+{
+	pEstados.top()->keyReleased(std::to_string(buton));
 	return true;
 }
 bool Juego::keyPressed(const OIS::KeyEvent& ke)
@@ -283,6 +288,7 @@ void Juego::handleInput() {
 	}
 
 	OIS::JoyStick * js = mInputMgr->getJoystick(0);
+	
 	if (js != NULL) {
 		if (js->getJoyStickState().mAxes[0].abs != 0 || js->getJoyStickState().mAxes[1].abs != 0) {
 
@@ -306,7 +312,9 @@ void Juego::handleInput() {
 			else
 				pEstados.top()->joystickMoved(0, 0, 2);
 		}
+		if(js->getJoyStickState().mButtons[2])pEstados.top()->keyPressed("2");;
 	}
+	
 }
 bool Juego::keyReleased(const OIS::KeyEvent& ke)
 {
