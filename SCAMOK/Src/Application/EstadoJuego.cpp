@@ -3,7 +3,9 @@
 #include "FactoryBalas.h"
 #include <iostream>
 #include "OgreParticleSystem.h"
-EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
+#include "Juego.h"
+#include "EstadoMenu.h"
+EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego): Estado(mng, mWindow, sys, pJuego)
 {
 	
 	noInput = true; contInput = contDescartes=0;
@@ -62,6 +64,7 @@ void EstadoJuego::init() {
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
+	
 
 	
 
@@ -180,23 +183,24 @@ void EstadoJuego::keyPressed(std::string s) {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
-		entidades.at("Alaia")->setAnim("JumpLoop");
+		entidades.at("Alaia")->setAnim("Jump");
 	}
 	else if (s == "1") {
-		entidades.at("Alaia")->setAnim("SliceHorizontal");
+		entidades.at("Alaia")->setAnim("AirUp");
 
 	}
 	else if (s == "2") {
-		entidades.at("Alaia")->setAnim("Dance");
+		entidades.at("Alaia")->setAnim("AirDown");
 	}
 	else if (s == "3") {
-		entidades.at("Alaia")->setAnim("SliceVertical");
 		
 			for (std::pair<std::string, Entidad*> ent : entidades)
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
 	else if (s == "5") {
 		if (power->getWidth().d_offset >= 24) {
+			entidades.at("Alaia")->setAnim("Shoot");
+
 			Entidad* aux1 = new Entidad(this);
 
 			string auxBala = factoria->create("triangulo");
@@ -212,6 +216,11 @@ void EstadoJuego::keyPressed(std::string s) {
 			scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);
 			particleSystem->setEmitting(true);
 		}
+	}
+	else if (s == "7") {
+			EstadoMenu * pEstado;
+			pEstado = new EstadoMenu(scnMgr, mWin, system, game_, "pause");
+			game_->cambiaEstado(pEstado);
 	}
 
 }

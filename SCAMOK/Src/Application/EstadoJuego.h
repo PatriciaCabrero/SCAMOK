@@ -4,7 +4,7 @@
 class EstadoJuego: public Estado
 {
 public:
-	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys);
+	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego = nullptr);
 	virtual ~EstadoJuego() {};
 
 	virtual bool update(float delta);

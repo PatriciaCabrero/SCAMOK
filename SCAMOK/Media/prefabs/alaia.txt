@@ -1,6 +1,10 @@
 Animation
 Alaia
-1
+5
+Jump
+AirUp
+AirDown
+Shoot
 Run
 Logico
 Transform

@@ -15,6 +15,9 @@ public:
 	void salir();
 	void creditos();
 	virtual bool update(float delta);
+	virtual void joystickMoved(float x, float y, int js = 0);
+	virtual void keyPressed(std::string key);
+	virtual void keyReleased(std::string key);
 
 private:
 		std::string type_;
