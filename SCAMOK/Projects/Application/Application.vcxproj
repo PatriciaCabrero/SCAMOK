@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\Src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\Src\Application\Juego.cpp" />
     <ClCompile Include="..\..\Src\Application\LifeComponent.cpp" />
+    <ClCompile Include="..\..\Src\Application\ManaComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\ProyectoBasico.cpp" />
     <ClCompile Include="..\..\Src\Application\SoundManager.cpp" />
     <ClCompile Include="..\..\Src\Application\Transform.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="..\..\Src\Application\InputManager.h" />
     <ClInclude Include="..\..\Src\Application\Juego.h" />
     <ClInclude Include="..\..\Src\Application\LifeComponent.h" />
+    <ClInclude Include="..\..\Src\Application\ManaComponent.h" />
     <ClInclude Include="..\..\Src\Application\Mensaje.h" />
     <ClInclude Include="..\..\Src\Application\SoundManager.h" />
     <ClInclude Include="..\..\Src\Application\Transform.h" />

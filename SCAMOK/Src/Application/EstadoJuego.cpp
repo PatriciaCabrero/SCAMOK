@@ -80,9 +80,9 @@ void EstadoJuego::cargaGui()
 }
 void EstadoJuego::restaPower()
 {
-	CEGUI::UDim dim = power->getWidth();
-	dim -= {0, 25};
-	power->setWidth(dim);
+	Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaMana);
+	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	mensajes.push(ms);
 }
 bool EstadoJuego::initCEGUI() {
 	//Estado::initCEGUI();
@@ -91,8 +91,9 @@ bool EstadoJuego::initCEGUI() {
 	m_gui.getRoot()->addChild(guiRoot);
 
 	//life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
-	power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
-	maxPower = power->getWidth().d_offset;
+	//power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
+	
+
 
 	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
 	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
@@ -136,13 +137,11 @@ bool EstadoJuego::update(float delta) {
 	m_gui.draw();
 	swapMsgBufer();
 
-	if (power != nullptr) {
-		CEGUI::UDim dim = power->getWidth();
-		if (dim.d_offset < maxPower) {
-			dim += {0, 0.01f};
-			power->setWidth(dim);
-		}
-	}
+
+	Mensaje ms(Tipo::Gui, "+0.01", SubTipo::CambiaMana);
+	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	mensajes.push(ms);
+
 	return true;
 }
 
@@ -196,22 +195,9 @@ void EstadoJuego::keyPressed(std::string s) {
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
 	else if (s == "5") {
-		if (power->getWidth().d_offset >= 24) {
-			Entidad* aux1 = new Entidad(this);
-
-			string auxBala = factoria->create("triangulo");
-			aux1->setNombreNodo(auxBala);
-			
-			aux1->añadeComponenteGrafico("triangulo", auxBala);
-			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-			aux1->añadeComponenteLogico("BalaComponent");
-			entidades.insert(std::make_pair(auxBala, aux1));
-			restaPower();
-			// create a particle system named explosions using the explosionTemplate
-			Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem(auxBala+"PFX","Smoke");
-			scnMgr->getSceneNode(auxBala)->attachObject(particleSystem);
-			particleSystem->setEmitting(true);
-		}
+		Mensaje msg(Tipo::Mana, "", SubTipo::DoPower);
+		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		mensajes.push(msg);
 	}
 
 }

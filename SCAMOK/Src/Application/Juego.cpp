@@ -172,6 +172,10 @@ bool Juego::run(){
 			mInputMgr->capture();
 
 
+		if (firstTime) {
+			firstTime = false;
+				pEstados.top()->init();
+		}
 			if (cont == 4) {
 				handleInput();
 				cont = 0;
@@ -190,10 +194,6 @@ bool Juego::run(){
 	
 		
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
-		if (firstTime) {
-			firstTime = false;
-				pEstados.top()->init();
-		}
 		
 
 	}

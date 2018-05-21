@@ -9,6 +9,8 @@ Logico
 Transform
 Logico
 LifeComponent
+Logico
+ManaComponent
 CFisico
 1 1 1 0 2 100
 ---

@@ -11,6 +11,7 @@
 #include "BalaComponent.h"
 #include "IABola.h"
 #include "LifeComponent.h"
+#include "ManaComponent.h"
 
 Entidad::Entidad(Estado* pEstado): pEstado(pEstado){
 	cont++;
@@ -139,6 +140,9 @@ bool Entidad::añadeComponenteLogico(std::string component) {
 	}
 	else if (component == "LifeComponent") {
 		componentes.insert(std::make_pair("LifeComponent", new LifeComponent(this)));
+	}
+	else if (component == "ManaComponent") {
+		componentes.insert(std::make_pair("ManaComponent", new ManaComponent(this)));
 	}
 	return true;
 }

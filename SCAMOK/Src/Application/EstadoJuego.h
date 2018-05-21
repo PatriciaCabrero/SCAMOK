@@ -17,8 +17,6 @@ public:
 	void restaPower();
 private:
 	
-	CEGUI::ProgressBar * life;
-	CEGUI::ProgressBar * power = nullptr;
 	int maxPower;
 	int contDescartes;
 
