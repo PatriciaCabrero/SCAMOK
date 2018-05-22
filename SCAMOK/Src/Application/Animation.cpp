@@ -35,19 +35,19 @@ void Animation::Update(float deltaTime, Mensaje const & msj) {
 void Animation:: addAnimationState(std::string name, bool loop, bool enabled, bool idle) {
 	
 	if (idle) {
-		if (animStates.find("RunTop") != animStates.end()) {
-			animStates.at("RunTop")->setEnabled(false);
-			animStates.erase("RunTop");
+		if (animStates.find("Run") != animStates.end()) {
+			animStates.at("Run")->setEnabled(false);
+			animStates.erase("Run");
 		}
-		if (animStates.find("RunBase") != animStates.end()) {
+		/*if (animStates.find("RunBase") != animStates.end()) {
 			animStates.at("RunBase")->setEnabled(false);
 			animStates.erase("RunBase");
-		}
+		}*/
 	}
 	if (idle && animStates.size() != 0) 
 		return;
-	if (name == "RunTop" || name == "RunBase") time = 0.030f;
-	else time = 0.010f;
+	if (name == "Run" ) time = 0.005f;
+	else time = 0.005f;
 	if (animStates.find(name) == animStates.end()) {
 		Ogre::AnimationState* newState;
 		///ent->

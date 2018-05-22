@@ -151,7 +151,7 @@ bool Juego::initFmod() {
 bool Juego::run(){
 
 	//EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
-	EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system);
+	EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
 	firstTime = true;
 	pEstados.push(pEstado);
 	
@@ -211,20 +211,22 @@ bool Juego::exitGame(const CEGUI::EventArgs &e)
 }
 bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 	contJoystick++;
-
 	
 	return true;
 }
 bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
 	std::cout << buton << "\n";
+	
 	pEstados.top()->keyPressed(std::to_string(buton));
+	//pEstados.top()->joystickMoved()
 	return true;
 }
-bool Juego::buttonReleased(const OIS::JoyStickEvent & arg, int buton)
-{
+
+bool Juego::buttonReleased(const OIS::JoyStickEvent & arg, int buton) {
 	pEstados.top()->keyReleased(std::to_string(buton));
 	return true;
-}
+ }
+
 bool Juego::keyPressed(const OIS::KeyEvent& ke)
 {
 	EstadoMenu * pEstado;

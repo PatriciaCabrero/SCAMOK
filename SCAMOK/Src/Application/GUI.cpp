@@ -55,6 +55,20 @@ void GUI::upMouse(OIS::MouseButtonID id) {
 	m_context->injectMouseButtonUp(convertButton(id));
 }
 
+void GUI::moveJoystick(int x, int y) {
+	m_context->injectMouseMove(x, y);
+}
+void GUI::downButton(std::string id) {
+	m_context->injectMouseButtonDown(convertButtonFromJoystick(id));
+
+}
+void GUI::upButton(std::string id) {
+	m_context->injectMouseButtonUp(convertButtonFromJoystick(id));
+
+
+}
+
+
 void GUI::setMouseCursor(const std::string&imageFile) {
 	m_context->getMouseCursor().setDefaultImage(imageFile);
 }
@@ -97,6 +111,21 @@ CEGUI::MouseButton GUI::convertButton(OIS::MouseButtonID buttonID) {
 	case OIS::MB_Middle:
 		return CEGUI::MiddleButton;
 
+	default:
+		return CEGUI::LeftButton;
+	}
+}
+
+CEGUI::MouseButton GUI::convertButtonFromJoystick(std::string buttonID)
+{
+	
+	switch (std::stoi(buttonID))
+	{
+	case 0:
+		return CEGUI::LeftButton;
+
+	case 1:
+		return CEGUI::RightButton;
 	default:
 		return CEGUI::LeftButton;
 	}

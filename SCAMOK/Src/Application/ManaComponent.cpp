@@ -42,6 +42,7 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 		if (msg.getSubTipo() == SubTipo::DoPower ) {
 
 			if (mana->getWidth().d_offset >= 24) {
+				pEntidad->getPEstado()->getEntidad("Alaia")->setAnim("Shoot");
 				Entidad* aux1 = new Entidad(pEntidad->getPEstado());
 
 				string auxBala = pEntidad->getPEstado()->getFactory()->create("triangulo");

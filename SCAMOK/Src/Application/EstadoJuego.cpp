@@ -3,7 +3,9 @@
 #include "FactoryBalas.h"
 #include <iostream>
 #include "OgreParticleSystem.h"
-EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
+#include "Juego.h"
+#include "EstadoMenu.h"
+EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego): Estado(mng, mWindow, sys, pJuego)
 {
 	
 	noInput = true; contInput = contDescartes=0;
@@ -20,12 +22,12 @@ void EstadoJuego::init() {
 	scnMgr->setShadowFarDistance(200);
 
 
-	entidades.insert(std::make_pair("sinbad", new Entidad(this, "sinbad")));
+	entidades.insert(std::make_pair("Alaia", new Entidad(this, "Alaia")));
 	entidades.insert(std::make_pair("camera", new Entidad(this, "camera")));
 
 
 	Mensaje msg(Tipo::Fisica, "80/30/0", SubTipo::Reposicionar,8);
-	msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(msg);
 
 	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena","arena");
@@ -62,6 +64,7 @@ void EstadoJuego::init() {
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
+	
 
 	
 
@@ -81,7 +84,7 @@ void EstadoJuego::cargaGui()
 void EstadoJuego::restaPower()
 {
 	Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaMana);
-	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(ms);
 }
 bool EstadoJuego::initCEGUI() {
@@ -96,7 +99,7 @@ bool EstadoJuego::initCEGUI() {
 
 
 	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
-	ms.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(ms);
 	
 	return true;
@@ -122,8 +125,8 @@ bool EstadoJuego::update(float delta) {
 		}
 	}
 	if (contInput >= 30) {
-		entidades.at("sinbad")->setAnim("IdleTop", true, true, true);
-		entidades.at("sinbad")->setAnim("IdleBase", true, true, true);
+		entidades.at("Alaia")->setAnim("Idle", true, true, true);
+		//entidades.at("Alaia")->setAnim("IdleBase", true, true, true);
 		contInput = 0;
 	}
 
@@ -150,10 +153,10 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 		Mensaje msgI(Tipo::Input, s, SubTipo::Mover);
 		mensajes.push(msgI);
 		Mensaje msgR(Tipo::Render, s, SubTipo::Orientar); //Look at de la camara
-		msgR.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msgR.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msgR);
-		entidades.at("sinbad")->setAnim("RunTop", true);
-		entidades.at("sinbad")->setAnim("RunBase", true);
+		entidades.at("Alaia")->setAnim("Run", true);
+		//entidades.at("Alaia")->setAnim("RunBase", true);
 		contInput = 0;
 
 	}
@@ -172,30 +175,36 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 void EstadoJuego::keyPressed(std::string s) {
 	if (s == "0" || s == "salto") {
 		Mensaje msg(Tipo::Fisica, "", SubTipo::Salto);
-		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
-		entidades.at("sinbad")->setAnim("JumpLoop");
+		entidades.at("Alaia")->setAnim("Jump");
 	}
 	else if (s == "1") {
-		entidades.at("sinbad")->setAnim("SliceHorizontal");
+		entidades.at("Alaia")->setAnim("AirUp");
 
 	}
 	else if (s == "2") {
-		entidades.at("sinbad")->setAnim("Dance");
+
+	entidades.at("Alaia")->setAnim("AirDown");
 		Mensaje msg(Tipo::Mana, "carga", SubTipo::GetPower);
-		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
 	}
 	else if (s == "3") {
-		entidades.at("sinbad")->setAnim("SliceVertical");
 		
 			for (std::pair<std::string, Entidad*> ent : entidades)
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
 	else if (s == "5") {
 		Mensaje msg(Tipo::Mana, "", SubTipo::DoPower);
-		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
+
+	}
+	else if (s == "7") {
+			EstadoMenu * pEstado;
+			pEstado = new EstadoMenu(scnMgr, mWin, system, game_, "pause");
+			game_->cambiaEstado(pEstado);
 	}
 
 }
@@ -203,7 +212,7 @@ void EstadoJuego::keyReleased(std::string s) {
 	if (s == "2") {
 		
 		Mensaje msg(Tipo::Mana, " ", SubTipo::GetPower);
-		msg.setMsgInfo(entidades.at("sinbad"), entidades.at("sinbad"));
+		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
 	}
 
