@@ -1,10 +1,10 @@
 #include "FComponent.h"  
 #include <iostream>
  
-FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, btScalar masa):Componente(pEnt),mass(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
+FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profCaj, std::string nombreNodo, bool suelo, tipoFisica type, btScalar masa ):Componente(pEnt),mass(masa),altoCaja(altoCaj),anchoCaja(anchoCaj), profCaja(profCaj) {
 	tipo = type;
 	_suelo = suelo;
-	
+	eliminado = false; firstTime = true;
 	trigger = nullptr;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
@@ -36,7 +36,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo()));
 
 		//Para poder acceder desde Fisic a los rigidbodies
-		if (tipo != tipoFisica::Trigger)
+		if (tipo != tipoFisica::Trigger)// && tipo != tipoFisica::TriggerDinamico)
 			pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
 		
 	}
@@ -72,12 +72,12 @@ void FComponent::initBody() {
 	motionState = new btDefaultMotionState(pTransform);
 
 	if (!_suelo) {
-		if (tipo != tipoFisica::Trigger)
+		if (tipo != tipoFisica::Trigger && tipo != tipoFisica::TriggerDinamico)
 			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(altoCaja / 2), btScalar(profCaja / 2)));
 		else {
 
 			trigger = new btGhostObject();
-			shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
+			shape = new btBoxShape(btVector3(btScalar(0 / 2), btScalar(3), btScalar(0 / 2)));
 			trigger->setCollisionShape(shape);
 		}
 	}
@@ -113,6 +113,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	//if (msg.getTipo() == Tipo:: IA) return;
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
+			
 			int pos = msg.getMsg().find("/");
 			std::string xS = msg.getMsg().substr(0, pos);
 			std::string subcad = msg.getMsg().substr(pos + 1);
@@ -123,74 +124,102 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			btTransform t;
 			t.setIdentity();
 			t.setOrigin(btVector3(std::stof(xS), std::stof(yS), std::stof(zS)));
+			if (tipo == tipoFisica::Trigger || tipo == tipoFisica::TriggerDinamico)
+				trigger->setWorldTransform(t);
+
 			body->setWorldTransform(t);
+			pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / deltaTime);
+
 		}
-	}
 
-	
-	switch (tipo)
-	{
-	case Dinamico:
-		break;
+		if (!firstTime)
+		{
+			
+			//Este sería el caso kinematico concreto de la niña
+			//Para los enemigos habría que hacer otro
+			if (tipo == Kinematico || tipo == TriggerDinamico) {
+				if (msg.getTipo() == Tipo::Fisica) {
+					if (msg.getSubTipo() == SubTipo::Mover) {
+						body->activate(true);
+						//Aquí lo movemos con la info procedente del input
+						int pos = msg.getMsg().find("/");
+						std::string xS = msg.getMsg().substr(0, pos);
+						std::string subcad = msg.getMsg().substr(pos + 1);
+						pos = subcad.find("/");
+						std::string yS = subcad.substr(0, pos);
+						std::string zS = subcad.substr(pos + 1);
+						float xF = std::stof(xS) * deltaTime*0.1;
+						float zF = std::stof(zS) * deltaTime*0.1;
+						Ogre::Vector3 valores = { xF,0,zF };
+						Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
-	//Este sería el caso kinematico concreto de la niña
-	//Para los enemigos habría que hacer otro
-	case Kinematico:
-		if (msg.getTipo() == Tipo::Fisica) {
-			if (msg.getSubTipo() == SubTipo::Mover) {
-				body->activate(true);
-				//Aquí lo movemos con la info procedente del input
-				int pos = msg.getMsg().find("/");
-				std::string xS = msg.getMsg().substr(0, pos);
-				std::string subcad = msg.getMsg().substr(pos + 1);
-				pos = subcad.find("/");
-				std::string yS = subcad.substr(0, pos);
-				std::string zS = subcad.substr(pos + 1);
-				float xF= std::stof(xS) * deltaTime*0.1;
-				float zF = std::stof(zS) * deltaTime*0.1;
-				Ogre::Vector3 valores = { xF,0,zF };
-				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
+						if (pEntidad->getNombreNodo() == "Alaia")
+							valores = matriz * valores;
 
-				if (pEntidad->getNombreNodo() == "Alaia") 
-					valores = matriz * valores;
-		
-				btVector3 vel = body->getLinearVelocity();
-				//float yAux = vel.y();
-				vel.setValue(valores.x*30,vel.y(),valores.z*30);
-				body->setLinearVelocity(vel);
-			}
-			else if (msg.getSubTipo() == SubTipo::Salto) {
-				if ((int)body->getLinearVelocity().getY() == 0) {
-					std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX()) + "/0/" + std::to_string(body->getWorldTransform().getOrigin().getZ());
-					Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
-					pEntidad->getPEstado()->addMsg(msEfect);
-					body->activate(true);
-					body->applyCentralImpulse(btVector3(0, 2000, 0));
+						btVector3 vel = body->getLinearVelocity();
+						//float yAux = vel.y();
+						vel.setValue(valores.x * 30, vel.y(), valores.z * 30);
+						body->setLinearVelocity(vel);
+					}
+					else if (msg.getSubTipo() == SubTipo::Salto) {
+						if ((int)body->getLinearVelocity().getY() == 0) {
+							std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX()) + "/0/" + std::to_string(body->getWorldTransform().getOrigin().getZ());
+							Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
+							pEntidad->getPEstado()->addMsg(msEfect);
+							body->activate(true);
+							body->applyCentralImpulse(btVector3(0, 2000, 0));
+						}
+
+					}
+					else if (msg.getSubTipo() == SubTipo::Nulo) {
+						if (tipo != tipoFisica::TriggerDinamico) {
+							btVector3 vel = body->getLinearVelocity();
+							vel = vel * btVector3(0, 1, 0);
+							body->setLinearVelocity(vel);
+						}
+					}
 				}
-				
 			}
-			else if (msg.getSubTipo() == SubTipo::Nulo) {
-				btVector3 vel = body->getLinearVelocity();
-				vel = vel * btVector3(0, 1, 0);
-				body->setLinearVelocity(vel);
+			if ((tipo == tipoFisica::Trigger || tipo == tipoFisica::TriggerDinamico)) {
+				if (!eliminado && (trigger != nullptr && trigger->getNumOverlappingObjects() > 0)) {
+
+					std::string msgStr = "";
+					Mensaje m(Tipo::Fisica, msgStr, SubTipo::Trigge);
+					std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
+					m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
+
+					if (pEntidad->getNombreNodo() == "stone") {
+						std::cout << "holi";
+					}
+
+					pEntidad->getPEstado()->addMsg(m);
+					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+					eliminado = true;
+					//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
+				}
+
+			}
+			if (msg.getTipo() == Tipo::Fisica) {
+				if (msg.getSubTipo() == SubTipo::Inicializado) {
+					//reposicionado = true;
+					pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / deltaTime);
+				}
+			}
+			if (msg.getTipo() == Tipo::Fisica) {
+				if (pEntidad->getNombreNodo()[0] == 't') {
+					std::cout << " ";
+				}
+				if (!eliminado && msg.getSubTipo() == SubTipo::Colision) {
+					//reposicionado = true;
+					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+					eliminado = true;
+				}
 			}
 		}
-		break;
+		firstTime = false;
 	}
 
-	if (tipo == tipoFisica::Trigger) {
-		if (trigger->getNumOverlappingObjects() > 0) {
-			
-			std::string msgStr = "";
-			Mensaje m (Tipo::Fisica, msgStr,SubTipo::Trigge);
-			std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
-			m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
-			
-			pEntidad->getPEstado()->addMsg(m);
-			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-			//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
-		}
-	}
+
 	actualizaNodo();
 
 	
@@ -199,11 +228,13 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 //Actualiza el nodo gráfico en base a los cambios del físico
 void FComponent:: actualizaNodo() {
 
-	userPointer = body->getUserPointer();
-
+	if (tipo == tipoFisica::Trigger || tipo == tipoFisica::TriggerDinamico) userPointer = trigger->getUserPointer();
+	else userPointer = body->getUserPointer();
+	btVector3 position; btQuaternion orientation;
 	if (userPointer) {
 		btQuaternion orientation = body->getOrientation();
-		btVector3 position = body->getWorldTransform().getOrigin();
+		position = body->getWorldTransform().getOrigin();
+		
 		Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
 		sceneNode->setPosition(Ogre::Vector3(position.getX() , position.getY(), position.getZ()));	
 	}

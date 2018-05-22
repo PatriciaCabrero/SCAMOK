@@ -15,6 +15,8 @@ public:
 	virtual void init();
 	void cargaGui();
 	void restaPower();
+	void resuelveCol();
+
 private:
 	
 	int maxPower;

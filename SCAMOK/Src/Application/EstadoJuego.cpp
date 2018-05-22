@@ -5,13 +5,64 @@
 #include "OgreParticleSystem.h"
 #include "Juego.h"
 #include "EstadoMenu.h"
+
+static std::vector<std::string> colisiones;
+static std::string anteriorRec = " ", anteriorEmi =" ";
+bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper *colObj1Wrap, int partId1, int index1) {
+	std::string emisor = "vacio", receptor = "vacio";
+	receptor = static_cast<Ogre::SceneNode*>(colObj0Wrap->getCollisionObject()->getUserPointer())->getName();
+	int i = 0;
+	while (i < colisiones.size() && colisiones[i] != receptor)i++;
+	if (i >= colisiones.size()) colisiones.push_back(receptor);
+
+	emisor = static_cast<Ogre::SceneNode*>(colObj1Wrap->getCollisionObject()->getUserPointer())->getName();
+	try {
+		if (emisor != "vacio") {
+			std::string s = emisor.substr(5, 9);
+			if (s == "triangulo") {
+				i = 0;
+				while (i < colisiones.size() && colisiones[i] != emisor)i++;
+				if (i >= colisiones.size()) colisiones.push_back(emisor);
+			}
+
+		}
+	}catch (const std::length_error& le) {}
+	/*if (colObj0Wrap != nullptr) {
+		receptor = static_cast<Ogre::SceneNode*>(colObj0Wrap->getCollisionObject()->getUserPointer())->getName();
+		std::cout << receptor;
+		if (anteriorRec != receptor) {
+			colisiones.push(receptor);
+			anteriorRec = receptor;
+		}
+
+	}
+	if (colObj1Wrap != nullptr) {
+		try {
+			emisor = static_cast<Ogre::SceneNode*>(colObj1Wrap->getCollisionObject()->getUserPointer())->getName();
+			if (anteriorEmi != emisor) {
+				if (emisor != "vacio") {
+					std::string s = emisor.substr(5, 9);
+					if (s == "triangulo")
+						colisiones.push(emisor);
+				}
+				anteriorEmi = emisor;
+			}
+		}
+		catch(const std::length_error& le){}
+		
+	}*/
+	return false;
+}
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego): Estado(mng, mWindow, sys, pJuego)
 {
 	
 	noInput = true; contInput = contDescartes=0;
+	gContactAddedCallback = collisionCallback;
+	anteriorEmi = anteriorRec = " ";
 	cargaGui();
 	
 }
+
 void EstadoJuego::init() {
 #pragma region InitOgre 
 	factoria = new FactoryBalas();
@@ -37,10 +88,10 @@ void EstadoJuego::init() {
 
 	Entidad *aux2 = new Entidad(this);
 	aux2->añadeComponenteGrafico("compcube","compcube");
-	aux2->añadeComponenteFisico(0, 0, 0, false);
-	entidades.insert(std::make_pair("MetalBox", aux2));
-	Mensaje ms1(Tipo::Fisica, "0/15/10", SubTipo::Reposicionar,8);
-	ms1.setMsgInfo(entidades.at("MetalBox"), entidades.at("MetalBox"));
+	aux2->añadeComponenteFisico(1 ,1 ,1, false, tipoFisica::Estatico, 100);
+	entidades.insert(std::make_pair("compcube", aux2));
+	Mensaje ms1(Tipo::Fisica, "25/10/10", SubTipo::Reposicionar,8);
+	ms1.setMsgInfo(entidades.at("compcube"), entidades.at("compcube"));
 	mensajes.push(ms1);
 
 	Entidad* aux1 = new Entidad(this);
@@ -73,6 +124,9 @@ void EstadoJuego::init() {
 #pragma endregion InitOgre
 	destroy();
 	initCEGUI();
+
+	Mensaje ini(Tipo::Fisica, " ", SubTipo::Inicializado, -10);
+	//mensajes.push(ini);
 }
 void EstadoJuego::cargaGui()
 {
@@ -86,6 +140,21 @@ void EstadoJuego::restaPower()
 	Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaMana);
 	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(ms);
+}
+void EstadoJuego::resuelveCol()
+{
+	while (colisiones.size() > 0) {
+		std::string aux = colisiones[colisiones.size()-1].substr(5,colisiones[colisiones.size() - 1].size());
+		colisiones.pop_back();
+		if (aux != "arena" && aux != "alaia") {
+			try {
+				Mensaje ms(Tipo::Fisica, " ", SubTipo::Colision);
+				ms.setMsgInfo(entidades.at(aux), entidades.at(aux));
+				mensajes.push(ms);
+			}catch(const std::out_of_range& ot){}
+		}
+
+	}
 }
 bool EstadoJuego::initCEGUI() {
 	//Estado::initCEGUI();
@@ -124,6 +193,7 @@ bool EstadoJuego::update(float delta) {
 			ent.second->Update(delta, aux);
 		}
 	}
+	resuelveCol();
 	if (contInput >= 30) {
 		entidades.at("Alaia")->setAnim("Idle", true, true, true);
 		//entidades.at("Alaia")->setAnim("IdleBase", true, true, true);
@@ -132,7 +202,7 @@ bool EstadoJuego::update(float delta) {
 
 	for (std::pair<std::string, Entidad*> ent : entidades) {
 		ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
-		ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+		//ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
 	}
 		
 	
@@ -178,6 +248,9 @@ void EstadoJuego::keyPressed(std::string s) {
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
 		entidades.at("Alaia")->setAnim("Jump");
+		Mensaje msg1(Tipo::Fisica, "", SubTipo::Musica);
+		//msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
+		mensajes.push(msg1);
 	}
 	else if (s == "1") {
 		entidades.at("Alaia")->setAnim("AirUp");
@@ -212,6 +285,7 @@ void EstadoJuego::keyPressed(std::string s) {
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
 	}
+	
 
 }
 void EstadoJuego::keyReleased(std::string s) {

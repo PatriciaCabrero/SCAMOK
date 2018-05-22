@@ -61,6 +61,9 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 				btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 1000);
 
+				btRigidBody * bala = pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo());
+				bala->setCollisionFlags(bala->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 				btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
 				pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
 
@@ -83,17 +86,20 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 				valores = matriz * valores;
 
+				btRigidBody * bala = pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo());
+				bala->setCollisionFlags(bala->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 				btVector3 vel = { 0 ,-valores.y, 0 };
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(vel * 10, start);
 			}
 
-
+			
 		}
-		if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
+
+		/*if (tiempoInicio + /*5000000*1000000  < std::clock() * 1000) {
 			pEntidad->Sleep();
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 			std::cout << "MUERE\n";
-		}
+		}*/
 	}
 
 }

@@ -4,7 +4,7 @@
 
 enum Tipo{ Render, Fisica, Logica, Input, AnimationM, Audio, IA, Gui, Mana };
 enum SubTipo { Musica, Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara, Effect, Trigge, Dispara, Nulo, 
-	InitGui, CambiaVida, CambiaMana, DoPower,GetPower};
+	InitGui, CambiaVida, CambiaMana, DoPower,GetPower, Inicializado, Colision};
 
 
 class Mensaje{

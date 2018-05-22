@@ -25,4 +25,5 @@ protected:
 	btGhostObject* trigger;
 	void *userPointer;
 	bool _suelo;
+	bool eliminado, firstTime;
 }; 

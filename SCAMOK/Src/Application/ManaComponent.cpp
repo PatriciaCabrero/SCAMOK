@@ -50,14 +50,14 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 					aux1->setNombreNodo(auxBala);
 
 					aux1->añadeComponenteGrafico("triangulo", auxBala);
-					aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
-					aux1->añadeComponenteLogico("BalaComponentSimple");
-					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 					restaPower();
 					// create a particle system named explosions using the explosionTemplate
 					Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
 					pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
 					particleSystem->setEmitting(true);
+					aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+					aux1->añadeComponenteLogico("BalaComponentSimple");
+					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 				}
 			}
 			else if (msg.getMsg() == "lluvia") {
@@ -86,12 +86,13 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 						ms1.setMsgInfo(aux1, aux1);
 						aux1->getPEstado()->addMsg(ms);
 						aux1->getPEstado()->addMsg(ms1);
-						//restaPower();
+						
 						// create a particle system named explosions using the explosionTemplate
 						Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
 						pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
 						particleSystem->setEmitting(true);
 					}
+					restaPower();
 				}
 			}
 		}
