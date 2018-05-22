@@ -9,5 +9,6 @@ public:
 	virtual void Update(float deltaTime, Mensaje const & msj);//A rellenar con el cuenta steps
 	virtual void destroy() {};
 
+
 	float tiempoInicio;
 }; 

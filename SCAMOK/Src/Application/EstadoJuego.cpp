@@ -195,6 +195,7 @@ void EstadoJuego::keyPressed(std::string s) {
 			for (std::pair<std::string, Entidad*> ent : entidades)
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
+
 	else if (s == "5") {
 		Mensaje msg(Tipo::Mana, "", SubTipo::DoPower);
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
