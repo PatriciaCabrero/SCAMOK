@@ -4,7 +4,7 @@
 class EstadoJuego: public Estado
 {
 public:
-	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys);
+	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego = nullptr);
 	virtual ~EstadoJuego() {};
 
 	virtual bool update(float delta);
@@ -16,10 +16,9 @@ public:
 	void cargaGui();
 	void restaPower();
 private:
-	Factory * factoria;
-	CEGUI::ProgressBar * life;
-	CEGUI::ProgressBar * power = nullptr;
+	
 	int maxPower;
+	int contDescartes;
 
 	float RandomNumber(float Min, float Max)
 	{

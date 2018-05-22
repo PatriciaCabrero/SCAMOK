@@ -7,13 +7,13 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 	if (type == "Simple") {
 
 		Ogre::Vector3 valores = { 1,0,1 };
-		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("Alaia")->getLocalAxes();
 		valores = matriz * valores;
 		btVector3 pos1 = { valores.x ,0, valores.z };
 		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
-		string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getX()) + "/" +
-			to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getY() + 4) + "/" +
-			to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad")->getWorldTransform().getOrigin().getZ());
+		string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getX()) + "/" +
+			to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getY() + 4) + "/" +
+			to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getZ());
 		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(pEntidad, pEntidad);
@@ -23,7 +23,7 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 	}
 	else {
 		Ogre::Vector3 valores = { 0,1,0 };
-		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+		Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("Alaia")->getLocalAxes();
 		valores = matriz * valores;
 		btVector3 pos1 = { 0 ,valores.y, 0 };
 		
@@ -48,11 +48,11 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			if (tipo == "Simple") {
 				Ogre::Real escala = std::stof(msg.getMsg());
 
-				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
-				btVector3 start = alaia->getWorldTransform().getOrigin();
+			btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia");
+			btVector3 start = alaia->getWorldTransform().getOrigin();
 
-				Ogre::Vector3 valores = { escala,0,escala };
-				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+			Ogre::Vector3 valores = { escala,0,escala };
+			Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("Alaia")->getLocalAxes();
 
 				valores = matriz * valores;
 
@@ -75,11 +75,11 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			else {
 				Ogre::Real escala = std::stof(msg.getMsg());
 
-				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("sinbad");
+				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia");
 				btVector3 start = alaia->getWorldTransform().getOrigin();
 
 				Ogre::Vector3 valores = { 0,escala,0 };
-				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("sinbad")->getLocalAxes();
+				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("Alaia")->getLocalAxes();
 
 				valores = matriz * valores;
 
@@ -88,35 +88,12 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			}
 
 
-			
-
-			/*
-			int numManifolds = world->getDispatcher()->getNumManifolds();
-    for (int i = 0; i < numManifolds; i++)
-    {
-        btPersistentManifold* contactManifold =  world->getDispatcher()->getManifoldByIndexInternal(i);
-        const btCollisionObject* obA = contactManifold->getBody0();
-        const btCollisionObject* obB = contactManifold->getBody1();
-
-        int numContacts = contactManifold->getNumContacts();
-        for (int j = 0; j < numContacts; j++)
-        {
-            btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (pt.getDistance() < 0.f)
-            {
-                const btVector3& ptA = pt.getPositionWorldOnA();
-                const btVector3& ptB = pt.getPositionWorldOnB();
-                const btVector3& normalOnB = pt.m_normalWorldOnB;
-            }
-        }
-    }
-			*/
+		}
+		if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
+			pEntidad->Sleep();
+			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			std::cout << "MUERE\n";
 		}
 	}
 
-	if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
-		//pEntidad->Sleep();
-		pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-		std::cout << "MUERE\n";
-	}
 }

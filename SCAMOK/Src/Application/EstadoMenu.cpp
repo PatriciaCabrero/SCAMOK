@@ -127,3 +127,20 @@ void EstadoMenu::initPpal()
 	creditos->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::creditos, this));
 
 }
+void EstadoMenu::joystickMoved(float x, float y, int js) {
+	if (abs(x) >= 0.2 || abs(y) >= 0.2) {
+		m_gui.moveJoystick(x*(-10), y*(-10));
+	}
+}
+
+void EstadoMenu::keyPressed(std::string key)
+{
+	if(key != "")
+	m_gui.downButton(key);
+}
+
+void EstadoMenu::keyReleased(std::string key)
+{
+	if (key != "")
+	m_gui.upButton(key);
+}

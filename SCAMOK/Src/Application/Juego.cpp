@@ -150,8 +150,8 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
-	//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system);
+	//EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+	EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
 	firstTime = true;
 	pEstados.push(pEstado);
 	
@@ -171,7 +171,7 @@ bool Juego::run(){
 	//	if (GetTickCount() - lastUpdate >= msUpdate) {
 			mInputMgr->capture();
 
-
+			
 			if (cont == 4) {
 				handleInput();
 				cont = 0;
@@ -190,11 +190,11 @@ bool Juego::run(){
 	
 		
 		if ( cont%2 != 0 && !root->renderOneFrame())return false;
+		
 		if (firstTime) {
 			firstTime = false;
-				pEstados.top()->init();
+			pEstados.top()->init();
 		}
-		
 
 	}
 	delete pEstado;
@@ -211,15 +211,22 @@ bool Juego::exitGame(const CEGUI::EventArgs &e)
 }
 bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 	contJoystick++;
-
 	
 	return true;
 }
 bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
 	std::cout << buton << "\n";
+	
 	pEstados.top()->keyPressed(std::to_string(buton));
+	//pEstados.top()->joystickMoved()
 	return true;
 }
+
+bool Juego::buttonReleased(const OIS::JoyStickEvent & arg, int buton) {
+	pEstados.top()->keyReleased(std::to_string(buton));
+	return true;
+ }
+
 bool Juego::keyPressed(const OIS::KeyEvent& ke)
 {
 	EstadoMenu * pEstado;
@@ -285,6 +292,7 @@ void Juego::handleInput() {
 	}
 
 	OIS::JoyStick * js = mInputMgr->getJoystick(0);
+	
 	if (js != NULL) {
 		if (js->getJoyStickState().mAxes[0].abs != 0 || js->getJoyStickState().mAxes[1].abs != 0) {
 
@@ -293,6 +301,10 @@ void Juego::handleInput() {
 
 			if (abs(x) >= 0.2 || abs(y) >= 0.2)
 				pEstados.top()->joystickMoved(-x, -y);
+			else {
+				pEstados.top()->joystickMoved(0, 0, 2);
+			}
+
 		}
 		if (js->getJoyStickState().mAxes[2].abs != 0 || js->getJoyStickState().mAxes[3].abs != 0) {
 
@@ -301,8 +313,12 @@ void Juego::handleInput() {
 
 			if (abs(x) >= 0.2 || abs(y) >= 0.2)
 				pEstados.top()->joystickMoved(-x, -y, 1);
+			else
+				pEstados.top()->joystickMoved(0, 0, 2);
 		}
+		if(js->getJoyStickState().mButtons[2])pEstados.top()->keyPressed("2");;
 	}
+	
 }
 bool Juego::keyReleased(const OIS::KeyEvent& ke)
 {

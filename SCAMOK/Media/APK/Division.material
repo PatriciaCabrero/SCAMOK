@@ -1,4 +1,4 @@
-material Examples/Smoke
+material Division
 {
 	technique
 	{
@@ -8,10 +8,9 @@ material Examples/Smoke
 			scene_blend alpha_blend
 			depth_write off
 			diffuse vertexcolour
-
 			texture_unit
 			{
-				texture smoke.png
+				texture division.png
 				tex_address_mode clamp
 			}
 		}

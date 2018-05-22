@@ -96,7 +96,7 @@ void FComponent::initBody() {
 	//Elasticidad del material
 	body->setRestitution(0);
 	
-	//Para que sinbad no rote
+	//Para que Alaia no rote
 	if (tipo == tipoFisica::Kinematico || tipo == tipoFisica::Trigger) {
 		body->setAngularFactor(btVector3(0, 1, 0));
 	}
@@ -110,7 +110,7 @@ void FComponent::initBody() {
 void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-
+	//if (msg.getTipo() == Tipo:: IA) return;
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
 			int pos = msg.getMsg().find("/");
@@ -151,10 +151,12 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				Ogre::Vector3 valores = { xF,0,zF };
 				Ogre::Matrix3 matriz = pEntidad->getPEstado()->getScnManager()->getSceneNode("NodoCamera")->getLocalAxes();
 
-				valores = matriz * valores;
+				if (pEntidad->getNombreNodo() == "Alaia") 
+					valores = matriz * valores;
 		
 				btVector3 vel = body->getLinearVelocity();
-				vel = vel + btVector3(valores.x*30,0,valores.z*30);
+				//float yAux = vel.y();
+				vel.setValue(valores.x*30,vel.y(),valores.z*30);
 				body->setLinearVelocity(vel);
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {

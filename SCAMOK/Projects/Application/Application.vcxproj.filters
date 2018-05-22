@@ -51,7 +51,6 @@
     <ClCompile Include="..\..\Src\Application\SoundManager.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-
     <ClCompile Include="..\..\Src\Application\Factory.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -59,7 +58,7 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Application\BalaComponent.cpp">
- <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Application\GUI.cpp">
       <Filter>Archivos de código fuente</Filter>
@@ -68,6 +67,15 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\Application\EstadoMenu.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Application\IABola.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Application\LifeComponent.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Application\ManaComponent.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,7 +119,6 @@
     <ClInclude Include="..\..\Src\Application\SoundManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-
     <ClInclude Include="..\..\Src\Application\Factory.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -119,7 +126,7 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\BalaComponent.h">
-<Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\GUI.h">
       <Filter>Archivos de encabezado</Filter>
@@ -128,6 +135,15 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Application\EstadoMenu.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Application\IABola.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Application\LifeComponent.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Application\ManaComponent.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

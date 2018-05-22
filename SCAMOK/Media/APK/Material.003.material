@@ -1,12 +1,12 @@
 // Material.003 genrated by blender2ogre 0.6.0
 
-material Material.003 
+material Material
 {
     receive_shadows on 
 
     technique
     {
-        pass Material.003
+        pass Material
         {
             ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0

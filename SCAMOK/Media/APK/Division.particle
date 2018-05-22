@@ -1,11 +1,11 @@
 // Example particle systems
 
 // smoke
-particle_system Examples/Smoke
+particle_system Division
 {
-	material        	Examples/Smoke
-	particle_width  	35
-	particle_height 	35
+	material        	Division
+	particle_width  	7
+	particle_height 	7
 	cull_each       	true
 	quota           	500
 	billboard_type  	point
@@ -14,18 +14,19 @@ particle_system Examples/Smoke
 	// Area emitter
 	emitter Point
 	{
-		position 0 15 -15
+		position 0 0 0
 		angle 35
-		emission_rate 15
-		time_to_live 4
+		emission_rate 100
+		duration	   1
+		time_to_live 2
 		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
+		velocity_min 5
+		velocity_max 8    	
 	}
 
 	affector ColourImage
 	{
-		image smokecolors.png
+		image divisioncolors.png
 	}
 
    	affector Rotator
@@ -38,7 +39,7 @@ particle_system Examples/Smoke
 
    	affector Scaler
    	{
-       	rate 50
+       		rate 2
    	}
 
 }

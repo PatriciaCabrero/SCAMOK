@@ -39,6 +39,9 @@ public:
 	virtual void keyReleased(std::string key);
 	virtual void joystickMoved(float x, float y, int js = 0);
 	Entidad* getEntidad(std::string s);
+	void addEntidad(std::string &name,Entidad * ent) {
+		entidades.insert(std::make_pair(name, ent));
+	}
 
 	virtual bool initCEGUI();
 	virtual void destroy() { 
@@ -71,10 +74,12 @@ public:
 
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
-
-
+	Factory* getFactory() { return factoria; }
+	CEGUI::Window* getGUIRoot() {
+		return guiRoot;
+	}
 protected:
-
+	Factory * factoria;
 	std::vector<std::string> borrar;
 	std::map<std::string, Entidad*> entidades;
 	Ogre::SceneManager * scnMgr;
@@ -85,7 +90,7 @@ protected:
 	GUI m_gui;
 	CEGUI::Window *guiRoot;
 
-	std::priority_queue < Mensaje > mensajes, bufer;
+	std::priority_queue <Mensaje> mensajes, bufer;
 	Fisic* fisicaManager;
 	FMOD::System* system;
 	bool noInput; int  contInput;

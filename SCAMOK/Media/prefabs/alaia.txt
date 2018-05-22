@@ -1,5 +1,17 @@
-Grafico
-alaia
+Animation
+Alaia
+5
+Jump
+AirUp
+AirDown
+Shoot
+Run
+Logico
+Transform
+Logico
+LifeComponent
+Logico
+ManaComponent
 CFisico
-1 1 1 0 3 100
+1 1 1 0 2 100
 ---

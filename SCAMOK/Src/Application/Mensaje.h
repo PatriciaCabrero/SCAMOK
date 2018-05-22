@@ -2,8 +2,9 @@
 #include "Estado.h"
 #pragma once
 
-enum Tipo{ Render, Fisica, Logica, Input, AnimationM, Audio };
-enum SubTipo { Musica, Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara, Effect, Trigge, Dispara, Nulo};
+enum Tipo{ Render, Fisica, Logica, Input, AnimationM, Audio, IA, Gui, Mana };
+enum SubTipo { Musica, Rotar, Escalar, Salto, Mover, InitFis, Reposicionar, Orientar, OrientaCamara, Effect, Trigge, Dispara, Nulo, 
+	InitGui, CambiaVida, CambiaMana, DoPower,GetPower};
 
 
 class Mensaje{
@@ -32,7 +33,7 @@ public:
 				prio = 3;
 				break;
 			default:
-				prio = 4;
+				prio = 0;
 				break;
 			}
 		}
