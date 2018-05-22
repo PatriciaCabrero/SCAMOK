@@ -48,53 +48,17 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 			btVector3 vel = { valores.x ,0, valores.z };
 			btVector3 velAux = vel.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 
-			btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 9000);
+			//btVector3 auxx(velAux.getX(), velAux.getY(), velAux.getZ() + 9000);
 
-			btCollisionWorld::ClosestRayResultCallback RayCallback(start, auxx);
-			pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->rayTest(start, auxx, RayCallback);
-
-			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
-			pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
-
-			if (RayCallback.hasHit()) {
-				auxx = RayCallback.m_hitPointWorld;
-				Mensaje ms1(Tipo::Fisica, " ", SubTipo::Destruye);
-				ms1.setMsgInfo(pEntidad, pEntidad);
-				pEntidad->getPEstado()->addMsg(ms1);
-			}
-
-
-
+			btRigidBody* bala = pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo());
+			bala->setLinearFactor({ 1, 0, 1 });
+			bala->setCollisionFlags(bala->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+			bala->applyImpulse(velAux * 10, start);
 			
-
-			/*
-			int numManifolds = world->getDispatcher()->getNumManifolds();
-    for (int i = 0; i < numManifolds; i++)
-    {
-        btPersistentManifold* contactManifold =  world->getDispatcher()->getManifoldByIndexInternal(i);
-        const btCollisionObject* obA = contactManifold->getBody0();
-        const btCollisionObject* obB = contactManifold->getBody1();
-
-        int numContacts = contactManifold->getNumContacts();
-        for (int j = 0; j < numContacts; j++)
-        {
-            btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (RayCallback.hasHit()) {
-				auxx = RayCallback.m_hitPointWorld;
-				Mensaje ms1(Tipo::Fisica, " ", SubTipo::Destruye);
-				ms1.setMsgInfo(pEntidad, pEntidad);
-				pEntidad->getPEstado()->addMsg(ms1);
-				
-			}else{
-				/if (tiempoInicio + /*5000000*//*1000000  < std::clock() * 1000) {*/
-				//pEntidad->Sleep();
-				/*pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-				std::cout << "MUERE\n";
-			}*/
 			}
         }
 	if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
-		//pEntidad->Sleep();
+		pEntidad->Sleep();
 		pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 		std::cout << "MUERE\n";
 	}

@@ -15,6 +15,7 @@ public:
 	virtual void init();
 	void cargaGui();
 	void restaPower();
+
 private:
 	Factory * factoria;
 	CEGUI::ProgressBar * life;

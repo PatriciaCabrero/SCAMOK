@@ -5,11 +5,17 @@
 #include "OgreParticleSystem.h"
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys): Estado(mng, mWindow, sys)
 {
-	
+	//gContactAddedCallback = callbackFunc;
 	noInput = true; contInput = 0;
 	cargaGui();
 	
 }
+
+bool callbackFunc(btManifoldPoint& cp, const btCollisionObject* ob1, int id1,int index1, const btCollisionObject* ob2, int id2, int index2) {
+	std::cout << "collision\n";
+	return false;
+}
+
 void EstadoJuego::init() {
 #pragma region InitOgre 
 	factoria = new FactoryBalas();
@@ -99,9 +105,65 @@ bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
+
+
+	///////////////////////////////
+	//Los Manifolds son las colisiones (de pares de objetos) que existen en cada momento en el mundo físico
+	int numManifolds = getFisicManager()->getDynamicsWorld()->getDispatcher()->getNumManifolds();
+	for (int i = 0; i < numManifolds; i++)
+	{
+		//
+		btPersistentManifold* contactManifold = getFisicManager()->getDynamicsWorld()->getDispatcher()->getManifoldByIndexInternal(i);
+		//obA y obB son los pares de objetos que están colisionando
+		const btCollisionObject* obA = contactManifold->getBody0();
+		const btCollisionObject* obB = contactManifold->getBody1();
+		void* userPointer = obA->getUserPointer();
+		if (userPointer) {
+			Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
+			std::string nombre = sceneNode->getName();
+			nombre = nombre.substr(0, 9);
+			if (nombre == "triangulo") {
+				//El cuerpo A es una bala
+				std::cout << "HEADSHOT";
+			}
+			else {
+				userPointer = obB->getUserPointer();
+				if (userPointer) {
+					Ogre::SceneNode *sceneNode = static_cast<Ogre::SceneNode *>(userPointer);
+					std::string nombre = sceneNode->getName();
+					nombre = nombre.substr(0, 9);
+					if (nombre == "triangulo") {
+						//El cuerpo b es una bala
+						std::cout << "HEADSHOT";
+					}
+				}
+			
+			}
+			
+		
+		}
+		//int numContacts = contactManifold->getNumContacts();
+		//std::cout << numContacts << "\n";
+		/*for (int j = 0; j < numContacts; j++)
+		{
+			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+			if (pt.getDistance() < 0.f)
+			{
+				const btVector3& ptA = pt.getPositionWorldOnA();
+				const btVector3& ptB = pt.getPositionWorldOnB();
+				const btVector3& normalOnB = pt.m_normalWorldOnB;
+			}
+		}*/
+	}
+
+
+
+
 	for (size_t i = 0; i < borrar.size(); i++)
 	{
 		entidades.at(borrar[i])->destruyeComponenteGrafico();
+		btRigidBody* b = getFisicManager()->getRigidBody(borrar[i]);
+		getFisicManager()->getDynamicsWorld()->removeRigidBody(b);
 		entidades.erase(borrar[i]);
 	}
 	borrar.clear();
