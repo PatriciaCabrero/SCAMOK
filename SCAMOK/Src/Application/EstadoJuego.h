@@ -20,6 +20,10 @@ public:
 
 private:
 	
+	CEGUI::DefaultWindow* lluviaW, *simpleW;
+	int habilidad; //0-> simple, 1-> lluvia.
+	void changeHabilidad();
+	
 	int maxPower;
 	int contDescartes;
 

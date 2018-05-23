@@ -6,6 +6,7 @@
 	<Imageset filename="menuPrincipal.imageset" />
 	<Imageset filename="Loading.imageset" />
 	<Imageset filename="creditos.imageset" />
+	<Imageset filename="GameOver.imageset" />
 	<Font filename="DejaVuSans-12.font" />
 	<LookNFeel filename="TaharezLook.looknfeel" />
 	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />

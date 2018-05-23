@@ -144,16 +144,31 @@ void EstadoJuego::resuelveCol()
 
 	}
 }
+void EstadoJuego::changeHabilidad()
+{
+	if (habilidad == 0) { // Simple
+		habilidad = 1;
+		lluviaW->setAlpha(1);
+		simpleW->setAlpha(0);
+	}
+	else if (habilidad == 1) { //Lluvia
+		habilidad = 0;
+		lluviaW->setAlpha(0);
+		simpleW->setAlpha(1);
+	}
+}
 bool EstadoJuego::initCEGUI() {
 	//Estado::initCEGUI();
 
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
-	//life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
-	//power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
+	lluviaW = static_cast<CEGUI::DefaultWindow*>(guiRoot->getChild("Lluvia"));
+	simpleW = static_cast<CEGUI::DefaultWindow*>(guiRoot->getChild("Simple"));
 	
-
+	lluviaW->setAlpha(0);
+	simpleW->setAlpha(1);
+	habilidad = 0;
 
 	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
 	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
@@ -276,9 +291,16 @@ void EstadoJuego::keyPressed(std::string s) {
 	}
 
 	else if (s == "5") {
-		Mensaje msg(Tipo::Mana, "simple", SubTipo::DoPower);
-		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
-		mensajes.push(msg);
+		if (habilidad == 0) { //Simple
+			Mensaje msg(Tipo::Mana, "simple", SubTipo::DoPower);
+			msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
+			mensajes.push(msg);
+		}
+		else if (habilidad == 1) { //lluvia
+			Mensaje msg(Tipo::Mana, "lluvia", SubTipo::DoPower);
+			msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
+			mensajes.push(msg);
+		}
 
 	}
 	else if (s == "7") {
@@ -286,11 +308,7 @@ void EstadoJuego::keyPressed(std::string s) {
 			pEstado = new EstadoMenu(scnMgr, mWin, system, game_, "pause");
 			game_->cambiaEstado(pEstado);
 	}
-	else if (s == "4") {
-		Mensaje msg(Tipo::Mana, "lluvia", SubTipo::DoPower);
-		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
-		mensajes.push(msg);
-	}
+	
 	
 
 }
@@ -300,6 +318,9 @@ void EstadoJuego::keyReleased(std::string s) {
 		Mensaje msg(Tipo::Mana, " ", SubTipo::GetPower);
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
+	}
+	else if (s == "4") {
+		changeHabilidad();
 	}
 
 }

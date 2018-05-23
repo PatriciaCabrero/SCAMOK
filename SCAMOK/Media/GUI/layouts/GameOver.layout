@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="TaharezLook/StaticImage" name="StaticImage" >
+        <Property name="Area" value="{{0,10},{0,4},{0,1138},{0,624}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="FrameEnabled" value="True" />
+        <Property name="BackgroundEnabled" value="True" />
+        <Property name="VerticalAlignment" value="Centre" />
+        <Property name="HorizontalAlignment" value="Centre" />
+        <Window type="TaharezLook/Button" name="Button" >
+            <Property name="Area" value="{{0,0},{0,0},{0,96},{0,32}}" />
+        </Window>
+    </Window>
+</GUILayout>
