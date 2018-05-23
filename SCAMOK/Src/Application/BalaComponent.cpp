@@ -39,6 +39,9 @@ BalaComponent::~BalaComponent() {
 
 	particleSystem->removeAllEmitters();
 	particleSystem->clear();
+
+
+	
 }
 
 void BalaComponent::Update(float deltaTime, Mensaje const & msj)
@@ -76,6 +79,9 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
+				particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Spiral");
+				pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
+				particleSystem->setEmitting(true);
 			}
 			else {
 
@@ -93,10 +99,11 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 				bala->setCollisionFlags(bala->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 				btVector3 vel = { 0 ,-valores.y, 0 };
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(vel * 10, start);
+
+				particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "LLuvia");
+				pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
+				particleSystem->setEmitting(true);
 			}
-			particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Spiral");
-			pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
-			particleSystem->setEmitting(true);
 
 			
 		}

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Juego.h"
-#include <vld.h>
+//#include <vld.h>
 #include <cstdlib>
 #include <iostream>
 #include <ctime>

@@ -15,5 +15,4 @@ public:
 
 private:
 	Ogre::ParticleSystem* particleSystem;
-
 }; 
