@@ -89,7 +89,7 @@ void FComponent::initBody() {
 		}
 	}
 	else {
-shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
+		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar((altoCaja / 2) + 1.2), btScalar(profCaja / 2)));
 
 	}
 

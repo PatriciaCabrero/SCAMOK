@@ -18,7 +18,7 @@ bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colO
 	std::string s = receptor.substr(5, 5);
 
 		int i = 0;
-	if (s != "Candy" && s != "Muffi") {
+	if (s != "Candy" && s != "Muffi" && s!= "cuern") {
 		while (i < colisiones.size() && colisiones[i] != receptor)i++;
 		if (i >= colisiones.size()) colisiones.push_back(receptor);
 	}
@@ -69,9 +69,43 @@ void EstadoJuego::init() {
 	scnMgr->getSceneNode("Alaia")->attachObject(particleSystem);
 	particleSystem->setEmitting(true);
 
-	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena","arena");
+
+	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("ring", "ring");
 	aux->añadeComponenteFisico(0, 0, 0, true);
-	entidades.insert(std::make_pair("arena", aux));
+	entidades.insert(std::make_pair("ring", aux));
+	Mensaje mcg(Tipo::Fisica, "0/-20/0", SubTipo::Reposicionar, 8);
+	mcg.setMsgInfo(entidades.at("ring"), entidades.at("ring"));
+	mensajes.push(mcg);
+
+
+
+	double rotation = 2 * 3.1416 / 36;
+	for (int i = 0; i < 36; i++) {
+
+
+		Entidad* aux11 = new Entidad(this);
+
+		string auxCuerno = factoria->create("cuerno");
+		aux11->setNombreNodo(auxCuerno);
+
+		aux11->añadeComponenteGrafico("cuerno", auxCuerno);
+		aux11->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Estatico, 100);
+		addEntidad(auxCuerno, aux11);
+
+		double rot = i * rotation;
+		double x = cos(rot) * 300;
+		double z = sin(rot) * 300;
+		Mensaje ms(Tipo::Fisica, to_string(x) + "/50/" + to_string(z), SubTipo::Reposicionar);
+		ms.setMsgInfo(aux11, aux11);
+		mensajes.push(ms);
+		Mensaje msr(Tipo::Render, to_string(-90 + (10 * i)), SubTipo::Rotar);
+		msr.setMsgInfo(aux11, aux11);
+		mensajes.push(msr);
+
+
+	}
+
+
 
 
 	Entidad *aux2 = new Entidad(this);
@@ -134,7 +168,7 @@ void EstadoJuego::resuelveCol()
 	while (colisiones.size() > 0) {
 		std::string aux = colisiones[colisiones.size()-1].substr(5,colisiones[colisiones.size() - 1].size());
 		colisiones.pop_back();
-		if (aux != "arena" && aux != "Alaia") { 
+		if (aux != "ring" && aux != "Alaia") { 
 			try {
 				Mensaje ms(Tipo::Fisica, " ", SubTipo::Colision);
 				ms.setMsgInfo(entidades.at(aux), entidades.at(aux));
@@ -225,12 +259,12 @@ bool EstadoJuego::update(float delta) {
 		z = (rand() % 200) - 100;
 
 		if (random % 2 == 0) {
-			Mensaje msg(Tipo::Consumible, to_string(x)+"/3/"+to_string(z), SubTipo::Candy);
+			Mensaje msg(Tipo::Consumible, to_string(x) + "/-8/" + to_string(z), SubTipo::Candy);
 			mensajes.push(msg);
 		}
 		else {
-			Mensaje msg(Tipo::Consumible, to_string(x) + "/5/" + to_string(z), SubTipo::Muffin);
-		mensajes.push(msg);
+			Mensaje msg(Tipo::Consumible, to_string(x) + "/-6/" + to_string(z), SubTipo::Muffin);
+			mensajes.push(msg);
 
 		}
 	}

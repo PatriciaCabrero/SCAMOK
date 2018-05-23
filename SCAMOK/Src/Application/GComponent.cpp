@@ -43,6 +43,12 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 			
 
 			}
+
+			else if (msg.getSubTipo() == SubTipo::Rotar) {
+				int angle = std::stof(msg.getMsg());
+				rota(angle, { 0,1,0 });
+
+			}
 			
 		}
 	}
@@ -69,8 +75,7 @@ GComponent::~GComponent() {
 	//groupNode->removeAndDestroyAllChildren();
 }
 void GComponent::rota(float angle, Vector3 eje){
-	//groupNode->rotate(Quaternion(Degree(-angle*2), eje));
-	//node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
+	groupNode->rotate(Quaternion(Degree(angle), eje));	//node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
 	
 }
 void GComponent::translate(float x, float y, float z) {
