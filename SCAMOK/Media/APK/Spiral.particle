@@ -18,11 +18,11 @@ particle_system Spiral
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction 0.0 1.0 0.0
-		angle 154.8
+		direction 0.0 0.0 -1.0
+		angle 180.0
 		emission_rate 200
 		velocity_min 10
-		velocity_max 30
+		velocity_max 15
 		time_to_live_min 0
 		time_to_live_max 3.38
 		duration_min 1
@@ -31,26 +31,13 @@ particle_system Spiral
 		colour_range_end 1 1 1 1
 	}
 
-	affector LinearForce
-	{
-		force_vector 0.0 12.32 0.0
-		force_application add
-	}
-
-	affector Rotator
-	{
-		rotation_speed_range_start 100
-		rotation_speed_range_end 500
-		rotation_range_start 0
-		rotation_range_end 180
-	}
 
 	
 	affector ColourFader
 	{
-		red -0.93
+		red -0.73
 		green -1
-		blue 1
-		alpha -1
+		blue -0.3
+		alpha -0.2
 	}
 }

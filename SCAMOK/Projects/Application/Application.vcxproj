@@ -92,8 +92,8 @@
     <OutDir>$(SolutionDir)Exes\</OutDir>
     <TargetName>$(SolutionName)D</TargetName>
     <IntDir>$(SolutionDir)Inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>C:\Users\David\Desktop\UCM\SegundoCuatri\Proyecto_3\SCAMOK\Dependencies\VLD\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\David\Desktop\UCM\SegundoCuatri\Proyecto_3\SCAMOK\Dependencies\VLD\lib\Win64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\VLD\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\VLD\lib\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -109,6 +109,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\Bullet3\include;$(SolutionDir)Dependencies\Ogre\OgreMain\include;$(SolutionDir)Dependencies\Ogre\Build\include;$(SolutionDir)Dependencies\OIS\include;$(SolutionDir)Dependencies\Fmod\inc;$(SolutionDir)Dependencies\CEGUI\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>$(SolutionDir)Dependencies\VLD\include</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

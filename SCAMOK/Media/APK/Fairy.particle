@@ -2,7 +2,7 @@ particle_system Fairy
 
 {
 
-	material Hidden.002
+	material Fireball.002
 
 	particle_width 1.0
 

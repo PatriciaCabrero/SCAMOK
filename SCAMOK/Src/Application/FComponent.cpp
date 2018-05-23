@@ -18,9 +18,11 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		Ogre::Vector3 posN = pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo())->getPosition();
 		Ogre::AxisAlignedBox bbox = pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->_getWorldAABB();
 		Ogre::Vector3  v = bbox.getSize();
-		altoCaja = v.y; 
-		profCaja = v.z;
-		anchoCaja = v.x;
+		if (altoCaj == 0 && profCaj == 0 && anchoCaj == 0) {
+			altoCaja = v.y;
+			profCaja = v.z;
+			anchoCaja = v.x;
+		}
 		pTransform.setIdentity();
 		pTransform.setOrigin(btVector3(posN.x, posN.y, posN.z));
 		
@@ -202,9 +204,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				}
 			}
 			if (msg.getTipo() == Tipo::Fisica) {
-				if (pEntidad->getNombreNodo()[0] == 't') {
-					std::cout << " ";
-				}
+				
 				if (!eliminado && msg.getSubTipo() == SubTipo::Colision) {
 					//reposicionado = true;
 					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());

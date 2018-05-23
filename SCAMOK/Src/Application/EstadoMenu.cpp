@@ -1,14 +1,26 @@
 #pragma once
 #include "EstadoMenu.h"   
 #include "Juego.h"
+#include "FactoryBalas.h"
 
-EstadoMenu::EstadoMenu(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* game, std::string type ): Estado(mng, mWindow, sys, game) {
+EstadoMenu::EstadoMenu(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* game, std::string type) : Estado(mng, mWindow, sys, game) {
 	type_ = type;
 	initCEGUI();
+	factoria = new FactoryBalas();
 }
 
-EstadoMenu::~EstadoMenu() { 
-} 
+EstadoMenu::~EstadoMenu()
+{
+	//m_gui.destroy();;
+	jugar_->removeAllEvents();
+	salir_->removeAllEvents();
+	opciones_->removeAllEvents();
+	/*m_gui.getRoot()->disable();
+	//m_gui.getRoot()->destroyChild(guiRoot);*/
+}
+
+
+
 bool EstadoMenu::initCEGUI() {
 	Estado::initCEGUI();
 
@@ -25,10 +37,10 @@ bool EstadoMenu::initCEGUI() {
 	//aux->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
 	//TaharezLook/Button/disableButton
 	//aux->activate();
-	
+
 	/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
 	testButton->setText("Hello GUI!");*/
-	
+
 
 	m_gui.setMouseCursor("TaharezLook/MouseArrow");
 	m_gui.showMouseCursor();
@@ -37,16 +49,18 @@ bool EstadoMenu::initCEGUI() {
 
 void EstadoMenu::opciones()
 {
-	
+
 }
 
 void EstadoMenu::estadoAnt()
 {
+
 	game_->quitaEstado();
 }
 
 void EstadoMenu::level1()
 {
+
 	//destroy();
 	//game_->quitaEstado();
 	Mensaje playM(Tipo::Audio, "Stop/wii.mp3", SubTipo::Musica);
@@ -60,7 +74,7 @@ void EstadoMenu::level1()
 void EstadoMenu::salir()
 {
 	game_->exitGame();
-	
+
 }
 
 void EstadoMenu::creditos()
@@ -86,14 +100,14 @@ void EstadoMenu::initMenuPause()
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Custom.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
-	CEGUI::PushButton* opciones = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Opciones"));
-	opciones->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::opciones, this));
+	opciones_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Opciones"));
+	opciones_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::opciones, this));
 
-	CEGUI::PushButton* jugar = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
-	jugar->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
+	jugar_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
+	jugar_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
 
-	CEGUI::PushButton* salir = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
-	salir->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));
+	salir_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
+	salir_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));
 }
 
 void EstadoMenu::initCreditos()
@@ -135,12 +149,28 @@ void EstadoMenu::joystickMoved(float x, float y, int js) {
 
 void EstadoMenu::keyPressed(std::string key)
 {
-	if(key != "")
-	m_gui.downButton(key);
+	if (key != "")
+		m_gui.downButton(key);
 }
 
 void EstadoMenu::keyReleased(std::string key)
 {
-	if (key != "")
-	m_gui.upButton(key);
+	if (key != "" && !callback)
+		m_gui.upButton(key);
+}
+
+bool EstadoMenu::mousePressed(const OIS::MouseEvent & me, OIS::MouseButtonID id)
+{
+	if (!callback) {
+		m_gui.downMouse(id);
+		//callback = true;
+	}
+	return false;
+}
+
+bool EstadoMenu::mouseReleased(const OIS::MouseEvent & me, OIS::MouseButtonID id)
+{
+	m_gui.upMouse(id);
+
+	return false;
 }

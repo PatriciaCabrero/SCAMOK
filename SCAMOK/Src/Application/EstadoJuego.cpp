@@ -37,7 +37,9 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 	cargaGui();
 	
 }
-
+EstadoJuego::~EstadoJuego() {
+	Estado::~Estado();
+}
 void EstadoJuego::init() {
 #pragma region InitOgre 
 	factoria = new FactoryBalas();
@@ -63,9 +65,9 @@ void EstadoJuego::init() {
 
 	Entidad *aux2 = new Entidad(this);
 	aux2->añadeComponenteGrafico("compcube","compcube");
-	aux2->añadeComponenteFisico(1 ,1 ,1, false, tipoFisica::Estatico, 100);
+	aux2->añadeComponenteFisico(0 ,0 ,0, false, tipoFisica::Estatico, 100);
 	entidades.insert(std::make_pair("compcube", aux2));
-	Mensaje ms1(Tipo::Fisica, "25/10/10", SubTipo::Reposicionar,8);
+	Mensaje ms1(Tipo::Fisica, "25/5/10", SubTipo::Reposicionar,8);
 	ms1.setMsgInfo(entidades.at("compcube"), entidades.at("compcube"));
 	mensajes.push(ms1);
 

@@ -12,9 +12,10 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 		valores = matriz * valores;
 		btVector3 pos1 = { valores.x ,0, valores.z };
 		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
-		string posOgro = to_string(posAux.getX() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getX()) + "/" +
-			to_string(pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getY() + 4) + "/" +
-			to_string(posAux.getZ() * 6 + pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getZ());
+		btVector3 posEnt = pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin();
+		string posOgro = to_string(posAux.getX() * 6 + posEnt.getX()) + "/" +
+			to_string(posEnt.getY()+2) + "/" +
+			to_string(posAux.getZ() * 6 + posEnt.getZ());
 		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(pEntidad, pEntidad);
@@ -96,9 +97,10 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 				btVector3 vel = { 0 ,-valores.y, 0 };
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(vel * 10, start);
 			}
-			particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Smoke");
+			particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Spiral");
 			pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
 			particleSystem->setEmitting(true);
+
 			
 		}
 

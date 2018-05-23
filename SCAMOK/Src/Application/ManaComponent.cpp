@@ -50,12 +50,12 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 					aux1->setNombreNodo(auxBala);
 
 					aux1->añadeComponenteGrafico("triangulo", auxBala);
-					restaPower();
+				//	restaPower();
 					// create a particle system named explosions using the explosionTemplate
 					/*Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
 					pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
 					particleSystem->setEmitting(true);*/
-					aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+					aux1->añadeComponenteFisico(2, 2, 2, false, tipoFisica::Dinamico, 1);
 					aux1->añadeComponenteLogico("BalaComponentSimple");
 					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 				}
@@ -71,17 +71,17 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 						aux1->setNombreNodo(auxBala);
 
 						aux1->añadeComponenteGrafico("triangulo", auxBala);
-						aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
+						aux1->añadeComponenteFisico(2, 1, 2, false, tipoFisica::Dinamico, 1);
 						aux1->añadeComponenteLogico("BalaComponent");
 						pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 						double rot = i * rotation;
-						double x = aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getX() + cos(rot) * 10;
-						double z = aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getZ() + sin(rot) * 10;
+						double x = aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getX() + cos(rot) * 15;
+						double z = aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getZ() + sin(rot) * 15;
 						string posOgro = to_string(x) + "/" +
 							to_string(aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getY() + 60) + "/" +
 							to_string(z);
 						Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
-						Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
+						Mensaje ms1(Tipo::Fisica, "5", SubTipo::Dispara);
 						ms.setMsgInfo(aux1, aux1);
 						ms1.setMsgInfo(aux1, aux1);
 						aux1->getPEstado()->addMsg(ms);
