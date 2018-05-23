@@ -54,7 +54,6 @@ void EstadoMenu::opciones()
 
 void EstadoMenu::estadoAnt()
 {
-
 	game_->quitaEstado();
 }
 
@@ -100,11 +99,13 @@ void EstadoMenu::initMenuPause()
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Custom.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
+
 	opciones_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Opciones"));
 	opciones_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::opciones, this));
 
 	jugar_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
 	jugar_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
+
 
 	salir_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
 	salir_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));

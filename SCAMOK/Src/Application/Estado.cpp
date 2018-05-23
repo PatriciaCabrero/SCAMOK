@@ -39,6 +39,9 @@ Estado::~Estado(){
 	}
 	delete fisicaManager;
 	delete factoria;
+	//m_gui.getRoot()->destroyChild(guiRoot);
+	//m_gui.destroy();
+	//guiRoot->destroy();
 }
 
 bool Estado::update(float delta){

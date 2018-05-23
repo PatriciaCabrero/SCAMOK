@@ -1,6 +1,6 @@
-// Material.003 genrated by blender2ogre 0.6.0
+// Material genrated by blender2ogre 0.6.0
 
-material Material
+material Material 
 {
     receive_shadows on 
 

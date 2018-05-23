@@ -37,9 +37,7 @@ EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, 
 	cargaGui();
 	
 }
-EstadoJuego::~EstadoJuego() {
-	Estado::~Estado();
-}
+
 void EstadoJuego::init() {
 #pragma region InitOgre 
 	factoria = new FactoryBalas();

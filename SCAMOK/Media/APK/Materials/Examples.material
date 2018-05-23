@@ -1,4 +1,5 @@
-material Flare.000
+
+material Examples/CloudySky
 {
 	technique
 	{
@@ -6,11 +7,11 @@ material Flare.000
 		{
 			lighting off
 			depth_write off
-			scene_blend add
 
 			texture_unit
 			{
-				texture Flare.000.png
+				texture clouds.jpg
+				scroll_anim 0.15 0
 			}
 		}
 	}

@@ -204,7 +204,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				}
 			}
 			if (msg.getTipo() == Tipo::Fisica) {
-				
 				if (!eliminado && msg.getSubTipo() == SubTipo::Colision) {
 					//reposicionado = true;
 					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());

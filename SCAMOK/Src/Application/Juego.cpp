@@ -202,8 +202,9 @@ bool Juego::run(){
 			
 		}
 
+
 	}
-	delete pEstado;
+	//delete pEstado;
 	return true;
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
@@ -368,6 +369,12 @@ bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
 }
 Juego::~Juego()
 {
+	while (pEstados.size() > 0) {
+		Estado * aux = pEstados.top();
+		pEstados.pop();
+		delete aux;
+	}
 	delete mInputMgr;
 	delete root;
 }
+

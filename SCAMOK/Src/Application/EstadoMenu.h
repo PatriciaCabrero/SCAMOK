@@ -22,6 +22,7 @@ public:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 private:
+
 	bool callback = false;
 	std::string type_;
 	void initMenuPause();

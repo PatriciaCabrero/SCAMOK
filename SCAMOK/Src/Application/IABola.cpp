@@ -20,6 +20,7 @@ IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Compon
 	valueDiv = (rand() %  300) + 700;
 	valueWait = (rand() % 50) + 150;
 	velDir = (rand() % 10) + 45;
+
 } 
 IABola::~IABola() {
 	pS->removeAllEmitters();

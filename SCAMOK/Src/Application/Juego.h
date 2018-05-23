@@ -18,12 +18,15 @@ public:
 	bool run();
 	std::stack<Estado*>pEstados;
 	std::stack<Estado*> borrar;
+
 	void exitGame() {
 	//Estado* aux = pEstados.top();
+	//pEstados.pop();
 	//quitaEstado();
-	pEstados.pop();
+	//delete aux;
 	exit = true;
 	}
+
 	void quitaEstado() {
 		Estado * aux = pEstados.top();
 		aux->destroy();
