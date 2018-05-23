@@ -54,7 +54,12 @@ public:
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
-	void destroy(std::string b) { borrar.push_back(b); }
+	void destroy(std::string b) { 
+		int i = 0;
+		while (i < borrar.size() && borrar[i] != b) i++;
+		if (i >= borrar.size())
+			borrar.push_back(b); 
+	}
 
 
 	//mensajes-------------------------------------

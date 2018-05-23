@@ -1,6 +1,7 @@
 #include "BalaComponent.h"  
 #include <ctime>
 #include <iostream>
+#include "OgreParticleSystem.h"
  
 BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntidad) {
 	tipo = type;
@@ -36,6 +37,9 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 
 } 
 BalaComponent::~BalaComponent() { 
+
+	particleSystem->removeAllEmitters();
+	particleSystem->clear();
 }
 
 void BalaComponent::Update(float deltaTime, Mensaje const & msj)
@@ -76,6 +80,7 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(velAux * 10, start);
 			}
 			else {
+
 				Ogre::Real escala = std::stof(msg.getMsg());
 
 				btRigidBody* alaia = pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia");
@@ -91,15 +96,17 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 				btVector3 vel = { 0 ,-valores.y, 0 };
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->applyImpulse(vel * 10, start);
 			}
-
+			particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(pEntidad->getNombreNodo() + "PFX", "Smoke");
+			pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
+			particleSystem->setEmitting(true);
 			
 		}
 
-		/*if (tiempoInicio + /*5000000*1000000  < std::clock() * 1000) {
+		if (tiempoInicio  + 5000000 /*1000000*/  < std::clock() * 1000) {
 			pEntidad->Sleep();
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 			std::cout << "MUERE\n";
-		}*/
+		}
 	}
 
 }

@@ -5,7 +5,7 @@ class EstadoJuego: public Estado
 {
 public:
 	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego = nullptr);
-	virtual ~EstadoJuego() {};
+	//virtual ~EstadoJuego() {};
 
 	virtual bool update(float delta);
 	virtual void keyPressed(std::string key);

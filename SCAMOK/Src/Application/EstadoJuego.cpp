@@ -8,6 +8,7 @@
 
 static std::vector<std::string> colisiones;
 static std::string anteriorRec = " ", anteriorEmi =" ";
+
 bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper *colObj1Wrap, int partId1, int index1) {
 	std::string emisor = "vacio", receptor = "vacio";
 	receptor = static_cast<Ogre::SceneNode*>(colObj0Wrap->getCollisionObject()->getUserPointer())->getName();
@@ -16,41 +17,15 @@ bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colO
 	if (i >= colisiones.size()) colisiones.push_back(receptor);
 
 	emisor = static_cast<Ogre::SceneNode*>(colObj1Wrap->getCollisionObject()->getUserPointer())->getName();
-	try {
-		if (emisor != "vacio") {
-			std::string s = emisor.substr(5, 9);
-			if (s == "triangulo") {
-				i = 0;
-				while (i < colisiones.size() && colisiones[i] != emisor)i++;
-				if (i >= colisiones.size()) colisiones.push_back(emisor);
-			}
-
-		}
-	}catch (const std::length_error& le) {}
-	/*if (colObj0Wrap != nullptr) {
-		receptor = static_cast<Ogre::SceneNode*>(colObj0Wrap->getCollisionObject()->getUserPointer())->getName();
-		std::cout << receptor;
-		if (anteriorRec != receptor) {
-			colisiones.push(receptor);
-			anteriorRec = receptor;
+	if (emisor != "vacio") {
+		std::string s = emisor.substr(5, 9);
+		if (s == "triangulo") {
+			i = 0;
+			while (i < colisiones.size() && colisiones[i] != emisor)i++;
+			if (i >= colisiones.size()) colisiones.push_back(emisor);
 		}
 
 	}
-	if (colObj1Wrap != nullptr) {
-		try {
-			emisor = static_cast<Ogre::SceneNode*>(colObj1Wrap->getCollisionObject()->getUserPointer())->getName();
-			if (anteriorEmi != emisor) {
-				if (emisor != "vacio") {
-					std::string s = emisor.substr(5, 9);
-					if (s == "triangulo")
-						colisiones.push(emisor);
-				}
-				anteriorEmi = emisor;
-			}
-		}
-		catch(const std::length_error& le){}
-		
-	}*/
 	return false;
 }
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego): Estado(mng, mWindow, sys, pJuego)
@@ -146,7 +121,7 @@ void EstadoJuego::resuelveCol()
 	while (colisiones.size() > 0) {
 		std::string aux = colisiones[colisiones.size()-1].substr(5,colisiones[colisiones.size() - 1].size());
 		colisiones.pop_back();
-		if (aux != "arena" && aux != "alaia") {
+		if (aux != "arena" && aux != "Alaia") { 
 			try {
 				Mensaje ms(Tipo::Fisica, " ", SubTipo::Colision);
 				ms.setMsgInfo(entidades.at(aux), entidades.at(aux));
@@ -173,6 +148,7 @@ bool EstadoJuego::initCEGUI() {
 	
 	return true;
 }
+//===========================================================================================================
 bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
 	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
@@ -180,8 +156,10 @@ bool EstadoJuego::update(float delta) {
 	
 	for (size_t i = 0; i < borrar.size(); i++)
 	{
-		entidades.at(borrar[i])->destruyeComponenteGrafico();
+		Entidad * ent = entidades.at(borrar[i]);
+		delete ent;
 		entidades.erase(borrar[i]);
+	
 	}
 	borrar.clear();
 
@@ -202,7 +180,7 @@ bool EstadoJuego::update(float delta) {
 
 	for (std::pair<std::string, Entidad*> ent : entidades) {
 		ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
-		//ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
+		ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
 	}
 		
 	

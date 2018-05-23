@@ -52,9 +52,9 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 					aux1->añadeComponenteGrafico("triangulo", auxBala);
 					restaPower();
 					// create a particle system named explosions using the explosionTemplate
-					Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
+					/*Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
 					pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
-					particleSystem->setEmitting(true);
+					particleSystem->setEmitting(true);*/
 					aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Dinamico, 1);
 					aux1->añadeComponenteLogico("BalaComponentSimple");
 					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
@@ -88,9 +88,9 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 						aux1->getPEstado()->addMsg(ms1);
 						
 						// create a particle system named explosions using the explosionTemplate
-						Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
+						/*Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
 						pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
-						particleSystem->setEmitting(true);
+						particleSystem->setEmitting(true);*/
 					}
 					restaPower();
 				}

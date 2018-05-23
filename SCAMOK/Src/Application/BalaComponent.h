@@ -14,5 +14,6 @@ public:
 	string tipo;
 
 private:
+	Ogre::ParticleSystem* particleSystem;
 
 }; 

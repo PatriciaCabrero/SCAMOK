@@ -61,6 +61,8 @@ void GComponent::destroy() {
 	//delete ent;
 }
 GComponent::~GComponent() {
+	pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());
+
 	//node->removeAndDestroyAllChildren();
 
 //	delete pEntidad;

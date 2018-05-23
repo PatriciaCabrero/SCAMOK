@@ -38,4 +38,5 @@ private:
 
 	std::vector<btCollisionShape*> collisionShapes;
 	std::map<std::string, btRigidBody *> physicsAccessors;
+	btGhostPairCallback* ghost;
 }; 

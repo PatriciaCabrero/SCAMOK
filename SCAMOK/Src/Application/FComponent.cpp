@@ -52,8 +52,8 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 } 
 
 FComponent::~FComponent() { 
-	/*if(body != nullptr)
-		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeRigidBody(body);*/
+	if(body != nullptr)
+		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeRigidBody(body);
 	delete body;
 	delete motionState;
 	delete shape;
@@ -187,10 +187,6 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 					Mensaje m(Tipo::Fisica, msgStr, SubTipo::Trigge);
 					std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
 					m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
-
-					if (pEntidad->getNombreNodo() == "stone") {
-						std::cout << "holi";
-					}
 
 					pEntidad->getPEstado()->addMsg(m);
 					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
