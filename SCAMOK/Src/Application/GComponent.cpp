@@ -5,7 +5,7 @@ GComponent::GComponent(Entidad* pEnt, int cont, std::string name) : Componente (
 	std::string mesh = name + ".mesh";
 	ent = pEnt->getPEstado()->getScnManager()->createEntity(mesh);
 	groupNode = pEnt->getPEstado()->getScnManager()->getRootSceneNode()->createChildSceneNode("GNode"+name);
-	node = groupNode->createChildSceneNode(name );
+	node = groupNode->createChildSceneNode(name);
 	node->attachObject(ent);
 	firstMsg = false;
 	nodeCh = nullptr;

@@ -67,10 +67,12 @@ Entidad::Entidad(Estado* pEstado, std::string prefab, std::string nombre) : pEst
 
 Entidad::~Entidad()
 {
+}
+void Entidad::destroy() {
 	for (std::pair<std::string, Componente*> p : componentes) {
+		p.second->destroy();
 		delete p.second;
 	}
-	
 }
 
 bool Entidad::añadeAnimacion(std::string mesh, std::ifstream & fe) {

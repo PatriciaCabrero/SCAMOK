@@ -21,8 +21,14 @@ IABola::IABola(Entidad * pEnt, std::string target, int x, int y, int z) : Compon
 	valueWait = (rand() % 50) + 150;
 	velDir = (rand() % 10) + 45;
 } 
-IABola::~IABola() { 
-} 
+
+void IABola::destroy()
+{
+	pS->clear();
+	pS->removeAllEmitters();
+	delete pS;
+}
+
 void IABola::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
 
@@ -194,7 +200,7 @@ void IABola::die()
 		pEntidad->getPEstado()->addMsg(ms);
 	
 		if (cont > 200) {
-			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			pEntidad->getPEstado()->destroyEntidad(pEntidad->getNombreNodo());
 		}
 	cont++;
 }

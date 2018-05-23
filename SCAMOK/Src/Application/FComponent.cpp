@@ -54,12 +54,13 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 FComponent::~FComponent() { 
 	/*if(body != nullptr)
 		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeRigidBody(body);*/
+} 
+void FComponent::destroy() {
 	delete body;
 	delete motionState;
 	delete shape;
 	delete trigger;
-} 
-
+}
 void FComponent::initBody() {
 	//Aquí ajustamos la masa
 	if (tipo == tipoFisica::Estatico || tipo == tipoFisica::Trigger)
@@ -83,7 +84,6 @@ void FComponent::initBody() {
 	}
 	else {
 		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
-
 	}
 	
 	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
@@ -187,7 +187,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
 			
 			pEntidad->getPEstado()->addMsg(m);
-			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			pEntidad->getPEstado()->destroyEntidad(pEntidad->getNombreNodo());
 			//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
 		}
 	}

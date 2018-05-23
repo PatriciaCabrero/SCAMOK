@@ -20,15 +20,14 @@ BalaComponent::BalaComponent(Entidad* pEntidad) : Componente(pEntidad) {
 	pEntidad->getPEstado()->addMsg(ms);
 	pEntidad->getPEstado()->addMsg(ms1);
 
-
 	tiempoInicio = std::clock()* 1000;
 	std::cout << "CREADOOO\n";
-	
-
 } 
 BalaComponent::~BalaComponent() { 
 }
+void BalaComponent::destroy() {
 
+}
 void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 {
 	Mensaje msg = msj;
@@ -64,9 +63,9 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 
 		}
-		if (tiempoInicio + /*5000000*/1000000  < std::clock() * 1000) {
+		if (tiempoInicio + 1000000  < std::clock() * 1000) {
 			pEntidad->Sleep();
-			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+			pEntidad->getPEstado()->destroyEntidad(pEntidad->getNombreNodo());
 			std::cout << "MUERE\n";
 		}
 	}

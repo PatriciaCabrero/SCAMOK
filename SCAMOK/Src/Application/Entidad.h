@@ -15,6 +15,7 @@ public:
 	void Update(float deltaTime, Mensaje  & msg);
 	void Awake();
 	void Sleep();
+	void destroy();
 	Estado* getPEstado() { return pEstado; };
 
 	bool añadeComponenteGrafico(std::string mesh);

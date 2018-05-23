@@ -35,6 +35,7 @@ private:
 	btSequentialImpulseConstraintSolver* solver;
 	btDiscreteDynamicsWorld* dynamicsWorld;
 	
+	btOverlappingPairCallback* btCallback;
 
 	std::vector<btCollisionShape*> collisionShapes;
 	std::map<std::string, btRigidBody *> physicsAccessors;

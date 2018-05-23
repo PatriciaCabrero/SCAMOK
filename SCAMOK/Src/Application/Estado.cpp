@@ -34,10 +34,18 @@ bool Estado::initCEGUI() {
 	return true;
 }
 Estado::~Estado(){
+	delete factoria;
 	delete fisicaManager;
 	for (std::pair<std::string,Entidad*> n : entidades) {
+		n.second->destroy();
 		delete n.second;
 	}
+}
+void Estado::destroyEntidad(std::string b) {
+	/*Entidad* ent = entidades.at(b);
+	ent->destroy();
+	delete ent;*/
+	borrar.push_back(b); 
 }
 
 bool Estado::update(float delta){

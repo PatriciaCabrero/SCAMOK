@@ -7,11 +7,10 @@
 #include "EstadoMenu.h"
 EstadoJuego::EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego): Estado(mng, mWindow, sys, pJuego)
 {
-	
 	noInput = true; contInput = contDescartes=0;
 	cargaGui();
-	
 }
+
 void EstadoJuego::init() {
 #pragma region InitOgre 
 	factoria = new FactoryBalas();
@@ -64,11 +63,6 @@ void EstadoJuego::init() {
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
-	
-
-	
-
-
 
 #pragma endregion InitOgre
 	destroy();
@@ -93,11 +87,6 @@ bool EstadoJuego::initCEGUI() {
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
-	//life = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Life"));
-	//power = static_cast<CEGUI::ProgressBar*>(guiRoot->getChild("Power"));
-	
-
-
 	Mensaje ms(Tipo::Gui, " ", SubTipo::InitGui);
 	ms.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(ms);
@@ -106,10 +95,9 @@ bool EstadoJuego::initCEGUI() {
 }
 bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
-	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
 	
-	for (size_t i = 0; i < borrar.size(); i++)
+	for (size_t i = 0; i < borrar.size(); ++i)
 	{
 		entidades.at(borrar[i])->destruyeComponenteGrafico();
 		entidades.erase(borrar[i]);
@@ -196,7 +184,7 @@ void EstadoJuego::keyPressed(std::string s) {
 				ent.second->Update(0.12, Mensaje(Tipo::IA, " ", SubTipo::Musica));
 	}
 
-	else if (s == "5") {
+	else if (s == "5" || s=="disparo") {
 		Mensaje msg(Tipo::Mana, "", SubTipo::DoPower);
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);

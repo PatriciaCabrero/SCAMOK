@@ -7,8 +7,8 @@ class IABola: public Componente
 {
 public: 
 	IABola(Entidad* pEnt, std::string target, int x, int y, int z);
-	~IABola(); 
 
+	virtual void destroy();
 	virtual void Update(float deltaTime, Mensaje const & mensaje);
 	void wander();
 	void stay();

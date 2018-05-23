@@ -54,7 +54,7 @@ public:
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
-	void destroy(std::string b) { borrar.push_back(b); }
+	void destroyEntidad(std::string b);
 
 
 	//mensajes-------------------------------------
