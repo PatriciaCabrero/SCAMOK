@@ -12,6 +12,8 @@ Logico
 LifeComponent
 Logico
 ManaComponent
+Logico
+ConsumibleComponent
 CFisico
 0 0 0 0 2 100
 ---

@@ -14,6 +14,7 @@
     <ClCompile Include="..\..\Src\Application\Animation.cpp" />
     <ClCompile Include="..\..\Src\Application\BalaComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Camara.cpp" />
+    <ClCompile Include="..\..\Src\Application\ConsumibleComponent.cpp" />
     <ClCompile Include="..\..\Src\Application\Entidad.cpp" />
     <ClCompile Include="..\..\Src\Application\Estado.cpp" />
     <ClCompile Include="..\..\Src\Application\EstadoJuego.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\..\Src\Application\BalaComponent.h" />
     <ClInclude Include="..\..\Src\Application\Camara.h" />
     <ClInclude Include="..\..\Src\Application\Componente.h" />
+    <ClInclude Include="..\..\Src\Application\ConsumibleComponent.h" />
     <ClInclude Include="..\..\Src\Application\Entidad.h" />
     <ClInclude Include="..\..\Src\Application\Estado.h" />
     <ClInclude Include="..\..\Src\Application\EstadoJuego.h" />

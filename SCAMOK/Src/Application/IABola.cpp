@@ -79,7 +79,7 @@ void IABola::wander()
 			cont = 0;
 			return;
 		}
-		std::cout << "\n" << r << "\n";
+		//std::cout << "\n" << r << "\n";
 		wState = (WanderState)r;
 	}
 	cont++;
@@ -141,7 +141,7 @@ void IABola::hunt()
 	else if (vecAlaia.z() - vecBola.z() < 0) Z = -0.5f;
 	else Z = 0;
 
-	std::cout << "\nบบบบบบ\nHUNT" << vecAlaia.z() - vecBola.z();
+	//std::cout << "\nบบบบบบ\nHUNT" << vecAlaia.z() - vecBola.z();
 
 	std::string s = std::to_string(X) + "/0/" + std::to_string(Z);
 	if (abs(vecAlaia.x() - vecBola.x()) < 6.0f && abs(vecAlaia.z() - vecBola.z()) < 6.0f) {

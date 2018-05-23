@@ -29,5 +29,6 @@ private:
 	void initCreditos();
 	void initOpciones();
 	void initPpal();
-	CEGUI::PushButton* jugar_, *opciones_, *salir_;
+	std::vector<CEGUI::PushButton*> botones;
+	//CEGUI::PushButton* jugar_, *opciones_, *salir_;
 };

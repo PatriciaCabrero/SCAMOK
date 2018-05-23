@@ -5,7 +5,7 @@ using namespace Ogre;
 Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 {
 	cam = pEnt->getPEstado()->getScnManager()->createCamera("camera");
-	cam->setPosition(0, 25, -80);
+	cam->setPosition(0, 25, -60);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
 	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodeAlaia")->createChildSceneNode("NodoCamera");

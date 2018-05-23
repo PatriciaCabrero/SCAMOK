@@ -11,10 +11,18 @@ static std::string anteriorRec = " ", anteriorEmi =" ";
 
 bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper *colObj1Wrap, int partId1, int index1) {
 	std::string emisor = "vacio", receptor = "vacio";
+	
+
 	receptor = static_cast<Ogre::SceneNode*>(colObj0Wrap->getCollisionObject()->getUserPointer())->getName();
-	int i = 0;
-	while (i < colisiones.size() && colisiones[i] != receptor)i++;
-	if (i >= colisiones.size()) colisiones.push_back(receptor);
+
+	std::string s = receptor.substr(5, 5);
+
+		int i = 0;
+	if (s != "Candy" && s != "Muffi") {
+		while (i < colisiones.size() && colisiones[i] != receptor)i++;
+		if (i >= colisiones.size()) colisiones.push_back(receptor);
+	}
+	
 
 	emisor = static_cast<Ogre::SceneNode*>(colObj1Wrap->getCollisionObject()->getUserPointer())->getName();
 	if (emisor != "vacio") {
@@ -23,6 +31,7 @@ bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colO
 			i = 0;
 			while (i < colisiones.size() && colisiones[i] != emisor)i++;
 			if (i >= colisiones.size()) colisiones.push_back(emisor);
+			
 		}
 
 	}
@@ -56,6 +65,10 @@ void EstadoJuego::init() {
 	msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 	mensajes.push(msg);
 
+	Ogre::ParticleSystem* particleSystem = scnMgr->createParticleSystem("Bubbles", "Bubbles");
+	scnMgr->getSceneNode("Alaia")->attachObject(particleSystem);
+	particleSystem->setEmitting(true);
+
 	Entidad *aux = new Entidad(this); aux->añadeComponenteGrafico("arena","arena");
 	aux->añadeComponenteFisico(0, 0, 0, true);
 	entidades.insert(std::make_pair("arena", aux));
@@ -68,6 +81,8 @@ void EstadoJuego::init() {
 	Mensaje ms1(Tipo::Fisica, "25/5/10", SubTipo::Reposicionar,8);
 	ms1.setMsgInfo(entidades.at("compcube"), entidades.at("compcube"));
 	mensajes.push(ms1);
+
+
 
 	Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("stone","stone");
@@ -90,8 +105,6 @@ void EstadoJuego::init() {
 
 	light = scnMgr->createLight("MainLight");
 	light->setPosition(20, 50, 50);
-	
-
 	
 
 
@@ -182,8 +195,23 @@ bool EstadoJuego::update(float delta) {
 		ent.second->Update(delta, Mensaje(Tipo::AnimationM, " ", SubTipo::Nulo));
 		ent.second->Update(delta, Mensaje(Tipo::IA, " ", SubTipo::Nulo));
 	}
-		
-	
+	int random = rand() % 10000;
+	if ( random > 9995) {
+		int x, z;
+		x = (rand() % 200 )-100;
+		z = (rand() % 200) - 100;
+
+		if (random % 2 == 0) {
+			Mensaje msg(Tipo::Consumible, to_string(x)+"/3/"+to_string(z), SubTipo::Candy);
+			mensajes.push(msg);
+		}
+		else {
+			Mensaje msg(Tipo::Consumible, to_string(x) + "/5/" + to_string(z), SubTipo::Muffin);
+		mensajes.push(msg);
+
+		}
+	}
+
 	contInput++;
 	m_gui.draw();
 	swapMsgBufer();

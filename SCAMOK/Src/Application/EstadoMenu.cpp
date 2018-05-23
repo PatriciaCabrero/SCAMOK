@@ -7,14 +7,16 @@ EstadoMenu::EstadoMenu(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FM
 	type_ = type;
 	initCEGUI();
 	factoria = new FactoryBalas();
+	
 }
 
 EstadoMenu::~EstadoMenu()
 {
 	//m_gui.destroy();;
-	jugar_->removeAllEvents();
-	salir_->removeAllEvents();
-	opciones_->removeAllEvents();
+	for each  ( CEGUI::PushButton* var in botones)
+	{
+		var->removeAllEvents();
+	}
 	/*m_gui.getRoot()->disable();
 	//m_gui.getRoot()->destroyChild(guiRoot);*/
 }
@@ -34,12 +36,7 @@ bool EstadoMenu::initCEGUI() {
 		initCreditos();
 	}
 
-	//aux->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&Juego::exitGame, this));
-	//TaharezLook/Button/disableButton
-	//aux->activate();
 
-	/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(m_gui.createWidget("TaharezLook/Button", glm::vec4(0.5f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton"));
-	testButton->setText("Hello GUI!");*/
 
 
 	m_gui.setMouseCursor("TaharezLook/MouseArrow");
@@ -66,7 +63,7 @@ void EstadoMenu::level1()
 	mensajes.push(playM);
 	update(0.17);
 
-	EstadoJuego* estado = new EstadoJuego(scnMgr, mWin, system);
+	EstadoJuego* estado = new EstadoJuego(scnMgr, mWin, system,game_);
 	game_->cambiaEstado(estado, true);
 }
 
@@ -99,16 +96,17 @@ void EstadoMenu::initMenuPause()
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Custom.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
-
-	opciones_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Opciones"));
+	CEGUI::PushButton* opciones_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Opciones"));
 	opciones_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::opciones, this));
+	botones.push_back(opciones_);
 
-	jugar_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
+	CEGUI::PushButton* jugar_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reanudar"));
 	jugar_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::estadoAnt, this));
+	botones.push_back(jugar_);
 
-
-	salir_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
+	CEGUI::PushButton* salir_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
 	salir_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));
+	botones.push_back(salir_);
 }
 
 void EstadoMenu::initCreditos()

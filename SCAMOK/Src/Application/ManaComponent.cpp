@@ -11,6 +11,7 @@ ManaComponent::ManaComponent(Entidad* pEnt) : Componente(pEnt)
 } 
 ManaComponent::~ManaComponent() { 
 } 
+
 void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 {
 	Mensaje msg = msj;
@@ -44,17 +45,12 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 			if (msg.getMsg() == "simple") {
 				if (mana->getWidth().d_offset >= 24) {
 					pEntidad->getPEstado()->getEntidad("Alaia")->setAnim("Shoot");
-					Entidad* aux1 = new Entidad(pEntidad->getPEstado());
 
+					Entidad* aux1 = new Entidad(pEntidad->getPEstado());
 					string auxBala = pEntidad->getPEstado()->getFactory()->create("triangulo");
 					aux1->setNombreNodo(auxBala);
-
 					aux1->añadeComponenteGrafico("triangulo", auxBala);
-				//	restaPower();
-					// create a particle system named explosions using the explosionTemplate
-					/*Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
-					pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
-					particleSystem->setEmitting(true);*/
+					restaPower();				
 					aux1->añadeComponenteFisico(2, 2, 2, false, tipoFisica::Dinamico, 1);
 					aux1->añadeComponenteLogico("BalaComponentSimple");
 					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
@@ -63,15 +59,15 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 			else if (msg.getMsg() == "lluvia") {
 
 				if (mana->getWidth().d_offset >= 24) {
-					double rotation = 2 * 3.1416 / 6;
-					for (int i = 0; i < 6; i++) {
+					double rotation = 2 * 3.1416 / 8;
+					for (int i = 0; i < 8; i++) {
 						Entidad* aux1 = new Entidad(pEntidad->getPEstado());
 
 						string auxBala = pEntidad->getPEstado()->getFactory()->create("triangulo");
 						aux1->setNombreNodo(auxBala);
 
 						aux1->añadeComponenteGrafico("triangulo", auxBala);
-						aux1->añadeComponenteFisico(2, 1, 2, false, tipoFisica::Dinamico, 1);
+						aux1->añadeComponenteFisico(3, 0.5, 3, false, tipoFisica::Dinamico, 1);
 						aux1->añadeComponenteLogico("BalaComponent");
 						pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 						double rot = i * rotation;
@@ -81,7 +77,7 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 							to_string(aux1->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin().getY() + 60) + "/" +
 							to_string(z);
 						Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
-						Mensaje ms1(Tipo::Fisica, "5", SubTipo::Dispara);
+						Mensaje ms1(Tipo::Fisica, "2", SubTipo::Dispara);
 						ms.setMsgInfo(aux1, aux1);
 						ms1.setMsgInfo(aux1, aux1);
 						aux1->getPEstado()->addMsg(ms);

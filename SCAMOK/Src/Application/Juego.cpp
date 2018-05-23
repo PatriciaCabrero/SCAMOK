@@ -25,6 +25,7 @@ void Juego::cambiaEstado(Estado * state, bool sobrescribe)
 		root->renderOneFrame();
 		firstTime = true;
 		quitaEstado();
+		
 	}
 	
 	pEstados.push(state);
@@ -150,8 +151,9 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	//EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
-	EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
+	
+	EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+	//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
 	firstTime = true;
 	pEstados.push(pEstado);
 	

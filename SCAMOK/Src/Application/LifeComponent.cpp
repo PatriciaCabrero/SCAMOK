@@ -20,6 +20,8 @@ void LifeComponent::Update(float deltaTime, Mensaje const & msj)
 				CEGUI::UDim dim = life->getWidth();
 				if (dim.d_offset < maxLife) {
 					dim += {0, std::stof(s)};
+					if (dim.d_offset > maxLife)
+						dim.d_offset = maxLife;
 					life->setWidth(dim);
 				}
 			}

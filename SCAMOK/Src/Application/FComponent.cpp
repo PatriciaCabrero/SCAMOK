@@ -11,7 +11,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 
 		//Muestra la caja en Ogre
 		//pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
-		std::cout << pEntidad->getNombreNodo() << std::endl;
+		//std::cout << pEntidad->getNombreNodo() << std::endl;
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->_update(true, true);
 
 		//Le pone al cuerpo coordenadas, orientación y volumen (sacado del componente gráfico)
@@ -32,8 +32,10 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 		initBody();
 
 		//Vincula el nodo gráfico al físico
-		if (trigger)
+		if (trigger) {
 			trigger->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode" + pEntidad->getNombreNodo()));
+			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo()));
+		}
 		else
 			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo()));
 
@@ -56,6 +58,9 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 FComponent::~FComponent() { 
 	if(body != nullptr)
 		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeRigidBody(body);
+
+	if (trigger != nullptr)
+		pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->removeCollisionObject(static_cast<btCollisionObject*>(trigger));
 	delete body;
 	delete motionState;
 	delete shape;
@@ -84,20 +89,20 @@ void FComponent::initBody() {
 		}
 	}
 	else {
-		shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
+shape = new btBoxShape(btVector3(btScalar(anchoCaja / 2), btScalar(3), btScalar(profCaja / 2)));
 
 	}
-	
+
 	//Aquí se inicializa el cuerpo en base a sus parámetros anteriores
 	shape->calculateLocalInertia(mass, localInertia);
 	pEntidad->getPEstado()->getFisicManager()->getCollisionShapes().push_back(shape);
 	btRigidBody::btRigidBodyConstructionInfo RBInfo(mass, motionState, shape, localInertia);
-	
+
 	body = new btRigidBody(RBInfo);
 
 	//Elasticidad del material
 	body->setRestitution(0);
-	
+
 	//Para que Alaia no rote
 	if (tipo == tipoFisica::Kinematico || tipo == tipoFisica::Trigger) {
 		body->setAngularFactor(btVector3(0, 1, 0));
@@ -115,7 +120,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	//if (msg.getTipo() == Tipo:: IA) return;
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
-			
+
 			int pos = msg.getMsg().find("/");
 			std::string xS = msg.getMsg().substr(0, pos);
 			std::string subcad = msg.getMsg().substr(pos + 1);
@@ -136,7 +141,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 
 		if (!firstTime)
 		{
-			
+
 			//Este sería el caso kinematico concreto de la niña
 			//Para los enemigos habría que hacer otro
 			if (tipo == Kinematico || tipo == TriggerDinamico) {
@@ -184,16 +189,31 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 			}
 			if ((tipo == tipoFisica::Trigger || tipo == tipoFisica::TriggerDinamico)) {
 				if (!eliminado && (trigger != nullptr && trigger->getNumOverlappingObjects() > 0)) {
-
-					std::string msgStr = "";
-					Mensaje m(Tipo::Fisica, msgStr, SubTipo::Trigge);
 					std::string receptor = pEntidad->getPEstado()->getFisicManager()->getRigidBody((btRigidBody*)trigger->getOverlappingObject(0));
-					m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
+					if ( receptor == "Alaia") {
+						std::string msgStr = "";
+						Mensaje m(Tipo::Fisica, msgStr, SubTipo::Trigge);
+						m.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad(receptor));
+						std::string emisor = static_cast<Ogre::SceneNode*>(trigger->getUserPointer())->getName();
+						std::string s = emisor.substr(5, 1);
+						
+						if (s == "C") {
+							Mensaje ms(Tipo::Gui, "+25", SubTipo::CambiaMana);
+							ms.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad("Alaia"));
+							pEntidad->getPEstado()->addMsg(ms, true);
+						}
+						else if (s == "M") {
+							Mensaje ms(Tipo::Gui, "+25", SubTipo::CambiaVida);
+							ms.setMsgInfo(pEntidad, pEntidad->getPEstado()->getEntidad("Alaia"));
+							pEntidad->getPEstado()->addMsg(ms);
+						}
 
-					pEntidad->getPEstado()->addMsg(m);
-					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-					eliminado = true;
-					//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
+
+						pEntidad->getPEstado()->addMsg(m);
+						pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
+						eliminado = true;
+						//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
+					}
 				}
 
 			}

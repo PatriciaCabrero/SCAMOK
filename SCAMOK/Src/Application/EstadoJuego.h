@@ -1,6 +1,7 @@
 #pragma once
 #include "Estado.h"
 #include "Factory.h"
+#include <iostream>
 class EstadoJuego: public Estado
 {
 public:
@@ -22,10 +23,11 @@ private:
 	int maxPower;
 	int contDescartes;
 
-	float RandomNumber(float Min, float Max)
-	{
-		float result = (((float)rand() / float(RAND_MAX)) * (Max - Min)) + Min;
-		return result;
+
+	int RandomNumber(float max, float min) {
+		float result = min + rand() / (RAND_MAX / (max - min));
+		std::cout << (int)result <<"\n";
+		return int(result);
 	}
 
 };

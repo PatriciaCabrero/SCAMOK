@@ -13,9 +13,9 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 		btVector3 pos1 = { valores.x ,0, valores.z };
 		btVector3 posAux = pos1.rotate(btVector3(0, 1, 0), -3.141596 / 4);
 		btVector3 posEnt = pEntidad->getPEstado()->getFisicManager()->getRigidBody("Alaia")->getWorldTransform().getOrigin();
-		string posOgro = to_string(posAux.getX() * 6 + posEnt.getX()) + "/" +
+		string posOgro = to_string(posAux.getX() * 3.666 + posEnt.getX()) + "/" +
 			to_string(posEnt.getY()+2) + "/" +
-			to_string(posAux.getZ() * 6 + posEnt.getZ());
+			to_string(posAux.getZ() * 3.666 + posEnt.getZ());
 		Mensaje ms(Tipo::Fisica, posOgro, SubTipo::Reposicionar);
 		Mensaje ms1(Tipo::Fisica, "10", SubTipo::Dispara);
 		ms.setMsgInfo(pEntidad, pEntidad);
