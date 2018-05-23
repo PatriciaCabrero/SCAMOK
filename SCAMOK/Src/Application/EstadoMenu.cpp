@@ -42,7 +42,11 @@ void EstadoMenu::opciones()
 
 void EstadoMenu::estadoAnt()
 {
+	std::string pos = "0/0/0";
+	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
+	addMsg(msEfect2);
 	game_->quitaEstado();
+
 }
 
 void EstadoMenu::level1()
@@ -52,6 +56,10 @@ void EstadoMenu::level1()
 	Mensaje playM(Tipo::Audio, "Stop/wii.mp3", SubTipo::Musica);
 	mensajes.push(playM);
 	update(0.17);
+	std::string pos = "0/0/0";
+	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
+	addMsg(msEfect2);
+
 
 	EstadoJuego* estado = new EstadoJuego(scnMgr, mWin, system);
 	game_->cambiaEstado(estado, true);
@@ -66,6 +74,9 @@ void EstadoMenu::salir()
 void EstadoMenu::creditos()
 {
 	EstadoMenu* estado = new EstadoMenu(scnMgr, mWin, system, game_, "creditos");
+	std::string pos = "0/0/0";
+	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
+	addMsg(msEfect2);
 	game_->cambiaEstado(estado);
 }
 
@@ -116,7 +127,7 @@ void EstadoMenu::initPpal()
 	entidades.insert(std::make_pair("SoundManager", aux3));
 	Mensaje playM(Tipo::Audio, "Play/ppal.mp3", SubTipo::Musica);
 	mensajes.push(playM);
-
+	
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("menuPrincipal.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 

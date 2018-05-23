@@ -201,9 +201,14 @@ void EstadoJuego::keyPressed(std::string s) {
 		msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msg);
 
+
 	}
 	else if (s == "7") {
 			EstadoMenu * pEstado;
+			std::string pos = "500/1000/500";
+			Mensaje msEfect(Tipo::Audio, "Play/item.wav/" + pos, SubTipo::Effect);
+			
+			entidades.at("SoundManager")->Update(16, msEfect);
 			pEstado = new EstadoMenu(scnMgr, mWin, system, game_, "pause");
 			game_->cambiaEstado(pEstado);
 	}

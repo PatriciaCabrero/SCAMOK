@@ -8,6 +8,7 @@ ManaComponent::ManaComponent(Entidad* pEnt) : Componente(pEnt)
 	particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem("cargaManaPFX", "Fairy");
 	pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->attachObject(particleSystem);
 	particleSystem->setEmitting(false);
+	playinFX = false;
 } 
 ManaComponent::~ManaComponent() { 
 } 
@@ -28,6 +29,7 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 					dim += {0, std::stof(s)};
 					mana->setWidth(dim);
 				}
+				
 			}
 			else if (msg.getMsg()[0] == '-') {
 				std::string s;
@@ -44,6 +46,13 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 			if (mana->getWidth().d_offset >= 24) {
 				pEntidad->getPEstado()->getEntidad("Alaia")->setAnim("Shoot");
 				Entidad* aux1 = new Entidad(pEntidad->getPEstado());
+				std::string pos = "500/1000/500";
+				Mensaje msEfect(Tipo::Audio, "Play/bolaFuego.wav/" + pos, SubTipo::Effect);
+				pEntidad->getPEstado()->addMsg(msEfect);
+				pos = "0/0/0";
+				Mensaje msEfect2(Tipo::Audio, "Play/bolaFuegoRisa.wav/" + pos, SubTipo::Effect);
+				pEntidad->getPEstado()->addMsg(msEfect2);
+
 
 				string auxBala = pEntidad->getPEstado()->getFactory()->create("triangulo");
 				aux1->setNombreNodo(auxBala);
@@ -89,7 +98,12 @@ void ManaComponent::charge()
 	Mensaje ms(Tipo::Gui, "+0.5", SubTipo::CambiaMana);
 	ms.setMsgInfo(pEntidad, pEntidad);
 	pEntidad->getPEstado()->addMsg(ms, true);
-
+	
+	if (!playinFX) {
+		Mensaje msEfect2(Tipo::Audio, "Play/recargar.wav", SubTipo::Musica);
+		pEntidad->getPEstado()->addMsg(msEfect2);
+	}
+	playinFX = true;
 	particleSystem->setEmitting(true);
 	
 }
@@ -97,6 +111,10 @@ void ManaComponent::charge()
 void ManaComponent::finCharge()
 {
 	particleSystem->setEmitting(false);
+
+	Mensaje msEfect2(Tipo::Audio, "Stop/1", SubTipo::Musica);
+	pEntidad->getPEstado()->addMsg(msEfect2);
+
 }
 void ManaComponent::restaurapS()
 {

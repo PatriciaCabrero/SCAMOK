@@ -5,6 +5,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	tipo = type;
 	_suelo = suelo;
 	
+	timePas = 0;
 	trigger = nullptr;
 	//Si está vinculado a un componente gráfico
 	if (nombreNodo != " ") {
@@ -158,11 +159,20 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				//float yAux = vel.y();
 				vel.setValue(valores.x*30,vel.y(),valores.z*30);
 				body->setLinearVelocity(vel);
+
+				timePas += deltaTime;
+				if (pEntidad->getNombreNodo() == "Alaia" && timePas >= 100 && abs(vel.getY()) < 0.1) {
+					timePas = 0;
+					int r = rand() % 4 + 1;
+					std::string paso = "Play/pasos" + std::to_string(r) + ".wav/" + "0/0/0";
+					Mensaje msEfect(Tipo::Audio, paso, SubTipo::Effect);
+					pEntidad->getPEstado()->addMsg(msEfect);
+				}
 			}
 			else if (msg.getSubTipo() == SubTipo::Salto) {
 				if ((int)body->getLinearVelocity().getY() == 0) {
-					std::string pos = std::to_string(body->getWorldTransform().getOrigin().getX()) + "/0/" + std::to_string(body->getWorldTransform().getOrigin().getZ());
-					Mensaje msEfect(Tipo::Audio, "Play/jump.mp3/" + pos, SubTipo::Effect);
+					std::string pos = "0/0/0";
+					Mensaje msEfect(Tipo::Audio, "Play/salto.wav/" + pos, SubTipo::Effect);
 					pEntidad->getPEstado()->addMsg(msEfect);
 					body->activate(true);
 					body->applyCentralImpulse(btVector3(0, 2000, 0));

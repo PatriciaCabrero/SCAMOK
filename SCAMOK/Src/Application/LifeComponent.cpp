@@ -1,12 +1,13 @@
 #include "LifeComponent.h"  
  
 LifeComponent::LifeComponent(Entidad* pEnt): Componente(pEnt) {
-	
+	time = 0;
 } 
 LifeComponent::~LifeComponent() { 
 }
 void LifeComponent::Update(float deltaTime, Mensaje const & msj)
 {
+	time += deltaTime;
 	Mensaje msg = msj;
 	if (msg.getTipo() == Tipo::Gui) {
 		if (msg.getSubTipo() == SubTipo::InitGui) {
@@ -31,6 +32,13 @@ void LifeComponent::Update(float deltaTime, Mensaje const & msj)
 					dim -= {0, std::stof(s)};
 					life->setWidth(dim);
 				}
+				if (time >= 1500) {
+					time = 0;
+					std::string pos = "0/0/0";
+					Mensaje msEfect2(Tipo::Audio, "Play/danoNina.wav/" + pos, SubTipo::Effect);
+					pEntidad->getPEstado()->addMsg(msEfect2);
+				}
+
 			}
 		}
 	}
