@@ -44,8 +44,10 @@ void EstadoMenu::estadoAnt()
 {
 	std::string pos = "0/0/0";
 	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
-	addMsg(msEfect2);
+	
 	game_->quitaEstado();
+	
+	game_->pEstados.top()->getEntidad("SoundManager")->Update(16, msEfect2);
 
 }
 
@@ -58,8 +60,7 @@ void EstadoMenu::level1()
 	update(0.17);
 	std::string pos = "0/0/0";
 	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
-	addMsg(msEfect2);
-
+	entidades.at("SoundManager")->Update(16, msEfect2);
 
 	EstadoJuego* estado = new EstadoJuego(scnMgr, mWin, system);
 	game_->cambiaEstado(estado, true);
@@ -76,8 +77,8 @@ void EstadoMenu::creditos()
 	EstadoMenu* estado = new EstadoMenu(scnMgr, mWin, system, game_, "creditos");
 	std::string pos = "0/0/0";
 	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
-	addMsg(msEfect2);
 	game_->cambiaEstado(estado);
+	game_->pEstados.top()->getEntidad("SoundManager")->Update(16, msEfect2);
 }
 
 bool EstadoMenu::update(float delta)
@@ -94,6 +95,7 @@ bool EstadoMenu::update(float delta)
 
 void EstadoMenu::initMenuPause()
 {
+
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Custom.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
@@ -109,6 +111,10 @@ void EstadoMenu::initMenuPause()
 
 void EstadoMenu::initCreditos()
 {
+	std::string pos = "500/1000/500";
+	Mensaje msEfect(Tipo::Audio, "Play/item.wav/" + pos, SubTipo::Effect);
+	game_->pEstados.top()->getEntidad("SoundManager")->Update(16, msEfect);
+	
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("creditos.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
@@ -127,7 +133,10 @@ void EstadoMenu::initPpal()
 	entidades.insert(std::make_pair("SoundManager", aux3));
 	Mensaje playM(Tipo::Audio, "Play/ppal.mp3", SubTipo::Musica);
 	mensajes.push(playM);
-	
+	std::string pos = "500/1000/500";
+	Mensaje msEfect(Tipo::Audio, "Play/item.wav/" + pos, SubTipo::Effect);
+	mensajes.push(msEfect);
+
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("menuPrincipal.layout");
 	m_gui.getRoot()->addChild(guiRoot);
 
