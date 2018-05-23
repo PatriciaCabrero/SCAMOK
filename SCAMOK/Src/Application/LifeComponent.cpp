@@ -1,5 +1,5 @@
 #include "LifeComponent.h"  
- 
+
 LifeComponent::LifeComponent(Entidad* pEnt): Componente(pEnt) {
 	
 } 
@@ -32,6 +32,9 @@ void LifeComponent::Update(float deltaTime, Mensaje const & msj)
 				if (dim.d_offset > 1) {
 					dim -= {0, std::stof(s)};
 					life->setWidth(dim);
+				}
+				else {
+					pEntidad->getPEstado()->cambiaEstado("GameOver");
 				}
 			}
 		}

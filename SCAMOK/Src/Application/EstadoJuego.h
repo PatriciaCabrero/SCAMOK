@@ -17,6 +17,7 @@ public:
 	void cargaGui();
 	void restaPower();
 	void resuelveCol();
+	virtual void cambiaEstado(std::string const & estado);
 
 private:
 	

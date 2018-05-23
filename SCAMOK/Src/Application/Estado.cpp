@@ -2,7 +2,7 @@
 #include "Juego.h"
 #include "FactoryBalas.h"
 
-
+class EstadoMenu;
 Estado::Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* game){
 
 	//Aqui montamos el mundo físico
@@ -67,6 +67,7 @@ Entidad* Estado::getEntidad(std::string s) {
 	
 	return nullptr;
 }
+
 bool Estado::mouseMoved(const OIS::MouseEvent& me) {
 	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
 	m_gui.moveMouse(me.state.X.abs, me.state.Y.abs);

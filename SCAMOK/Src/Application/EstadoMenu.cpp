@@ -35,7 +35,9 @@ bool EstadoMenu::initCEGUI() {
 	else if (type_ == "creditos") {
 		initCreditos();
 	}
-
+	else if (type_ == "GameOver") {
+		initGameOver();
+	}
 
 
 
@@ -71,6 +73,12 @@ void EstadoMenu::salir()
 {
 	game_->exitGame();
 
+}
+
+void EstadoMenu::restart()
+{
+	game_->restart();
+	salir();
 }
 
 void EstadoMenu::creditos()
@@ -139,6 +147,19 @@ void EstadoMenu::initPpal()
 	CEGUI::PushButton* creditos = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Creditos"));
 	creditos->subscribeEvent(CEGUI::PushButton::EventMouseButtonDown, CEGUI::Event::Subscriber(&EstadoMenu::creditos, this));
 
+}
+void EstadoMenu::initGameOver()
+{
+	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameOver.layout");
+	m_gui.getRoot()->addChild(guiRoot);
+
+	CEGUI::PushButton* restart = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Reiniciar"));
+	restart->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::restart, this));
+	botones.push_back(restart);
+
+	CEGUI::PushButton* salir_ = static_cast<CEGUI::PushButton*>(guiRoot->getChild("Salir"));
+	salir_->subscribeEvent(CEGUI::PushButton::EventMouseButtonUp, CEGUI::Event::Subscriber(&EstadoMenu::salir, this));
+	botones.push_back(salir_);
 }
 void EstadoMenu::joystickMoved(float x, float y, int js) {
 	if (abs(x) >= 0.2 || abs(y) >= 0.2) {

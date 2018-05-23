@@ -18,7 +18,9 @@ public:
 	bool run();
 	std::stack<Estado*>pEstados;
 	std::stack<Estado*> borrar;
-
+	void restart() {
+		restart_ = true;
+	}
 	void exitGame() {
 	//Estado* aux = pEstados.top();
 	//pEstados.pop();
@@ -40,6 +42,7 @@ private:
 	bool initOgre();
 	bool initOis();
 	bool initFmod();
+	bool restart_;
 	//bool initCEGUI();
 
 	std::string recursos, plugins;

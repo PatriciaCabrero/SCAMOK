@@ -144,6 +144,14 @@ void EstadoJuego::resuelveCol()
 
 	}
 }
+void EstadoJuego::cambiaEstado(std::string const & estado)
+{
+
+	if (estado == "GameOver") {
+		EstadoMenu* go = new EstadoMenu (scnMgr, mWin, system, game_, "GameOver");
+		game_->cambiaEstado(go, true);
+	}
+}
 void EstadoJuego::changeHabilidad()
 {
 	if (habilidad == 0) { // Simple

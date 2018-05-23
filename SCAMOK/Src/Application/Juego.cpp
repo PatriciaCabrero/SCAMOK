@@ -151,29 +151,32 @@ bool Juego::initFmod() {
 }
 bool Juego::run(){
 
-	
-	EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
-	//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
-	firstTime = true;
-	pEstados.push(pEstado);
-	
-	int cont = 0;
-	std::cout << "\n\n\n";
-	contJoystick = 0;
-	bool rend = false;
-	
+		restart_ = false;
+	do {
+		
+		EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
+		//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
+		firstTime = true;
+		pEstados.push(pEstado);
 
-	int msUpdate = 8;
-	int lastUpdate = 0;
-	
+		int cont = 0;
+		std::cout << "\n\n\n";
+		contJoystick = 0;
+		bool rend = false;
 
-	while (!exit)
-	{
 
-	//	if (GetTickCount() - lastUpdate >= msUpdate) {
+		int msUpdate = 8;
+		int lastUpdate = 0;
+		restart_ = false;
+		exit = false;
+
+		while (!exit)
+		{
+
+			//	if (GetTickCount() - lastUpdate >= msUpdate) {
 			mInputMgr->capture();
 
-			
+
 			if (cont == 4) {
 				handleInput();
 				cont = 0;
@@ -188,24 +191,26 @@ bool Juego::run(){
 
 			//comprobar si la ventana está abierta
 			if (mWindow->isClosed())return false;
-		//}
-	
-		
-		if ( cont%2 != 0 && !root->renderOneFrame())return false;
-		
-		if (firstTime) {
-			firstTime = false;
-			pEstados.top()->init();
+			//}
+
+
+			if (cont % 2 != 0 && !root->renderOneFrame())return false;
+
+			if (firstTime) {
+				firstTime = false;
+				pEstados.top()->init();
+			}
+			while (borrar.size() > 0) {
+				Estado * aux = borrar.top();
+				delete aux;
+				borrar.pop();
+
+			}
+
 		}
-		while (borrar.size() > 0) {
-			Estado * aux = borrar.top();
-			delete aux;
-			borrar.pop();
+		std::cout << "pop";
 			
-		}
-
-
-	}
+	} while (restart_);
 	//delete pEstado;
 	return true;
 }

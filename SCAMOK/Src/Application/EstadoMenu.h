@@ -13,6 +13,7 @@ public:
 	void estadoAnt();
 	void level1();
 	void salir();
+	void restart();
 	void creditos();
 	virtual bool update(float delta);
 	virtual void joystickMoved(float x, float y, int js = 0);
@@ -29,6 +30,7 @@ private:
 	void initCreditos();
 	void initOpciones();
 	void initPpal();
+	void initGameOver();
 	std::vector<CEGUI::PushButton*> botones;
 	//CEGUI::PushButton* jugar_, *opciones_, *salir_;
 };
