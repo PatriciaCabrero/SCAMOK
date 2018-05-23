@@ -32,8 +32,6 @@ BalaComponent::BalaComponent(Entidad* pEntidad, string type) : Componente(pEntid
 
 
 	tiempoInicio = std::clock()* 1000;
-	std::cout << "CREADOOO\n";
-	
 
 } 
 BalaComponent::~BalaComponent() { 
@@ -73,7 +71,6 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 
 				if (RayCallback.hasHit()) {
 					auxx = RayCallback.m_hitPointWorld;
-					std::cout << "EYY";
 				}
 
 				pEntidad->getPEstado()->getFisicManager()->getRigidBody(pEntidad->getNombreNodo())->setLinearFactor({ 1, 0, 1 });
@@ -105,7 +102,6 @@ void BalaComponent::Update(float deltaTime, Mensaje const & msj)
 		if (tiempoInicio  + 5000000 /*1000000*/  < std::clock() * 1000) {
 			pEntidad->Sleep();
 			pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
-			std::cout << "MUERE\n";
 		}
 	}
 

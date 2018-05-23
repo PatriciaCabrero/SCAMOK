@@ -28,7 +28,7 @@ class Estado
 {
 public:
 	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego * game = nullptr);
-	~Estado();
+	virtual ~Estado();
 
 	void addViewPort();
 	Ogre::SceneManager* getScnManager(){ return scnMgr; };

@@ -17,9 +17,16 @@ public:
 	
 	bool run();
 	std::stack<Estado*>pEstados;
-	void exitGame() { exit = true; }
+	std::stack<Estado*> borrar;
+	void exitGame() { 
+		//Estado* aux = pEstados.top();
+		//quitaEstado();
+		pEstados.pop();
+		exit = true; }
 	void quitaEstado() {
-		pEstados.top()->destroy();
+		Estado * aux = pEstados.top();
+		aux->destroy();
+		borrar.push(aux);
 		pEstados.pop();
 	}
 	void cambiaEstado(Estado* state, bool sobrescribe = false);

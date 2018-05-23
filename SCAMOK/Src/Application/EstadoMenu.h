@@ -18,11 +18,15 @@ public:
 	virtual void joystickMoved(float x, float y, int js = 0);
 	virtual void keyPressed(std::string key);
 	virtual void keyReleased(std::string key);
+	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 private:
+		bool callback = false;
 		std::string type_;
 		void initMenuPause();
 		void initCreditos();
 		void initOpciones();
 		void initPpal();
+		CEGUI::PushButton* jugar_, *opciones_, *salir_;
 }; 

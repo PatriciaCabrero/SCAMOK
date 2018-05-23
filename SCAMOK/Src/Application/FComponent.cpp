@@ -202,9 +202,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 				}
 			}
 			if (msg.getTipo() == Tipo::Fisica) {
-				if (pEntidad->getNombreNodo()[0] == 't') {
-					std::cout << " ";
-				}
+			
 				if (!eliminado && msg.getSubTipo() == SubTipo::Colision) {
 					//reposicionado = true;
 					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());

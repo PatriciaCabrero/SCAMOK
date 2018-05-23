@@ -195,7 +195,11 @@ bool Juego::run(){
 			firstTime = false;
 			pEstados.top()->init();
 		}
-
+		while (borrar.size() > 0) {
+			Estado * aux = borrar.top();
+			delete aux;
+			borrar.pop();
+		}
 	}
 	delete pEstado;
 	return true;
@@ -362,6 +366,11 @@ bool Juego::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id) {
 }
 Juego::~Juego()
 {
+	while (pEstados.size() > 0) {
+		Estado* aux=pEstados.top();
+		delete aux;
+		pEstados.pop();
+	}
 	delete mInputMgr;
 	delete root;
 }
