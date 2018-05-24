@@ -133,7 +133,7 @@ bool Juego::initOgre(){
 	//SceneManager Set Up
 
 	//we generate the default sceneManager. (more SceneManagers in Ogre::ST_....)
-	scnMgr = root->createSceneManager(Ogre::ST_GENERIC);
+	
 
 	return true;
 }
@@ -153,7 +153,7 @@ bool Juego::run(){
 
 		restart_ = false;
 	do {
-		
+		scnMgr = root->createSceneManager(Ogre::ST_GENERIC);
 		EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
 		//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
 		firstTime = true;
@@ -202,14 +202,32 @@ bool Juego::run(){
 			}
 			while (borrar.size() > 0) {
 				Estado * aux = borrar.top();
+				aux->destroy();
 				delete aux;
 				borrar.pop();
 
 			}
 
 		}
-		std::cout << "pop";
-			
+		if (restart_) {
+			quitaEstado();
+			while (borrar.size() > 0) {
+				Estado * aux = borrar.top();
+				aux->destroy();
+				delete aux;
+				borrar.pop();
+
+			}
+			std::cout << "pop";
+			mWindow->removeAllViewports();
+			//scnMgr->getCurrentViewport()->clear();
+			scnMgr->clearScene();
+			scnMgr->destroyCamera("camera");
+			root->destroySceneManager(scnMgr);
+			CEGUI::WindowManager::getSingleton().destroyAllWindows();// destroyWindow(0);*/
+		}
+		//delete scnMgr;
+
 	} while (restart_);
 	//delete pEstado;
 	return true;
@@ -381,6 +399,7 @@ Juego::~Juego()
 		pEstados.pop();
 		delete aux;
 	}
+	
 	delete mInputMgr;
 	delete root;
 }

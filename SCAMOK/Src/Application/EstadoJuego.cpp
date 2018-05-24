@@ -119,14 +119,25 @@ void EstadoJuego::init() {
 
 
 	Entidad* aux1 = new Entidad(this);
-	aux1->añadeComponenteGrafico("stone","stone");
+	aux1->añadeComponenteGrafico("stone","stone0");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
 	aux1->añadeComponenteLogico("IABola");
-	entidades.insert(std::make_pair("stone", aux1));
+	entidades.insert(std::make_pair("stone0", aux1));
 	Mensaje ms(Tipo::Fisica, "20/150/0", SubTipo::Reposicionar,8);
-	ms.setMsgInfo(entidades.at("stone"), entidades.at("stone"));
+	ms.setMsgInfo(entidades.at("stone0"), entidades.at("stone0"));
 	mensajes.push(ms);
 
+	Entidad* enem2 = new Entidad(this);
+	string auxBola = factoria->create("stone");
+	enem2->setNombreNodo(auxBola);
+
+	enem2->añadeComponenteGrafico("stone", auxBola);
+	enem2->añadeComponenteLogico("IABola");
+	enem2->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
+	addEntidad(auxBola, enem2);
+	Mensaje mstone(Tipo::Fisica, "30/50/50", SubTipo::Reposicionar);
+	mstone.setMsgInfo(enem2, enem2);
+	addMsg(mstone);
 
 	Entidad* aux3 = new Entidad(this); aux3->añadeComponenteSM("SoundManager", system);
 	entidades.insert(std::make_pair("SoundManager", aux3));
@@ -229,6 +240,23 @@ bool EstadoJuego::update(float delta) {
 		Entidad * ent = entidades.at(borrar[i]);
 		delete ent;
 		entidades.erase(borrar[i]);
+		std::string s = "stone" + std::to_string(factoria->getLastCont());
+		std::string so = borrar[i];
+		if (borrar[i] ==s ) {
+			Entidad* aux1 = new Entidad(this);
+			string auxBola = factoria->create("stone");
+			aux1->setNombreNodo(auxBola);
+
+			aux1->añadeComponenteGrafico("stone", auxBola);
+			aux1->añadeComponenteLogico("IABola");
+			aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
+			addEntidad(auxBola, aux1);
+
+
+			Mensaje ms(Tipo::Fisica, "20/50/40", SubTipo::Reposicionar);
+			ms.setMsgInfo(aux1, aux1);
+			addMsg(ms);
+		}
 	
 	}
 	borrar.clear();

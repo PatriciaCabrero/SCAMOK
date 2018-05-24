@@ -12,6 +12,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 	node->attachObject(cam);
 
 	//set viewport
+	//if(pEnt->getPEstado()->getWin()->vie)
 	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 150, 150));
 
@@ -24,7 +25,7 @@ Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 
 Camara::~Camara()
 {
-	
+	vp->clear();
 }
 void Camara::attach(Ogre::SceneNode* node) {
 	node->attachObject(cam);

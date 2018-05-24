@@ -19,7 +19,9 @@ public:
 	std::stack<Estado*>pEstados;
 	std::stack<Estado*> borrar;
 	void restart() {
+		//quitaEstado();
 		restart_ = true;
+		exit = true;
 	}
 	void exitGame() {
 	//Estado* aux = pEstados.top();
@@ -31,7 +33,7 @@ public:
 
 	void quitaEstado() {
 		Estado * aux = pEstados.top();
-		aux->destroy();
+		//aux->destroy();
 		borrar.push(aux);
 		pEstados.pop();
 	}

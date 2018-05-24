@@ -78,7 +78,7 @@ void EstadoMenu::salir()
 void EstadoMenu::restart()
 {
 	game_->restart();
-	salir();
+	//salir();
 }
 
 void EstadoMenu::creditos()

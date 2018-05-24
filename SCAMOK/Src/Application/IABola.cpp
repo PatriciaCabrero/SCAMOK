@@ -193,7 +193,7 @@ void IABola::die()
 {
 		restaurapS();
 		pS->setEmitting(true);
-		Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaVida);
+		Mensaje ms(Tipo::Gui, "-250", SubTipo::CambiaVida);
 		ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("Alaia"), pEntidad->getPEstado()->getEntidad("Alaia"));
 		pEntidad->getPEstado()->addMsg(ms);
 	
