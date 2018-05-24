@@ -39,10 +39,7 @@ void Animation:: addAnimationState(std::string name, bool loop, bool enabled, bo
 			animStates.at("Run")->setEnabled(false);
 			animStates.erase("Run");
 		}
-		/*if (animStates.find("RunBase") != animStates.end()) {
-			animStates.at("RunBase")->setEnabled(false);
-			animStates.erase("RunBase");
-		}*/
+		
 	}
 	if (idle && animStates.size() != 0) 
 		return;
@@ -50,7 +47,7 @@ void Animation:: addAnimationState(std::string name, bool loop, bool enabled, bo
 	else time = 0.005f;
 	if (animStates.find(name) == animStates.end()) {
 		Ogre::AnimationState* newState;
-		///ent->
+		
 		newState = ent->getAnimationState(name);
 		
 		newState->setTimePosition(0);

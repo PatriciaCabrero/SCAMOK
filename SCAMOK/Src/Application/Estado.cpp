@@ -29,7 +29,6 @@ bool Estado::initCEGUI() {
 	m_gui.setFont("DejaVuSans-10");
 
 
-	//m_gui getRootWindow()->addChild(BloodScreen);
 
 	return true;
 }
@@ -39,9 +38,7 @@ Estado::~Estado(){
 	}
 	delete fisicaManager;
 	delete factoria;
-	//m_gui.getRoot()->destroyChild(guiRoot);
-	//m_gui.destroy();
-	//guiRoot->destroy();
+	
 }
 
 bool Estado::update(float delta){
@@ -69,7 +66,7 @@ Entidad* Estado::getEntidad(std::string s) {
 }
 
 bool Estado::mouseMoved(const OIS::MouseEvent& me) {
-	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
+	
 	m_gui.moveMouse(me.state.X.abs, me.state.Y.abs);
 	return true;
 }

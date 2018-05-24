@@ -62,20 +62,14 @@ void GComponent::Update(float deltaTime,  Mensaje const & msj) {
 //El juego peta al salir
 void GComponent::destroy() {
 	pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());
-	//pEntidad->getPEstado()->getScnManager()->getRootSceneNode()->detachObject(ent);
-	//delete node;
-	//delete ent;
+	
 }
 GComponent::~GComponent() {
 	pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());
 
-	//node->removeAndDestroyAllChildren();
-
-//	delete pEntidad;
-	//groupNode->removeAndDestroyAllChildren();
 }
 void GComponent::rota(float angle, Vector3 eje){
-	groupNode->rotate(Quaternion(Degree(angle), eje));	//node->setOrientation(groupNode->getChild("NodoCamera")->getOrientation());
+	groupNode->rotate(Quaternion(Degree(angle), eje));	
 	
 }
 void GComponent::translate(float x, float y, float z) {

@@ -7,7 +7,6 @@ void  GUI::init(const std::string& resourceDirectory) {
 	if (m_renderer == nullptr) {
 		m_renderer = &CEGUI::OgreRenderer::create();
 		CEGUI::System::create(*m_renderer);
-		//m_renderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
 		CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 		rp->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets");
@@ -35,11 +34,9 @@ void  GUI::init(const std::string& resourceDirectory) {
 void  GUI::destroy() {
 	CEGUI::System::destroy();
 	CEGUI::OgreRenderer::destroy(static_cast<CEGUI::OgreRenderer&>(*m_renderer));
-//	CEGUI::System::getSingleton().destroyGUIContext(*m_context);
 }
 
 void  GUI::draw() {
-	//CEGUI::System::getSingleton().renderAllGUIContexts();
 	m_renderer->beginRendering();
 	m_context->draw();
 	m_renderer->endRendering();

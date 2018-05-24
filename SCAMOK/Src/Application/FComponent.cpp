@@ -12,8 +12,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 	if (nombreNodo != " ") {
 
 		//Muestra la caja en Ogre
-		//pEntidad->getPEstado()->getScnManager()->getSceneNode(nombreNodo)->showBoundingBox(true);
-		//std::cout << pEntidad->getNombreNodo() << std::endl;
+		
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(pEntidad->getNombreNodo())->_update(true, true);
 
 		//Le pone al cuerpo coordenadas, orientación y volumen (sacado del componente gráfico)
@@ -42,7 +41,7 @@ FComponent::FComponent(Entidad* pEnt, float altoCaj, float anchoCaj, float profC
 			body->setUserPointer(pEntidad->getPEstado()->getScnManager()->getSceneNode("GNode"+ pEntidad->getNombreNodo()));
 
 		//Para poder acceder desde Fisic a los rigidbodies
-		if (tipo != tipoFisica::Trigger)// && tipo != tipoFisica::TriggerDinamico)
+		if (tipo != tipoFisica::Trigger)
 			pEntidad->getPEstado()->getFisicManager()->addBodyToMap(nombreNodo, body);
 		
 	}
@@ -119,7 +118,7 @@ void FComponent::initBody() {
 void FComponent::Update(float deltaTime, Mensaje const & msj) {
 	Mensaje msg = msj;
 	Componente::Update(deltaTime, msj);
-	//if (msg.getTipo() == Tipo:: IA) return;
+	
 	if (msg.getTipo() == Tipo::Fisica) {
 		if (msg.getSubTipo() == SubTipo::Reposicionar) {
 
@@ -166,7 +165,7 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 							valores = matriz * valores;
 
 						btVector3 vel = body->getLinearVelocity();
-						//float yAux = vel.y();
+						
 						vel.setValue(valores.x * 30, vel.y(), valores.z * 30);
 						body->setLinearVelocity(vel);
 
@@ -223,20 +222,18 @@ void FComponent::Update(float deltaTime, Mensaje const & msj) {
 						pEntidad->getPEstado()->addMsg(m);
 						pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 						eliminado = true;
-						//pEntidad->getPEstado()->getScnManager()->destroySceneNode("GNode" + pEntidad->getNombreNodo());//->getSceneNode("GNode" + nombreNodo)
+						
 					}
 				}
 
 			}
 			if (msg.getTipo() == Tipo::Fisica) {
 				if (msg.getSubTipo() == SubTipo::Inicializado) {
-					//reposicionado = true;
 					pEntidad->getPEstado()->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / deltaTime);
 				}
 			}
 			if (msg.getTipo() == Tipo::Fisica) {
 				if (!eliminado && msg.getSubTipo() == SubTipo::Colision) {
-					//reposicionado = true;
 					pEntidad->getPEstado()->destroy(pEntidad->getNombreNodo());
 					eliminado = true;
 				}

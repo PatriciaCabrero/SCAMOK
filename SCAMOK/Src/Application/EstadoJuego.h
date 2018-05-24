@@ -6,7 +6,7 @@ class EstadoJuego: public Estado
 {
 public:
 	EstadoJuego(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego* pJuego = nullptr);
-	//virtual ~EstadoJuego() ;
+	
 
 	virtual bool update(float delta);
 	virtual void keyPressed(std::string key);
@@ -23,7 +23,7 @@ public:
 private:
 	
 	CEGUI::DefaultWindow* lluviaW, *simpleW;
-	int habilidad; //0-> simple, 1-> lluvia.
+	int habilidad; 
 	void changeHabilidad();
 	
 	int maxPower;
@@ -32,7 +32,7 @@ private:
 
 	int RandomNumber(float max, float min) {
 		float result = min + rand() / (RAND_MAX / (max - min));
-		std::cout << (int)result <<"\n";
+		
 		return int(result);
 	}
 

@@ -88,10 +88,6 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 						aux1->getPEstado()->addMsg(ms);
 						aux1->getPEstado()->addMsg(ms1);
 						
-						// create a particle system named explosions using the explosionTemplate
-						/*Ogre::ParticleSystem* particleSystem = pEntidad->getPEstado()->getScnManager()->createParticleSystem(auxBala + "PFX", "Smoke");
-						pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBala)->attachObject(particleSystem);
-						particleSystem->setEmitting(true);*/
 					}
 					restaPower();
 				}

@@ -12,13 +12,12 @@ EstadoMenu::EstadoMenu(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FM
 
 EstadoMenu::~EstadoMenu()
 {
-	//m_gui.destroy();;
+	
 	for each  ( CEGUI::PushButton* var in botones)
 	{
 		var->removeAllEvents();
 	}
-	/*m_gui.getRoot()->disable();
-	//m_gui.getRoot()->destroyChild(guiRoot);*/
+	
 }
 
 
@@ -65,8 +64,6 @@ void EstadoMenu::estadoAnt()
 void EstadoMenu::level1()
 {
 
-	//destroy();
-	//game_->quitaEstado();
 	Mensaje playM(Tipo::Audio, "Stop/wii.mp3", SubTipo::Musica);
 	mensajes.push(playM);
 	update(0.17);
@@ -87,7 +84,6 @@ void EstadoMenu::salir()
 void EstadoMenu::restart()
 {
 	game_->restart();
-	//salir();
 }
 
 void EstadoMenu::creditos()
@@ -96,7 +92,6 @@ void EstadoMenu::creditos()
 	std::string pos = "0/0/0";
 	Mensaje msEfect2(Tipo::Audio, "Play/click.wav/" + pos, SubTipo::Effect);
 	game_->cambiaEstado(estado);
-	game_->pEstados.top()->getEntidad("SoundManager")->Update(16, msEfect2);
 }
 
 bool EstadoMenu::update(float delta)
@@ -203,7 +198,6 @@ bool EstadoMenu::mousePressed(const OIS::MouseEvent & me, OIS::MouseButtonID id)
 {
 	if (!callback) {
 		m_gui.downMouse(id);
-		//callback = true;
 	}
 	return false;
 }

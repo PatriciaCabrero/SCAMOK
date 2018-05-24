@@ -19,21 +19,16 @@ public:
 	std::stack<Estado*>pEstados;
 	std::stack<Estado*> borrar;
 	void restart() {
-		//quitaEstado();
 		restart_ = true;
 		exit = true;
 	}
 	void exitGame() {
-	//Estado* aux = pEstados.top();
-	//pEstados.pop();
-	//quitaEstado();
-	//delete aux;
+
 	exit = true;
 	}
 
 	void quitaEstado() {
 		Estado * aux = pEstados.top();
-		//aux->destroy();
 		borrar.push(aux);
 		pEstados.pop();
 	}
@@ -45,7 +40,6 @@ private:
 	bool initOis();
 	bool initFmod();
 	bool restart_;
-	//bool initCEGUI();
 
 	std::string recursos, plugins;
 	Ogre::Root *root;
@@ -60,11 +54,7 @@ private:
 
 	//Ois-------------------
 	InputManager * mInputMgr;
-	
-
-	//CEGUI----------------
-	//GUI m_gui;
-	 
+		 
 
 
 

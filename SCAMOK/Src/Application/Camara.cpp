@@ -5,14 +5,12 @@ using namespace Ogre;
 Camara::Camara(Entidad * pEnt) : Componente(pEnt)
 {
 	cam = pEnt->getPEstado()->getScnManager()->createCamera("camera");
-	cam->setPosition(0, 25, -60);
+	cam->setPosition(0, 15, -70);
 	cam->lookAt(0, 0, 0);
 	cam->setNearClipDistance(5);
 	node = pEnt->getPEstado()->getScnManager()->getSceneNode("GNodeAlaia")->createChildSceneNode("NodoCamera");
 	node->attachObject(cam);
 
-	//set viewport
-	//if(pEnt->getPEstado()->getWin()->vie)
 	vp = pEnt->getPEstado()->getWin()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 150, 150));
 

@@ -32,5 +32,5 @@ private:
 	void initPpal();
 	void initGameOver();
 	std::vector<CEGUI::PushButton*> botones;
-	//CEGUI::PushButton* jugar_, *opciones_, *salir_;
+	
 };

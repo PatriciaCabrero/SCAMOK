@@ -163,7 +163,6 @@ void SoundManager::cargaAudio(std::string irPath) {
 
 void SoundManager::reproduceFx(std::string fx, float x, float y, float z, float wet) {
 
-	//if (abs(x) < 2000 && abs(y) < 1200) {
 
 	FMOD_VECTOR pos = { x *0.01f, y*0.01f, z*0.1f };
 	FMOD_VECTOR vel = { 0.0f, 0.0f, 0.0f };
@@ -210,7 +209,7 @@ void SoundManager::reproduceFx(std::string fx, float x, float y, float z, float 
 	}
 
 	system->update();
-	//}
+
 }
 
 void SoundManager::reproduceAmbM(std::string amb, float wet, bool fade) {

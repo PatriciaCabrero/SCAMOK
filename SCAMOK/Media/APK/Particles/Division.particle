@@ -41,5 +41,11 @@ particle_system Division
    	{
        		rate 2
    	}
-
+   	affector ColourFader
+ 	{
+  		red 0
+		  green 0
+		  blue 0
+		  alpha -0.4
+ 	}
 }

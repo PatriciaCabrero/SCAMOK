@@ -15,7 +15,7 @@ Juego::Juego()
 	
 	init();
 	initFmod();
-	//initCEGUI();
+	
 }
 
 void Juego::cambiaEstado(Estado * state, bool sobrescribe)
@@ -48,13 +48,12 @@ bool Juego::init(){
 
 bool Juego::initOis(){
 	
-	//mInputMgr = new InputManager(*mInputMgr);
 	mInputMgr = InputManager::getSingletonPtr();
 	mInputMgr->initialise(mWindow);
 	mInputMgr->addKeyListener(this, "KeyListener");
 	mInputMgr->addMouseListener(this, "MouseListener");
 	mInputMgr->addJoystickListener(this, "JoystickListener");
-	//mMouse = static_cast<OIS::Mouse*>(mInputMgr->createInputObject(OIS::OISMouse, true));
+	
 
 	mInputMgr->getKeyboard()->setEventCallback(this);
 	mInputMgr->getMouse()->setEventCallback(this);
@@ -155,12 +154,12 @@ bool Juego::run(){
 	do {
 		scnMgr = root->createSceneManager(Ogre::ST_GENERIC);
 		EstadoMenu * pEstado = new EstadoMenu(scnMgr, mWindow, system, this);
-		//EstadoJuego* pEstado = new EstadoJuego(scnMgr, mWindow, system,this);
+		
 		firstTime = true;
 		pEstados.push(pEstado);
 
 		int cont = 0;
-		std::cout << "\n\n\n";
+		
 		contJoystick = 0;
 		bool rend = false;
 
@@ -173,7 +172,6 @@ bool Juego::run(){
 		while (!exit)
 		{
 
-			//	if (GetTickCount() - lastUpdate >= msUpdate) {
 			mInputMgr->capture();
 
 
@@ -182,16 +180,14 @@ bool Juego::run(){
 				cont = 0;
 			}
 			else cont++;
-			//std::cout << GetTickCount() - lastUpdate << std::endl;
-			//pEstados.top()->update(GetTickCount() - lastUpdate);
-			// render ogre
+			
 			pEstados.top()->update(12.0f);
 			Ogre::WindowEventUtilities::messagePump();
 			lastUpdate = GetTickCount();
 
 			//comprobar si la ventana está abierta
 			if (mWindow->isClosed())return false;
-			//}
+			
 
 
 			if (cont % 2 != 0 && !root->renderOneFrame())return false;
@@ -218,22 +214,22 @@ bool Juego::run(){
 				borrar.pop();
 
 			}
-			std::cout << "pop";
+			
 			mWindow->removeAllViewports();
-			//scnMgr->getCurrentViewport()->clear();
+			
 			scnMgr->clearScene();
 			scnMgr->destroyCamera("camera");
 			root->destroySceneManager(scnMgr);
-			CEGUI::WindowManager::getSingleton().destroyAllWindows();// destroyWindow(0);*/
+			CEGUI::WindowManager::getSingleton().destroyAllWindows();
 		}
-		//delete scnMgr;
+		
 
 	} while (restart_);
-	//delete pEstado;
+	
 	return true;
 }
 bool Juego::povMoved(const OIS::JoyStickEvent & arg, int index) {
-	std::cout << arg.state.mPOV->direction << "\n";
+	
 	return true;
 }
 bool Juego::exitGame(const CEGUI::EventArgs &e)
@@ -247,10 +243,10 @@ bool Juego::axisMoved(const OIS::JoyStickEvent & arg, int index) {
 	return true;
 }
 bool Juego::buttonPressed(const OIS::JoyStickEvent & arg, int buton) {
-	std::cout << buton << "\n";
+	
 	
 	pEstados.top()->keyPressed(std::to_string(buton));
-	//pEstados.top()->joystickMoved()
+	
 	return true;
 }
 
@@ -357,8 +353,7 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 	std::string key = "";
 	switch (ke.key)
 	{
-	case OIS::KC_ESCAPE:// if (pEstados.size() == 1) exit = true;
-						// else { pEstados.top()->destroy(); pEstados.pop(); }
+	case OIS::KC_ESCAPE:
 	break;
 	case OIS::KC_RETURN: key = "return";
 		break;
@@ -380,7 +375,7 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 
 //MOUSE
 bool Juego::mouseMoved(const OIS::MouseEvent& me) {
-	//std::cout<<me.state.X.rel<<" , "<<me.state.Y.rel<< std::endl;
+	
 	pEstados.top()->mouseMoved(me);
 	return true;
 }

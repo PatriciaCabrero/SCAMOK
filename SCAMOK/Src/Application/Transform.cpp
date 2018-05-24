@@ -14,7 +14,7 @@ Transform::~Transform()
 void Transform::Update(float deltaTime, Mensaje const & msj) {
 	Componente::Update(deltaTime, msj);
 	Mensaje msg = msj;
-	//Play/jddjdj/x/y/z
+	
 	if (msg.getTipo() == Tipo::Input ) {
 
 		if (msg.getSubTipo() == SubTipo::Mover) {

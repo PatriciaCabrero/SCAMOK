@@ -11,10 +11,7 @@ Fisic::Fisic() {
 }
 
 Fisic::~Fisic() { 
-	/*for each (auto var in physicsAccessors)
-	{
-		dynamicsWorld->removeRigidBody(var.second);
-	}*/
+	
 	delete dynamicsWorld;
 	delete solver;
 	delete ghost;

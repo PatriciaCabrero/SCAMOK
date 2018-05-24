@@ -211,7 +211,6 @@ void EstadoJuego::changeHabilidad()
 	}
 }
 bool EstadoJuego::initCEGUI() {
-	//Estado::initCEGUI();
 
 	guiRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Hud.layout");
 	m_gui.getRoot()->addChild(guiRoot);
@@ -232,7 +231,7 @@ bool EstadoJuego::initCEGUI() {
 //===========================================================================================================
 bool EstadoJuego::update(float delta) {
 	CEGUI::System::getSingleton().injectTimePulse(1.0f / delta);
-	//CEGUI::System::getSingleton().injectTimePulse(0.016f);
+	
 	this->getFisicManager()->getDynamicsWorld()->stepSimulation(1.0f / delta);
 	
 	for (size_t i = 0; i < borrar.size(); i++)
@@ -272,7 +271,7 @@ bool EstadoJuego::update(float delta) {
 	resuelveCol();
 	if (contInput >= 30) {
 		entidades.at("Alaia")->setAnim("Idle", true, true, true);
-		//entidades.at("Alaia")->setAnim("IdleBase", true, true, true);
+		
 		contInput = 0;
 	}
 
@@ -317,7 +316,7 @@ void EstadoJuego::joystickMoved(float x, float y, int js) {
 		msgR.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
 		mensajes.push(msgR);
 		entidades.at("Alaia")->setAnim("Run", true);
-		//entidades.at("Alaia")->setAnim("RunBase", true);
+		
 		contInput = 0;
 
 	}
@@ -340,7 +339,7 @@ void EstadoJuego::keyPressed(std::string s) {
 		mensajes.push(msg);
 		entidades.at("Alaia")->setAnim("Jump");
 		Mensaje msg1(Tipo::Fisica, "", SubTipo::Musica);
-		//msg.setMsgInfo(entidades.at("Alaia"), entidades.at("Alaia"));
+		
 		mensajes.push(msg1);
 	}
 	else if (s == "1") {

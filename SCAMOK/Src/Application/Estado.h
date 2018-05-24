@@ -74,11 +74,6 @@ public:
 		mensajes.swap(bufer);
 	}
 
-	//Audio-----------------------------------------
-
-	/*void reproduceFx(std::string fx, float x, float y, float z, float wet);
-	void reproduceAmbM(std::string amb, float wet, bool fade);
-	void paraAmb(int ch, bool fade);*/
 
 	//Ogre------------------------------------------
 	Ogre::RenderWindow* getWin() { return mWin; }
