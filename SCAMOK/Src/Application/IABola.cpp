@@ -63,6 +63,10 @@ void IABola::Update(float deltaTime, Mensaje const & msj) {
 				}
 				else if (state == Die) {
 					die();
+					std::string pos = "0/0/0";
+					Mensaje msEfect2(Tipo::Audio, "Play/danoBola.wav/" + pos, SubTipo::Effect);
+					pEntidad->getPEstado()->addMsg(msEfect2);
+
 				}
 			}
 			
@@ -144,7 +148,7 @@ void IABola::hunt()
 	//std::cout << "\nบบบบบบ\nHUNT" << vecAlaia.z() - vecBola.z();
 
 	std::string s = std::to_string(X) + "/0/" + std::to_string(Z);
-	if (abs(vecAlaia.x() - vecBola.x()) < 6.0f && abs(vecAlaia.z() - vecBola.z()) < 6.0f) {
+	if (abs(vecAlaia.x() - vecBola.x()) < 6.0f && abs(vecAlaia.z() - vecBola.z()) < 6.0f&& abs(vecAlaia.y() - vecBola.y()) < 6.0f) {
 		cont++;
 		die();
 	}
@@ -186,6 +190,10 @@ void IABola::divide()
 
 		pEntidad->getPEstado()->getScnManager()->getSceneNode(auxBola)->scale(node->getScale().x, node->getScale().x, node->getScale().x);
 		numDiv++;
+		pos = "500/500/500";
+		Mensaje msEfect2(Tipo::Audio, "Play/division.wav/" + pos, SubTipo::Effect);
+		pEntidad->getPEstado()->addMsg(msEfect2);
+		
 	}
 }
 
@@ -193,7 +201,7 @@ void IABola::die()
 {
 		restaurapS();
 		pS->setEmitting(true);
-		Mensaje ms(Tipo::Gui, "-250", SubTipo::CambiaVida);
+		Mensaje ms(Tipo::Gui, "-0.25", SubTipo::CambiaVida);
 		ms.setMsgInfo(pEntidad->getPEstado()->getEntidad("Alaia"), pEntidad->getPEstado()->getEntidad("Alaia"));
 		pEntidad->getPEstado()->addMsg(ms);
 	

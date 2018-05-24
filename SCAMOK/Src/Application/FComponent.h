@@ -26,4 +26,5 @@ protected:
 	void *userPointer;
 	bool _suelo;
 	bool eliminado, firstTime;
+	float timePas;
 }; 

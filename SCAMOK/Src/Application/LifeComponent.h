@@ -10,4 +10,5 @@ public:
 private:
 	CEGUI::ProgressBar * life;
 	int maxLife;
+	float time;
 }; 

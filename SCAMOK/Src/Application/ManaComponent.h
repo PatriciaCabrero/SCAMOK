@@ -16,4 +16,6 @@ private:
 	void charge();
 	void finCharge();
 	void restaurapS();
+	bool playinFX;
+
 }; 

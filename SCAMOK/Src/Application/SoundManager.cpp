@@ -250,7 +250,10 @@ void SoundManager::Update(float deltaTime, Mensaje const & msj) {
 				reproduceAmbM(cancion, 0.0, true);
 			}
 			else if (accion == "Stop") {
-				paraAmb(0, true);
+				if (cancion != "1")
+					paraAmb(0, true);
+				else paraAmb(1, true);
+
 			}
 		}
 		if (msg.getSubTipo() == SubTipo::Effect) {
