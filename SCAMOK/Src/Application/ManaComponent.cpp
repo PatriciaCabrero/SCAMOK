@@ -42,28 +42,28 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 		}
 	}
 	if (msg.getTipo() == Tipo::Mana && mana != nullptr) {
-		if (msg.getSubTipo() == SubTipo::DoPower ) {
+		if (msg.getSubTipo() == SubTipo::DoPower) {
 
-			if (msg.getMsg() == "simple") {
-				if (mana->getWidth().d_offset >= 24) {
+			if (mana->getWidth().d_offset >= 24) {
+				if (msg.getMsg() == "simple") {
 					pEntidad->getPEstado()->getEntidad("Alaia")->setAnim("Shoot");
 
 					Entidad* aux1 = new Entidad(pEntidad->getPEstado());
 					string auxBala = pEntidad->getPEstado()->getFactory()->create("triangulo");
 					aux1->setNombreNodo(auxBala);
 					aux1->añadeComponenteGrafico("triangulo", auxBala);
-					restaPower();				
+					restaPower();
 					aux1->añadeComponenteFisico(2, 2, 2, false, tipoFisica::Dinamico, 1);
 					aux1->añadeComponenteLogico("BalaComponentSimple");
 					pEntidad->getPEstado()->addEntidad(auxBala, aux1);
 
-					
+
+
 
 				}
-			}
-			else if (msg.getMsg() == "lluvia") {
+				else if (msg.getMsg() == "lluvia") {
 
-				if (mana->getWidth().d_offset >= 24) {
+
 					double rotation = 2 * 3.1416 / 8;
 					for (int i = 0; i < 8; i++) {
 						Entidad* aux1 = new Entidad(pEntidad->getPEstado());
@@ -87,17 +87,18 @@ void ManaComponent::Update(float deltaTime, Mensaje const & msj)
 						ms1.setMsgInfo(aux1, aux1);
 						aux1->getPEstado()->addMsg(ms);
 						aux1->getPEstado()->addMsg(ms1);
-						
+
 					}
 					restaPower();
+
 				}
+				std::string pos = "500/1000/500";
+				Mensaje msEfect(Tipo::Audio, "Play/bolaFuego.wav/" + pos, SubTipo::Effect);
+				pEntidad->getPEstado()->addMsg(msEfect);
+				pos = "0/0/0";
+				Mensaje msEfect2(Tipo::Audio, "Play/bolaFuegoRisa.wav/" + pos, SubTipo::Effect);
+				pEntidad->getPEstado()->addMsg(msEfect2);
 			}
-			std::string pos = "500/1000/500";
-			Mensaje msEfect(Tipo::Audio, "Play/bolaFuego.wav/" + pos, SubTipo::Effect);
-			pEntidad->getPEstado()->addMsg(msEfect);
-			pos = "0/0/0";
-			Mensaje msEfect2(Tipo::Audio, "Play/bolaFuegoRisa.wav/" + pos, SubTipo::Effect);
-			pEntidad->getPEstado()->addMsg(msEfect2);
 		}
 		else if (msg.getSubTipo() == SubTipo::GetPower) {
 			if (msg.getMsg() == "item") {
