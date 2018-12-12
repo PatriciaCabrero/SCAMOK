@@ -15,6 +15,8 @@
 #include <OgreException.h>
 #include "Fisic.h"
 #include <fmod.hpp>
+#include <fmod_studio.hpp>
+
 #include "GUI.h"
 
 
@@ -27,7 +29,7 @@ class Juego;
 class Estado
 {
 public:
-	Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego * game = nullptr);
+		Estado(Ogre::SceneManager * mng, Ogre::RenderWindow* mWindow, FMOD::System* sys, Juego * game = nullptr);
 	virtual ~Estado();
 
 

@@ -138,6 +138,7 @@ bool Juego::initOgre(){
 }
 bool Juego::initFmod() {
 	unsigned int      version;
+	//result = FMOD::System::create(&system);
 	result = FMOD::System_Create(&system);
 	result = system->getVersion(&version);
 
@@ -145,6 +146,7 @@ bool Juego::initFmod() {
 	{
 		std::cout << ("FMOD lib version %08x doesn't match header version %08x", version, FMOD_VERSION);
 	}
+	//system->initialize(100, FMOD_INIT_NORMAL, NULL, NULL);
 	system->init(100, FMOD_INIT_NORMAL, NULL);
 	return true;
 }
@@ -279,7 +281,7 @@ bool Juego::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	case OIS::KC_SPACE: key = "salto";
 		break;
-	case OIS::KC_Q: key = "disparo";
+	case OIS::KC_Q: key = "2"; break;
 	default:
 		break;
 	}
@@ -365,6 +367,7 @@ bool Juego::keyReleased(const OIS::KeyEvent& ke)
 		break;
 	case OIS::KC_DOWN: key = "aba";
 		break;	
+	case OIS::KC_Q: key = "2"; break;
 	default:
 		break;
 	}

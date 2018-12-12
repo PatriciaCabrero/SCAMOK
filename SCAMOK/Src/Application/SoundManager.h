@@ -1,6 +1,7 @@
 #pragma once 
 #include "Componente.h"
 #include <fmod.hpp>
+#include <fmod_studio.hpp>
 #include "Estado.h"
 #include <vector>
 class SoundManager : public Componente { 
