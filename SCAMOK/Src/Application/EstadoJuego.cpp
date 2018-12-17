@@ -109,25 +109,25 @@ void EstadoJuego::init() {
 
 
 	Entidad *aux2 = new Entidad(this);
-	aux2->añadeComponenteGrafico("compcube","compcube");
+	aux2->añadeComponenteGrafico("Cube","Cube");
 	aux2->añadeComponenteFisico(0 ,0 ,0, false, tipoFisica::Estatico, 100);
-	entidades.insert(std::make_pair("compcube", aux2));
-	Mensaje ms1(Tipo::Fisica, "25/5/10", SubTipo::Reposicionar,8);
-	ms1.setMsgInfo(entidades.at("compcube"), entidades.at("compcube"));
+	entidades.insert(std::make_pair("Cube", aux2));
+	Mensaje ms1(Tipo::Fisica, "25/0/10", SubTipo::Reposicionar,8);
+	ms1.setMsgInfo(entidades.at("Cube"), entidades.at("Cube"));
 	mensajes.push(ms1);
 
 
 
-	Entidad* aux1 = new Entidad(this);
+	/*Entidad* aux1 = new Entidad(this);
 	aux1->añadeComponenteGrafico("stone","stone0");
 	aux1->añadeComponenteFisico(0, 0, 0, false, tipoFisica::Kinematico, 1);
 	aux1->añadeComponenteLogico("IABola");
 	entidades.insert(std::make_pair("stone0", aux1));
 	Mensaje ms(Tipo::Fisica, "20/150/0", SubTipo::Reposicionar,8);
 	ms.setMsgInfo(entidades.at("stone0"), entidades.at("stone0"));
-	mensajes.push(ms);
+	mensajes.push(ms);*/
 
-	Entidad* enem2 = new Entidad(this);
+	/*Entidad* enem2 = new Entidad(this);
 	string auxBola = factoria->create("stone");
 	enem2->setNombreNodo(auxBola);
 
@@ -137,7 +137,7 @@ void EstadoJuego::init() {
 	addEntidad(auxBola, enem2);
 	Mensaje mstone(Tipo::Fisica, "30/50/50", SubTipo::Reposicionar);
 	mstone.setMsgInfo(enem2, enem2);
-	addMsg(mstone);
+	addMsg(mstone);*/
 
 	Entidad* aux3 = new Entidad(this); aux3->añadeComponenteSM("SoundManager", system);
 	entidades.insert(std::make_pair("SoundManager", aux3));
