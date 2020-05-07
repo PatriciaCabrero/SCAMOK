@@ -1,6 +1,7 @@
 # SCAMOK
 
-Scamok is a beat them up videogame, where the player is surrounded by enemies. The player must kill as many enemies as possible until he reaches the final boss.
+Scamok is a beat them up videogame, where the player is surrounded by enemies. The player must kill as many enemies as possible until he reaches the final boss. 
+https://www.youtube.com/watch?v=Ja9vEK1mdag
 
 
 ## Architecture
@@ -29,4 +30,4 @@ All the libraries has been compiled from their sources repositories and configur
   - Colin Ulrich Cop
   - Gonzalo Guzmám Del Río
 
-This videogame is part of a university project developed in three months.
+This videogame is part of a university project developed in three months. We focused our efforts on building a robust architecture with the libraries previously mentioned in order to have a complete videogame engine and build future projects.
